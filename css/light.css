@@ -1,3 +1,11 @@
 .app-light {
     background-color: rgb(210, 210, 210);
 }
+
+.header-light {
+    background-color: rgb(200, 200, 200);
+}
+
+.header-item-light:hover {
+    background-color: rgb(190, 190, 190);
+}

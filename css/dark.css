@@ -1,3 +1,11 @@
 .app-dark {
     background-color: rgb(20, 20, 20);
 }
+
+.header-dark {
+    background-color: rgb(24, 24, 24);
+}
+
+.header-item-dark:hover {
+    background-color: rgb(32, 32, 32);
+}
