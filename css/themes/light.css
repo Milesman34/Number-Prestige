@@ -6,6 +6,14 @@
     background-color: rgb(200, 200, 200);
 }
 
+.header-item-light {
+    color: rgb(0, 0, 0);
+}
+
 .header-item-light:hover {
     background-color: rgb(190, 190, 190);
+}
+
+.number-display-light {
+    color: rgb(0, 0, 0);
 }

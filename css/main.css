@@ -1,10 +1,19 @@
 @font-face {
     font-family: "Open Sans";
-    src: url("../opensans-regular-webfont.woff");
+    src: url("../fonts/opensans-regular-webfont.woff");
+}
+
+@font-face {
+    font-family: "Monospace";
+    src: url("../fonts/monospacetypewriter-webfont.ttf");
 }
 
 .sans {
     font-family: "Open Sans";
+}
+
+.monospace {
+    font-family: "Monospace";
 }
 
 #app {
@@ -18,7 +27,7 @@
 
     display: grid;
 
-    grid-template-rows: 5% auto;
+    grid-template-rows: 5% 10% auto;
     grid-template-columns: 100%;
 }
 
@@ -29,4 +38,45 @@
 
     grid-template-rows: 100%;
     grid-template-columns: repeat(2, auto);
+}
+
+.header-item {
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    font-size: 175%;
+}
+
+#number-display {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    font-size: 200%;
+}
+
+#content {
+    width: 100%;
+    height: 100%;
+
+    display: grid;
+
+    grid-template-rows: 100%;
+    grid-template-columns: 100%;
+}
+
+#main {
+    grid-row: 1;
+    grid-column: 1;
+}
+
+#options {
+    grid-row: 1;
+    grid-column: 1;
 }

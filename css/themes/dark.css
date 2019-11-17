@@ -6,6 +6,14 @@
     background-color: rgb(24, 24, 24);
 }
 
+.header-item-dark {
+    color: rgb(255, 255, 255);
+}
+
 .header-item-dark:hover {
     background-color: rgb(32, 32, 32);
+}
+
+.number-display-dark {
+    color: rgb(255, 255, 255);
 }

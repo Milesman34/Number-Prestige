@@ -1,1 +1,4 @@
-let game = Game();
+let game = Game({
+    theme: "dark",
+    state: "main"
+});
