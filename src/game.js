@@ -3,12 +3,18 @@ const removeIdentifier = elementName => ["#", "."].includes(elementName[0]) ?
     elementName.slice(1, elementName.length) :
     elementName;
 
+//Capitalizes a word
+const capitalizeWord = str => str[0].toUpperCase() + str.slice(1, str.length).toLowerCase();
+
+//Capitalizes a phrase
+const capitalizePhrase = str => str.split(" ").map(capitalizeWord).join(" ");
+
 //List of themes
 //CSS class should be [element]-[theme-name]
 const themes = ["light", "dark"];
 
 //Elements to modify
-const elements = ["#app", "#header", ".header-item", "#number-display"];
+const elements = ["#app", "#header", ".header-item", "#number-display", ".options-button", "#theme-options-button", "#theme-options-text", "#theme-options-current"];
 
 //Potential game states
 const gameStates = ["main", "options"];
@@ -37,6 +43,9 @@ const Game = ({theme = "dark", state = "main"} = {}) => {
             elements.forEach(element => {
                 $(element).addClass(`${removeIdentifier(element)}-${this.theme}`);
             });
+
+            //Updates current theme text on theme button
+            $("#theme-options-current").text(`Currently: ${capitalizePhrase(this.theme)}`);
         },
 
         //Sets the state of the game
@@ -52,6 +61,8 @@ const Game = ({theme = "dark", state = "main"} = {}) => {
             });
         }
     };
+
+    $("#theme-select").hide();
 
     obj.setTheme(obj.theme);
     obj.setState(obj.state);

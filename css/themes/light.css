@@ -6,14 +6,16 @@
     background-color: rgb(200, 200, 200);
 }
 
-.header-item-light {
+.header-item-light, .number-display-light, #theme-options-text-light, #theme-options-current-light {
     color: rgb(0, 0, 0);
 }
 
-.header-item-light:hover {
+.header-item-light:hover, .options-button-light:hover, .theme-options-button-light:hover {
     background-color: rgb(190, 190, 190);
 }
 
-.number-display-light {
+.options-button-light, .theme-options-button-light {
     color: rgb(0, 0, 0);
+
+    background-color: rgb(200, 200, 200);
 }

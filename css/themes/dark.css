@@ -6,7 +6,7 @@
     background-color: rgb(24, 24, 24);
 }
 
-.header-item-dark {
+.header-item-dark, .number-display-dark, #theme-options-text-dark, #theme-options-current-dark {
     color: rgb(255, 255, 255);
 }
 
@@ -14,6 +14,12 @@
     background-color: rgb(32, 32, 32);
 }
 
-.number-display-dark {
+.options-button-dark, .theme-options-button-dark {
     color: rgb(255, 255, 255);
+
+    background-color: rgb(32, 32, 32);
+}
+
+.options-button-dark:hover, .theme-options-button-dark:hover {
+    background-color: rgb(40, 40, 40);
 }
