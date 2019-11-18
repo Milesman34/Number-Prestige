@@ -23,3 +23,7 @@
 .options-button-dark:hover, .theme-options-button-dark:hover {
     background-color: rgb(40, 40, 40);
 }
+
+.theme-selector-dark {
+	background-color: rgba(60, 60, 60, 0.8);
+}

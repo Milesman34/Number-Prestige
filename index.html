@@ -14,33 +14,37 @@
     </head>
 
     <body>
-        <div id="app">
-            <div id="header">
-                <div class="header-item sans" onClick="game.setState('main')">Main</div>
-                <div class="header-item sans" onClick="game.setState('options')">Options</div>
-            </div>
+		<div id="container">
+			<div id="app">
+				<div id="header">
+					<div class="header-item sans" onClick="game.setState('main')">Main</div>
+					<div class="header-item sans" onClick="game.setState('options')">Options</div>
+				</div>
 
-            <div id="number-display" class="monospace">0</div>
+				<div id="number-display" class="monospace">0</div>
 
-            <div id="content">
-                <div id="main"></div>
+				<div id="content">
+					<div id="main"></div>
 
-                <div id="options">
-                    <div class="options-row">
-                        <div class="options-button-container">
-                            <div id="theme-options-button">
-                                <div id="theme-options-container">
-                                    <div id="theme-options-text" class="sans">Theme</div>
-                                    <div id="theme-options-current" class="sans">Currently: Dark</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+					<div id="options">
+						<div class="options-row">
+							<div class="options-button-container">
+								<div id="theme-options-button">
+									<div id="theme-options-container" onClick="game.openThemeSelector()">
+										<div id="theme-options-text" class="sans">Theme</div>
+										<div id="theme-options-current" class="sans">Currently: Dark</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 
-            <div id="theme-select"></div>
-        </div>
+			<div id="theme-selector-container">
+				<div id="theme-selector"></div>
+			</div>
+		</div>
 
         <script src="src/game.js"></script>
         <script src="src/index.js"></script>

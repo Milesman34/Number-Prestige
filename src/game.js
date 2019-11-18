@@ -14,7 +14,8 @@ const capitalizePhrase = str => str.split(" ").map(capitalizeWord).join(" ");
 const themes = ["light", "dark"];
 
 //Elements to modify
-const elements = ["#app", "#header", ".header-item", "#number-display", ".options-button", "#theme-options-button", "#theme-options-text", "#theme-options-current"];
+const elements = ["#app", "#header", ".header-item", "#number-display", ".options-button", "#theme-options-button", 
+"#theme-options-text", "#theme-options-current", "#theme-selector"];
 
 //Potential game states
 const gameStates = ["main", "options"];
@@ -59,11 +60,16 @@ const Game = ({theme = "dark", state = "main"} = {}) => {
                 else
                     $(`#${s}`).hide();
             });
-        }
+        },
+		
+		//Opens the theme selector
+		openThemeSelector() {
+			$("#theme-selector-container").show();
+		}
     };
 
 	//Hides the theme selector
-    $("#theme-select").hide();
+    $("#theme-selector-container").hide();
 
 	//Sets the theme and state to the required values (with defaults)
     obj.setTheme(obj.theme);

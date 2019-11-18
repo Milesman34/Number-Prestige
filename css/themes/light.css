@@ -19,3 +19,7 @@
 
     background-color: rgb(200, 200, 200);
 }
+
+.theme-selector-light {
+	background-color: rgba(180, 180, 180, 0.8);
+}
