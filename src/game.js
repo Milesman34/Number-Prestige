@@ -62,8 +62,10 @@ const Game = ({theme = "dark", state = "main"} = {}) => {
         }
     };
 
+	//Hides the theme selector
     $("#theme-select").hide();
 
+	//Sets the theme and state to the required values (with defaults)
     obj.setTheme(obj.theme);
     obj.setState(obj.state);
 
