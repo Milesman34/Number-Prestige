@@ -6,20 +6,23 @@
     background-color: rgb(200, 200, 200);
 }
 
-.header-item-light, .number-display-light, #theme-options-text-light, #theme-options-current-light {
+.header-item-light {
     color: rgb(0, 0, 0);
+    box-shadow: 2px 2px 2px rgb(180, 180, 180);
 }
 
 .header-item-light:hover, .options-button-light:hover, .theme-options-button-light:hover {
     background-color: rgb(190, 190, 190);
 }
 
-.options-button-light, .theme-options-button-light {
+.number-display-light, #theme-options-text-light, #theme-options-current-light {
+    color: rgb(0, 0, 0);
+}
+
+.options-button-light, .theme-options-button-light, .theme-selector-light {
     color: rgb(0, 0, 0);
 
     background-color: rgb(200, 200, 200);
-}
 
-.theme-selector-light {
-	background-color: rgba(180, 180, 180, 0.8);
+    box-shadow: 2px 2px 2px rgb(180, 180, 180);
 }

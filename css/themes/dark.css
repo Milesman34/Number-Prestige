@@ -6,24 +6,27 @@
     background-color: rgb(24, 24, 24);
 }
 
-.header-item-dark, .number-display-dark, #theme-options-text-dark, #theme-options-current-dark {
+.header-item-dark {
     color: rgb(255, 255, 255);
+    box-shadow: 2px 2px 2px black;
 }
 
 .header-item-dark:hover {
     background-color: rgb(32, 32, 32);
 }
 
-.options-button-dark, .theme-options-button-dark {
+.number-display-dark, #theme-options-text-dark, #theme-options-current-dark {
+    color: rgb(255, 255, 255);
+}
+
+.options-button-dark, .theme-options-button-dark, .theme-selector-dark {
     color: rgb(255, 255, 255);
 
     background-color: rgb(32, 32, 32);
+
+    box-shadow: 2px 2px 2px black;
 }
 
 .options-button-dark:hover, .theme-options-button-dark:hover {
     background-color: rgb(40, 40, 40);
-}
-
-.theme-selector-dark {
-	background-color: rgba(60, 60, 60, 0.8);
 }
