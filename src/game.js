@@ -9,6 +9,21 @@ const capitalizeWord = str => str[0].toUpperCase() + str.slice(1, str.length).to
 //Capitalizes a phrase
 const capitalizePhrase = str => str.split(" ").map(capitalizeWord).join(" ");
 
+//Rounds a number to a given number of decimal places
+const roundTo = (num, places = 0) =>
+	Math.round(num * 10 ** places) / (10 ** places);
+
+//Formats a number in exponential format (if over the requirement)
+const formatSci = (num, limit = 1e3, places = 3) => {
+	if (num >= limit) {
+		let oom = Math.floor(Math.log10(num));
+		let div = roundTo(num / (10 ** oom), places);
+		
+		return `${div}e${oom}`;
+	} else
+		return num.toString();
+}
+
 //List of themes
 //CSS class should be [element]-[theme-name]
 const themes = ["light", "dark"];
@@ -28,6 +43,15 @@ const Game = ({theme = "dark", state = "main"} = {}) => {
 
         //Current state
         state: "main",
+		
+		//Current score
+		score: 0,
+		
+		//Current amount gained on click
+		gain: 1,
+		
+		//Current goal to prestige
+		prestigeGoal: 10,
 
         //Sets the theme
         setTheme(theme) {
@@ -73,7 +97,14 @@ const Game = ({theme = "dark", state = "main"} = {}) => {
         //Closes the theme selector
         closeThemeSelector() {
             $("#theme-selector-container").hide();
-        }
+        },
+		
+		//Adds to the score
+		addScore(s) {
+			this.score += s;
+			
+			$("#number-display-main").text(formatSci(this.score));
+		}
     };
 
 	//Hides the theme selector
@@ -82,6 +113,12 @@ const Game = ({theme = "dark", state = "main"} = {}) => {
 	//Sets the theme and state to the required values (with defaults)
     obj.setTheme(obj.theme);
     obj.setState(obj.state);
+	
+	//Sets the score to the proper value
+	$("#number-display-main").text(formatSci(obj.score));
+	
+	//Sets the goal to the proper value
+	$("#number-display-goal").text(`Goal: ${formatSci(obj.prestigeGoal)}`);
 
     return obj;
 }
