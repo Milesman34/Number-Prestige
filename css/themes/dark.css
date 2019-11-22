@@ -31,7 +31,7 @@
     background-color: rgb(40, 40, 40);
 }
 
-.theme-selector-list-button-dark {
+.theme-selector-list-button-dark, .theme-selector-title-dark {
     color: rgb(255, 255, 255);
 
     border-bottom: solid black 2px;

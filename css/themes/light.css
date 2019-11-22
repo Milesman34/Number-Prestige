@@ -27,7 +27,7 @@
     box-shadow: 2px 2px 2px rgb(180, 180, 180);
 }
 
-.theme-selector-list-button-light {
+.theme-selector-list-button-light, .theme-selector-title-light {
     color: rgb(0, 0, 0);
 
     border-bottom: solid rgb(180, 180, 180) 2px;
