@@ -68,7 +68,12 @@ const Game = ({theme = "dark", state = "main"} = {}) => {
 		//Opens the theme selector
 		openThemeSelector() {
 			$("#theme-selector-container").show();
-		}
+		},
+
+        //Closes the theme selector
+        closeThemeSelector() {
+            $("#theme-selector-container").hide();
+        }
     };
 
 	//Hides the theme selector

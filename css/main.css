@@ -57,6 +57,8 @@
     align-items: center;
 
     font-size: 175%;
+
+    user-select: none;
 }
 
 #number-display {
@@ -136,6 +138,8 @@
 
     grid-template-rows: 25% auto 25%;
     grid-template-columns: 100%;
+
+    user-select: none;
 }
 
 #theme-options-container {
@@ -188,6 +192,8 @@
 
     grid-template-rows: 80% auto;
     grid-template-columns: auto;
+
+    user-select: none;
 }
 
 #theme-selector-list {
