@@ -11,7 +11,7 @@
     box-shadow: 2px 2px 2px rgb(180, 180, 180);
 }
 
-.header-item-light:hover, .options-button-light:hover, .theme-options-button-light:hover {
+.header-item-light:hover, .options-button-light:hover, .theme-options-button-light:hover, .theme-selector-list-button-light:hover {
     background-color: rgb(190, 190, 190);
 }
 
@@ -25,4 +25,10 @@
     background-color: rgb(200, 200, 200);
 
     box-shadow: 2px 2px 2px rgb(180, 180, 180);
+}
+
+.theme-selector-list-button-light {
+    color: rgb(0, 0, 0);
+
+    border-bottom: solid rgb(180, 180, 180) 2px;
 }

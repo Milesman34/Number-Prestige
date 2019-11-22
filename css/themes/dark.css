@@ -27,6 +27,12 @@
     box-shadow: 2px 2px 2px black;
 }
 
-.options-button-dark:hover, .theme-options-button-dark:hover {
+.options-button-dark:hover, .theme-options-button-dark:hover, .theme-selector-list-button:hover {
     background-color: rgb(40, 40, 40);
+}
+
+.theme-selector-list-button-dark {
+    color: rgb(255, 255, 255);
+
+    border-bottom: solid black 2px;
 }
