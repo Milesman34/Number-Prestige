@@ -30,7 +30,8 @@ const themes = ["light", "dark"];
 
 //Elements to modify
 const elements = ["#app", "#header", ".header-item", "#number-display", ".options-button", "#theme-options-button",
-"#theme-options-text", "#theme-options-current", "#theme-selector", "#theme-selector-title", ".theme-selector-list-button", "#theme-selector-exit-button"];
+"#theme-options-text", "#theme-options-current", "#theme-selector", "#theme-selector-title", 
+".theme-selector-list-button", "#theme-selector-exit-button", "#click-button"];
 
 //Potential game states
 const gameStates = ["main", "options"];
@@ -103,7 +104,16 @@ const Game = ({theme = "dark", state = "main"} = {}) => {
 		addScore(s) {
 			this.score += s;
 			
+			//Updates number display
 			$("#number-display-main").text(formatSci(this.score));
+		},
+		
+		//Updates the amount gained on click
+		setGain(gain) {
+			this.gain = gain;
+			
+			//Updates amount gained text
+			$("#click-button").text(`Increase number by ${formatSci(obj.gain)}`);
 		}
     };
 
@@ -119,6 +129,9 @@ const Game = ({theme = "dark", state = "main"} = {}) => {
 	
 	//Sets the goal to the proper value
 	$("#number-display-goal").text(`Goal: ${formatSci(obj.prestigeGoal)}`);
+	
+	//Updates click button text
+	$("#click-button").text(`Increase number by ${formatSci(obj.gain)}`);
 
     return obj;
 }

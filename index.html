@@ -37,11 +37,15 @@
 				<div id="number-display" class="monospace">
 					<div id="number-display-main" class="monospace">0</div>
 					
-					<div id="number-display-goal" class="monospace">Goal: 10</div>
+					<div id="number-display-goal" class="sans">Goal: 10</div>
 				</div>
 
 				<div id="content">
-					<div id="main"></div>
+					<div id="main">
+						<div id="click-button-container">
+							<div id="click-button" class="sans" onClick="game.addScore(game.gain)">Increase number by 1</div>
+						</div>
+					</div>
 
 					<div id="options">
 						<div class="options-row">

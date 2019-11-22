@@ -19,7 +19,7 @@
     color: rgb(255, 255, 255);
 }
 
-.options-button-dark, .theme-options-button-dark, .theme-selector-dark {
+.options-button-dark, .theme-options-button-dark, .theme-selector-dark, .click-button-dark {
     color: rgb(255, 255, 255);
 
     background-color: rgb(32, 32, 32);
@@ -27,7 +27,8 @@
     box-shadow: 2px 2px 2px black;
 }
 
-.options-button-dark:hover, .theme-options-button-dark:hover, .theme-selector-list-button:hover, .theme-selector-exit-button-dark:hover {
+.options-button-dark:hover, .theme-options-button-dark:hover, .theme-selector-list-button:hover, 
+.theme-selector-exit-button-dark:hover, .click-button-dark:hover {
     background-color: rgb(40, 40, 40);
 }
 
