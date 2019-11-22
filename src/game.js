@@ -15,7 +15,7 @@ const themes = ["light", "dark"];
 
 //Elements to modify
 const elements = ["#app", "#header", ".header-item", "#number-display", ".options-button", "#theme-options-button",
-"#theme-options-text", "#theme-options-current", "#theme-selector", ".theme-selector-list-button"];
+"#theme-options-text", "#theme-options-current", "#theme-selector", ".theme-selector-list-button", "#theme-selector-exit-button"];
 
 //Potential game states
 const gameStates = ["main", "options"];

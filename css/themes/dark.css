@@ -15,7 +15,7 @@
     background-color: rgb(32, 32, 32);
 }
 
-.number-display-dark, #theme-options-text-dark, #theme-options-current-dark {
+.number-display-dark, .theme-options-text-dark, .theme-options-current-dark, .theme-selector-exit-button-dark {
     color: rgb(255, 255, 255);
 }
 
@@ -27,7 +27,7 @@
     box-shadow: 2px 2px 2px black;
 }
 
-.options-button-dark:hover, .theme-options-button-dark:hover, .theme-selector-list-button:hover {
+.options-button-dark:hover, .theme-options-button-dark:hover, .theme-selector-list-button:hover, .theme-selector-exit-button-dark:hover {
     background-color: rgb(40, 40, 40);
 }
 

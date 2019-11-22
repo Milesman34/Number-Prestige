@@ -208,3 +208,13 @@
     justify-content: center;
     align-items: center;
 }
+
+#theme-selector-exit-button {
+    grid-row: 2;
+    grid-column: 1;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+}
