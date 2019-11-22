@@ -16,7 +16,12 @@
     <body>
 		<div id="container">
             <div id="theme-selector-container">
-				<div id="theme-selector" onClick="alert('Help me!')"></div>
+				<div id="theme-selector">
+                    <div id="theme-selector-list">
+                        <div class="theme-selector-list-button sans" onClick="game.setTheme('light')">Light</div>
+                        <div class="theme-selector-list-button sans" onClick="game.setTheme('dark')">Dark</div>
+                    </div>
+                </div>
 			</div>
 
 			<div id="app">
