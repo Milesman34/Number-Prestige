@@ -32,7 +32,7 @@ const themes = ["light", "dark"];
 //Elements to modify
 const elements = ["#app", "#header", ".header-item", "#number-display", ".options-button", "#theme-options-button",
 "#theme-options-text", "#theme-options-current", "#theme-selector", "#theme-selector-title",
-".theme-selector-list-button", "#theme-selector-exit-button", "#click-button"];
+".theme-selector-list-button", "#theme-selector-exit-button", "#click-button", "#prestige-button"];
 
 //Potential game states
 const gameStates = ["main", "options"];
@@ -54,6 +54,26 @@ const Game = ({theme = "dark", state = "main"} = {}) => {
 
 		//Current goal to prestige
 		prestigeGoal: 10,
+
+        //Shows the theme selector
+		showThemeSelector() {
+			$("#theme-selector-container").show();
+		},
+
+        //Hides the theme selector
+        hideThemeSelector() {
+            $("#theme-selector-container").hide();
+        },
+
+        //Shows the prestige button
+        showPrestigeButton() {
+            $("#prestige-button").show();
+        },
+
+        //Hides the prestige button
+        hidePrestigeButton() {
+            $("#prestige-button").hide();
+        },
 
         //Sets the theme
         setTheme(theme) {
@@ -88,25 +108,25 @@ const Game = ({theme = "dark", state = "main"} = {}) => {
             });
 
             //Hides open selectors
-            $("#theme-selector-container").hide();
+            this.hideThemeSelector();
         },
 
-		//Opens the theme selector
-		openThemeSelector() {
-			$("#theme-selector-container").show();
-		},
+        //Sets the score to a value
+        setScore(score) {
+            this.score = score;
 
-        //Closes the theme selector
-        closeThemeSelector() {
-            $("#theme-selector-container").hide();
+            //Updates score amount
+            $("#number-display-main").text(formatSci(this.score));
+
+            //Shows prestige button if needed
+            if (this.score >= this.prestigeGoal) {
+                this.showPrestigeButton();
+            }
         },
 
 		//Adds to the score
-		addScore(s) {
-			this.score += s;
-
-			//Updates number display
-			$("#number-display-main").text(formatSci(this.score));
+		addScore(score) {
+			this.setScore(this.score + score);
 		},
 
 		//Updates the amount gained on click
@@ -115,24 +135,45 @@ const Game = ({theme = "dark", state = "main"} = {}) => {
 
 			//Updates amount gained text
 			$("#click-button").text(`Increase number by ${formatSci(obj.gain)}`);
-		}
+		},
+
+        //Updates the goal to prestige
+        setGoal(goal) {
+            this.prestigeGoal = goal;
+
+            $("#number-display-goal").text(`Goal: ${formatSci(obj.prestigeGoal)}`);
+        },
+
+        //Prestiges
+        //This resets score, but doubles the goal and adds 1 to gain
+        prestige() {
+            this.setScore(0);
+            this.setGain(this.gain + 1);
+            this.setGoal(this.prestigeGoal * 2);
+
+            //Hides prestige button
+            this.hidePrestigeButton();
+        }
     };
 
 	//Hides the theme selector
-    $("#theme-selector-container").hide();
+    obj.hideThemeSelector();
 
 	//Sets the theme and state to the required values (with defaults)
     obj.setTheme(obj.theme);
     obj.setState(obj.state);
 
 	//Sets the score to the proper value
-	$("#number-display-main").text(formatSci(obj.score));
+	obj.setScore(obj.score);
 
 	//Sets the goal to the proper value
-	$("#number-display-goal").text(`Goal: ${formatSci(obj.prestigeGoal)}`);
+	obj.setGoal(obj.prestigeGoal);
 
 	//Updates click button text
-	$("#click-button").text(`Increase number by ${formatSci(obj.gain)}`);
+	obj.setGain(obj.gain);
+
+    //Player cannot prestige at first
+    obj.hidePrestigeButton();
 
     return obj;
 }

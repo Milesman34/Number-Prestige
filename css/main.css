@@ -118,6 +118,20 @@ button {
     align-items: center;
 }
 
+#prestige-button {
+    width: 45%;
+    height: 75%;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    font-size: 85%;
+
+    user-select: none;
+}
+
 #content {
     width: 100%;
     height: 100%;
