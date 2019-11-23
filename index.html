@@ -20,18 +20,18 @@
                     <div id="theme-selector-title" class="sans">Select Theme</div>
 
                     <div id="theme-selector-list">
-                        <div class="theme-selector-list-button sans" onClick="game.setTheme('light')">Light</div>
-                        <div class="theme-selector-list-button sans" onClick="game.setTheme('dark')">Dark</div>
+                        <button class="theme-selector-list-button sans" onClick="game.setTheme('light')">Light</button>
+                        <button class="theme-selector-list-button sans" onClick="game.setTheme('dark')">Dark</button>
                     </div>
 
-                    <div id="theme-selector-exit-button" class="sans" onClick="game.closeThemeSelector()">Exit</div>
+                    <button id="theme-selector-exit-button" class="sans" onClick="game.closeThemeSelector()">Exit</button>
                 </div>
 			</div>
 
 			<div id="app">
 				<div id="header">
-					<div class="header-item sans" onClick="game.setState('main')">Main</div>
-					<div class="header-item sans" onClick="game.setState('options')">Options</div>
+					<button class="header-item sans" onClick="game.setState('main')">Main</button>
+					<button class="header-item sans" onClick="game.setState('options')">Options</button>
 				</div>
 
 				<div id="display-header" class="monospace">
@@ -40,24 +40,28 @@
 
     					<div id="number-display-goal" class="sans">Goal: 10</div>
                     </div>
+
+                    <div id="prestige-button-container">
+
+                    </div>
 				</div>
 
 				<div id="content">
 					<div id="main">
 						<div id="click-button-container">
-							<div id="click-button" class="sans" onClick="game.addScore(game.gain)">Increase number by 1</div>
+							<button id="click-button" class="sans" onClick="game.addScore(game.gain)">Increase number by 1</button>
 						</div>
 					</div>
 
 					<div id="options">
 						<div class="options-row">
 							<div class="options-button-container">
-								<div id="theme-options-button" onClick="game.openThemeSelector()">
+								<button id="theme-options-button" onClick="game.openThemeSelector()">
 									<div id="theme-options-container">
 										<div id="theme-options-text" class="sans">Theme</div>
 										<div id="theme-options-current" class="sans">Currently: Dark</div>
 									</div>
-								</div>
+								</button>
 							</div>
 						</div>
 					</div>
