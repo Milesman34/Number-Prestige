@@ -14,11 +14,12 @@ const roundTo = (num, places = 0) =>
 	Math.round(num * 10 ** places) / (10 ** places);
 
 //Formats a number in exponential format (if over the requirement)
-const formatSci = (num, limit = 1e3, places = 3) => {
+const formatSci = (num, limit = 1e6, places = 2) => {
 	if (num >= limit) {
+        //Splits the orders of magnitude and the amount before it to format it
 		let oom = Math.floor(Math.log10(num));
 		let div = roundTo(num / (10 ** oom), places);
-		
+
 		return `${div}e${oom}`;
 	} else
 		return num.toString();
@@ -30,7 +31,7 @@ const themes = ["light", "dark"];
 
 //Elements to modify
 const elements = ["#app", "#header", ".header-item", "#number-display", ".options-button", "#theme-options-button",
-"#theme-options-text", "#theme-options-current", "#theme-selector", "#theme-selector-title", 
+"#theme-options-text", "#theme-options-current", "#theme-selector", "#theme-selector-title",
 ".theme-selector-list-button", "#theme-selector-exit-button", "#click-button"];
 
 //Potential game states
@@ -44,13 +45,13 @@ const Game = ({theme = "dark", state = "main"} = {}) => {
 
         //Current state
         state: "main",
-		
+
 		//Current score
 		score: 0,
-		
+
 		//Current amount gained on click
 		gain: 1,
-		
+
 		//Current goal to prestige
 		prestigeGoal: 10,
 
@@ -99,19 +100,19 @@ const Game = ({theme = "dark", state = "main"} = {}) => {
         closeThemeSelector() {
             $("#theme-selector-container").hide();
         },
-		
+
 		//Adds to the score
 		addScore(s) {
 			this.score += s;
-			
+
 			//Updates number display
 			$("#number-display-main").text(formatSci(this.score));
 		},
-		
+
 		//Updates the amount gained on click
 		setGain(gain) {
 			this.gain = gain;
-			
+
 			//Updates amount gained text
 			$("#click-button").text(`Increase number by ${formatSci(obj.gain)}`);
 		}
@@ -123,13 +124,13 @@ const Game = ({theme = "dark", state = "main"} = {}) => {
 	//Sets the theme and state to the required values (with defaults)
     obj.setTheme(obj.theme);
     obj.setState(obj.state);
-	
+
 	//Sets the score to the proper value
 	$("#number-display-main").text(formatSci(obj.score));
-	
+
 	//Sets the goal to the proper value
 	$("#number-display-goal").text(`Goal: ${formatSci(obj.prestigeGoal)}`);
-	
+
 	//Updates click button text
 	$("#click-button").text(`Increase number by ${formatSci(obj.gain)}`);
 
