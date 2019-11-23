@@ -66,7 +66,7 @@
     height: 100%;
 
     display: grid;
-	
+
 	grid-template-rows: 75% 25%;
 	grid-template-columns: 100%;
 }
@@ -76,7 +76,7 @@
 
     justify-content: center;
     align-items: center;
-	
+
 	font-size: 200%;
 }
 
@@ -85,7 +85,7 @@
 
     justify-content: center;
     align-items: center;
-	
+
 	font-size: 75%;
 }
 
@@ -102,9 +102,9 @@
 #main {
     grid-row: 1;
     grid-column: 1;
-	
+
 	display: grid;
-	
+
 	grid-template-rows: 30% 70%;
 	grid-template-columns: 100%;
 }
@@ -112,24 +112,24 @@
 #click-button-container {
 	grid-row: 1;
 	grid-column: 1;
-	
+
 	display: flex;
 
     justify-content: center;
     align-items: center;
-	
+
 	user-select: none;
 }
 
 #click-button {
 	width: 22%;
 	height: 35%;
-	
+
 	display: flex;
 
     justify-content: center;
     align-items: center;
-	
+
 	font-size: 100%;
 }
 
