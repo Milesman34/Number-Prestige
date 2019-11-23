@@ -61,6 +61,16 @@
     user-select: none;
 }
 
+#display-header {
+    width: 100%;
+    height: 100%;
+
+    display: grid;
+
+    grid-template-rows: 100%;
+    grid-template-columns: 30% 40% 30%;
+}
+
 #number-display {
     width: 100%;
     height: 100%;
