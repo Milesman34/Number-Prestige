@@ -190,7 +190,7 @@ button {
 
     display: grid;
 
-    grid-template-columns: repeat(4, auto);
+    grid-template-columns: repeat(4, 25%);
 }
 
 .options-button-container {

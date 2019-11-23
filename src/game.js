@@ -70,6 +70,11 @@ const Game = ({theme = "dark", state = "main"} = {}) => {
             this.prestiges = parseInt(data[4]);
         },
 
+        //Saves the game in the current save file
+        save() {
+            this.setSaveFile(this.currentSave);
+        },
+
         //Shows the theme selector
 		showThemeSelector() {
 			$("#theme-selector-container").show();
@@ -209,7 +214,7 @@ const Game = ({theme = "dark", state = "main"} = {}) => {
 
     //Sets up an interval for saving
     setInterval(() => {
-        obj.setSaveFile(obj.currentSave);
+        obj.save();
     }, saveInterval);
 
     return obj;
