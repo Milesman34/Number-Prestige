@@ -55,6 +55,9 @@ const Game = ({theme = "dark", state = "main"} = {}) => {
 		//Current goal to prestige
 		prestigeGoal: 10,
 
+        //Number of prestiges
+        prestiges: 0,
+
         //Shows the theme selector
 		showThemeSelector() {
 			$("#theme-selector-container").show();
@@ -147,9 +150,17 @@ const Game = ({theme = "dark", state = "main"} = {}) => {
         //Prestiges
         //This resets score, but doubles the goal and adds 1 to gain
         prestige() {
+            //Checks if the player really wants to prestige (only on first prestige)
+            if (
+                this.prestiges === 0 &&
+                !confirm("Are you sure you want to prestige? This will reset your score, while adding 1 to your number gain and doubling the goal.")
+            ) return;
+
             this.setScore(0);
             this.setGain(this.gain + 1);
             this.setGoal(this.prestigeGoal * 2);
+
+            this.prestiges++;
 
             //Hides prestige button
             this.hidePrestigeButton();
