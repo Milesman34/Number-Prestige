@@ -11,8 +11,7 @@
     box-shadow: 2px 2px 2px rgb(180, 180, 180);
 }
 
-.header-item-light:hover, .options-button-light:hover, .theme-options-button-light:hover,
-.theme-selector-list-button-light:hover, .theme-selector-exit-button-light:hover, .click-button-light:hover, .prestige-button-light:hover {
+.header-item-light:hover, .options-button-light:hover, .theme-options-button-light:hover, .click-button-light:hover, .prestige-button-light:hover {
     background-color: rgb(190, 190, 190);
 }
 
@@ -26,6 +25,18 @@
     background-color: rgb(200, 200, 200);
 
     box-shadow: 2px 2px 2px rgb(180, 180, 180);
+}
+
+.theme-selector-light {
+    color: rgb(0, 0, 0);
+
+    background-color: rgb(195, 195, 195);
+
+    box-shadow: 2px 2px 2px rgb(180, 180, 180);
+}
+
+.theme-selector-list-button-light:hover, .theme-selection-exit-button-light:hover {
+    background-color: rgb(185, 185, 185);
 }
 
 .theme-selector-list-button-light, .theme-selector-title-light {

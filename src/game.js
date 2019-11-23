@@ -75,6 +75,29 @@ const Game = ({theme = "dark", state = "main"} = {}) => {
             this.setSaveFile(this.currentSave);
         },
 
+        //Resets the current save file
+        resetSave() {
+            //Prompt to make sure user wants to reset
+            if (
+                confirm("Do you want to reset your save? You will lose everything!") &&
+                confirm("Are you sure about this? There is no way to get your save back!") &&
+                confirm("This is your last warning!")
+            ) {
+                //Resets all values
+                this.setScore(0);
+                this.setGain(1);
+                this.setGoal(10);
+
+                this.prestiges = 0;
+
+                this.setTheme("dark");
+                this.setState("main");
+
+                //Saves over save file
+                this.save();
+            }
+        },
+
         //Shows the theme selector
 		showThemeSelector() {
 			$("#theme-selector-container").show();

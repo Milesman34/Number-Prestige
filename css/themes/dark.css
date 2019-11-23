@@ -19,7 +19,7 @@
     color: rgb(255, 255, 255);
 }
 
-.options-button-dark, .theme-options-button-dark, .theme-selector-dark, .click-button-dark, .prestige-button-dark {
+.options-button-dark, .theme-options-button-dark, .click-button-dark, .prestige-button-dark {
     color: rgb(255, 255, 255);
 
     background-color: rgb(32, 32, 32);
@@ -27,8 +27,19 @@
     box-shadow: 2px 2px 2px black;
 }
 
-.options-button-dark:hover, .theme-options-button-dark:hover, .theme-selector-list-button:hover,
-.theme-selector-exit-button-dark:hover, .click-button-dark:hover, .prestige-button-dark:hover {
+.theme-selector-dark {
+    color: rgb(255, 255, 255);
+
+    background-color: rgb(36, 36, 36);
+
+    box-shadow: 2px 2px 2px black;
+}
+
+.theme-selector-list-button-dark:hover, .theme-selection-exit-button-dark:hover {
+    background-color: rgb(44, 44, 44);
+}
+
+.options-button-dark:hover, .theme-options-button-dark:hover, .click-button-dark:hover, .prestige-button-dark:hover {
     background-color: rgb(40, 40, 40);
 }
 
