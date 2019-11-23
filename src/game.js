@@ -31,6 +31,42 @@ const Game = ({theme = "dark", state = "main"} = {}) => {
         //Number of prestiges
         prestiges: 0,
 
+        //Save files
+        saves: ["", "", ""],
+
+        //Current save file
+        currentSave: 0,
+
+        //Encodes the save data
+        encodeSaveData() {
+            return `${this.theme}|${this.score}|${this.gain}|${this.prestigeGoal}|${this.prestiges}`;
+        },
+
+        //Sets a save file
+        setSaveFile(file) {
+            /*
+            Format is:
+            THEME|SCORE|GAIN|PRESTIGEGOAL|PRESTIGES
+            */
+            this.saves[file] = this.encodeSaveData();
+
+            //Sets save file in local storage
+            localStorage.setItem(`save${file}`, this.saves[file]);
+        },
+
+        //Loads a save file
+        loadSaveFile(file) {
+            let save = this.saves[file];
+            let data = save.split("|");
+
+            this.setTheme(data[0]);
+            this.setScore(parseInt(data[1]));
+            this.setGain(parseInt(data[2]));
+            this.setGoal(parseInt(data[3]));
+
+            this.prestiges = parseInt(data[4]);
+        },
+
         //Shows the theme selector
 		showThemeSelector() {
 			$("#theme-selector-container").show();
@@ -139,6 +175,15 @@ const Game = ({theme = "dark", state = "main"} = {}) => {
             this.hidePrestigeButton();
         }
     };
+
+    //Attempts to load save file
+    obj.saves = obj.saves.map((e, i) => lsGetOrSetDefault(`save${i}`, obj.encodeSaveData()));
+
+    //Gets the current save file
+    obj.currentSave = parseInt(lsGetOrSetDefault("saveFile", 0));
+
+    //Loads the current save file
+    obj.loadSaveFile(obj.currentSave);
 
 	//Hides the theme selector
     obj.hideThemeSelector();

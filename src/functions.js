@@ -24,3 +24,12 @@ const formatSci = (num, limit = 1e6, places = 2) => {
 	} else
 		return num.toString();
 }
+
+//Attempts to get an item from local storage
+//If it does not exist, it sets the item
+const lsGetOrSetDefault = (item, def) => {
+    if (localStorage.getItem(item) === null)
+        localStorage.setItem(item, def);
+
+    return localStorage.getItem(item);
+}
