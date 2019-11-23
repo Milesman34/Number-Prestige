@@ -10,6 +10,9 @@ const elements = ["#app", "#header", ".header-item", "#number-display", ".option
 //Potential game states
 const gameStates = ["main", "options"];
 
+//Interval for saving
+const saveInterval = 5 * 1000;
+
 //Game constructor (only one at a time)
 const Game = ({theme = "dark", state = "main"} = {}) => {
     let obj = {
@@ -203,6 +206,11 @@ const Game = ({theme = "dark", state = "main"} = {}) => {
 
     //Player cannot prestige at first
     obj.hidePrestigeButton();
+
+    //Sets up an interval for saving
+    setInterval(() => {
+        obj.setSaveFile(obj.currentSave);
+    }, saveInterval);
 
     return obj;
 }
