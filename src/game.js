@@ -5,7 +5,8 @@ const themes = ["light", "dark"];
 //Elements to modify
 const elements = ["#app", "#header", ".header-item", "#number-display", ".options-button", "#theme-options-button",
 "#theme-options-text", "#theme-options-current", "#theme-selector", "#theme-selector-title",
-".theme-selector-list-button", "#theme-selector-exit-button", "#click-button", "#prestige-button", "#prestige-point-display"];
+".theme-selector-list-button", "#theme-selector-exit-button", "#click-button", "#prestige-button", 
+"#prestige-point-display", "#upgrades-subtext"];
 
 //Potential game states
 const gameStates = ["main", "options", "upgrades"];

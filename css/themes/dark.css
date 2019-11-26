@@ -15,7 +15,8 @@
     background-color: rgb(32, 32, 32);
 }
 
-.number-display-dark, .theme-options-text-dark, .theme-options-current-dark, .theme-selector-exit-button-dark, .prestige-point-display-dark {
+.number-display-dark, .theme-options-text-dark, .theme-options-current-dark, .theme-selector-exit-button-dark, 
+.prestige-point-display-dark, .upgrades-subtext-dark {
     color: rgb(255, 255, 255);
 }
 

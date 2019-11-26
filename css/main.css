@@ -343,3 +343,25 @@ button {
     justify-content: center;
     align-items: center;
 }
+
+#upgrades {
+	width: 100%;
+	height: 100%;
+	
+	display: grid;
+	
+	grid-template-rows: 12% 88%;
+	grid-template-columns: 100%;
+}
+
+#upgrades-subtext {
+	width: 100%;
+	height: 100%;
+	
+	display: flex;
+
+    justify-content: center;
+    align-items: center;
+	
+	font-size: 85%;
+}
