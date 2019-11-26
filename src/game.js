@@ -33,6 +33,9 @@ const Game = ({theme = "dark", state = "main"} = {}) => {
 
         //Number of prestiges
         prestiges: 0,
+		
+		//Number of prestige points
+		prestigePoints: 0,
 
         //Save files
         saves: ["", "", ""],
@@ -42,7 +45,7 @@ const Game = ({theme = "dark", state = "main"} = {}) => {
 
         //Encodes the save data
         encodeSaveData() {
-            return `${this.theme}|${this.score}|${this.gain}|${this.prestigeGoal}|${this.prestiges}`;
+            return `${this.theme}|${this.score}|${this.gain}|${this.prestigeGoal}|${this.prestiges}|${this.prestigePoints}`;
         },
 
         //Sets a save file
@@ -68,6 +71,7 @@ const Game = ({theme = "dark", state = "main"} = {}) => {
             this.setGoal(parseInt(data[3]));
 
             this.prestiges = parseInt(data[4]);
+			this.prestigePoints = parseInt(data[5]);
         },
 
         //Saves the game in the current save file
@@ -89,6 +93,7 @@ const Game = ({theme = "dark", state = "main"} = {}) => {
                 this.setGoal(10);
 
                 this.prestiges = 0;
+				this.prestigePoints = 0;
 
                 this.setTheme("dark");
                 this.setState("main");
@@ -193,7 +198,7 @@ const Game = ({theme = "dark", state = "main"} = {}) => {
             //Checks if the player really wants to prestige (only on first prestige)
             if (
                 this.prestiges === 0 &&
-                !confirm("Are you sure you want to prestige? This will reset your score, while adding 1 to your number gain and doubling the goal.")
+                !confirm("Are you sure you want to prestige? This will reset your score, while adding 1 to your number gain and doubling the goal. You will also receive a Prestige point.")
             ) return;
 
             this.setScore(0);
@@ -201,6 +206,7 @@ const Game = ({theme = "dark", state = "main"} = {}) => {
             this.setGoal(this.prestigeGoal * 2);
 
             this.prestiges++;
+			this.prestigePoints++;
 
             //Hides prestige button
             this.hidePrestigeButton();
