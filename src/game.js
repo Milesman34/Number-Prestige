@@ -71,7 +71,8 @@ const Game = ({theme = "dark", state = "main"} = {}) => {
             this.setGoal(parseInt(data[3]));
 
             this.prestiges = parseInt(data[4]);
-			this.prestigePoints = parseInt(data[5]);
+			
+			this.setPrestigePoints(parseInt(data[5]));
         },
 
         //Saves the game in the current save file
@@ -93,7 +94,8 @@ const Game = ({theme = "dark", state = "main"} = {}) => {
                 this.setGoal(10);
 
                 this.prestiges = 0;
-				this.prestigePoints = 0;
+				
+				this.setPrestigePoints(0);
 
                 this.setTheme("dark");
                 this.setState("main");
@@ -175,6 +177,19 @@ const Game = ({theme = "dark", state = "main"} = {}) => {
 
             $("#number-display-goal").text(`Goal: ${formatSci(obj.prestigeGoal)}`);
         },
+		
+		//Updates prestige points
+		setPrestigePoints(points) {
+			this.prestigePoints = points;
+			
+			$("#prestige-point-display")
+				.text(`You have ${this.prestigePoints} Prestige point${points === 1 ? '' : 's'}`);
+		},
+		
+		//Adds to the player's prestige points
+		addPrestigePoints(points) {
+			this.setPrestigePoints(this.prestigePoints + points);
+		},
 
         //Prestiges
         //This resets score, but doubles the goal and adds 1 to gain
@@ -190,7 +205,8 @@ const Game = ({theme = "dark", state = "main"} = {}) => {
             this.setGoal(this.prestigeGoal * 2);
 
             this.prestiges++;
-			this.prestigePoints++;
+			
+			this.addPrestigePoints(1);
 
             //Hides prestige button
             $("#prestige-button").hide();
