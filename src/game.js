@@ -8,7 +8,7 @@ const elements = ["#app", "#header", ".header-item", "#number-display", ".option
 ".theme-selector-list-button", "#theme-selector-exit-button", "#click-button", "#prestige-button", "#prestige-point-display"];
 
 //Potential game states
-const gameStates = ["main", "options"];
+const gameStates = ["main", "options", "upgrades"];
 
 //Interval for saving
 const saveInterval = 5 * 1000;
@@ -106,6 +106,9 @@ const Game = ({theme = "dark", state = "main"} = {}) => {
 				//Hides prestige buttons
 				$("#prestige-button").hide();
 				$("#prestige-point-display").hide();
+				
+				//Hides upgrades
+				$("#upgrades-header-item").hide();
             }
         },
 
@@ -155,6 +158,7 @@ const Game = ({theme = "dark", state = "main"} = {}) => {
             //Shows prestige button if needed
             if (this.score >= this.prestigeGoal) {
                 $("#prestige-button").show();
+
             }
         },
 
@@ -213,6 +217,9 @@ const Game = ({theme = "dark", state = "main"} = {}) => {
 			
 			//Shows prestige point display
 			$("#prestige-point-display").show();
+			
+			//Shows upgrades in the header
+			$("#upgrades-header-item").show();
         }
     };
 
@@ -246,8 +253,14 @@ const Game = ({theme = "dark", state = "main"} = {}) => {
 		$("#prestige-button").hide();
 	
 	//This doesn't show up if the player has not prestiged yet
-	if (obj.prestiges === 0)
+	if (obj.prestiges === 0) {
 		$("#prestige-point-display").hide();
+		
+		//Upgrades are disabled until you prestige
+		$("#upgrades-header-item").hide();
+	}
+	
+	//Upgrades
 
     //Sets up an interval for saving
     setInterval(() => {

@@ -52,7 +52,7 @@ button {
     display: grid;
 
     grid-template-rows: 100%;
-    grid-template-columns: repeat(2, 50%);
+    grid-template-columns: repeat(auto-fill, auto);
 }
 
 .header-item {
@@ -60,6 +60,8 @@ button {
 
     justify-content: center;
     align-items: center;
+	
+	grid-row: 1;
 
     font-size: 175%;
 
