@@ -5,7 +5,7 @@ const themes = ["light", "dark"];
 //Elements to modify
 const elements = ["#app", "#header", ".header-item", "#number-display", ".options-button", "#theme-options-button",
 "#theme-options-text", "#theme-options-current", "#theme-selector", "#theme-selector-title",
-".theme-selector-list-button", "#theme-selector-exit-button", "#click-button", "#prestige-button"];
+".theme-selector-list-button", "#theme-selector-exit-button", "#click-button", "#prestige-button", "#prestige-point-display"];
 
 //Potential game states
 const gameStates = ["main", "options"];
@@ -100,27 +100,11 @@ const Game = ({theme = "dark", state = "main"} = {}) => {
 
                 //Saves over save file
                 this.save();
+				
+				//Hides prestige buttons
+				$("#prestige-button").hide();
+				$("#prestige-point-display").hide();
             }
-        },
-
-        //Shows the theme selector
-		showThemeSelector() {
-			$("#theme-selector-container").show();
-		},
-
-        //Hides the theme selector
-        hideThemeSelector() {
-            $("#theme-selector-container").hide();
-        },
-
-        //Shows the prestige button
-        showPrestigeButton() {
-            $("#prestige-button").show();
-        },
-
-        //Hides the prestige button
-        hidePrestigeButton() {
-            $("#prestige-button").hide();
         },
 
         //Sets the theme
@@ -156,7 +140,7 @@ const Game = ({theme = "dark", state = "main"} = {}) => {
             });
 
             //Hides open selectors
-            this.hideThemeSelector();
+            $("#theme-selector-container").hide();
         },
 
         //Sets the score to a value
@@ -168,7 +152,7 @@ const Game = ({theme = "dark", state = "main"} = {}) => {
 
             //Shows prestige button if needed
             if (this.score >= this.prestigeGoal) {
-                this.showPrestigeButton();
+                $("#prestige-button").show();
             }
         },
 
@@ -209,7 +193,10 @@ const Game = ({theme = "dark", state = "main"} = {}) => {
 			this.prestigePoints++;
 
             //Hides prestige button
-            this.hidePrestigeButton();
+            $("#prestige-button").hide();
+			
+			//Shows prestige point display
+			$("#prestige-point-display").show();
         }
     };
 
@@ -223,7 +210,7 @@ const Game = ({theme = "dark", state = "main"} = {}) => {
     obj.loadSaveFile(obj.currentSave);
 
 	//Hides the theme selector
-    obj.hideThemeSelector();
+    $("#theme-selector-container").hide();
 
 	//Sets the theme and state to the required values (with defaults)
     obj.setTheme(obj.theme);
@@ -238,8 +225,13 @@ const Game = ({theme = "dark", state = "main"} = {}) => {
 	//Updates click button text
 	obj.setGain(obj.gain);
 
-    //Player cannot prestige at first
-    obj.hidePrestigeButton();
+    //Player cannot prestige at first (unless they have enough points)
+	if (obj.score < obj.prestigeGoal)
+		$("#prestige-button").hide();
+	
+	//This doesn't show up if the player has not prestiged yet
+	if (obj.prestiges === 0)
+		$("#prestige-point-display").hide();
 
     //Sets up an interval for saving
     setInterval(() => {

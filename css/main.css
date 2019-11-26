@@ -112,22 +112,48 @@ button {
 
     grid-column: 3;
 
-    display: flex;
+    display: grid;
+
+	grid-row: 20% 80%;
+	grid-column: 100%;
+}
+
+#prestige-point-display {
+	width: 100%;
+	height: 100%;
+	
+	grid-row: 1;
+	
+	display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    font-size: 55%;
+}
+
+#prestige-button-sub-container {
+	width: 100%;
+	height: 100%;
+	
+	grid-row: 2;
+	
+	display: flex;
 
     justify-content: center;
     align-items: center;
 }
 
 #prestige-button {
-    width: 45%;
-    height: 75%;
+    width: 55%;
+    height: 100%;
 
     display: flex;
 
     justify-content: center;
     align-items: center;
 
-    font-size: 85%;
+    font-size: 70%;
 
     user-select: none;
 }

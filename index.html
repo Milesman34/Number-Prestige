@@ -24,7 +24,7 @@
                         <button class="theme-selector-list-button sans" onClick="game.setTheme('dark')">Dark</button>
                     </div>
 
-                    <button id="theme-selector-exit-button" class="sans" onClick="game.hideThemeSelector()">Exit</button>
+                    <button id="theme-selector-exit-button" class="sans" onClick="$('#theme-selector-container').hide()">Exit</button>
                 </div>
 			</div>
 
@@ -42,8 +42,12 @@
                     </div>
 
                     <div id="prestige-button-container">
-                        <button id="prestige-button" class="sans" onClick="game.prestige()">Prestige for 1 Prestige point</button>
-                    </div>
+						<div id="prestige-point-display" class="sans">You have 0 Prestige points</div>
+						
+						<div id="prestige-button-sub-container">
+							<button id="prestige-button" class="sans" onClick="game.prestige()">Prestige for 1 Prestige point</button>
+						</div>
+					</div>
 				</div>
 
 				<div id="content">
@@ -56,7 +60,7 @@
 					<div id="options">
 						<div class="options-row">
 							<div class="options-button-container">
-								<button id="theme-options-button" onClick="game.showThemeSelector()">
+								<button id="theme-options-button" onClick="$('#theme-selector-container').show()">
 									<div id="theme-options-container">
 										<div id="theme-options-text" class="sans">Theme</div>
 										<div id="theme-options-current" class="sans">Currently: Dark</div>
