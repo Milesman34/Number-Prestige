@@ -32,6 +32,7 @@
 				<div id="header">
 					<button class="header-item sans" onClick="game.setState('main')">Main</button>
 					<button class="header-item sans" onClick="game.setState('options')">Options</button>
+					<button id="upgrades-header-item" class="header-item sans" onClick="game.setState('upgrades')">Upgrades</button>
 				</div>
 
 				<div id="display-header" class="monospace">
@@ -80,6 +81,11 @@
                                 </button>
                             </div>
 						</div>
+					</div>
+					
+					<div id="upgrades">
+						<div id="upgrades-subtext" class="sans">Buying an upgrade will reset your prestige requirement and number gain.</div>
+						<div id="upgrades-container"></div>
 					</div>
 				</div>
 			</div>
