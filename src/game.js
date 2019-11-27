@@ -5,7 +5,7 @@ const themes = ["light", "dark"];
 //Elements to modify
 const elements = ["#app", "#header", ".header-item", "#number-display", ".options-button", "#theme-options-button",
 "#theme-options-text", "#theme-options-current", "#theme-selector", "#theme-selector-title",
-".theme-selector-list-button", "#theme-selector-exit-button", "#click-button", "#prestige-button", 
+".theme-selector-list-button", "#theme-selector-exit-button", "#click-button", "#prestige-button",
 "#prestige-point-display", "#upgrades-subtext"];
 
 //Potential game states
@@ -73,7 +73,8 @@ const Game = ({theme = "dark", state = "main"} = {}) => {
 
             this.prestiges = parseInt(data[4]);
 
-			this.setPrestigePoints(parseInt(data[5]));
+            //At this point, the game has to check if the game has been updated, setting the values to the defaults if needed
+			this.setPrestigePoints(data.length >= 6 ? parseInt(data[5]) : 0);
         },
 
         //Saves the game in the current save file
@@ -107,7 +108,7 @@ const Game = ({theme = "dark", state = "main"} = {}) => {
 				//Hides prestige buttons
 				$("#prestige-button").hide();
 				$("#prestige-point-display").hide();
-				
+
 				//Hides upgrades
 				$("#upgrades-header-item").hide();
             }
@@ -218,7 +219,7 @@ const Game = ({theme = "dark", state = "main"} = {}) => {
 
 			//Shows prestige point display
 			$("#prestige-point-display").show();
-			
+
 			//Shows upgrades in the header
 			$("#upgrades-header-item").show();
         }
@@ -256,11 +257,11 @@ const Game = ({theme = "dark", state = "main"} = {}) => {
 	//This doesn't show up if the player has not prestiged yet
 	if (obj.prestiges === 0) {
 		$("#prestige-point-display").hide();
-		
+
 		//Upgrades are disabled until you prestige
 		$("#upgrades-header-item").hide();
 	}
-	
+
 	//Upgrades
 
     //Sets up an interval for saving
