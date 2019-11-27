@@ -33,7 +33,7 @@ const Game = ({theme = "dark", state = "main"} = {}) => {
 
         //Number of prestiges
         prestiges: 0,
-		
+
 		//Number of prestige points
 		prestigePoints: 0,
 
@@ -71,7 +71,7 @@ const Game = ({theme = "dark", state = "main"} = {}) => {
             this.setGoal(parseInt(data[3]));
 
             this.prestiges = parseInt(data[4]);
-			
+
 			this.setPrestigePoints(parseInt(data[5]));
         },
 
@@ -94,7 +94,7 @@ const Game = ({theme = "dark", state = "main"} = {}) => {
                 this.setGoal(10);
 
                 this.prestiges = 0;
-				
+
 				this.setPrestigePoints(0);
 
                 this.setTheme("dark");
@@ -102,7 +102,7 @@ const Game = ({theme = "dark", state = "main"} = {}) => {
 
                 //Saves over save file
                 this.save();
-				
+
 				//Hides prestige buttons
 				$("#prestige-button").hide();
 				$("#prestige-point-display").hide();
@@ -177,15 +177,15 @@ const Game = ({theme = "dark", state = "main"} = {}) => {
 
             $("#number-display-goal").text(`Goal: ${formatSci(obj.prestigeGoal)}`);
         },
-		
+
 		//Updates prestige points
 		setPrestigePoints(points) {
 			this.prestigePoints = points;
-			
+
 			$("#prestige-point-display")
 				.text(`You have ${this.prestigePoints} Prestige point${points === 1 ? '' : 's'}`);
 		},
-		
+
 		//Adds to the player's prestige points
 		addPrestigePoints(points) {
 			this.setPrestigePoints(this.prestigePoints + points);
@@ -205,12 +205,12 @@ const Game = ({theme = "dark", state = "main"} = {}) => {
             this.setGoal(this.prestigeGoal * 2);
 
             this.prestiges++;
-			
+
 			this.addPrestigePoints(1);
 
             //Hides prestige button
             $("#prestige-button").hide();
-			
+
 			//Shows prestige point display
 			$("#prestige-point-display").show();
         }
@@ -244,7 +244,7 @@ const Game = ({theme = "dark", state = "main"} = {}) => {
     //Player cannot prestige at first (unless they have enough points)
 	if (obj.score < obj.prestigeGoal)
 		$("#prestige-button").hide();
-	
+
 	//This doesn't show up if the player has not prestiged yet
 	if (obj.prestiges === 0)
 		$("#prestige-point-display").hide();
