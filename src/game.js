@@ -6,7 +6,7 @@ const themes = ["light", "dark"];
 const elements = ["#app", "#header", ".header-item", "#number-display", ".options-button", "#theme-options-button",
 "#theme-options-text", "#theme-options-current", "#theme-selector", "#theme-selector-title",
 ".theme-selector-list-button", "#theme-selector-exit-button", "#click-button", "#prestige-button",
-"#prestige-point-display", "#upgrades-subtext"];
+"#prestige-point-display", "#upgrades-subtext", ".prestige-upgrade-button"];
 
 //Potential game states
 const gameStates = ["main", "options", "upgrades"];
@@ -189,7 +189,7 @@ const Game = ({theme = "dark", state = "main"} = {}) => {
 			this.prestigePoints = points;
 
 			$("#prestige-point-display")
-				.text(`You have ${this.prestigePoints} Prestige point${points === 1 ? '' : 's'}`);
+				.text(`You have ${this.prestigePoints} Prestige Point${points === 1 ? '' : 's'}`);
 		},
 
 		//Adds to the player's prestige points

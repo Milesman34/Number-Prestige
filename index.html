@@ -46,7 +46,7 @@
 						<div id="prestige-point-display" class="sans">You have 0 Prestige points</div>
 
 						<div id="prestige-button-sub-container">
-							<button id="prestige-button" class="sans" onClick="game.prestige()">Prestige for 1 Prestige point</button>
+							<button id="prestige-button" class="sans" onClick="game.prestige()">Prestige for 1 Prestige Point</button>
 						</div>
 					</div>
 				</div>
@@ -82,10 +82,44 @@
                             </div>
 						</div>
 					</div>
-					
+
 					<div id="upgrades">
 						<div id="upgrades-subtext" class="sans">Buying an upgrade will reset your prestige requirement and number gain.</div>
-						<div id="upgrades-container"></div>
+						<div id="upgrades-container">
+                            <div id="prestige-upgrades-container">
+                                <div class="prestige-upgrade-container">
+                                    <button id="prestige-point-multi-upgrade-button" class="prestige-upgrade-button">
+                                        <div class="prestige-upgrade-desc sans">Multiply Prestige Point gain by 2</div>
+                                        <div class="prestige-upgrade-current sans">Currently: 1x</div>
+                                        <div class="prestige-upgrade-cost sans">Cost: 2 Prestige Points</div>
+                                    </button>
+                                </div>
+
+                                <div class="prestige-upgrade-container">
+                                    <button id="number-gain-boost-upgrade-button" class="prestige-upgrade-button">
+                                        <div class="prestige-upgrade-desc sans">Add 1 to number gain</div>
+                                        <div class="prestige-upgrade-current sans">Currently: 1 -> 1</div>
+                                        <div class="prestige-upgrade-cost sans">Cost: 5 Prestige Points</div>
+                                    </button>
+                                </div>
+
+                                <div class="prestige-upgrade-container">
+                                    <button id="prestige-reduce-requirement-upgrade-button" class="prestige-upgrade-button">
+                                        <div class="prestige-upgrade-desc sans">Reduce prestige requirement by 10%</div>
+                                        <div class="prestige-upgrade-current sans">Currently: 100% -> 100%</div>
+                                        <div class="prestige-upgrade-cost sans">Cost: 5 Prestige Points</div>
+                                    </button>
+                                </div>
+
+                                <div class="prestige-upgrade-container">
+                                    <button id="autoclicker-buff-upgrade-button" class="prestige-upgrade-button">
+                                        <div class="prestige-upgrade-desc sans">Make Auto-Click 2x faster</div>
+                                        <div class="prestige-upgrade-current sans">Currently: 1x</div>
+                                        <div class="prestige-upgrade-cost sans">Cost: 4 Prestige Points</div>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
 					</div>
 				</div>
 			</div>

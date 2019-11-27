@@ -11,17 +11,18 @@
     box-shadow: 2px 2px 2px rgb(180, 180, 180);
 }
 
-.header-item-light:hover, .options-button-light:hover, .theme-options-button-light:hover, .click-button-light:hover, 
-.prestige-button-light:hover {
+.header-item-light:hover, .options-button-light:hover, .theme-options-button-light:hover, .click-button-light:hover,
+.prestige-button-light:hover, .prestige-upgrade-button-light:hover {
     background-color: rgb(190, 190, 190);
 }
 
-.number-display-light, .theme-options-text-light, .theme-options-current-light, .theme-selector-exit-button-light, 
+.number-display-light, .theme-options-text-light, .theme-options-current-light, .theme-selector-exit-button-light,
 .prestige-button-display-light, .upgrades-subtext-light {
     color: rgb(0, 0, 0);
 }
 
-.options-button-light, .theme-options-button-light, .theme-selector-light, .click-button-light, .prestige-button-light {
+.options-button-light, .theme-options-button-light, .theme-selector-light, .click-button-light, .prestige-button-light,
+.prestige-upgrade-button-light {
     color: rgb(0, 0, 0);
 
     background-color: rgb(200, 200, 200);
