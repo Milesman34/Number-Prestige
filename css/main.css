@@ -396,6 +396,8 @@ button {
 
     grid-template-rows: 5% 17% 15% 10% 3% 12% auto;
     grid-template-columns: 100%;
+
+    user-select: none;
 }
 
 .prestige-upgrade-desc {

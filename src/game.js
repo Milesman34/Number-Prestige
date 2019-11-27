@@ -38,6 +38,22 @@ const Game = ({theme = "dark", state = "main"} = {}) => {
 		//Number of prestige points
 		prestigePoints: 0,
 
+        //Amount the player has of each upgrade
+        upgrades: [
+            Upgrade({
+                id: "prestige-point-multi-upgrade",
+
+                cost: 2,
+                costMulti: 5,
+
+                boost() {
+                    return 2 ** this.amount
+                },
+
+                currently: boost => `${boost}x`
+            })
+        ],
+
         //Save files
         saves: ["", "", ""],
 
@@ -189,13 +205,38 @@ const Game = ({theme = "dark", state = "main"} = {}) => {
 			this.prestigePoints = points;
 
 			$("#prestige-point-display")
-				.text(`You have ${this.prestigePoints} Prestige Point${points === 1 ? '' : 's'}`);
+				.text(`You have ${formatSci(this.prestigePoints)} Prestige Point${points === 1 ? '' : 's'}`);
 		},
 
 		//Adds to the player's prestige points
 		addPrestigePoints(points) {
 			this.setPrestigePoints(this.prestigePoints + points);
 		},
+
+        //Subtracts from the player's prestige points
+        subtractPrestigePoints(points) {
+            this.setPrestigePoints(this.prestigePoints - points);
+        },
+
+        //Attempts to buy an upgrade if the player has enough prestige points
+        buyUpgrade(upgrade) {
+            let u = this.upgrades[upgrade];
+
+            if (u.canBuy && this.prestigePoints >= u.cost) {
+                //Actually buys the upgrade
+                this.subtractPrestigePoints(u.cost);
+
+                u.buy();
+
+                //Resets gain and prestige requirement
+                this.setScore(0);
+                this.setGoal(10);
+                this.setGain(1);
+
+                //Prestige point gain is updated
+                $("#prestige-button").text(`Prestige for ${formatSci(this.upgrades[0].boost())} Prestige Point${this.prestigePoints === 1 ? '' : 's'}`);
+            }
+        },
 
         //Prestiges
         //This resets score, but doubles the goal and adds 1 to gain
@@ -212,7 +253,8 @@ const Game = ({theme = "dark", state = "main"} = {}) => {
 
             this.prestiges++;
 
-			this.addPrestigePoints(1);
+            //Upgrade 0 affects prestige point gain
+			this.addPrestigePoints(this.upgrades[0].boost());
 
             //Hides prestige button
             $("#prestige-button").hide();
