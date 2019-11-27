@@ -31,7 +31,15 @@ const Upgrade = ({id, cost, costMulti, boost, currently, repeatable = true} = {}
         //Updates the boost shown on the element
         updateBoost() {
             //The 2nd child is the currently element
-            $(`#${this.id}`).children().eq(1).text(`Currently: ${this.currently(formatSci(this.boost()))}`)
+            $(`#${this.id}`).children().eq(1).text(`Currently: ${this.currently(formatSci(this.boost()))}`);
+        },
+
+        //Sets the cost of the upgrade
+        setCost(cost) {
+            this.cost = cost;
+
+            //The 3rd child is the cost element
+            $(`#${this.id}`).children().eq(2).text(`Cost: ${formatSci(this.cost)} Prestige Points`);
         },
 
         //Buys the upgrade,
@@ -42,7 +50,7 @@ const Upgrade = ({id, cost, costMulti, boost, currently, repeatable = true} = {}
 
             //Cost is multiplied if it is repeatable
             if (this.repeatable)
-                this.cost *= this.costMulti;
+                this.setCost(this.cost * this.costMulti);
         }
     };
 
