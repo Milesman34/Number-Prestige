@@ -62,14 +62,14 @@ const Game = ({theme = "dark", state = "main"} = {}) => {
 
         //Encodes the save data
         encodeSaveData() {
-            return `${this.theme}|${this.score}|${this.gain}|${this.prestigeGoal}|${this.prestiges}|${this.prestigePoints}`;
+            return `${this.theme}|${this.score}|${this.gain}|${this.prestigeGoal}|${this.prestiges}|${this.prestigePoints}|${this.upgrades[0].amount}|${this.upgrades[0].cost}`;
         },
 
         //Sets a save file
         setSaveFile(file) {
             /*
             Format is:
-            THEME|SCORE|GAIN|PRESTIGEGOAL|PRESTIGES
+            THEME|SCORE|GAIN|PRESTIGEGOAL|PRESTIGES|PRESTIGEPOINTS|UPGRADE0BUYS|UPGRADE0COST
             */
             this.saves[file] = this.encodeSaveData();
 
@@ -90,7 +90,12 @@ const Game = ({theme = "dark", state = "main"} = {}) => {
             this.prestiges = parseInt(data[4]);
 
             //At this point, the game has to check if the game has been updated, setting the values to the defaults if needed
+            //Prestige points update
 			this.setPrestigePoints(data.length >= 6 ? parseInt(data[5]) : 0);
+
+            //Prestige upgrade 1 update
+            this.upgrades[0].amount = data.length >= 7 ? parseInt(data[6]) : 0;
+            this.upgrades[0].setCost(data.length >= 8 ? parseInt(data[7]) : 2);
         },
 
         //Saves the game in the current save file
@@ -117,6 +122,13 @@ const Game = ({theme = "dark", state = "main"} = {}) => {
 
                 this.setTheme("dark");
                 this.setState("main");
+
+                //Handles first prestige upgrade
+                this.upgrades[0].amount = 0;
+                this.upgrades[0].setCost(2);
+                this.upgrades[0].updateBoost();
+
+                this.updatePrestigePointGain();
 
                 //Saves over save file
                 this.save();
@@ -218,6 +230,11 @@ const Game = ({theme = "dark", state = "main"} = {}) => {
             this.setPrestigePoints(this.prestigePoints - points);
         },
 
+        //Updates prestige point gain shown on button
+        updatePrestigePointGain() {
+            $("#prestige-button").text(`Prestige for ${formatSci(this.upgrades[0].boost())} Prestige Point${this.prestigePoints === 1 ? '' : 's'}`);
+        },
+
         //Attempts to buy an upgrade if the player has enough prestige points
         buyUpgrade(upgrade) {
             let u = this.upgrades[upgrade];
@@ -234,7 +251,7 @@ const Game = ({theme = "dark", state = "main"} = {}) => {
                 this.setGain(1);
 
                 //Prestige point gain is updated
-                $("#prestige-button").text(`Prestige for ${formatSci(this.upgrades[0].boost())} Prestige Point${this.prestigePoints === 1 ? '' : 's'}`);
+                this.updatePrestigePointGain();
             }
         },
 
@@ -304,7 +321,11 @@ const Game = ({theme = "dark", state = "main"} = {}) => {
 		$("#upgrades-header-item").hide();
 	}
 
-	//Upgrades
+	//Updates attributes of each upgrade
+    obj.upgrades[0].setCost(obj.upgrades[0].cost);
+    obj.upgrades[0].updateBoost();
+
+    obj.updatePrestigePointGain();
 
     //Sets up an interval for saving
     setInterval(() => {
