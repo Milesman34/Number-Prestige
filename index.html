@@ -36,7 +36,8 @@
 				<div id="header" v-bind:class="themeClass('header')">
 					<button class="header-item sans" v-bind:class="themeClass('header-item')" v-on:click="setState('main')">Main</button>
 					<button class="header-item sans" v-bind:class="themeClass('header-item')" v-on:click="setState('options')">Options</button>
-					<button id="upgrades-header-item" class="header-item sans" v-bind:class="themeClass('header-item')" v-on:click="setState('upgrades')" v-if="prestiges > 0">Upgrades</button>
+					<button class="header-item sans" v-bind:class="themeClass('header-item')" v-on:click="setState('upgrades')" v-if="prestiges > 0">Upgrades</button>
+					<button class="header-item sans" v-bind:class="themeClass('header-item')" v-on:click="setState('automation')" v-if="prestiges > 0">Automation</button>
 				</div>
 
 				<div id="display-header" class="monospace">
@@ -131,6 +132,10 @@
                             </div>
     					</div>
                     </template>
+					
+					<template v-if="state === 'automation'">
+						<div id="automation"></div>
+					</template>
 				</div>
 			</div>
 		</div>
