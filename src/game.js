@@ -19,6 +19,11 @@ let app = new Vue({
         //Generates the theme class used for a given element
         themeClass(elem) {
             return `${elem}-${this.theme}`;
+        },
+
+        //Capitalizes a word
+        capitalize(word) {
+            return word[0].toUpperCase() + word.slice(1, word.length).toLowerCase();
         }
     }
 });

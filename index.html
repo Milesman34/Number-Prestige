@@ -18,7 +18,7 @@
     <body>
 		<div id="container">
             <template v-if="state === 'options'">
-                <div id="theme-selector-container" v-if="state === 'options'">
+                <div id="theme-selector-container">
         			<div id="theme-selector" v-bind:class="themeClass('theme-selector')">
                         <div id="theme-selector-title" class="sans" v-bind:class="themeClass('theme-selector-title')">Select Theme</div>
 
@@ -71,7 +71,7 @@
     								<button id="theme-options-button" v-bind:class="themeClass('theme-options-button')">
     									<div id="theme-options-container">
     										<div id="theme-options-text" class="sans" v-bind:class="themeClass('theme-options-text')">Theme</div>
-    										<div id="theme-options-current" class="sans" v-bind:class="themeClass('theme-options-current')">Currently: Dark</div>
+    										<div id="theme-options-current" class="sans" v-bind:class="themeClass('theme-options-current')">Currently: {{ capitalize(theme) }}</div>
     									</div>
     								</button>
     							</div>
