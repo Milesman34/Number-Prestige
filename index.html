@@ -41,9 +41,9 @@
 
 				<div id="display-header" class="monospace">
                     <div id="number-display" v-bind:class="themeClass('number-display')">
-    					<div id="number-display-main" class="sans">0</div>
+    					<div id="number-display-main" class="sans">{{ formatSci(score) }}</div>
 
-    					<div id="number-display-goal" class="sans">Goal: 10</div>
+    					<div id="number-display-goal" class="sans">Goal: {{ formatSci(goal) }}</div>
                     </div>
 
                     <div id="prestige-button-container">
@@ -59,7 +59,7 @@
                     <template v-if="state === 'main'">
     					<div id="main">
     						<div id="click-button-container">
-    							<button id="click-button" class="sans" v-bind:class="themeClass('click-button')">Increase number by 1</button>
+    							<button id="click-button" class="sans" v-bind:class="themeClass('click-button')" v-on:click="addScore(gain)">Increase number by {{ formatSci(gain) }}</button>
     						</div>
     					</div>
                     </template>
