@@ -36,7 +36,7 @@
     box-shadow: 2px 2px 2px black;
 }
 
-.theme-selector-list-button-dark:hover, .theme-selection-exit-button-dark:hover {
+.theme-selector-list-button-dark:hover, .theme-selector-exit-button-dark:hover {
     background-color: rgb(44, 44, 44);
 }
 

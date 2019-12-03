@@ -38,7 +38,7 @@
     box-shadow: 2px 2px 2px rgb(180, 180, 180);
 }
 
-.theme-selector-list-button-light:hover, .theme-selection-exit-button-light:hover {
+.theme-selector-list-button-light:hover, .theme-selector-exit-button-light:hover {
     background-color: rgb(185, 185, 185);
 }
 

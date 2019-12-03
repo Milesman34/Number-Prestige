@@ -17,17 +17,17 @@
 
     <body>
 		<div id="container">
-            <template v-if="state === 'options'">
+            <template v-if="selector === 'theme'">
                 <div id="theme-selector-container">
         			<div id="theme-selector" v-bind:class="themeClass('theme-selector')">
                         <div id="theme-selector-title" class="sans" v-bind:class="themeClass('theme-selector-title')">Select Theme</div>
 
                         <div id="theme-selector-list">
-                            <button class="theme-selector-list-button sans" v-bind:class="themeClass('theme-selector-list-button')">Light</button>
-                            <button class="theme-selector-list-button sans" v-bind:class="themeClass('theme-selector-list-button')">Dark</button>
+                            <button class="theme-selector-list-button sans" v-bind:class="themeClass('theme-selector-list-button')" v-on:click="setTheme('light')">Light</button>
+                            <button class="theme-selector-list-button sans" v-bind:class="themeClass('theme-selector-list-button')" v-on:click="setTheme('dark')">Dark</button>
                         </div>
 
-                        <button id="theme-selector-exit-button" class="sans" v-bind:class="themeClass('theme-selector-exit-button')">Exit</button>
+                        <button id="theme-selector-exit-button" class="sans" v-bind:class="themeClass('theme-selector-exit-button')" v-on:click="setSelector('none')">Exit</button>
                     </div>
         		</div>
             </template>
@@ -68,7 +68,7 @@
     					<div id="options">
     						<div class="options-row">
     							<div class="options-button-container">
-    								<button id="theme-options-button" v-bind:class="themeClass('theme-options-button')">
+    								<button id="theme-options-button" v-bind:class="themeClass('theme-options-button')" v-on:click="setSelector('theme')">
     									<div id="theme-options-container">
     										<div id="theme-options-text" class="sans" v-bind:class="themeClass('theme-options-text')">Theme</div>
     										<div id="theme-options-current" class="sans" v-bind:class="themeClass('theme-options-current')">Currently: {{ capitalize(theme) }}</div>
@@ -77,13 +77,13 @@
     							</div>
 
                                 <div class="options-button-container">
-                                    <button class="options-button sans" v-bind:class="themeClass('options-button')">
+                                    <button class="options-button sans" v-bind:class="themeClass('options-button')" v-on:click="save">
                                         Save
                                     </button>
                                 </div>
 
                                 <div class="options-button-container">
-                                    <button class="options-button sans" v-bind:class="themeClass('options-button')">
+                                    <button class="options-button sans" v-bind:class="themeClass('options-button')" v-on:click="resetSave">
                                         Reset
                                     </button>
                                 </div>
