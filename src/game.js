@@ -21,6 +21,27 @@ let app = new Vue({
         //Current amount gained on click
         gain: 1,
 
+        //Number of prestiges
+        prestiges: 0,
+
+        //Number of prestige points
+        prestigePoints: 0,
+
+        //Prestige upgrades
+        upgrades: [
+            //Prestige point multiplier upgrade
+            {
+                cost: 2,
+                costScaling: 5,
+
+                amount: 0,
+
+                boost() {
+                    return 2 ** this.amount;
+                }
+            }
+        ],
+
         //Current save file
         currentSaveFile: 0,
 
@@ -57,6 +78,11 @@ let app = new Vue({
         		return num.toString();
         },
 
+        //Returns the correct plural ending (s ending)
+        pluralize(num) {
+            return Math.abs(num) === 1 ? "" : "s"
+        },
+
         //SETTERS
         //Sets the current theme
         setTheme(theme) {
@@ -85,6 +111,47 @@ let app = new Vue({
             this.setScore(this.score + score);
         },
 
+        //Gets the current prestige point gain
+        prestigePointGain() {
+            return this.upgrades[0].boost();
+        },
+
+        //GAME STUFF
+        //Prestige resets score but doubles the goal and increases the gain by 1
+        prestige() {
+            //Checks if the player really wants to prestige (only on first prestige)
+            if (
+                this.prestiges === 0 &&
+                !confirm("Are you sure you want to prestige? This will reset your score, while adding 1 to your number gain and doubling the goal. You will also receive a Prestige point.")
+            ) return;
+
+            this.setScore(0);
+            this.gain++;
+            this.goal *= 2;
+
+            this.prestiges++;
+
+            this.prestigePoints += this.prestigePointGain();
+        },
+
+        //Attempts to buy an upgrade
+        buyUpgrade(id) {
+            let upgrade = this.upgrades[id];
+
+            if (this.prestigePoints >= upgrade.cost) {
+                this.prestigePoints -= upgrade.cost;
+
+                upgrade.amount++;
+
+                upgrade.cost *= upgrade.costScaling;
+
+                //Mini-prestige element
+                this.setScore(0);
+                this.gain = 1;
+                this.goal = 10;
+            }
+        },
+
         //SAVE FILE FUNCTIONS
         //Attempts to load a value from localStorage, replacing it with a default value if it does not exist
         lsGetOrSetDefault(item, def) {
@@ -96,7 +163,7 @@ let app = new Vue({
 
         //Encodes the current save data
         encodeSaveData() {
-            return `${this.theme}|${this.state}|${this.score}|${this.goal}|${this.gain}`;
+            return `${this.theme}|${this.state}|${this.score}|${this.goal}|${this.gain}|${this.prestiges}|${this.prestigePoints}|${this.upgrades[0].cost}|${this.upgrades[0].amount}`;
         },
 
         //Sets a save file
@@ -117,6 +184,10 @@ let app = new Vue({
             this.setScore(data.length >= 3 ? parseInt(data[2]) : 0);
             this.goal = data.length >= 4 ? parseInt(data[3]) : 10;
             this.gain = data.length >= 5 ? parseInt(data[4]) : 1;
+            this.prestiges = data.length >= 6 ? parseInt(data[5]) : 0;
+            this.prestigePoints = data.length >= 7 ? parseInt(data[6]) : 0;
+            this.upgrades[0].cost = data.length >= 8 ? parseInt(data[7]) : 2;
+            this.upgrades[0].amount = data.length >= 9 ? parseInt(data[8]) : 0;
         },
 
         //Saves the game in the current save slot
@@ -138,6 +209,10 @@ let app = new Vue({
                 this.setScore(0);
                 this.goal = 10;
                 this.gain = 1;
+                this.prestiges = 0;
+                this.prestigePoints = 0;
+                this.upgrades[0].cost = 2;
+                this.upgrades[0].amount = 0;
 
                 //Saves over save file
                 this.save();

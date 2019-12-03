@@ -36,7 +36,7 @@
 				<div id="header" v-bind:class="themeClass('header')">
 					<button class="header-item sans" v-bind:class="themeClass('header-item')" v-on:click="setState('main')">Main</button>
 					<button class="header-item sans" v-bind:class="themeClass('header-item')" v-on:click="setState('options')">Options</button>
-					<button id="upgrades-header-item" class="header-item sans" v-bind:class="themeClass('header-item')" v-on:click="setState('upgrades')">Upgrades</button>
+					<button id="upgrades-header-item" class="header-item sans" v-bind:class="themeClass('header-item')" v-on:click="setState('upgrades')" v-if="prestiges > 0">Upgrades</button>
 				</div>
 
 				<div id="display-header" class="monospace">
@@ -47,10 +47,10 @@
                     </div>
 
                     <div id="prestige-button-container">
-						<div id="prestige-point-display" class="sans" v-bind:class="themeClass('prestige-point-display')">You have 0 Prestige points</div>
+						<div id="prestige-point-display" class="sans" v-bind:class="themeClass('prestige-point-display')" v-if="prestiges > 0">You have {{ prestigePoints }} Prestige Point{{ pluralize(prestigePoints) }}</div>
 
 						<div id="prestige-button-sub-container">
-							<button id="prestige-button" class="sans" v-bind:class="themeClass('prestige-button')">Prestige for 1 Prestige Point</button>
+							<button id="prestige-button" class="sans" v-bind:class="themeClass('prestige-button')" v-on:click="prestige" v-if="score >= goal">Prestige for {{ formatSci(prestigePointGain()) }} Prestige Point{{ pluralize(prestigePointGain()) }}</button>
 						</div>
 					</div>
 				</div>
@@ -97,10 +97,10 @@
     						<div id="upgrades-container">
                                 <div id="prestige-upgrades-container">
                                     <div class="prestige-upgrade-container">
-                                        <button id="prestige-point-multi-upgrade" class="prestige-upgrade-button" v-bind:class="themeClass('prestige-upgrade-button')">
+                                        <button id="prestige-point-multi-upgrade" class="prestige-upgrade-button" v-bind:class="themeClass('prestige-upgrade-button')" v-on:click="buyUpgrade(0)">
                                             <div class="prestige-upgrade-desc sans">Multiply Prestige Point gain by 2</div>
-                                            <div class="prestige-upgrade-current sans">Currently: 1x</div>
-                                            <div class="prestige-upgrade-cost sans">Cost: 2 Prestige Points</div>
+                                            <div class="prestige-upgrade-current sans">Currently: {{ formatSci(upgrades[0].boost()) }}x</div>
+                                            <div class="prestige-upgrade-cost sans">Cost: {{ formatSci(upgrades[0].cost) }} Prestige Points</div>
                                         </button>
                                     </div>
 
