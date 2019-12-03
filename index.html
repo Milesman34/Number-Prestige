@@ -34,9 +34,9 @@
 
 			<div id="app" v-bind:class="themeClass('app')">
 				<div id="header" v-bind:class="themeClass('header')">
-					<button class="header-item sans" v-bind:class="themeClass('header-item')">Main</button>
-					<button class="header-item sans" v-bind:class="themeClass('header-item')">Options</button>
-					<button id="upgrades-header-item" class="header-item sans" v-bind:class="themeClass('header-item')">Upgrades</button>
+					<button class="header-item sans" v-bind:class="themeClass('header-item')" v-on:click="setState('main')">Main</button>
+					<button class="header-item sans" v-bind:class="themeClass('header-item')" v-on:click="setState('options')">Options</button>
+					<button id="upgrades-header-item" class="header-item sans" v-bind:class="themeClass('header-item')" v-on:click="setState('upgrades')">Upgrades</button>
 				</div>
 
 				<div id="display-header" class="monospace">

@@ -11,6 +11,11 @@ let app = new Vue({
     },
 
     methods: {
+        //Sets the state of the game
+        setState(state) {
+            this.state = state;
+        },
+
         //Generates the theme class used for a given element
         themeClass(elem) {
             return `${elem}-${this.theme}`;
