@@ -8,6 +8,8 @@
 
         <script src="lib/jquery.js"></script>
 
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
         <link rel="stylesheet" href="css/main.css" />
         <link rel="stylesheet" href="css/themes/dark.css" />
         <link rel="stylesheet" href="css/themes/light.css" />
@@ -15,119 +17,124 @@
 
     <body>
 		<div id="container">
-            <div id="theme-selector-container">
-				<div id="theme-selector">
-                    <div id="theme-selector-title" class="sans">Select Theme</div>
+            <template v-if="state === 'options'">
+                <div id="theme-selector-container" v-if="state === 'options'">
+        			<div id="theme-selector" v-bind:class="themeClass('theme-selector')">
+                        <div id="theme-selector-title" class="sans" v-bind:class="themeClass('theme-selector-title')">Select Theme</div>
 
-                    <div id="theme-selector-list">
-                        <button class="theme-selector-list-button sans" onClick="game.setTheme('light')">Light</button>
-                        <button class="theme-selector-list-button sans" onClick="game.setTheme('dark')">Dark</button>
+                        <div id="theme-selector-list">
+                            <button class="theme-selector-list-button sans" v-bind:class="themeClass('theme-selector-list-button')">Light</button>
+                            <button class="theme-selector-list-button sans" v-bind:class="themeClass('theme-selector-list-button')">Dark</button>
+                        </div>
+
+                        <button id="theme-selector-exit-button" class="sans" v-bind:class="themeClass('theme-selector-exit-button')">Exit</button>
                     </div>
+        		</div>
+            </template>
 
-                    <button id="theme-selector-exit-button" class="sans" onClick="$('#theme-selector-container').hide()">Exit</button>
-                </div>
-			</div>
-
-			<div id="app">
-				<div id="header">
-					<button class="header-item sans" onClick="game.setState('main')">Main</button>
-					<button class="header-item sans" onClick="game.setState('options')">Options</button>
-					<button id="upgrades-header-item" class="header-item sans" onClick="game.setState('upgrades')">Upgrades</button>
+			<div id="app" v-bind:class="themeClass('app')">
+				<div id="header" v-bind:class="themeClass('header')">
+					<button class="header-item sans" v-bind:class="themeClass('header-item')">Main</button>
+					<button class="header-item sans" v-bind:class="themeClass('header-item')">Options</button>
+					<button id="upgrades-header-item" class="header-item sans" v-bind:class="themeClass('header-item')">Upgrades</button>
 				</div>
 
 				<div id="display-header" class="monospace">
-                    <div id="number-display">
+                    <div id="number-display" v-bind:class="themeClass('number-display')">
     					<div id="number-display-main" class="sans">0</div>
 
     					<div id="number-display-goal" class="sans">Goal: 10</div>
                     </div>
 
                     <div id="prestige-button-container">
-						<div id="prestige-point-display" class="sans">You have 0 Prestige points</div>
+						<div id="prestige-point-display" class="sans" v-bind:class="themeClass('prestige-point-display')">You have 0 Prestige points</div>
 
 						<div id="prestige-button-sub-container">
-							<button id="prestige-button" class="sans" onClick="game.prestige()">Prestige for 1 Prestige Point</button>
+							<button id="prestige-button" class="sans" v-bind:class="themeClass('prestige-button')">Prestige for 1 Prestige Point</button>
 						</div>
 					</div>
 				</div>
 
 				<div id="content">
-					<div id="main">
-						<div id="click-button-container">
-							<button id="click-button" class="sans" onClick="game.addScore(game.gain)">Increase number by 1</button>
-						</div>
-					</div>
+                    <template v-if="state === 'main'">
+    					<div id="main">
+    						<div id="click-button-container">
+    							<button id="click-button" class="sans" v-bind:class="themeClass('click-button')">Increase number by 1</button>
+    						</div>
+    					</div>
+                    </template>
 
-					<div id="options">
-						<div class="options-row">
-							<div class="options-button-container">
-								<button id="theme-options-button" onClick="$('#theme-selector-container').show()">
-									<div id="theme-options-container">
-										<div id="theme-options-text" class="sans">Theme</div>
-										<div id="theme-options-current" class="sans">Currently: Dark</div>
-									</div>
-								</button>
-							</div>
+                    <template v-if="state === 'options'">
+    					<div id="options">
+    						<div class="options-row">
+    							<div class="options-button-container">
+    								<button id="theme-options-button" v-bind:class="themeClass('theme-options-button')">
+    									<div id="theme-options-container">
+    										<div id="theme-options-text" class="sans" v-bind:class="themeClass('theme-options-text')">Theme</div>
+    										<div id="theme-options-current" class="sans" v-bind:class="themeClass('theme-options-current')">Currently: Dark</div>
+    									</div>
+    								</button>
+    							</div>
 
-                            <div class="options-button-container">
-                                <button class="options-button sans" onClick="game.save()">
-                                    Save
-                                </button>
+                                <div class="options-button-container">
+                                    <button class="options-button sans" v-bind:class="themeClass('options-button')">
+                                        Save
+                                    </button>
+                                </div>
+
+                                <div class="options-button-container">
+                                    <button class="options-button sans" v-bind:class="themeClass('options-button')">
+                                        Reset
+                                    </button>
+                                </div>
+    						</div>
+    					</div>
+                    </template>
+
+                    <template v-if="state === 'upgrades'">
+    					<div id="upgrades">
+    						<div id="upgrades-subtext" class="sans" v-bind:class="themeClass('upgrades-subtext')">Buying an upgrade will reset your score, prestige requirement, and number gain.</div>
+    						<div id="upgrades-container">
+                                <div id="prestige-upgrades-container">
+                                    <div class="prestige-upgrade-container">
+                                        <button id="prestige-point-multi-upgrade" class="prestige-upgrade-button" v-bind:class="themeClass('prestige-upgrade-button')">
+                                            <div class="prestige-upgrade-desc sans">Multiply Prestige Point gain by 2</div>
+                                            <div class="prestige-upgrade-current sans">Currently: 1x</div>
+                                            <div class="prestige-upgrade-cost sans">Cost: 2 Prestige Points</div>
+                                        </button>
+                                    </div>
+
+                                    <div class="prestige-upgrade-container">
+                                        <button id="number-gain-boost-upgrade" class="prestige-upgrade-button" v-bind:class="themeClass('prestige-upgrade-button')">
+                                            <div class="prestige-upgrade-desc sans">Add 1 to number gain</div>
+                                            <div class="prestige-upgrade-current sans">Currently: 1 -> 1</div>
+                                            <div class="prestige-upgrade-cost sans">Cost: 5 Prestige Points</div>
+                                        </button>
+                                    </div>
+
+                                    <div class="prestige-upgrade-container">
+                                        <button id="prestige-reduce-requirement-upgrade" class="prestige-upgrade-button" v-bind:class="themeClass('prestige-upgrade-button')">
+                                            <div class="prestige-upgrade-desc sans">Reduce prestige requirement by 10%</div>
+                                            <div class="prestige-upgrade-current sans">Currently: 100% -> 100%</div>
+                                            <div class="prestige-upgrade-cost sans">Cost: 5 Prestige Points</div>
+                                        </button>
+                                    </div>
+
+                                    <div class="prestige-upgrade-container">
+                                        <button id="autoclicker-buff-upgrade" class="prestige-upgrade-button" v-bind:class="themeClass('prestige-upgrade-button')">
+                                            <div class="prestige-upgrade-desc sans">Make Auto-Click 2x faster</div>
+                                            <div class="prestige-upgrade-current sans">Currently: 1x</div>
+                                            <div class="prestige-upgrade-cost sans">Cost: 4 Prestige Points</div>
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
-
-                            <div class="options-button-container">
-                                <button class="options-button sans" onClick="game.resetSave()">
-                                    Reset
-                                </button>
-                            </div>
-						</div>
-					</div>
-
-					<div id="upgrades">
-						<div id="upgrades-subtext" class="sans">Buying an upgrade will reset your score, prestige requirement, and number gain.</div>
-						<div id="upgrades-container">
-                            <div id="prestige-upgrades-container">
-                                <div class="prestige-upgrade-container">
-                                    <button id="prestige-point-multi-upgrade" class="prestige-upgrade-button" onClick="game.buyUpgrade(0)">
-                                        <div class="prestige-upgrade-desc sans">Multiply Prestige Point gain by 2</div>
-                                        <div class="prestige-upgrade-current sans">Currently: 1x</div>
-                                        <div class="prestige-upgrade-cost sans">Cost: 2 Prestige Points</div>
-                                    </button>
-                                </div>
-
-                                <div class="prestige-upgrade-container">
-                                    <button id="number-gain-boost-upgrade" class="prestige-upgrade-button">
-                                        <div class="prestige-upgrade-desc sans">Add 1 to number gain</div>
-                                        <div class="prestige-upgrade-current sans">Currently: 1 -> 1</div>
-                                        <div class="prestige-upgrade-cost sans">Cost: 5 Prestige Points</div>
-                                    </button>
-                                </div>
-
-                                <div class="prestige-upgrade-container">
-                                    <button id="prestige-reduce-requirement-upgrade" class="prestige-upgrade-button">
-                                        <div class="prestige-upgrade-desc sans">Reduce prestige requirement by 10%</div>
-                                        <div class="prestige-upgrade-current sans">Currently: 100% -> 100%</div>
-                                        <div class="prestige-upgrade-cost sans">Cost: 5 Prestige Points</div>
-                                    </button>
-                                </div>
-
-                                <div class="prestige-upgrade-container">
-                                    <button id="autoclicker-buff-upgrade" class="prestige-upgrade-button">
-                                        <div class="prestige-upgrade-desc sans">Make Auto-Click 2x faster</div>
-                                        <div class="prestige-upgrade-current sans">Currently: 1x</div>
-                                        <div class="prestige-upgrade-cost sans">Cost: 4 Prestige Points</div>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-					</div>
+    					</div>
+                    </template>
 				</div>
 			</div>
 		</div>
 
-        <script src="src/functions.js"></script>
-        <script src="src/upgrade.js"></script>
         <script src="src/game.js"></script>
-        <script src="src/index.js"></script>
     </body>
 </html>
