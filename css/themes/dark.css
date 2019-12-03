@@ -16,7 +16,7 @@
 }
 
 .number-display-dark, .theme-options-text-dark, .theme-options-current-dark, .theme-selector-exit-button-dark,
-.prestige-point-display-dark, .upgrades-subtext-dark {
+.prestige-point-display-dark, .upgrades-subtext-dark, .automation-next-unlock-text-dark {
     color: rgb(255, 255, 255);
 }
 

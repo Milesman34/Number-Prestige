@@ -134,7 +134,12 @@
                     </template>
 					
 					<template v-if="state === 'automation'">
-						<div id="automation"></div>
+						<div id="automation">
+							<div id="automation-next-unlock">
+								<div class="automation-next-unlock-text sans" v-bind:class="themeClass('automation-next-unlock-text')" v-if="!autoClickUnlocked">Unlock Auto-Click at 1000 points</div>
+								<div class="automation next-unlock-text sans" v-bind:class="themeClass('automation-next-unlock-text')" v-if="autoClickUnlocked && !autoPrestigeUnlocked">Unlock Auto-Prestige at 50 Prestige Points</div>
+							</div>
+						</div>
 					</template>
 				</div>
 			</div>
