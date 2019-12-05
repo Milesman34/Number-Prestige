@@ -6,26 +6,34 @@
     background-color: rgb(24, 24, 24);
 }
 
+.text-dark {
+	color: rgb(255, 255, 255);
+}
+
+.shadow-dark {
+	box-shadow: 2px 2px 2px black;
+}
+
+.border-dark {
+	border-bottom: solid black 2px;
+}
+
+.game-button-dark {
+	color: rgb(255, 255, 255);
+
+    background-color: rgb(32, 32, 32);
+
+    box-shadow: 2px 2px 2px black;
+}
+
 .header-item-dark {
-    color: rgb(255, 255, 255);
-    box-shadow: 2px 2px 2px black;
+	color: rgb(255, 255, 255);
+	box-shadow: 2px 2px 2px black;
 }
 
-.header-item-dark:hover {
-    background-color: rgb(32, 32, 32);
-}
-
-.number-display-dark, .theme-options-text-dark, .theme-options-current-dark, .theme-selector-exit-button-dark,
-.prestige-point-display-dark, .upgrades-subtext-dark, .automation-next-unlock-text-dark {
-    color: rgb(255, 255, 255);
-}
-
-.options-button-dark, .theme-options-button-dark, .click-button-dark, .prestige-button-dark, .prestige-upgrade-button-dark {
-    color: rgb(255, 255, 255);
-
-    background-color: rgb(32, 32, 32);
-
-    box-shadow: 2px 2px 2px black;
+.selector-item-dark {
+	color: rgb(255, 255, 255);
+	border-bottom: solid black 2px;
 }
 
 .theme-selector-dark {
@@ -36,17 +44,10 @@
     box-shadow: 2px 2px 2px black;
 }
 
-.theme-selector-list-button-dark:hover, .theme-selector-exit-button-dark:hover {
+.selector-hover-dark:hover {
     background-color: rgb(44, 44, 44);
 }
 
-.options-button-dark:hover, .theme-options-button-dark:hover, .click-button-dark:hover, .prestige-button-dark:hover,
-.prestige-upgrade-button-dark:hover {
+.button-hover-dark:hover, .header-item-dark:hover, .game-button-dark:hover {
     background-color: rgb(40, 40, 40);
-}
-
-.theme-selector-list-button-dark, .theme-selector-title-dark {
-    color: rgb(255, 255, 255);
-
-    border-bottom: solid black 2px;
 }

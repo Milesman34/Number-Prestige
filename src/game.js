@@ -87,8 +87,9 @@ let app = new Vue({
         },
 
         //Generates the theme class used for a given element
-        themeClass(elem) {
-            return `${elem}-${this.theme}`;
+		//If the elem is an array, generates an array of classes
+        themeClass(...elems) {
+			return elems.map(e => `${e}-${this.theme}`);
         },
 
         //Rounds a number to a given number of decimal places

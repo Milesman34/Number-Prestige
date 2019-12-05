@@ -6,24 +6,20 @@
     background-color: rgb(200, 200, 200);
 }
 
-.header-item-light {
-    color: rgb(0, 0, 0);
-    box-shadow: 2px 2px 2px rgb(180, 180, 180);
+.text-light {
+	color: rgb(0, 0, 0);
 }
 
-.header-item-light:hover, .options-button-light:hover, .theme-options-button-light:hover, .click-button-light:hover,
-.prestige-button-light:hover, .prestige-upgrade-button-light:hover {
-    background-color: rgb(190, 190, 190);
+.shadow-light {
+	box-shadow: 2px 2px 2px rgb(180, 180, 180);
 }
 
-.number-display-light, .theme-options-text-light, .theme-options-current-light, .theme-selector-exit-button-light,
-.prestige-button-display-light, .upgrades-subtext-light, .automation-next-unlock-text-light {
-    color: rgb(0, 0, 0);
+.border-light {
+	border-bottom: solid rgb(180, 180, 180) 2px;
 }
 
-.options-button-light, .theme-options-button-light, .theme-selector-light, .click-button-light, .prestige-button-light,
-.prestige-upgrade-button-light {
-    color: rgb(0, 0, 0);
+.game-button-light {
+	color: rgb(0, 0, 0);
 
     background-color: rgb(200, 200, 200);
 
@@ -38,12 +34,23 @@
     box-shadow: 2px 2px 2px rgb(180, 180, 180);
 }
 
-.theme-selector-list-button-light:hover, .theme-selector-exit-button-light:hover {
-    background-color: rgb(185, 185, 185);
+.header-item-light {
+	color: rgb(0, 0, 0);
+	box-shadow: 2px 2px 2px rgb(180, 180, 180);
 }
 
-.theme-selector-list-button-light, .theme-selector-title-light {
+.selector-item-light {
     color: rgb(0, 0, 0);
 
     border-bottom: solid rgb(180, 180, 180) 2px;
 }
+
+.header-item-light:hover, .game-button-light:hover, .button-hover-light:hover {
+    background-color: rgb(190, 190, 190);
+}
+
+.selector-hover-light:hover {
+    background-color: rgb(185, 185, 185);
+}
+
+
