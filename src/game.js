@@ -182,12 +182,17 @@ let app = new Vue({
 			if (this.prestigePoints >= 50)
 				this.autoPrestigeUnlocked = true;
         },
+		
+		//Checks if the player can afford an upgrade
+		canAfford(id) {
+			return this.prestigePoints >= this.upgrades[id].cost;
+		},
 
         //Attempts to buy an upgrade
         buyUpgrade(id) {
             let upgrade = this.upgrades[id];
 
-            if (this.prestigePoints >= upgrade.cost) {
+            if (this.canAfford(id)) {
                 this.prestigePoints -= upgrade.cost;
 
                 upgrade.amount++;

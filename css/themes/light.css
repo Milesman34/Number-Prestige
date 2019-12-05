@@ -46,11 +46,18 @@
 }
 
 .header-item-light:hover, .game-button-light:hover, .button-hover-light:hover {
-    background-color: rgb(190, 190, 190);
+    background-color: rgb(215, 215, 215);
 }
 
 .selector-hover-light:hover {
-    background-color: rgb(185, 185, 185);
+    background-color: rgb(215, 215, 215);
 }
 
+.unaffordable-light {
+	background-color: rgb(185, 185, 185);
+}
+
+.unaffordable-light:hover {
+	background-color: rgb(175, 175, 175);
+}
 

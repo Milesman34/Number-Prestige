@@ -51,3 +51,11 @@
 .button-hover-dark:hover, .header-item-dark:hover, .game-button-dark:hover {
     background-color: rgb(40, 40, 40);
 }
+
+.unaffordable-dark {
+	background-color: rgb(24, 24, 24);
+}
+
+.unaffordable-dark:hover {
+	background-color: rgb(15, 15, 15);
+}
