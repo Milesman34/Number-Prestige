@@ -121,13 +121,15 @@
                                         </button>
                                     </div>
 
-                                    <div class="prestige-upgrade-container">
-                                        <button id="autoclicker-buff-upgrade" class="prestige-upgrade-button" v-bind:class="themeClass('prestige-upgrade-button')">
-                                            <div class="prestige-upgrade-desc sans">Make Auto-Click 2x faster</div>
-                                            <div class="prestige-upgrade-current sans">Currently: 1x</div>
-                                            <div class="prestige-upgrade-cost sans">Cost: 4 Prestige Points</div>
-                                        </button>
-                                    </div>
+									<template v-if="autoClickUnlocked">
+										<div class="prestige-upgrade-container">
+											<button id="autoclicker-buff-upgrade" class="prestige-upgrade-button" v-bind:class="themeClass('prestige-upgrade-button')">
+												<div class="prestige-upgrade-desc sans">Make Auto-Click 2x faster</div>
+												<div class="prestige-upgrade-current sans">Currently: 1x</div>
+												<div class="prestige-upgrade-cost sans">Cost: 4 Prestige Points</div>
+											</button>
+										</div>
+									</template>
                                 </div>
                             </div>
     					</div>
