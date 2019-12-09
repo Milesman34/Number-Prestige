@@ -1,0 +1,61 @@
+.app-gradient {
+    background-color: rgb(0, 0, 0);
+}
+
+.header-gradient {
+    background-image: linear-gradient(rgb(78, 78, 78), rgb(102, 102, 102));
+}
+
+.header-item-gradient {
+	color: rgb(255, 255, 255);
+	border: 2px solid rgb(195, 195, 195);
+}
+
+.text-gradient {
+	color: rgb(255, 255, 255);
+}
+
+.shadow-gradient {
+	box-shadow: 2px 2px 2px black;
+}
+
+.border-gradient {
+	border-bottom: solid black 2px;
+}
+
+.game-button-gradient {
+	color: rgb(255, 255, 255);
+
+    background-color: rgb(32, 32, 32);
+
+    box-shadow: 2px 2px 2px black;
+}
+
+.selector-item-gradient {
+	color: rgb(255, 255, 255);
+	border-bottom: solid black 2px;
+}
+
+.theme-selector-gradient {
+    color: rgb(255, 255, 255);
+
+    background-color: rgb(36, 36, 36);
+
+    box-shadow: 2px 2px 2px black;
+}
+
+.selector-hover-gradient:hover {
+    background-color: rgb(44, 44, 44);
+}
+
+.button-hover-gradient:hover, .header-item-gradient:hover, .game-button-gradient:hover {
+    background-color: rgb(40, 40, 40);
+}
+
+.unaffordable-gradient {
+	background-color: rgb(24, 24, 24);
+}
+
+.unaffordable-gradient:hover {
+	background-color: rgb(15, 15, 15);
+}
