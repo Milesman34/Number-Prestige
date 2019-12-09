@@ -464,3 +464,35 @@ button {
 	
     font-size: 90%;
 }
+
+#notification-container {
+	grid-row: 1;
+	grid-column: 1;
+
+	display: grid;
+
+	grid-template-rows: 5% auto;
+	grid-template-columns: auto 10%;
+}
+
+.notification {
+	grid-row: 1;
+	grid-column: 2;
+    
+    z-index: 1;
+    
+    display: flex;
+    
+    justify-content: center;
+    align-items: center;
+    
+    text-align: center;
+    
+    color: black;
+    
+    font-size: 82%;
+    
+    border-radius: 5px;
+	
+	background-color: rgb(52, 204, 235);
+}

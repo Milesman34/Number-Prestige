@@ -115,49 +115,40 @@ let app = new Vue({
         },
 
         //SETTERS
-        //Sets the current theme
-        setTheme(theme) {
-            this.theme = theme;
-        },
-
         //Sets the state of the game
         setState(state) {
             this.state = state;
 
             //Disables open selectors
-            this.setSelector("none");
-        },
-
-        //Sets the current open selector
-        setSelector(selector) {
-            this.selector = selector;
+            this.selector = "none";
         },
 
         //Updates the score
         setScore(score) {
             this.score = score;
-        },
-
-        addScore(score) {
-            this.setScore(this.score + score);
 			
 			//Unlock auto-click if possible
 			if (this.score >= 1000)
 				this.autoClickUnlocked = true;
         },
 
+        addScore(score) {
+            this.setScore(this.score + score);
+        },
+		
+		//GETTERS
         //Gets the current prestige point gain
-        prestigePointGain() {
+        getPrestigePointGain() {
             return this.upgrades[0].boost();
         },
 
         //Actual number gain
-        actualGain() {
+        getGain() {
             return this.gain + this.upgrades[1].boost();
         },
 
         //Actual prestige goal
-        actualGoal() {
+        getGoal() {
             return Math.floor(this.goal * this.upgrades[2].boost());
         },
 
@@ -176,7 +167,7 @@ let app = new Vue({
 
             this.prestiges++;
 
-            this.prestigePoints += this.prestigePointGain();
+            this.prestigePoints += this.getPrestigePointGain();
 			
 			//Unlock auto-prestige if possible
 			if (this.prestigePoints >= 50)
@@ -233,7 +224,7 @@ let app = new Vue({
             let save = this.saveFiles[file];
             let data = save.split("|");
 
-            this.setTheme(data[0]);
+            this.theme = data[0];
             this.setState(data[1]);
             this.setScore(data.length >= 3 ? parseInt(data[2]) : 0);
             this.goal = data.length >= 4 ? parseInt(data[3]) : 10;
@@ -264,9 +255,10 @@ let app = new Vue({
                 confirm("This is your last warning!")
             ) {
                 //Resets all values
-                this.setTheme("dark");
+                this.theme = "dark"
                 this.setState("main");
                 this.setScore(0);
+				this.selector = "none";
                 this.goal = 10;
                 this.gain = 1;
                 this.prestiges = 0;
