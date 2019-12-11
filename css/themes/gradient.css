@@ -1,9 +1,9 @@
 .app-gradient {
-    background-color: rgb(0, 0, 0);
+    background-image: linear-gradient(rgb(0, 0, 0), rgb(25, 25, 25));
 }
 
 .header-gradient {
-    background-image: linear-gradient(rgb(78, 78, 78), rgb(102, 102, 102));
+    background-image: linear-gradient(rgb(36, 36, 36), rgb(61, 61, 61));
 }
 
 .header-item-gradient {
@@ -11,8 +11,13 @@
 	border: 2px solid rgb(195, 195, 195);
 }
 
+.header-item-gradient:hover, .game-button-gradient:hover, .button-hover-gradient:hover, .selector-hover-gradient:hover {
+	background-image: linear-gradient(rgb(56, 56, 56), rgb(81, 81, 81));
+}
+
 .text-gradient {
 	color: rgb(255, 255, 255);
+	font-family: "Plex Mono";
 }
 
 .shadow-gradient {
@@ -26,30 +31,22 @@
 .game-button-gradient {
 	color: rgb(255, 255, 255);
 
-    background-color: rgb(32, 32, 32);
+    background-color: rgba(0, 0, 0, 0);
 
-    box-shadow: 2px 2px 2px black;
+	border: 2px solid rgb(195, 195, 195);
 }
 
 .selector-item-gradient {
 	color: rgb(255, 255, 255);
-	border-bottom: solid black 2px;
+	border: 2px solid rgb(195, 195, 195);
 }
 
 .theme-selector-gradient {
     color: rgb(255, 255, 255);
 
-    background-color: rgb(36, 36, 36);
+    background-image: linear-gradient(rgb(36, 36, 36), rgb(61, 61, 61));
 
-    box-shadow: 2px 2px 2px black;
-}
-
-.selector-hover-gradient:hover {
-    background-color: rgb(44, 44, 44);
-}
-
-.button-hover-gradient:hover, .header-item-gradient:hover, .game-button-gradient:hover {
-    background-color: rgb(40, 40, 40);
+    border: 2px solid rgb(195, 195, 195);
 }
 
 .unaffordable-gradient {
@@ -57,5 +54,5 @@
 }
 
 .unaffordable-gradient:hover {
-	background-color: rgb(15, 15, 15);
+	background-image: linear-gradient(rgb(86, 56, 56), rgb(111, 81, 81));
 }

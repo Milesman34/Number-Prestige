@@ -8,12 +8,9 @@
     src: url("../fonts/monospacetypewriter-webfont.ttf");
 }
 
-.sans {
-    font-family: "Open Sans";
-}
-
-.monospace {
-    font-family: "Monospace";
+@font-face {
+	font-family: "Plex Mono";
+	src: url("../fonts/IBMPlexMono-Regular.ttf");
 }
 
 /*To let me style buttons*/
@@ -156,6 +153,8 @@ button {
     align-items: center;
 
     font-size: 92.5%;
+	
+	text-align: center;
 
     user-select: none;
 }
@@ -241,6 +240,8 @@ button {
     align-items: center;
 
     font-size: 235%;
+	
+	user-select: none;
 }
 
 #theme-options-button {
