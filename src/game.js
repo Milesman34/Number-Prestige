@@ -171,7 +171,7 @@ let app = new Vue({
 		
 		//Seconds required per autoclick
 		getSecondsPerAutoClick() {
-			return 10 / Math.max(this.prestigePoints, 1);
+			return (10 / this.upgrades[3].boost()) / Math.max(this.prestigePoints, 1);
 		},
 
         //GAME STUFF
@@ -230,7 +230,7 @@ let app = new Vue({
 
         //Encodes the current save data
         encodeSaveData() {
-            return `${this.theme}|${this.state}|${this.score}|${this.goal}|${this.gain}|${this.prestiges}|${this.prestigePoints}|${this.upgrades[0].cost}|${this.upgrades[0].amount}|${this.upgrades[1].cost}|${this.upgrades[1].amount}|${this.upgrades[2].cost}|${this.upgrades[2].amount}|${this.autoClickUnlocked}|${this.autoPrestigeUnlocked}`;
+            return `${this.theme}|${this.state}|${this.score}|${this.goal}|${this.gain}|${this.prestiges}|${this.prestigePoints}|${this.upgrades[0].cost}|${this.upgrades[0].amount}|${this.upgrades[1].cost}|${this.upgrades[1].amount}|${this.upgrades[2].cost}|${this.upgrades[2].amount}|${this.autoClickUnlocked}|${this.autoPrestigeUnlocked}|${this.upgrades[3].cost}|${this.upgrades[3].amount}`;
         },
 
         //Sets a save file
@@ -261,6 +261,8 @@ let app = new Vue({
             this.upgrades[2].amount = data.length >= 13 ? parseInt(data[12]) : 0;
 			this.autoClickUnlocked = data.length >= 14 ? data[13] === "true" : false;
 			this.autoPrestigeUnlocked = data.length >= 15 ? data[14] === "true" : false;
+			this.upgrades[3].cost = data.length >= 16 ? parseInt(data[15]) : 4;
+			this.upgrades[3].amount = data.length >= 17 ? parseInt(data[16]) : 0;
         },
 
         //Saves the game in the current save slot
@@ -291,6 +293,8 @@ let app = new Vue({
                 this.upgrades[1].amount = 0;
                 this.upgrades[2].cost = 5;
                 this.upgrades[2].amount = 0;
+				this.upgrades[3].cost = 4;
+				this.upgrades[3].cost = 0;
 				this.autoClickUnlocked = false;
 				this.autoPrestigeUnlocked = false;
 

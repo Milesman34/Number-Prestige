@@ -130,10 +130,10 @@
 
 									<template v-if="autoClickUnlocked">
 										<div class="prestige-upgrade-container">
-											<button id="autoclicker-buff-upgrade" class="prestige-upgrade-button" v-bind:class="themeClass('game-button')">
+											<button id="autoclicker-buff-upgrade" class="prestige-upgrade-button" v-bind:class="[...themeClass('game-button'), canAfford(3) ? '' : themeClass('unaffordable')]" v-on:click="buyUpgrade(3)">
 												<div class="prestige-upgrade-desc" v-bind:class="themeClass('text')">Make Auto-Click 2x faster</div>
-												<div class="prestige-upgrade-current" v-bind:class="themeClass('text')">Currently: 1x</div>
-												<div class="prestige-upgrade-cost" v-bind:class="themeClass('text')">Cost: 4 Prestige Points</div>
+												<div class="prestige-upgrade-current" v-bind:class="themeClass('text')">Currently: {{ formatSci(upgrades[3].boost()) }}x</div>
+												<div class="prestige-upgrade-cost" v-bind:class="themeClass('text')">Cost: {{ formatSci(upgrades[3].cost) }} Prestige Points</div>
 											</button>
 										</div>
 									</template>
