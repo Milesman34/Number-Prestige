@@ -442,7 +442,7 @@ button {
 
 	display: grid;
 	
-	grid-template-rows: 12% auto;
+	grid-template-rows: 12% 6% auto;
 }
 
 #automation-next-unlock {
@@ -464,6 +464,26 @@ button {
     align-items: center;
 	
     font-size: 90%;
+}
+
+#autoclick {
+	width: 100%;
+	height: 100%;
+	
+	display: flex;
+	
+	justify-content: center;
+    align-items: center;
+}
+
+#autoclick-speed-text {
+	width: 40%;
+	
+	text-align: center;
+}
+
+#autoclick-speed-text2 {
+	font-size: 150%;
 }
 
 #notification-container {
