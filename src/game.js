@@ -69,7 +69,19 @@ let app = new Vue({
                 boost() {
                     return 0.9 ** this.amount;
                 }
-            }
+            },
+			
+			//Auto-Click speed upgrade
+			{
+				cost: 4,
+				costScaling: 3,
+				
+				amount: 0,
+				
+				boost() {
+					return 2 ** this.amount;
+				}
+			}
         ],
 
         //Current save file
@@ -159,7 +171,7 @@ let app = new Vue({
 		
 		//Seconds required per autoclick
 		getSecondsPerAutoClick() {
-			return 10 / this.prestigePoints;
+			return 10 / Math.max(this.prestigePoints, 1);
 		},
 
         //GAME STUFF
