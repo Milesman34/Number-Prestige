@@ -49,7 +49,7 @@
 
 				<div id="display-header" class="monospace">
                     <div id="number-display" v-bind:class="themeClass('text')">
-    					<div id="number-display-main" v-bind:class="themeClass('text')">{{ formatSci(score) }}</div>
+    					<div id="number-display-main" v-bind:class="themeClass('text')">{{ formatSci(getScore()) }}</div>
 
     					<div id="number-display-goal" v-bind:class="themeClass('text')">Goal: {{ formatSci(getGoal()) }}</div>
                     </div>
@@ -58,7 +58,7 @@
 						<div id="prestige-point-display" v-bind:class="themeClass('text')" v-if="prestiges > 0">You have {{ prestigePoints }} Prestige Point{{ pluralize(prestigePoints) }}</div>
 
 						<div id="prestige-button-sub-container">
-							<button id="prestige-button" v-bind:class="themeClass('game-button', 'text')" v-on:click="prestige" v-if="score >= getGoal()">Prestige for {{ formatSci(getPrestigePointGain()) }} Prestige Point{{ pluralize(getPrestigePointGain()) }}</button>
+							<button id="prestige-button" v-bind:class="themeClass('game-button', 'text')" v-on:click="prestige" v-if="getScore() >= getGoal()">Prestige for {{ formatSci(getPrestigePointGain()) }} Prestige Point{{ pluralize(getPrestigePointGain()) }}</button>
 						</div>
 					</div>
 				</div>
@@ -153,7 +153,7 @@
 								<div id="autoclick" v-bind:class="themeClass('text')">
 									<div id="autoclick-speed-text">
 										Based on your Prestige Points, Auto-Click currently clicks once every
-										<font id="autoclick-speed-text2">10</font>
+										<font id="autoclick-speed-text2">{{ formatSci(getSecondsPerAutoClick()) }}</font>
 										seconds
 									</div>
 								</div>

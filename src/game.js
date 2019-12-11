@@ -141,6 +141,11 @@ let app = new Vue({
         getPrestigePointGain() {
             return this.upgrades[0].boost();
         },
+		
+		//Gets the actual score
+		getScore() {
+			return Math.floor(this.score);
+		},
 
         //Actual number gain
         getGain() {
@@ -151,6 +156,11 @@ let app = new Vue({
         getGoal() {
             return Math.floor(this.goal * this.upgrades[2].boost());
         },
+		
+		//Seconds required per autoclick
+		getSecondsPerAutoClick() {
+			return 10 / this.prestigePoints;
+		},
 
         //GAME STUFF
         //Prestige resets score but doubles the goal and increases the gain by 1
@@ -276,6 +286,17 @@ let app = new Vue({
                 this.save();
             }
         },
+		
+		//Has the app tick
+		tick(tps) {
+			if (this.autoClickUnlocked) {
+				let seconds = this.getSecondsPerAutoClick();
+				let gain = this.getGain();
+				
+				//Adds a fraction of the gain based on the tps and seconds required for autoclicking
+				this.addScore(gain / (seconds * tps));
+			}
+		}
     }
 });
 
@@ -292,3 +313,10 @@ app.loadSaveFile(app.currentSaveFile);
 setInterval(() => {
     app.save();
 }, 5 * 1000);
+
+//Sets up a series of ticks
+const tps = 20;
+
+setInterval(() => {
+	app.tick(tps);
+}, 1000 / tps);
