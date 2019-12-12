@@ -32,6 +32,10 @@ let app = new Vue({
 		
 		//Is auto-prestige unlocked
 		autoPrestigeUnlocked: false,
+		
+		//Should the game use auto-click and auto-prestige?
+		autoClickOn: true,
+		autoPrestigeOn: false,
 
         //Prestige upgrades
         upgrades: [
@@ -142,6 +146,10 @@ let app = new Vue({
 			//Unlock auto-click if possible
 			if (this.score >= 1000)
 				this.autoClickUnlocked = true;
+			
+			//Auto-prestige feature
+			if (this.score >= this.goal && this.autoPrestigeUnlocked && this.autoPrestigeOn)
+				this.prestige();
         },
 
         addScore(score) {
@@ -230,7 +238,7 @@ let app = new Vue({
 
         //Encodes the current save data
         encodeSaveData() {
-            return `${this.theme}|${this.state}|${this.score}|${this.goal}|${this.gain}|${this.prestiges}|${this.prestigePoints}|${this.upgrades[0].cost}|${this.upgrades[0].amount}|${this.upgrades[1].cost}|${this.upgrades[1].amount}|${this.upgrades[2].cost}|${this.upgrades[2].amount}|${this.autoClickUnlocked}|${this.autoPrestigeUnlocked}|${this.upgrades[3].cost}|${this.upgrades[3].amount}`;
+            return `${this.theme}|${this.state}|${this.score}|${this.goal}|${this.gain}|${this.prestiges}|${this.prestigePoints}|${this.upgrades[0].cost}|${this.upgrades[0].amount}|${this.upgrades[1].cost}|${this.upgrades[1].amount}|${this.upgrades[2].cost}|${this.upgrades[2].amount}|${this.autoClickUnlocked}|${this.autoPrestigeUnlocked}|${this.upgrades[3].cost}|${this.upgrades[3].amount}|${this.autoClickOn}|${this.autoPrestigeOn}`;
         },
 
         //Sets a save file
@@ -263,6 +271,8 @@ let app = new Vue({
 			this.autoPrestigeUnlocked = data.length >= 15 ? data[14] === "true" : false;
 			this.upgrades[3].cost = data.length >= 16 ? parseInt(data[15]) : 4;
 			this.upgrades[3].amount = data.length >= 17 ? parseInt(data[16]) : 0;
+			this.autoClickOn = data.length >= 18 ? data[17] === "true" : true;
+			this.autoPrestigeOn = data.length >= 19 ? data[18] === "true" : false;
         },
 
         //Saves the game in the current save slot
@@ -297,6 +307,8 @@ let app = new Vue({
 				this.upgrades[3].amount = 0;
 				this.autoClickUnlocked = false;
 				this.autoPrestigeUnlocked = false;
+				this.autoClickOn = true;
+				this.autoPrestigeOn = false;
 
                 //Saves over save file
                 this.save();
@@ -305,7 +317,7 @@ let app = new Vue({
 		
 		//Has the app tick
 		tick(tps) {
-			if (this.autoClickUnlocked) {
+			if (this.autoClickUnlocked && this.autoClickOn) {
 				let seconds = this.getAutoClickInterval();
 				let gain = this.getGain();
 				
