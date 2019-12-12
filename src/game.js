@@ -170,7 +170,7 @@ let app = new Vue({
         },
 		
 		//Seconds required per autoclick
-		getSecondsPerAutoClick() {
+		getAutoClickInterval() {
 			return (10 / this.upgrades[3].boost()) / Math.max(this.prestigePoints, 1);
 		},
 
@@ -294,7 +294,7 @@ let app = new Vue({
                 this.upgrades[2].cost = 5;
                 this.upgrades[2].amount = 0;
 				this.upgrades[3].cost = 4;
-				this.upgrades[3].cost = 0;
+				this.upgrades[3].amount = 0;
 				this.autoClickUnlocked = false;
 				this.autoPrestigeUnlocked = false;
 
@@ -306,7 +306,7 @@ let app = new Vue({
 		//Has the app tick
 		tick(tps) {
 			if (this.autoClickUnlocked) {
-				let seconds = this.getSecondsPerAutoClick();
+				let seconds = this.getAutoClickInterval();
 				let gain = this.getGain();
 				
 				//Adds a fraction of the gain based on the tps and seconds required for autoclicking

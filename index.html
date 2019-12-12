@@ -152,9 +152,17 @@
 							<template v-if="autoClickUnlocked">
 								<div id="autoclick" v-bind:class="themeClass('text')">
 									<div id="autoclick-speed-text">
-										Based on your Prestige Points, Auto-Click currently clicks once every
-										<font id="autoclick-speed-text2">{{ formatSci(getSecondsPerAutoClick()) }}</font>
-										second{{ pluralize(getSecondsPerAutoClick()) }}
+										Based on your Prestige Points, Auto-Click currently clicks
+										
+										<template v-if="getAutoClickInterval() >= 1">
+											once every <font class="autoclick-speed-text2">{{ formatSci(getAutoClickInterval()) }}</font>
+										second{{ pluralize(getAutoClickInterval()) }}
+										</template>
+										
+										<template v-else>
+											<font class="autoclick-speed-text2">{{ formatSci(1 / getAutoClickInterval()) }}</font>
+											times per second
+										</template>
 									</div>
 								</div>
 							</template>
