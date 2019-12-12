@@ -147,7 +147,7 @@ let app = new Vue({
 			if (this.score >= 1000)
 				this.autoClickUnlocked = true;
 			
-			//Auto-prestige feature
+			//Auto-prestige feature (currently really slow for some reason)
 			if (this.score >= this.goal && this.autoPrestigeUnlocked && this.autoPrestigeOn)
 				this.prestige();
         },

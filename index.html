@@ -151,19 +151,31 @@
 							
 							<template v-if="autoClickUnlocked">
 								<div id="autoclick" v-bind:class="themeClass('text')">
-									<div id="autoclick-speed-text">
-										Based on your Prestige Points, Auto-Click currently clicks
-										
-										<template v-if="getAutoClickInterval() >= 1">
-											once every <font class="autoclick-speed-text2">{{ formatSci(getAutoClickInterval()) }}</font>
-										second{{ pluralize(getAutoClickInterval()) }}
-										</template>
-										
-										<template v-else>
-											<font class="autoclick-speed-text2">{{ formatSci(1 / getAutoClickInterval()) }}</font>
-											times per second
-										</template>
+									<div id="autoclick-toggle-bar">
+										<button id="autoclick-toggle-button" v-bind:class="themeClass('game-button')" v-on:click="autoClickOn = !autoClickOn">Auto-Click: {{ autoClickOn ? "On" : "Off" }}</button>
 									</div>
+								
+									<div id="autoclick-speed-text-container">
+										<div id="autoclick-speed-text">
+											Based on your Prestige Points, Auto-Click currently clicks
+											
+											<template v-if="getAutoClickInterval() >= 1">
+												once every <font class="autoclick-speed-text2">{{ formatSci(getAutoClickInterval()) }}</font>
+											second{{ pluralize(getAutoClickInterval()) }}
+											</template>
+											
+											<template v-else>
+												<font class="autoclick-speed-text2">{{ formatSci(1 / getAutoClickInterval()) }}</font>
+												times per second
+											</template>
+										</div>
+									</div>
+								</div>
+							</template>
+							
+							<template v-if="autoPrestigeUnlocked">
+								<div id="autoprestige-toggle-bar">
+									<button id="autoprestige-toggle-button" v-bind:class="themeClass('game-button', 'text')" v-on:click="autoPrestigeOn = !autoPrestigeOn">Auto-Prestige: {{ autoPrestigeOn ? "On" : "Off" }}</button>
 								</div>
 							</template>
 						</div>
