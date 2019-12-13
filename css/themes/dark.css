@@ -60,3 +60,14 @@
 .unaffordable-dark:hover {
 	background-color: rgb(15, 15, 15);
 }
+
+.notification-dark {
+	background-color: rgb(52, 204, 235);
+}
+
+.notification-text-dark {
+	color: black;
+	font-family: "Open Sans";
+    
+    font-size: 82%;
+}

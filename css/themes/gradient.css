@@ -56,3 +56,14 @@
 .unaffordable-gradient:hover {
 	background-image: linear-gradient(rgb(86, 56, 56), rgb(111, 81, 81));
 }
+
+.notification-gradient {
+	background-color: rgb(52, 204, 235);
+}
+
+.notification-text-gradient {
+	color: black;
+	font-family: "Plex Mono";
+    
+    font-size: 75%;
+}
