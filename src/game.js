@@ -148,7 +148,7 @@ let app = new Vue({
 				this.autoClickUnlocked = true;
 			
 			//Auto-prestige feature (currently really slow for some reason)
-			if (this.score >= this.goal && this.autoPrestigeUnlocked && this.autoPrestigeOn)
+			if (this.isAutoPrestigeEnabled() && this.canPrestige())
 				this.prestige();
         },
 
@@ -180,6 +180,21 @@ let app = new Vue({
 		//Seconds required per autoclick
 		getAutoClickInterval() {
 			return (10 / this.upgrades[3].boost()) / Math.max(this.prestigePoints, 1);
+		},
+		
+		//Checks if auto-click is enabled
+		isAutoClickEnabled() {
+			return this.autoClickUnlocked && this.autoClickOn;
+		},
+		
+		//Checks if auto-prestige is enabled
+		isAutoPrestigeEnabled() {
+			return this.autoPrestigeUnlocked && this.autoPrestigeOn;
+		},
+		
+		//Checks if the player can prestige
+		canPrestige() {
+			return this.getScore() >= this.getGoal();
 		},
 
         //GAME STUFF
@@ -317,7 +332,7 @@ let app = new Vue({
 		
 		//Has the app tick
 		tick(tps) {
-			if (this.autoClickUnlocked && this.autoClickOn) {
+			if (this.isAutoClickEnabled()) {
 				let seconds = this.getAutoClickInterval();
 				let gain = this.getGain();
 				

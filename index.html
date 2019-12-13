@@ -58,7 +58,7 @@
 						<div id="prestige-point-display" v-bind:class="themeClass('text')" v-if="prestiges > 0">You have {{ formatSci(prestigePoints) }} Prestige Point{{ pluralize(prestigePoints) }}</div>
 
 						<div id="prestige-button-sub-container">
-							<button id="prestige-button" v-bind:class="themeClass('game-button', 'text')" v-on:click="prestige" v-if="getScore() >= getGoal()">Prestige for {{ formatSci(getPrestigePointGain()) }} Prestige Point{{ pluralize(getPrestigePointGain()) }}</button>
+							<button id="prestige-button" v-bind:class="themeClass('game-button', 'text')" v-on:click="prestige" v-if="canPrestige()">Prestige for {{ formatSci(getPrestigePointGain()) }} Prestige Point{{ pluralize(getPrestigePointGain()) }}</button>
 						</div>
 					</div>
 				</div>
