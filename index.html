@@ -34,9 +34,9 @@
         		</div>
             </template>
 			
-			<div id="notification-container" v-bind:class="themeClass('notification')">
-				<div class="notification" v-bind:class="themeClass('notification-text')" v-if="true">Unlocked Auto-Click</div>
-				<div class="notification" v-bind:class="themeClass('notification-text')" v-if="false">Unlocked Auto-Prestige</div>
+			<div id="notification-container">
+				<div class="notification" v-bind:class="themeClass('notification')" v-if="true">Unlocked Auto-Click</div>
+				<div class="notification" v-bind:class="themeClass('notification')" v-if="false">Unlocked Auto-Prestige</div>
 			</div>
 
 			<div id="app" v-bind:class="themeClass('app')">
