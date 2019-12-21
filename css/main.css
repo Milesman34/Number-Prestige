@@ -13,6 +13,16 @@
 	src: url("../fonts/IBMPlexMono-Regular.ttf");
 }
 
+@keyframes notification-fadeout {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
+}
+
 /*To let me style buttons*/
 button {
     all: unset
@@ -153,7 +163,7 @@ button {
     align-items: center;
 
     font-size: 92.5%;
-	
+
 	text-align: center;
 
     user-select: none;
@@ -240,7 +250,7 @@ button {
     align-items: center;
 
     font-size: 235%;
-	
+
 	user-select: none;
 }
 
@@ -408,7 +418,7 @@ button {
 
     justify-content: center;
     align-items: center;
-	
+
 	text-align: center;
 
     font-size: 140%;
@@ -441,14 +451,14 @@ button {
 	height: 100%;
 
 	display: grid;
-	
+
 	grid-template-rows: 12% 18% 12% auto;
 }
 
 #automation-next-unlock {
 	width: 100%;
 	height: 100%;
-	
+
 	display: flex;
 
     justify-content: center;
@@ -457,29 +467,29 @@ button {
 
 .automation-next-unlock-text {
 	height: 95%;
-	
+
 	display: flex;
 
     justify-content: center;
     align-items: center;
-	
+
     font-size: 90%;
 }
 
 #autoclick {
 	width: 100%;
 	height: 100%;
-	
+
 	display: grid;
-	
+
 	grid-template-rows: 50% 50%;
 }
 
 #autoclick-toggle-bar {
 	width: 100%;
-	
+
 	display: flex;
-	
+
 	justify-content: center;
     align-items: center;
 }
@@ -491,14 +501,14 @@ button {
 
 #autoclick-speed-text-container {
 	display: flex;
-	
+
 	justify-content: center;
     align-items: center;
 }
 
 #autoclick-speed-text {
 	width: 40%;
-	
+
 	text-align: center;
 }
 
@@ -508,9 +518,9 @@ button {
 
 #autoprestige-toggle-bar {
 	width: 100%;
-	
+
 	display: flex;
-	
+
 	justify-content: center;
     align-items: center;
 }
@@ -523,31 +533,41 @@ button {
 #notification-container {
 	grid-row: 1;
 	grid-column: 1;
-	
+
 	height: 5%;
 }
 
 .notification {
 	position: absolute;
-	
+
 	top: 0;
 	right: 0;
-	
+
 	height: 5%;
-    
+
     z-index: 1;
-    
+
     display: flex;
-    
+
     justify-content: center;
     align-items: center;
-    
+
     text-align: center;
-    
+
     color: black;
-	
+
 	padding-left: 5px;
 	padding-right: 5px;
-	
+
 	user-select: none;
+}
+
+.notification-off {
+    opacity: 0;
+}
+
+.notification-on {
+    opacity: 0;
+    animation-name: notification-fadeout;
+    animation-duration: 2s;
 }
