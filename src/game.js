@@ -26,13 +26,15 @@ let app = new Vue({
 
         //Number of prestige points
         prestigePoints: 0,
-		
+
 		//Is auto-click unlocked
 		autoClickUnlocked: false,
-		
+        justUnlockedAutoClick: false,
+
 		//Is auto-prestige unlocked
 		autoPrestigeUnlocked: false,
-		
+        justUnlockedAutoPrestige: false,
+
 		//Should the game use auto-click and auto-prestige?
 		autoClickOn: true,
 		autoPrestigeOn: false,
@@ -74,14 +76,14 @@ let app = new Vue({
                     return 0.9 ** this.amount;
                 }
             },
-			
+
 			//Auto-Click speed upgrade
 			{
 				cost: 4,
 				costScaling: 3,
-				
+
 				amount: 0,
-				
+
 				boost() {
 					return 2 ** this.amount;
 				}
@@ -142,11 +144,11 @@ let app = new Vue({
         //Updates the score
         setScore(score) {
             this.score = score;
-			
+
 			//Unlock auto-click if possible
 			if (this.score >= 1000)
-				this.autoClickUnlocked = true;
-			
+				this.unlockAutoClick();
+
 			//Auto-prestige feature (currently really slow for some reason)
 			if (this.isAutoPrestigeEnabled() && this.canPrestige())
 				this.prestige();
@@ -155,13 +157,13 @@ let app = new Vue({
         addScore(score) {
             this.setScore(this.score + score);
         },
-		
+
 		//GETTERS
         //Gets the current prestige point gain
         getPrestigePointGain() {
             return this.upgrades[0].boost();
         },
-		
+
 		//Gets the actual score
 		getScore() {
 			return Math.floor(this.score);
@@ -176,22 +178,32 @@ let app = new Vue({
         getGoal() {
             return Math.floor(this.goal * this.upgrades[2].boost());
         },
-		
+
 		//Seconds required per autoclick
 		getAutoClickInterval() {
 			return (10 / this.upgrades[3].boost()) / Math.max(this.prestigePoints, 1);
 		},
-		
+
 		//Checks if auto-click is enabled
 		isAutoClickEnabled() {
 			return this.autoClickUnlocked && this.autoClickOn;
 		},
-		
+
 		//Checks if auto-prestige is enabled
 		isAutoPrestigeEnabled() {
 			return this.autoPrestigeUnlocked && this.autoPrestigeOn;
 		},
-		
+
+        //Unlocks auto click
+        unlockAutoClick() {
+            this.autoClickUnlocked = true;
+        },
+
+        //Unlocks auto prestige
+        unlockAutoPrestige() {
+            this.autoPrestigeUnlocked = true;
+        },
+
 		//Checks if the player can prestige
 		canPrestige() {
 			return this.getScore() >= this.getGoal();
@@ -213,12 +225,12 @@ let app = new Vue({
             this.prestiges++;
 
             this.prestigePoints += this.getPrestigePointGain();
-			
+
 			//Unlock auto-prestige if possible
 			if (this.prestigePoints >= 50)
-				this.autoPrestigeUnlocked = true;
+				this.unlockAutoPrestige();
         },
-		
+
 		//Checks if the player can afford an upgrade
 		canAfford(id) {
 			return this.prestigePoints >= this.upgrades[id].cost;
@@ -329,13 +341,13 @@ let app = new Vue({
                 this.save();
             }
         },
-		
+
 		//Has the app tick
 		tick(tps) {
 			if (this.isAutoClickEnabled()) {
 				let seconds = this.getAutoClickInterval();
 				let gain = this.getGain();
-				
+
 				//Adds a fraction of the gain based on the tps and seconds required for autoclicking
 				this.addScore(gain / (seconds * tps));
 			}
