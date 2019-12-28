@@ -24,9 +24,10 @@
                         <div id="theme-selector-list">
                             <theme-selector-list-button
                                 v-on:set-theme="theme = $event"
+
                                 v-for="th in themes"
                                 v-bind:theme="th"
-                                v-bind:current-theme="theme"/>
+                                v-bind:current-theme="theme" />
                         </div>
 
                         <button id="theme-selector-exit-button" v-bind:class="[getThemeClass('text'), getThemeClass('selector-hover')]" v-on:click="selector = 'none'">Exit</button>
@@ -41,10 +42,14 @@
 
 			<div id="app" v-bind:class="getThemeClass('app')">
 				<div id="header" v-bind:class="getThemeClass('header')">
-					<button class="header-item" v-bind:class="[getThemeClass('header-item'), getThemeClass('text')]" v-on:click="setState('main')">Main</button>
-					<button class="header-item" v-bind:class="[getThemeClass('header-item'), getThemeClass('text')]" v-on:click="setState('options')">Options</button>
-					<button class="header-item" v-bind:class="[getThemeClass('header-item'), getThemeClass('text')]" v-on:click="setState('upgrades')" v-if="prestiges > 0">Upgrades</button>
-					<button class="header-item" v-bind:class="[getThemeClass('header-item'), getThemeClass('text')]" v-on:click="setState('automation')" v-if="prestiges > 0">Automation</button>
+                    <header-item
+                        v-on:set-state="setState($event)"
+
+                        v-for="h in headerItems"
+                        v-bind:state="h.state"
+                        v-bind:view="h.view"
+                        v-bind:prestiges="prestiges"
+                        v-bind:current-theme="theme" />
 				</div>
 
 				<div id="display-header" class="monospace">
@@ -188,6 +193,7 @@
         <script src="src/utils.js"></script>
 
         <script src="src/components/ThemeSelectorListButton.js"></script>
+        <script src="src/components/HeaderItem.js"></script>
 
         <script src="src/game.js"></script>
     </body>

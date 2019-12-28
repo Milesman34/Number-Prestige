@@ -14,6 +14,33 @@ let app = new Vue({
         //Current state
         state: "main",
 
+        //Header items
+        headerItems: [
+            {
+                state: "main",
+                view: () => true
+            },
+
+            {
+                state: "options",
+                view: () => true
+            },
+
+            {
+                state: "upgrades",
+                view() {
+                    return this.prestiges > 0
+                }
+            },
+
+            {
+                state: "automation",
+                view() {
+                    return this.prestiges > 0
+                }
+            }
+        ],
+
         //Current open selector
         selector: "none",
 
