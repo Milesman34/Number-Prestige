@@ -6,12 +6,12 @@ Vue.component("theme-selector-list-button", {
 
     methods: {
         //Returns the current theme class
-        currentThemeClass(elem) {
+        getThemeClass(elem) {
             return this.themeClass(elem, this.currentTheme);
         }
     },
 
     template: `
-        <button class="theme-selector-list-button" v-bind:class="[currentThemeClass('selector-item'), currentThemeClass('selector-hover'), currentThemeClass('text')]" v-on:click="$emit('set-theme', theme)">{{ capitalize(theme) }}</button>
+        <button class="theme-selector-list-button" v-bind:class="[getThemeClass('selector-item'), getThemeClass('selector-hover'), getThemeClass('text')]" v-on:click="$emit('set-theme', theme)">{{ capitalize(theme) }}</button>
     `
 })

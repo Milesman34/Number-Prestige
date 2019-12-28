@@ -101,6 +101,11 @@ let app = new Vue({
 
     methods: {
         //UTILITY FUNCTIONS
+        //Returns the theme class based on the current theme
+        getThemeClass(element) {
+            return this.themeClass(element, this.theme);
+        },
+
         //Rounds a number to a given number of decimal places
         roundTo(num, places = 0) {
         	return Math.round(num * 10 ** places) / (10 ** places);
@@ -120,7 +125,7 @@ let app = new Vue({
 
         //Returns the correct plural ending (s ending)
         pluralize(num) {
-            return Math.abs(num) === 1 ? "" : "s"
+            return Math.abs(num) === 1 ? "" : "s";
         },
 
         //SETTERS
