@@ -106,23 +106,6 @@ let app = new Vue({
             return this.themeClass(element, this.theme);
         },
 
-        //Rounds a number to a given number of decimal places
-        roundTo(num, places = 0) {
-        	return Math.round(num * 10 ** places) / (10 ** places);
-        },
-
-        //Formats a number in exponential format (if over the requirement)
-        formatSci(num, limit = 1e6, places = 2) {
-        	if (num >= limit) {
-                //Splits the orders of magnitude and the amount before it to format it
-        		let oom = Math.floor(Math.log10(num));
-        		let div = this.roundTo(num / (10 ** oom), places);
-
-        		return `${div}e${oom}`;
-        	} else
-        		return this.roundTo(num, places).toString();
-        },
-
         //Returns the correct plural ending (s ending)
         pluralize(num) {
             return Math.abs(num) === 1 ? "" : "s";
