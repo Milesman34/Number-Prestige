@@ -29,7 +29,7 @@
                                 v-bind:current-theme="theme"/>
                         </div>
 
-                        <button id="theme-selector-exit-button" v-bind:class="themeClass('text', 'selector-hover')" v-on:click="selector = 'none'">Exit</button>
+                        <button id="theme-selector-exit-button" v-bind:class="[themeClass('text', theme), themeClass('selector-hover', theme)]" v-on:click="selector = 'none'">Exit</button>
                     </div>
         		</div>
             </template>
