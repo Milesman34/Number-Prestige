@@ -101,12 +101,6 @@ let app = new Vue({
 
     methods: {
         //UTILITY FUNCTIONS
-        //Generates the theme class used for a given element
-		//If the elem is an array, generates an array of classes
-        themeClass(...elems) {
-			return elems.map(e => `${e}-${this.theme}`);
-        },
-
         //Rounds a number to a given number of decimal places
         roundTo(num, places = 0) {
         	return Math.round(num * 10 ** places) / (10 ** places);
