@@ -111,7 +111,7 @@
     						<div id="upgrades-container">
                                 <div id="prestige-upgrades-container">
                                     <div class="prestige-upgrade-container">
-                                        <button id="prestige-point-multi-upgrade" class="prestige-upgrade-button" v-bind:class="[getThemeClass('game-button'), canAfford(0) ? '' : getThemeClass('unaffordable')]" v-on:click="buyUpgrade(0)">
+                                        <button class="prestige-upgrade-button" v-bind:class="[getThemeClass('game-button'), canAfford(0) ? '' : getThemeClass('unaffordable')]" v-on:click="buyUpgrade(0)">
                                             <div class="prestige-upgrade-desc" v-bind:class="getThemeClass('text')">Multiply Prestige Point gain by 2</div>
                                             <div class="prestige-upgrade-current" v-bind:class="getThemeClass('text')">Currently: {{ formatSci(upgrades[0].boost()) }}x</div>
                                             <div class="prestige-upgrade-cost" v-bind:class="getThemeClass('text')">Cost: {{ formatSci(upgrades[0].cost) }} Prestige Points</div>
@@ -119,7 +119,7 @@
                                     </div>
 
                                     <div class="prestige-upgrade-container">
-                                        <button id="number-gain-boost-upgrade" class="prestige-upgrade-button" v-bind:class="[getThemeClass('game-button'), canAfford(1) ? '' : getThemeClass('unaffordable')]" v-on:click="buyUpgrade(1)">
+                                        <button class="prestige-upgrade-button" v-bind:class="[getThemeClass('game-button'), canAfford(1) ? '' : getThemeClass('unaffordable')]" v-on:click="buyUpgrade(1)">
                                             <div class="prestige-upgrade-desc" v-bind:class="getThemeClass('text')">Add 1 to number gain</div>
                                             <div class="prestige-upgrade-current" v-bind:class="getThemeClass('text')">Currently: {{ formatSci(gain) }} -> {{ formatSci(getGain()) }}</div>
                                             <div class="prestige-upgrade-cost" v-bind:class="getThemeClass('text')">Cost: {{ formatSci(upgrades[1].cost) }} Prestige Points</div>
@@ -127,7 +127,7 @@
                                     </div>
 
                                     <div class="prestige-upgrade-container">
-                                        <button id="prestige-reduce-requirement-upgrade" class="prestige-upgrade-button" v-bind:class="[getThemeClass('game-button'), canAfford(2) ? '' : getThemeClass('unaffordable')]" v-on:click="buyUpgrade(2)">
+                                        <button class="prestige-upgrade-button" v-bind:class="[getThemeClass('game-button'), canAfford(2) ? '' : getThemeClass('unaffordable')]" v-on:click="buyUpgrade(2)">
                                             <div class="prestige-upgrade-desc" v-bind:class="getThemeClass('text')">Reduce prestige requirement by 10%</div>
                                             <div class="prestige-upgrade-current" v-bind:class="getThemeClass('text')">Currently: 100% -> {{ formatSci(upgrades[2].boost() * 100) }}%</div>
                                             <div class="prestige-upgrade-cost" v-bind:class="getThemeClass('text')">Cost: {{ formatSci(upgrades[2].cost) }} Prestige Points</div>
@@ -136,7 +136,7 @@
 
 									<template v-if="autoClickUnlocked">
 										<div class="prestige-upgrade-container">
-											<button id="autoclicker-buff-upgrade" class="prestige-upgrade-button" v-bind:class="[getThemeClass('game-button'), canAfford(3) ? '' : getThemeClass('unaffordable')]" v-on:click="buyUpgrade(3)">
+											<button class="prestige-upgrade-button" v-bind:class="[getThemeClass('game-button'), canAfford(3) ? '' : getThemeClass('unaffordable')]" v-on:click="buyUpgrade(3)">
 												<div class="prestige-upgrade-desc" v-bind:class="getThemeClass('text')">Make Auto-Click 2x faster</div>
 												<div class="prestige-upgrade-current" v-bind:class="getThemeClass('text')">Currently: {{ formatSci(upgrades[3].boost()) }}x</div>
 												<div class="prestige-upgrade-cost" v-bind:class="getThemeClass('text')">Cost: {{ formatSci(upgrades[3].cost) }} Prestige Points</div>
@@ -152,7 +152,7 @@
 						<div id="automation">
 							<div id="automation-next-unlock">
 								<div class="automation-next-unlock-text sans" v-bind:class="getThemeClass('text')" v-if="!autoClickUnlocked">Unlock Auto-Click at 1000 points</div>
-								<div class="automation next-unlock-text sans" v-bind:class="getThemeClass('text')" v-if="autoClickUnlocked && !autoPrestigeUnlocked">Unlock Auto-Prestige at 50 Prestige Points</div>
+								<div class="automation-next-unlock-text sans" v-bind:class="getThemeClass('text')" v-if="autoClickUnlocked && !autoPrestigeUnlocked">Unlock Auto-Prestige at 50 Prestige Points</div>
 							</div>
 
 							<template v-if="autoClickUnlocked">

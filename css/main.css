@@ -509,11 +509,13 @@ button {
 #autoclick-speed-text {
 	width: 40%;
 
+    font-size: 85%;
+
 	text-align: center;
 }
 
 .autoclick-speed-text2 {
-	font-size: 150%;
+	font-size: 175%;
 }
 
 #autoprestige-toggle-bar {
