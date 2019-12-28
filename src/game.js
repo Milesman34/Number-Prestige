@@ -106,11 +106,6 @@ let app = new Vue({
             return this.themeClass(element, this.theme);
         },
 
-        //Returns the correct plural ending (s ending)
-        pluralize(num) {
-            return Math.abs(num) === 1 ? "" : "s";
-        },
-
         //SETTERS
         //Sets the state of the game
         setState(state) {

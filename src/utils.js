@@ -28,11 +28,15 @@ const formatSci = (num, limit = 1e6, places = 2) => {
         return roundTo(num, places).toString();
 };
 
+//Returns the correct plural ending (standard "s" ending)
+const pluralize = num => Math.abs(num) === 1 ? "" : "s";
+
 //This is a mixin that contains various utility functions
 const utils = {
     methods: {
         capitalize,
         formatSci,
+        pluralize,
         roundTo,
         themeClass
     }
