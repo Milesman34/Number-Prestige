@@ -24,7 +24,7 @@
                         <div id="theme-selector-list">
                             <theme-selector-list-button
                                 v-on:set-theme="theme = $event"
-                                v-for="th in ['light', 'dark', 'gradient']"
+                                v-for="th in themes"
                                 v-bind:theme="th"
                                 v-bind:current-theme="theme"/>
                         </div>

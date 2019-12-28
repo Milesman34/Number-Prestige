@@ -8,6 +8,9 @@ let app = new Vue({
         //Current theme
         theme: "dark",
 
+        //List of themes
+        themes: ["light", "dark", "gradient"],
+
         //Current state
         state: "main",
 
