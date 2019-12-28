@@ -22,9 +22,11 @@
                         <div id="theme-selector-title" v-bind:class="themeClass('selector-item', 'text')">Select Theme</div>
 
                         <div id="theme-selector-list">
-                            <button class="theme-selector-list-button" v-bind:class="themeClass('selector-item', 'selector-hover', 'text')" v-on:click="theme = 'light'">Light</button>
-                            <button class="theme-selector-list-button" v-bind:class="themeClass('selector-item', 'selector-hover', 'text')" v-on:click="theme = 'dark'">Dark</button>
-							<button class="theme-selector-list-button" v-bind:class="themeClass('selector-item', 'selector-hover', 'text')" v-on:click="theme = 'gradient'">Gradient</button>
+                            <theme-selector-list-button
+                                v-on:set-theme="theme = $event"
+                                v-for="th in ['light', 'dark', 'gradient']"
+                                v-bind:theme="th"
+                                v-bind:theme-class="themeClass" />
                         </div>
 
                         <button id="theme-selector-exit-button" v-bind:class="themeClass('text', 'selector-hover')" v-on:click="selector = 'none'">Exit</button>
@@ -181,6 +183,10 @@
 				</div>
 			</div>
 		</div>
+
+        <script src="src/utils.js"></script>
+
+        <script src="src/components/ThemeSelectorListButton.js"></script>
 
         <script src="src/game.js"></script>
     </body>

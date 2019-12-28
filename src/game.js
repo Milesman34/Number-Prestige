@@ -2,6 +2,8 @@
 let app = new Vue({
     el: "#container",
 
+    mixins: [utils],
+
     data: {
         //Current theme
         theme: "dark",
@@ -99,11 +101,6 @@ let app = new Vue({
 
     methods: {
         //UTILITY FUNCTIONS
-        //Capitalizes a word
-        capitalize(word) {
-            return word[0].toUpperCase() + word.slice(1, word.length).toLowerCase();
-        },
-
         //Generates the theme class used for a given element
 		//If the elem is an array, generates an array of classes
         themeClass(...elems) {
