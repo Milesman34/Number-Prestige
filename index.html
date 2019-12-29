@@ -151,8 +151,13 @@
 					<template v-if="state === 'automation'">
 						<div id="automation">
 							<div id="automation-next-unlock">
-								<div class="automation-next-unlock-text sans" v-bind:class="getThemeClass('text')" v-if="!autoClickUnlocked">Unlock Auto-Click at 1000 points</div>
-								<div class="automation-next-unlock-text sans" v-bind:class="getThemeClass('text')" v-if="autoClickUnlocked && !autoPrestigeUnlocked">Unlock Auto-Prestige at 50 Prestige Points</div>
+                                <automation-next-unlock-text
+                                    v-for="a in AutomationNextUnlockTexts"
+                                    v-bind:text="a.text"
+                                    v-bind:condition="a.condition"
+                                    v-bind:auto-click-unlocked="autoClickUnlocked"
+                                    v-bind:auto-prestige-unlocked="autoPrestigeUnlocked"
+                                    v-bind:current-theme="theme"/>
 							</div>
 
 							<template v-if="autoClickUnlocked">
@@ -192,8 +197,9 @@
 
         <script src="src/utils.js"></script>
 
-        <script src="src/components/ThemeSelectorListButton.js"></script>
+        <script src="src/components/AutomationNextUnlockText.js"></script>
         <script src="src/components/HeaderItem.js"></script>
+        <script src="src/components/ThemeSelectorListButton.js"></script>
 
         <script src="src/game.js"></script>
     </body>
