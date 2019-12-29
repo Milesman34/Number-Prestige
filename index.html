@@ -101,38 +101,52 @@
 
     						<div id="upgrades-container">
                                 <div id="prestige-upgrades-container">
-                                    <div class="prestige-upgrade-container">
-                                        <button class="prestige-upgrade-button" v-bind:class="[getThemeClass('game-button'), canAfford(0) ? '' : getThemeClass('unaffordable')]" v-on:click="buyUpgrade(0)">
-                                            <div class="prestige-upgrade-desc" v-bind:class="getThemeClass('text')">Multiply Prestige Point gain by 2</div>
-                                            <div class="prestige-upgrade-current" v-bind:class="getThemeClass('text')">Currently: {{ formatSci(upgrades[0].boost()) }}x</div>
-                                            <div class="prestige-upgrade-cost" v-bind:class="getThemeClass('text')">Cost: {{ formatSci(upgrades[0].cost) }} Prestige Points</div>
-                                        </button>
-                                    </div>
+                                    <upgrade-button
+                                        v-bind:current-theme="theme"
+                                        v-bind:id="0"
+                                        description="Multiply Prestige Point gain by 2"
+                                        v-bind:format-function="num => `${formatSci(num)}x`"
+                                        v-bind:boost="upgrades[0].boost()"
+                                        v-bind:cost="upgrades[0].cost"
+                                        v-bind:can-afford="canAfford"
 
-                                    <div class="prestige-upgrade-container">
-                                        <button class="prestige-upgrade-button" v-bind:class="[getThemeClass('game-button'), canAfford(1) ? '' : getThemeClass('unaffordable')]" v-on:click="buyUpgrade(1)">
-                                            <div class="prestige-upgrade-desc" v-bind:class="getThemeClass('text')">Add 1 to number gain</div>
-                                            <div class="prestige-upgrade-current" v-bind:class="getThemeClass('text')">Currently: {{ formatSci(gain) }} -> {{ formatSci(getGain()) }}</div>
-                                            <div class="prestige-upgrade-cost" v-bind:class="getThemeClass('text')">Cost: {{ formatSci(upgrades[1].cost) }} Prestige Points</div>
-                                        </button>
-                                    </div>
+                                        v-on:buy-upgrade="buyUpgrade(0)"
+                                        ></upgrade-button>
 
-                                    <div class="prestige-upgrade-container">
-                                        <button class="prestige-upgrade-button" v-bind:class="[getThemeClass('game-button'), canAfford(2) ? '' : getThemeClass('unaffordable')]" v-on:click="buyUpgrade(2)">
-                                            <div class="prestige-upgrade-desc" v-bind:class="getThemeClass('text')">Reduce prestige requirement by 10%</div>
-                                            <div class="prestige-upgrade-current" v-bind:class="getThemeClass('text')">Currently: 100% -> {{ formatSci(upgrades[2].boost() * 100) }}%</div>
-                                            <div class="prestige-upgrade-cost" v-bind:class="getThemeClass('text')">Cost: {{ formatSci(upgrades[2].cost) }} Prestige Points</div>
-                                        </button>
-                                    </div>
+                                    <upgrade-button
+                                        v-bind:current-theme="theme"
+                                        v-bind:id="1"
+                                        description="Add 1 to number gain"
+                                        v-bind:format-function="num => `${formatSci(gain)} -> ${formatSci(num)}`"
+                                        v-bind:boost="getGain()"
+                                        v-bind:cost="upgrades[1].cost"
+                                        v-bind:can-afford="canAfford"
+
+                                        v-on:buy-upgrade="buyUpgrade(1)"
+                                        ></upgrade-button>
+
+                                    <upgrade-button
+                                        v-bind:current-theme="theme"
+                                        v-bind:id="2"
+                                        description="Reduce prestige requirement by 10%"
+                                        v-bind:format-function="num => `100% -> ${formatSci(num * 100)}%`"
+                                        v-bind:boost="upgrades[2].boost()"
+                                        v-bind:cost="upgrades[2].cost"
+                                        v-bind:can-afford="canAfford"
+
+                                        v-on:buy-upgrade="buyUpgrade(2)"></upgrade-button>
 
 									<template v-if="autoClickUnlocked">
-										<div class="prestige-upgrade-container">
-											<button class="prestige-upgrade-button" v-bind:class="[getThemeClass('game-button'), canAfford(3) ? '' : getThemeClass('unaffordable')]" v-on:click="buyUpgrade(3)">
-												<div class="prestige-upgrade-desc" v-bind:class="getThemeClass('text')">Make Auto-Click 2x faster</div>
-												<div class="prestige-upgrade-current" v-bind:class="getThemeClass('text')">Currently: {{ formatSci(upgrades[3].boost()) }}x</div>
-												<div class="prestige-upgrade-cost" v-bind:class="getThemeClass('text')">Cost: {{ formatSci(upgrades[3].cost) }} Prestige Points</div>
-											</button>
-										</div>
+                                        <upgrade-button
+                                            v-bind:current-theme="theme"
+                                            v-bind:id="3"
+                                            description="Make Auto-Click 2x faster"
+                                            v-bind:format-function="num => `${formatSci(num)}x`"
+                                            v-bind:boost="upgrades[3].boost()"
+                                            v-bind:cost="upgrades[3].cost"
+                                            v-bind:can-afford="canAfford"
+
+                                            v-on:buy-upgrade="buyUpgrade(3)"></upgrade-button>
 									</template>
                                 </div>
                             </div>
@@ -192,6 +206,7 @@
         <script src="src/components/HeaderItem.js"></script>
         <script src="src/components/OptionsButton.js"></script>
         <script src="src/components/ThemeSelectorListButton.js"></script>
+        <script src="src/components/UpgradeButton.js"></script>
 
         <script src="src/game.js"></script>
     </body>
