@@ -41,3 +41,13 @@ const utils = {
         themeClass
     }
 };
+
+//This is a mixin that provides themeClass for components
+const themeClassComponents = {
+    methods: {
+        //Returns the current theme class
+        getThemeClass(elem) {
+            return this.themeClass(elem, this.currentTheme);
+        }
+    }
+};
