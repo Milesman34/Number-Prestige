@@ -89,17 +89,8 @@
     								</button>
     							</div>
 
-                                <div class="options-button-container">
-                                    <button class="options-button" v-bind:class="[getThemeClass('game-button'), getThemeClass('text')]" v-on:click="save">
-                                        Save
-                                    </button>
-                                </div>
-
-                                <div class="options-button-container">
-                                    <button class="options-button" v-bind:class="[getThemeClass('game-button'), getThemeClass('text')]" v-on:click="resetSave">
-                                        Reset
-                                    </button>
-                                </div>
+                                <options-button v-on:event="save" title="Save" v-bind:current-theme="theme"></options-button>
+                                <options-button v-on:event="resetSave" title="Reset" v-bind:current-theme="theme"></options-button>
     						</div>
     					</div>
                     </template>
@@ -157,7 +148,7 @@
                                     v-bind:condition="a.condition"
                                     v-bind:auto-click-unlocked="autoClickUnlocked"
                                     v-bind:auto-prestige-unlocked="autoPrestigeUnlocked"
-                                    v-bind:current-theme="theme"/>
+                                    v-bind:current-theme="theme" />
 							</div>
 
 							<template v-if="autoClickUnlocked">
@@ -199,6 +190,7 @@
 
         <script src="src/components/AutomationNextUnlockText.js"></script>
         <script src="src/components/HeaderItem.js"></script>
+        <script src="src/components/OptionsButton.js"></script>
         <script src="src/components/ThemeSelectorListButton.js"></script>
 
         <script src="src/game.js"></script>
