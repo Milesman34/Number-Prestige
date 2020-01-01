@@ -42,14 +42,13 @@
 
 			<div id="app" v-bind:class="getThemeClass('app')">
 				<div id="header" v-bind:class="getThemeClass('header')">
-                    <header-item
-                        v-on:set-state="setState($event)"
+                    <header-item v-on:event="setState($event)" state="main"></header-item>
+                    <header-item v-on:event="setState($event)" state="options"></header-item>
 
-                        v-for="h in headerItems"
-                        v-bind:state="h.state"
-                        v-bind:view="h.view"
-                        v-bind:prestiges="prestiges"
-                        v-bind:current-theme="theme" />
+                    <template v-if="prestiges > 0">
+                        <header-item v-on:event="setState($event)" state="upgrades"></header-item>
+                        <header-item v-on:event="setState($event)" state="automation"></header-item>
+                    </template>
 				</div>
 
 				<div id="display-header" class="monospace">
