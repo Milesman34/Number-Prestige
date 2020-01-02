@@ -7,6 +7,7 @@
         <title>Number Prestige</title>
 
         <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/vuex/3.1.2/vuex.js"></script>
 
         <link rel="stylesheet" href="css/main.css" />
         <link rel="stylesheet" href="css/themes/dark.css" />
@@ -26,8 +27,7 @@
                                 v-on:set-theme="theme = $event"
 
                                 v-for="th in themes"
-                                v-bind:theme="th"
-                                v-bind:current-theme="theme" />
+                                v-bind:theme="th" />
                         </div>
 
                         <button id="theme-selector-exit-button" v-bind:class="[getThemeClass('text'), getThemeClass('selector-hover')]" v-on:click="selector = 'none'">Exit</button>
@@ -201,6 +201,7 @@
 			</div>
 		</div>
 
+        <script src="src/store.js"></script>
         <script src="src/utils.js"></script>
 
         <script src="src/components/AutomationNextUnlockText.js"></script>

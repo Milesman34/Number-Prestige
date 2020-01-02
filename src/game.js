@@ -2,12 +2,11 @@
 let app = new Vue({
     el: "#container",
 
+    store,
+
     mixins: [utils],
 
     data: {
-        //Current theme
-        theme: "dark",
-
         //List of themes
         themes: ["light", "dark", "gradient"],
 
@@ -121,6 +120,12 @@ let app = new Vue({
         saveFiles: ["", "", ""],
     },
 
+    computed: {
+        theme() {
+            return store.state.theme;
+        }
+    },
+
     methods: {
         //UTILITY FUNCTIONS
         //Returns the theme class based on the current theme
@@ -135,6 +140,11 @@ let app = new Vue({
 
             //Disables open selectors
             this.selector = "none";
+        },
+
+        //Sets the theme of the game
+        setTheme(theme) {
+            store.commit("setTheme", theme);
         },
 
         //Updates the score
@@ -277,7 +287,7 @@ let app = new Vue({
             let save = this.saveFiles[file];
             let data = save.split("|");
 
-            this.theme = data[0];
+            this.setTheme(data[0]);
             this.setState(data[1]);
             this.setScore(data.length >= 3 ? parseInt(data[2]) : 0);
             this.goal = data.length >= 4 ? parseInt(data[3]) : 10;
@@ -312,7 +322,7 @@ let app = new Vue({
                 confirm("This is your last warning!")
             ) {
                 //Resets all values
-                this.theme = "dark"
+                this.setTheme("dark");
                 this.setState("main");
                 this.setScore(0);
 				this.selector = "none";

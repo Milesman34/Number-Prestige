@@ -1,7 +1,13 @@
 Vue.component("upgrade-button", {
     mixins: [utils, themeClassComponents],
 
-    props: ["currentTheme", "id", "description", "formatFunction", "boost", "cost", "canAfford"],
+    props: ["id", "description", "formatFunction", "boost", "cost", "canAfford"],
+
+    computed: {
+        currentTheme() {
+            return this.$store.state.theme;
+        }
+    },
 
     template: `<div class="prestige-upgrade-container">
         <button class="prestige-upgrade-button" v-bind:class="[getThemeClass('game-button'), canAfford(id) ? '' : getThemeClass('unaffordable')]" v-on:click="$emit('buy-upgrade', id)">

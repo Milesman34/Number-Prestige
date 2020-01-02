@@ -5,7 +5,7 @@ Vue.component("header-item", {
 
     computed: {
         currentTheme() {
-            return this.$root.theme;
+            return this.$store.state.theme;
         }
     },
 
