@@ -28,7 +28,7 @@
                                 v-bind:self-theme="th" />
                         </div>
 
-                        <button id="theme-selector-exit-button" v-bind:class="[getThemeClass('text'), getThemeClass('selector-hover')]" v-on:click="selector = 'none'">Exit</button>
+                        <button id="theme-selector-exit-button" v-bind:class="[getThemeClass('text'), getThemeClass('selector-hover')]" @click="setSelector('none')">Exit</button>
                     </div>
         		</div>
             </template>
@@ -80,7 +80,7 @@
     					<div id="options">
     						<div class="options-row">
     							<div class="options-button-container">
-    								<button id="theme-options-button" v-bind:class="[getThemeClass('game-button'), getThemeClass('text')]" v-on:click="selector = 'theme'">
+    								<button id="theme-options-button" v-bind:class="[getThemeClass('game-button'), getThemeClass('text')]" @click="setSelector('theme')">
     									<div id="theme-options-container">
     										<div id="theme-options-text" v-bind:class="getThemeClass('text')">Theme</div>
     										<div id="theme-options-current" v-bind:class="getThemeClass('text')">Currently: {{ capitalize(theme) }}</div>

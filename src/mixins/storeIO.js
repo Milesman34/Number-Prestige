@@ -7,6 +7,10 @@ const storeIO = {
 
         state() {
             return this.$store.state.state;
+        },
+
+        selector() {
+            return this.$store.state.selector;
         }
     },
 
@@ -17,6 +21,13 @@ const storeIO = {
 
         setState(state) {
             this.$store.commit("setState", state);
+
+            //Closes open selectors
+            this.setSelector("none");
+        },
+
+        setSelector(selector) {
+            this.$store.commit("setSelector", selector);
         }
     }
 };

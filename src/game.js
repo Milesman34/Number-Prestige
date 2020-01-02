@@ -29,9 +29,6 @@ let app = new Vue({
             }
         ],
 
-        //Current open selector
-        selector: "none",
-
         //Current score
         score: 0,
 
@@ -297,7 +294,7 @@ let app = new Vue({
                 this.setTheme("dark");
                 this.setState("main");
                 this.setScore(0);
-				this.selector = "none";
+				this.setSelector("none");
                 this.goal = 10;
                 this.gain = 1;
                 this.prestiges = 0;

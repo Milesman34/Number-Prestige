@@ -6,7 +6,10 @@ let store = new Vuex.Store({
         theme: "dark",
 
         //Current state
-        state: "main"
+        state: "main",
+
+        //Current selector
+        selector: "none"
     },
 
     mutations: {
@@ -18,6 +21,11 @@ let store = new Vuex.Store({
         //Sets the state
         setState(state, _state) {
             state.state = _state;
+        },
+
+        //Sets the open selector
+        setSelector(state, selector) {
+            state.selector = selector;
         }
     }
 });
