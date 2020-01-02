@@ -8,6 +8,6 @@ Vue.component("theme-selector-list-button", {
         <button
             class="theme-selector-list-button"
             v-bind:class="[getThemeClass('selector-item'), getThemeClass('selector-hover'), getThemeClass('text')]"
-            @click="$store.commit('setTheme', selfTheme)">{{ capitalize(selfTheme) }}</button>
+            @click="setTheme(selfTheme)">{{ capitalize(selfTheme) }}</button>
     `
 })

@@ -10,9 +10,6 @@ let app = new Vue({
         //List of themes
         themes: ["light", "dark", "gradient"],
 
-        //Current state
-        state: "main",
-
         //Automation next unlock texts
         AutomationNextUnlockTexts: [
             {

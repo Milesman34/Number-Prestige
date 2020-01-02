@@ -3,5 +3,5 @@ Vue.component("header-item", {
 
     props: ["state"],
 
-    template: `<button class="header-item" v-bind:class="[getThemeClass('header-item'), getThemeClass('text')]" v-on:click="$emit('set-state', state)">{{ capitalize(state) }}</button>`
+    template: `<button class="header-item" v-bind:class="[getThemeClass('header-item'), getThemeClass('text')]" v-on:click="setState(state)">{{ capitalize(state) }}</button>`
 })
