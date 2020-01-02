@@ -42,12 +42,14 @@
 
 			<div id="app" v-bind:class="getThemeClass('app')">
 				<div id="header" v-bind:class="getThemeClass('header')">
-                    <header-item v-on:event="setState($event)" state="main"></header-item>
-                    <header-item v-on:event="setState($event)" state="options"></header-item>
+                    <template>
+                        <header-item state="main" v-on:set-state="setState($event)"></header-item>
+                        <header-item state="options" v-on:set-state="setState($event)"></header-item>
 
-                    <template v-if="prestiges > 0">
-                        <header-item v-on:event="setState($event)" state="upgrades"></header-item>
-                        <header-item v-on:event="setState($event)" state="automation"></header-item>
+                        <template v-if="prestiges > 0">
+                            <header-item state="upgrades" v-on:set-state="setState($event)"></header-item>
+                            <header-item state="automation" v-on:set-state="setState($event)"></header-item>
+                        </template>
                     </template>
 				</div>
 
