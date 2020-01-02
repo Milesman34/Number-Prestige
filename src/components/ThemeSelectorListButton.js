@@ -1,19 +1,13 @@
 Vue.component("theme-selector-list-button", {
-    mixins: [utils, themeClassComponents],
+    mixins: [utils, storeIO],
 
     //currentTheme represents the game's current theme
-    props: ["theme"],
-
-    computed: {
-        currentTheme() {
-            return this.$store.state.theme;
-        }
-    },
+    props: ["self-theme"],
 
     template: `
         <button
             class="theme-selector-list-button"
             v-bind:class="[getThemeClass('selector-item'), getThemeClass('selector-hover'), getThemeClass('text')]"
-            @click="$store.commit('setTheme', theme)">{{ capitalize(theme) }}</button>
+            @click="$store.commit('setTheme', selfTheme)">{{ capitalize(selfTheme) }}</button>
     `
 })

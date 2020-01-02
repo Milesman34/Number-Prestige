@@ -4,7 +4,7 @@ let app = new Vue({
 
     store,
 
-    mixins: [utils],
+    mixins: [utils, storeIO],
 
     data: {
         //List of themes
@@ -120,12 +120,6 @@ let app = new Vue({
         saveFiles: ["", "", ""],
     },
 
-    computed: {
-        theme() {
-            return store.state.theme;
-        }
-    },
-
     methods: {
         //UTILITY FUNCTIONS
         //Returns the theme class based on the current theme
@@ -140,11 +134,6 @@ let app = new Vue({
 
             //Disables open selectors
             this.selector = "none";
-        },
-
-        //Sets the theme of the game
-        setTheme(theme) {
-            store.commit("setTheme", theme);
         },
 
         //Updates the score

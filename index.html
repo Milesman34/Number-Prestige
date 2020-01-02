@@ -24,10 +24,10 @@
 
                         <div id="theme-selector-list">
                             <theme-selector-list-button
-                                v-on:set-theme="theme = $event"
+                                v-on:set-theme="setTheme($event)"
 
                                 v-for="th in themes"
-                                v-bind:theme="th" />
+                                v-bind:self-theme="th" />
                         </div>
 
                         <button id="theme-selector-exit-button" v-bind:class="[getThemeClass('text'), getThemeClass('selector-hover')]" v-on:click="selector = 'none'">Exit</button>
@@ -202,7 +202,9 @@
 		</div>
 
         <script src="src/store.js"></script>
-        <script src="src/utils.js"></script>
+
+        <script src="src/mixins/storeIO.js"></script>
+        <script src="src/mixins/utils.js"></script>
 
         <script src="src/components/AutomationNextUnlockText.js"></script>
         <script src="src/components/HeaderItem.js"></script>

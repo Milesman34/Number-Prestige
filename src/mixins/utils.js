@@ -1,3 +1,4 @@
+//This mixin contains various utility functions
 //Capitalizes a word
 const capitalize = word => word[0].toUpperCase() + word.slice(1, word.length).toLowerCase();
 
@@ -31,25 +32,18 @@ const formatSci = (num, limit = 1e6, places = 2) => {
 //Returns the correct plural ending (standard "s" ending)
 const pluralize = num => Math.abs(num) === 1 ? "" : "s";
 
-//This is a mixin that contains various utility functions
+//The actual mixin
 const utils = {
     methods: {
         capitalize,
         formatSci,
         pluralize,
         roundTo,
-        themeClass
-    }
-};
-
-//This is a mixin that provides themeClass for components
-const themeClassComponents = {
-    methods: {
         themeClass,
 
-        //Returns the current theme class
+        //Returs the current theme class
         getThemeClass(elem) {
-            return this.themeClass(elem, this.currentTheme);
+            return themeClass(elem, this.theme);
         }
     }
 };
