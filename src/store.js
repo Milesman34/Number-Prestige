@@ -15,7 +15,7 @@ let store = new Vuex.Store({
             state.theme = theme;
         },
 
-        //Sets the current state
+        //Sets the state
         setState(state, _state) {
             state.state = _state;
         }

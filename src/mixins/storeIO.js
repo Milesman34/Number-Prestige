@@ -5,7 +5,11 @@ const storeIO = {
             return this.$store.state.theme;
         },
 
+<<<<<<< HEAD
         getState() {
+=======
+        state() {
+>>>>>>> refactor
             return this.$store.state.state;
         }
     },

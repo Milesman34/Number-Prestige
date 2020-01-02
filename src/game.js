@@ -118,21 +118,7 @@ let app = new Vue({
     },
 
     methods: {
-        //UTILITY FUNCTIONS
-        //Returns the theme class based on the current theme
-        getThemeClass(element) {
-            return this.themeClass(element, this.theme);
-        },
-
         //SETTERS
-        //Sets the state of the game
-        setState(state) {
-            this.state = state;
-
-            //Disables open selectors
-            this.selector = "none";
-        },
-
         //Updates the score
         setScore(score) {
             this.score = score;
