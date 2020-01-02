@@ -2,6 +2,7 @@ Vue.use(Vuex);
 
 let store = new Vuex.Store({
     state: {
+        //Current theme used
         theme: "dark"
     },
 
