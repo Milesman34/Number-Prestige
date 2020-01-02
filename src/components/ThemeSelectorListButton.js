@@ -10,4 +10,4 @@ Vue.component("theme-selector-list-button", {
             v-bind:class="[getThemeClass('selector-item'), getThemeClass('selector-hover'), getThemeClass('text')]"
             @click="setTheme(selfTheme)">{{ capitalize(selfTheme) }}</button>
     `
-})
+});

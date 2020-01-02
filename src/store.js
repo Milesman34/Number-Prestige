@@ -20,4 +20,4 @@ let store = new Vuex.Store({
             state.state = _state;
         }
     }
-})
+});
