@@ -10,25 +10,6 @@ let app = new Vue({
         //List of themes
         themes: ["light", "dark", "gradient"],
 
-        //Automation next unlock texts
-        AutomationNextUnlockTexts: [
-            {
-                text: "Unlock Auto-Click at 1000 points",
-
-                condition() {
-                    return !this.autoClickUnlocked;
-                }
-            },
-
-            {
-                text: "Unlock Auto-Prestige at 50 Prestige Points",
-
-                condition() {
-                    return this.autoClickUnlocked && !this.autoPrestigeUnlocked;
-                }
-            }
-        ],
-
         //Current score
         score: 0,
 

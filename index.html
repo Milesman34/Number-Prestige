@@ -88,8 +88,8 @@
     								</button>
     							</div>
 
-                                <options-button v-on:event="save" title="Save" v-bind:current-theme="theme"></options-button>
-                                <options-button v-on:event="resetSave" title="Reset" v-bind:current-theme="theme"></options-button>
+                                <options-button v-on:event="save" title="Save"></options-button>
+                                <options-button v-on:event="resetSave" title="Reset"></options-button>
     						</div>
     					</div>
                     </template>
@@ -155,13 +155,8 @@
 					<template v-if="state === 'automation'">
 						<div id="automation">
 							<div id="automation-next-unlock">
-                                <automation-next-unlock-text
-                                    v-for="a in AutomationNextUnlockTexts"
-                                    v-bind:text="a.text"
-                                    v-bind:condition="a.condition"
-                                    v-bind:auto-click-unlocked="autoClickUnlocked"
-                                    v-bind:auto-prestige-unlocked="autoPrestigeUnlocked"
-                                    v-bind:current-theme="theme" />
+                                <automation-next-unlock-text text="Unlock Auto-Click at 1000 points" v-if="!autoClickUnlocked"></automation-next-unlock-text>
+                                <automation-next-unlock-text text="Unlock Auto-Prestige at 50 Prestige Points" v-if="autoClickUnlocked && !autoPrestigeUnlocked"></automation-next-unlock-text>
 							</div>
 
 							<template v-if="autoClickUnlocked">
