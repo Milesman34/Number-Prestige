@@ -122,9 +122,6 @@ button {
     grid-column: 3;
 
     display: grid;
-
-	grid-row: 20% 80%;
-	grid-column: 100%;
 }
 
 #prestige-point-display {
