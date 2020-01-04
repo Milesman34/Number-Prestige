@@ -34,8 +34,8 @@
             </template>
 
 			<div id="notification-container">
-				<div class="notification" v-bind:class="[getThemeClass('notification'), false ? 'notification-on' : 'notification-off']">Unlocked Auto-Click</div>
-				<div class="notification" v-bind:class="[getThemeClass('notification'), false ? 'notification-on' : 'notification-off']">Unlocked Auto-Prestige</div>
+                <notification title="Unlocked Auto-Click" v-bind:condition="false"></notification>
+                <notification title="Unlocked Auto-Prestige" v-bind:condition="true"></notification>
 			</div>
 
 			<div id="app" v-bind:class="getThemeClass('app')">
@@ -191,6 +191,7 @@
 
         <script src="src/components/AutomationNextUnlockText.js"></script>
         <script src="src/components/HeaderItem.js"></script>
+        <script src="src/components/Notification.js"></script>
         <script src="src/components/OptionsButton.js"></script>
         <script src="src/components/ThemeSelectorListButton.js"></script>
         <script src="src/components/UpgradeButton.js"></script>
