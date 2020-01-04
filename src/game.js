@@ -25,13 +25,14 @@ let app = new Vue({
         //Number of prestige points
         prestigePoints: 0,
 
-		//Is auto-click unlocked
+        //The atStart variables are used for notifications to determine if they should be shown
+		//Is auto-click unlocked?
 		autoClickUnlocked: false,
-        justUnlockedAutoClick: false,
+        autoClickUnlockedAtStart: false,
 
-		//Is auto-prestige unlocked
+		//Is auto-prestige unlocked?
 		autoPrestigeUnlocked: false,
-        justUnlockedAutoPrestige: false,
+        autoPrestigeUnlockedAtStart: false,
 
 		//Should the game use auto-click and auto-prestige?
 		autoClickOn: true,
@@ -251,7 +252,9 @@ let app = new Vue({
             this.upgrades[2].cost = data.length >= 12 ? parseInt(data[11]) : 5;
             this.upgrades[2].amount = data.length >= 13 ? parseInt(data[12]) : 0;
 			this.autoClickUnlocked = data.length >= 14 ? data[13] === "true" : false;
+            this.autoClickUnlockedAtStart = this.autoClickUnlocked;
 			this.autoPrestigeUnlocked = data.length >= 15 ? data[14] === "true" : false;
+            this.autoPrestigeUnlockedAtStart = this.autoPrestigeUnlocked;
 			this.upgrades[3].cost = data.length >= 16 ? parseInt(data[15]) : 4;
 			this.upgrades[3].amount = data.length >= 17 ? parseInt(data[16]) : 0;
 			this.autoClickOn = data.length >= 18 ? data[17] === "true" : true;
@@ -289,7 +292,9 @@ let app = new Vue({
 				this.upgrades[3].cost = 4;
 				this.upgrades[3].amount = 0;
 				this.autoClickUnlocked = false;
+                this.autoClickUnlockedAtStart = false;
 				this.autoPrestigeUnlocked = false;
+                this.autoPrestigeUnlockedAtStart = false;
 				this.autoClickOn = true;
 				this.autoPrestigeOn = false;
 
