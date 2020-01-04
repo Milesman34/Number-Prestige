@@ -25,15 +25,15 @@ let app = new Vue({
         //Number of prestige points
         prestigePoints: 0,
 
-		//Is auto-click unlocked?
-		autoClickUnlocked: false,
+        //Is auto-click unlocked?
+        autoClickUnlocked: false,
 
-		//Is auto-prestige unlocked?
-		autoPrestigeUnlocked: false,
+        //Is auto-prestige unlocked?
+        autoPrestigeUnlocked: false,
 
-		//Should the game use auto-click and auto-prestige?
-		autoClickOn: true,
-		autoPrestigeOn: false,
+        //Should the game use auto-click and auto-prestige?
+        autoClickOn: true,
+        autoPrestigeOn: false,
 
         //Prestige upgrades
         upgrades: [
@@ -73,17 +73,17 @@ let app = new Vue({
                 }
             },
 
-			//Auto-Click speed upgrade
-			{
-				cost: 4,
-				costScaling: 3,
+            //Auto-Click speed upgrade
+            {
+                cost: 4,
+                costScaling: 3,
 
-				amount: 0,
+                amount: 0,
 
-				boost() {
-					return 2 ** this.amount;
-				}
-			}
+                boost() {
+                    return 2 ** this.amount;
+                }
+            }
         ],
 
         //Current save file
@@ -107,29 +107,29 @@ let app = new Vue({
         setScore(score) {
             this.score = score;
 
-			//Unlock auto-click if possible
-			if (this.score >= 1000 && !this.autoClickUnlocked)
-				this.unlockAutoClick();
+            //Unlock auto-click if possible
+            if (this.score >= 1000 && !this.autoClickUnlocked)
+                this.unlockAutoClick();
 
-			//Auto-prestige feature
-			if (this.isAutoPrestigeEnabled() && this.canPrestige())
-				this.prestige();
+            //Auto-prestige feature
+            if (this.isAutoPrestigeEnabled() && this.canPrestige())
+                this.prestige();
         },
 
         addScore(score) {
             this.setScore(this.score + score);
         },
 
-		//GETTERS
+        //GETTERS
         //Gets the current prestige point gain
         getPrestigePointGain() {
             return this.upgrades[0].boost();
         },
 
-		//Gets the actual score
-		getScore() {
-			return Math.floor(this.score);
-		},
+        //Gets the actual score
+        getScore() {
+            return Math.floor(this.score);
+        },
 
         //Actual number gain
         getGain() {
@@ -141,20 +141,22 @@ let app = new Vue({
             return Math.floor(this.goal * this.upgrades[2].boost());
         },
 
-		//Seconds required per autoclick
-		getAutoClickInterval() {
-			return (10 / this.upgrades[3].boost()) / Math.max(this.prestigePoints, 1);
-		},
+        //Seconds required per autoclick
+        getAutoClickInterval() {
+            return (
+                10 / this.upgrades[3].boost() / Math.max(this.prestigePoints, 1)
+            );
+        },
 
-		//Checks if auto-click is enabled
-		isAutoClickEnabled() {
-			return this.autoClickUnlocked && this.autoClickOn;
-		},
+        //Checks if auto-click is enabled
+        isAutoClickEnabled() {
+            return this.autoClickUnlocked && this.autoClickOn;
+        },
 
-		//Checks if auto-prestige is enabled
-		isAutoPrestigeEnabled() {
-			return this.autoPrestigeUnlocked && this.autoPrestigeOn;
-		},
+        //Checks if auto-prestige is enabled
+        isAutoPrestigeEnabled() {
+            return this.autoPrestigeUnlocked && this.autoPrestigeOn;
+        },
 
         //Unlocks auto click
         unlockAutoClick() {
@@ -168,10 +170,10 @@ let app = new Vue({
             this.pushNotification("Auto-Prestige Unlocked");
         },
 
-		//Checks if the player can prestige
-		canPrestige() {
-			return this.getScore() >= this.getGoal();
-		},
+        //Checks if the player can prestige
+        canPrestige() {
+            return this.getScore() >= this.getGoal();
+        },
 
         //GAME STUFF
         //Prestige resets score but doubles the goal and increases the gain by 1
@@ -179,8 +181,11 @@ let app = new Vue({
             //Checks if the player really wants to prestige (only on first prestige)
             if (
                 this.prestiges === 0 &&
-                !confirm("Are you sure you want to prestige? This will reset your score, while adding 1 to your number gain and doubling the goal. You will also receive a Prestige point.")
-            ) return;
+                !confirm(
+                    "Are you sure you want to prestige? This will reset your score, while adding 1 to your number gain and doubling the goal. You will also receive a Prestige point."
+                )
+            )
+                return;
 
             this.setScore(0);
             this.gain++;
@@ -190,15 +195,15 @@ let app = new Vue({
 
             this.prestigePoints += this.getPrestigePointGain();
 
-			//Unlock auto-prestige if possible
-			if (this.prestigePoints >= 50 && !this.autoPrestigeUnlocked)
-				this.unlockAutoPrestige();
+            //Unlock auto-prestige if possible
+            if (this.prestigePoints >= 50 && !this.autoPrestigeUnlocked)
+                this.unlockAutoPrestige();
         },
 
-		//Checks if the player can afford an upgrade
-		canAfford(id) {
-			return this.prestigePoints >= this.upgrades[id].cost;
-		},
+        //Checks if the player can afford an upgrade
+        canAfford(id) {
+            return this.prestigePoints >= this.upgrades[id].cost;
+        },
 
         //Attempts to buy an upgrade
         buyUpgrade(id) {
@@ -245,8 +250,10 @@ let app = new Vue({
             let save = this.saveFiles[file];
             let data = save.split("|");
 
-			this.autoClickUnlocked = data.length >= 14 ? data[13] === "true" : false;
-			this.autoPrestigeUnlocked = data.length >= 15 ? data[14] === "true" : false;
+            this.autoClickUnlocked =
+                data.length >= 14 ? data[13] === "true" : false;
+            this.autoPrestigeUnlocked =
+                data.length >= 15 ? data[14] === "true" : false;
             this.setTheme(data[0]);
             this.setState(data[1]);
             this.setScore(data.length >= 3 ? parseInt(data[2]) : 0);
@@ -257,13 +264,17 @@ let app = new Vue({
             this.upgrades[0].cost = data.length >= 8 ? parseInt(data[7]) : 2;
             this.upgrades[0].amount = data.length >= 9 ? parseInt(data[8]) : 0;
             this.upgrades[1].cost = data.length >= 10 ? parseInt(data[9]) : 4;
-            this.upgrades[1].amount = data.length >= 11 ? parseInt(data[10]) : 0;
+            this.upgrades[1].amount =
+                data.length >= 11 ? parseInt(data[10]) : 0;
             this.upgrades[2].cost = data.length >= 12 ? parseInt(data[11]) : 5;
-            this.upgrades[2].amount = data.length >= 13 ? parseInt(data[12]) : 0;
-			this.upgrades[3].cost = data.length >= 16 ? parseInt(data[15]) : 4;
-			this.upgrades[3].amount = data.length >= 17 ? parseInt(data[16]) : 0;
-			this.autoClickOn = data.length >= 18 ? data[17] === "true" : true;
-			this.autoPrestigeOn = data.length >= 19 ? data[18] === "true" : false;
+            this.upgrades[2].amount =
+                data.length >= 13 ? parseInt(data[12]) : 0;
+            this.upgrades[3].cost = data.length >= 16 ? parseInt(data[15]) : 4;
+            this.upgrades[3].amount =
+                data.length >= 17 ? parseInt(data[16]) : 0;
+            this.autoClickOn = data.length >= 18 ? data[17] === "true" : true;
+            this.autoPrestigeOn =
+                data.length >= 19 ? data[18] === "true" : true;
             console.log(this.notifications);
         },
 
@@ -282,15 +293,19 @@ let app = new Vue({
         resetSave() {
             //Prompt to make sure user wants to reset
             if (
-                confirm("Do you want to reset your save? You will lose everything!") &&
-                confirm("Are you sure about this? There is no way to get your save back!") &&
+                confirm(
+                    "Do you want to reset your save? You will lose everything!"
+                ) &&
+                confirm(
+                    "Are you sure about this? There is no way to get your save back!"
+                ) &&
                 confirm("This is your last warning!")
             ) {
                 //Resets all values
                 this.setTheme("dark");
                 this.setState("main");
                 this.setScore(0);
-				this.setSelector("none");
+                this.setSelector("none");
                 this.goal = 10;
                 this.gain = 1;
                 this.prestiges = 0;
@@ -301,33 +316,35 @@ let app = new Vue({
                 this.upgrades[1].amount = 0;
                 this.upgrades[2].cost = 5;
                 this.upgrades[2].amount = 0;
-				this.upgrades[3].cost = 4;
-				this.upgrades[3].amount = 0;
-				this.autoClickUnlocked = false;
-				this.autoPrestigeUnlocked = false;
-				this.autoClickOn = true;
-				this.autoPrestigeOn = false;
+                this.upgrades[3].cost = 4;
+                this.upgrades[3].amount = 0;
+                this.autoClickUnlocked = false;
+                this.autoPrestigeUnlocked = false;
+                this.autoClickOn = true;
+                this.autoPrestigeOn = false;
 
                 //Saves over save file
                 this.save();
             }
         },
 
-		//Has the app tick
-		tick(tps) {
-			if (this.isAutoClickEnabled()) {
-				let seconds = this.getAutoClickInterval();
-				let gain = this.getGain();
+        //Has the app tick
+        tick(tps) {
+            if (this.isAutoClickEnabled()) {
+                let seconds = this.getAutoClickInterval();
+                let gain = this.getGain();
 
-				//Adds a fraction of the gain based on the tps and seconds required for autoclicking
-				this.addScore(gain / (seconds * tps));
-			}
-		}
+                //Adds a fraction of the gain based on the tps and seconds required for autoclicking
+                this.addScore(gain / (seconds * tps));
+            }
+        }
     }
 });
 
 //Attempts to load save files
-app.saveFiles = app.saveFiles.map((e, i) => app.lsGetOrSetDefault(`save${i}`, app.encodeSaveData()));
+app.saveFiles = app.saveFiles.map((e, i) =>
+    app.lsGetOrSetDefault(`save${i}`, app.encodeSaveData())
+);
 
 //Gets the current save file
 app.currentSaveFile = parseInt(app.lsGetOrSetDefault("saveFile", 0));
@@ -344,5 +361,5 @@ setInterval(() => {
 const tps = 20;
 
 setInterval(() => {
-	app.tick(tps);
+    app.tick(tps);
 }, 1000 / tps);

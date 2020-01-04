@@ -110,8 +110,8 @@
 
                                     <upgrade-button
                                         description="Add 1 to number gain"
-                                        v-bind:format-function="num => `${formatSci(gain)} -> ${formatSci(num)}`"
-                                        v-bind:boost="getGain()"
+                                        v-bind:format-function="num => `+${formatSci(num)}`"
+                                        v-bind:boost="upgrades[1].boost()"
                                         v-bind:cost="upgrades[1].cost"
                                         v-bind:affordable="canAfford(1)"
 
@@ -119,7 +119,7 @@
 
                                     <upgrade-button
                                         description="Reduce prestige requirement by 10%"
-                                        v-bind:format-function="num => `100% -> ${formatSci(num * 100)}%`"
+                                        v-bind:format-function="num => `-${formatSci(goal * (1 - num))}`"
                                         v-bind:boost="upgrades[2].boost()"
                                         v-bind:cost="upgrades[2].cost"
                                         v-bind:affordable="canAfford(2)"
