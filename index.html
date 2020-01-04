@@ -34,9 +34,7 @@
             </template>
 
 			<div id="notification-container">
-                <notification title="Unlocked Auto-Click" v-bind:condition="autoClickUnlocked != autoClickUnlockedAtStart"></notification>
-                <notification title="Unlocked Auto-Prestige" v-bind:condition="autoPrestigeUnlocked != autoPrestigeUnlockedAtStart"></notification>
-                <notification title="Saved" v-bind:condition="justSaved"></notification>
+                <notification v-for="notif in notifications" v-bind:title="notif" />
 			</div>
 
 			<div id="app" v-bind:class="getThemeClass('app')">

@@ -1,8 +1,8 @@
 Vue.component("notification", {
     mixins: [utils, storeIO],
 
-    props: ["title", "condition"],
+    props: ["title"],
 
     template: `
-        <div class="notification" v-bind:class="[getThemeClass('notification'), condition ? 'notification-on' : 'notification-off']">{{ title }}</div>`
+        <div class="notification" v-bind:class="[getThemeClass('notification'), 'notification-on']">{{ title }}</div>`
 });

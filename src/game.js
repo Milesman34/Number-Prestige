@@ -25,14 +25,11 @@ let app = new Vue({
         //Number of prestige points
         prestigePoints: 0,
 
-        //The atStart variables are used for notifications to determine if they should be shown
 		//Is auto-click unlocked?
 		autoClickUnlocked: false,
-        autoClickUnlockedAtStart: false,
 
 		//Is auto-prestige unlocked?
 		autoPrestigeUnlocked: false,
-        autoPrestigeUnlockedAtStart: false,
 
 		//Should the game use auto-click and auto-prestige?
 		autoClickOn: true,
@@ -95,21 +92,26 @@ let app = new Vue({
         //All saves
         saveFiles: ["", "", ""],
 
-        //Did the player just save manually?
-        justSaved: false
+        //The list of active notifications. Works as a queue (FIFO)
+        notifications: []
     },
 
     methods: {
+        //Pushes a notification
+        pushNotification(text) {
+            this.notifications.push(text);
+        },
+
         //SETTERS
         //Updates the score
         setScore(score) {
             this.score = score;
 
 			//Unlock auto-click if possible
-			if (this.score >= 1000)
+			if (this.score >= 1000 && !this.autoClickUnlocked)
 				this.unlockAutoClick();
 
-			//Auto-prestige feature (currently really slow for some reason)
+			//Auto-prestige feature
 			if (this.isAutoPrestigeEnabled() && this.canPrestige())
 				this.prestige();
         },
@@ -157,11 +159,13 @@ let app = new Vue({
         //Unlocks auto click
         unlockAutoClick() {
             this.autoClickUnlocked = true;
+            this.pushNotification("Auto-Click Unlocked");
         },
 
         //Unlocks auto prestige
         unlockAutoPrestige() {
             this.autoPrestigeUnlocked = true;
+            this.pushNotification("Auto-Prestige Unlocked");
         },
 
 		//Checks if the player can prestige
@@ -187,7 +191,7 @@ let app = new Vue({
             this.prestigePoints += this.getPrestigePointGain();
 
 			//Unlock auto-prestige if possible
-			if (this.prestigePoints >= 50)
+			if (this.prestigePoints >= 50 && !this.autoPrestigeUnlocked)
 				this.unlockAutoPrestige();
         },
 
@@ -241,6 +245,8 @@ let app = new Vue({
             let save = this.saveFiles[file];
             let data = save.split("|");
 
+			this.autoClickUnlocked = data.length >= 14 ? data[13] === "true" : false;
+			this.autoPrestigeUnlocked = data.length >= 15 ? data[14] === "true" : false;
             this.setTheme(data[0]);
             this.setState(data[1]);
             this.setScore(data.length >= 3 ? parseInt(data[2]) : 0);
@@ -254,14 +260,11 @@ let app = new Vue({
             this.upgrades[1].amount = data.length >= 11 ? parseInt(data[10]) : 0;
             this.upgrades[2].cost = data.length >= 12 ? parseInt(data[11]) : 5;
             this.upgrades[2].amount = data.length >= 13 ? parseInt(data[12]) : 0;
-			this.autoClickUnlocked = data.length >= 14 ? data[13] === "true" : false;
-            this.autoClickUnlockedAtStart = this.autoClickUnlocked;
-			this.autoPrestigeUnlocked = data.length >= 15 ? data[14] === "true" : false;
-            this.autoPrestigeUnlockedAtStart = this.autoPrestigeUnlocked;
 			this.upgrades[3].cost = data.length >= 16 ? parseInt(data[15]) : 4;
 			this.upgrades[3].amount = data.length >= 17 ? parseInt(data[16]) : 0;
 			this.autoClickOn = data.length >= 18 ? data[17] === "true" : true;
 			this.autoPrestigeOn = data.length >= 19 ? data[18] === "true" : false;
+            console.log(this.notifications);
         },
 
         //Saves the game in the current save slot
@@ -272,11 +275,7 @@ let app = new Vue({
         //Saves the game manually
         manualSave() {
             this.save();
-            this.justSaved = true;
-
-            setTimeout(() => {
-                this.justSaved = false;
-            }, 3000);
+            this.pushNotification("Game Saved");
         },
 
         //Resets the current save file
@@ -305,9 +304,7 @@ let app = new Vue({
 				this.upgrades[3].cost = 4;
 				this.upgrades[3].amount = 0;
 				this.autoClickUnlocked = false;
-                this.autoClickUnlockedAtStart = false;
 				this.autoPrestigeUnlocked = false;
-                this.autoPrestigeUnlockedAtStart = false;
 				this.autoClickOn = true;
 				this.autoPrestigeOn = false;
 
