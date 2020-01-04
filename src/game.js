@@ -94,6 +94,9 @@ let app = new Vue({
 
         //All saves
         saveFiles: ["", "", ""],
+
+        //Did the player just save manually?
+        justSaved: false
     },
 
     methods: {
@@ -264,6 +267,16 @@ let app = new Vue({
         //Saves the game in the current save slot
         save() {
             this.setSaveFile(this.currentSaveFile);
+        },
+
+        //Saves the game manually
+        manualSave() {
+            this.save();
+            this.justSaved = true;
+
+            setTimeout(() => {
+                this.justSaved = false;
+            }, 3000);
         },
 
         //Resets the current save file
