@@ -101,51 +101,41 @@
     						<div id="upgrades-container">
                                 <div id="prestige-upgrades-container">
                                     <upgrade-button
-                                        v-bind:current-theme="theme"
-                                        v-bind:id="0"
                                         description="Multiply Prestige Point gain by 2"
                                         v-bind:format-function="num => `${formatSci(num)}x`"
                                         v-bind:boost="upgrades[0].boost()"
                                         v-bind:cost="upgrades[0].cost"
-                                        v-bind:can-afford="canAfford"
+                                        v-bind:affordable="canAfford(0)"
 
-                                        v-on:buy-upgrade="buyUpgrade(0)"
-                                        ></upgrade-button>
+                                        v-on:event="buyUpgrade(0)"></upgrade-button>
 
                                     <upgrade-button
-                                        v-bind:current-theme="theme"
-                                        v-bind:id="1"
                                         description="Add 1 to number gain"
                                         v-bind:format-function="num => `${formatSci(gain)} -> ${formatSci(num)}`"
                                         v-bind:boost="getGain()"
                                         v-bind:cost="upgrades[1].cost"
-                                        v-bind:can-afford="canAfford"
+                                        v-bind:affordable="canAfford(1)"
 
-                                        v-on:buy-upgrade="buyUpgrade(1)"
-                                        ></upgrade-button>
+                                        v-on:event="buyUpgrade(1)"></upgrade-button>
 
                                     <upgrade-button
-                                        v-bind:current-theme="theme"
-                                        v-bind:id="2"
                                         description="Reduce prestige requirement by 10%"
                                         v-bind:format-function="num => `100% -> ${formatSci(num * 100)}%`"
                                         v-bind:boost="upgrades[2].boost()"
                                         v-bind:cost="upgrades[2].cost"
-                                        v-bind:can-afford="canAfford"
+                                        v-bind:affordable="canAfford(2)"
 
-                                        v-on:buy-upgrade="buyUpgrade(2)"></upgrade-button>
+                                        v-on:event="buyUpgrade(2)"></upgrade-button>
 
 									<template v-if="autoClickUnlocked">
                                         <upgrade-button
-                                            v-bind:current-theme="theme"
-                                            v-bind:id="3"
                                             description="Make Auto-Click 2x faster"
                                             v-bind:format-function="num => `${formatSci(num)}x`"
                                             v-bind:boost="upgrades[3].boost()"
                                             v-bind:cost="upgrades[3].cost"
-                                            v-bind:can-afford="canAfford"
+                                            v-bind:affordable="canAfford(3)"
 
-                                            v-on:buy-upgrade="buyUpgrade(3)"></upgrade-button>
+                                            v-on:event="buyUpgrade(3)"></upgrade-button>
 									</template>
                                 </div>
                             </div>
