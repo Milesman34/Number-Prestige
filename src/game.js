@@ -33,7 +33,7 @@ let app = new Vue({
 
         //Should the game use auto-click and auto-prestige?
         autoClickOn: true,
-        autoPrestigeOn: false,
+        autoPrestigeOn: true,
 
         //Prestige upgrades
         upgrades: [
@@ -250,32 +250,34 @@ let app = new Vue({
             let save = this.saveFiles[file];
             let data = save.split("|");
 
+            this.setTheme(data[0]);
+            this.setState(data[1]);
+            this.score = data.length >= 3 ? parseFloat(data[2]) : 0;
+            this.goal = data.length >= 4 ? parseFloat(data[3]) : 10;
+            this.gain = data.length >= 5 ? parseFloat(data[4]) : 1;
+            this.prestiges = data.length >= 6 ? parseInt(data[5]) : 0;
+            this.prestigePoints = data.length >= 7 ? parseFloat(data[6]) : 0;
+            this.upgrades[0].cost = data.length >= 8 ? parseFloat(data[7]) : 2;
+            this.upgrades[0].amount =
+                data.length >= 9 ? parseFloat(data[8]) : 0;
+            this.upgrades[1].cost = data.length >= 10 ? parseFloat(data[9]) : 4;
+            this.upgrades[1].amount =
+                data.length >= 11 ? parseFloat(data[10]) : 0;
+            this.upgrades[2].cost =
+                data.length >= 12 ? parseFloat(data[11]) : 5;
+            this.upgrades[2].amount =
+                data.length >= 13 ? parseFloat(data[12]) : 0;
             this.autoClickUnlocked =
                 data.length >= 14 ? data[13] === "true" : false;
             this.autoPrestigeUnlocked =
                 data.length >= 15 ? data[14] === "true" : false;
-            this.setTheme(data[0]);
-            this.setState(data[1]);
-            this.setScore(data.length >= 3 ? parseInt(data[2]) : 0);
-            this.goal = data.length >= 4 ? parseInt(data[3]) : 10;
-            this.gain = data.length >= 5 ? parseInt(data[4]) : 1;
-            this.prestiges = data.length >= 6 ? parseInt(data[5]) : 0;
-            this.prestigePoints = data.length >= 7 ? parseInt(data[6]) : 0;
-            this.upgrades[0].cost = data.length >= 8 ? parseInt(data[7]) : 2;
-            this.upgrades[0].amount = data.length >= 9 ? parseInt(data[8]) : 0;
-            this.upgrades[1].cost = data.length >= 10 ? parseInt(data[9]) : 4;
-            this.upgrades[1].amount =
-                data.length >= 11 ? parseInt(data[10]) : 0;
-            this.upgrades[2].cost = data.length >= 12 ? parseInt(data[11]) : 5;
-            this.upgrades[2].amount =
-                data.length >= 13 ? parseInt(data[12]) : 0;
-            this.upgrades[3].cost = data.length >= 16 ? parseInt(data[15]) : 4;
+            this.upgrades[3].cost =
+                data.length >= 16 ? parseFloat(data[15]) : 4;
             this.upgrades[3].amount =
-                data.length >= 17 ? parseInt(data[16]) : 0;
+                data.length >= 17 ? parseFloat(data[16]) : 0;
             this.autoClickOn = data.length >= 18 ? data[17] === "true" : true;
             this.autoPrestigeOn =
                 data.length >= 19 ? data[18] === "true" : true;
-            console.log(this.notifications);
         },
 
         //Saves the game in the current save slot
@@ -321,7 +323,7 @@ let app = new Vue({
                 this.autoClickUnlocked = false;
                 this.autoPrestigeUnlocked = false;
                 this.autoClickOn = true;
-                this.autoPrestigeOn = false;
+                this.autoPrestigeOn = true;
 
                 //Saves over save file
                 this.save();
