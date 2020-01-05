@@ -1,0 +1,21 @@
+#header {
+    width: 100%;
+
+    display: grid;
+
+    grid-template-rows: 100%;
+    grid-template-columns: repeat(auto-fill, auto);
+}
+
+.header-item {
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+	grid-row: 1;
+
+    font-size: 175%;
+
+    user-select: none;
+}

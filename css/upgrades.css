@@ -1,0 +1,90 @@
+#upgrades {
+	width: 100%;
+	height: 100%;
+
+	display: grid;
+
+	grid-template-rows: 12% 30% auto;
+	grid-template-columns: 100%;
+}
+
+#upgrades-subtext {
+	width: 100%;
+	height: 100%;
+
+	display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+	font-size: 85%;
+}
+
+#prestige-upgrades-container {
+    width: 100%;
+    height: 100%;
+
+    grid-column: 1;
+
+    display: grid;
+
+    grid-template-rows: 100%;
+    grid-template-columns: repeat(4, 25%);
+}
+
+.prestige-upgrade-container {
+    width: 100%;
+	height: 100%;
+
+    grid-row: 1;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+}
+
+.prestige-upgrade-button {
+    width: 85%;
+    height: 85%;
+
+    grid-template-rows: 5% 17% 15% 10% 3% 12% auto;
+    grid-template-columns: 100%;
+
+    user-select: none;
+}
+
+.prestige-upgrade-desc {
+    grid-row: 2;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+	text-align: center;
+
+    font-size: 140%;
+}
+
+.prestige-upgrade-current {
+    grid-row: 4;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    font-size: 90%;
+}
+
+.prestige-upgrade-cost {
+    grid-row: 6;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    font-size: 90%;
+}

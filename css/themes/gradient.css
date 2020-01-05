@@ -60,8 +60,8 @@
 .notification-gradient {
 	color: black;
 	font-family: "Plex Mono";
-    
+
     font-size: 75%;
-	
+
 	background-image: linear-gradient(rgb(2, 176, 210), rgb(52, 204, 235));
 }
