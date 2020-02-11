@@ -1,3 +1,4 @@
+<!-- This is the core app component -->
 <template>
     <div id="app">
         <content-container></content-container>
@@ -31,6 +32,7 @@
     }
 </style>
 
+<!-- Global styles -->
 <style>
     @font-face {
         font-family: "Open Sans";

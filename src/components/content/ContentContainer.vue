@@ -1,11 +1,18 @@
+<!-- This component contains the app's main contents -->
 <template>
     <div id="content-container">
-
+        <header></header>
     </div>
 </template>
 
 <script>
-    export default {};
+    import Header from "./header/Header.vue";
+
+    export default {
+        components: {
+            header: Header
+        }
+    };
 </script>
 
 <style scoped>

@@ -9,6 +9,7 @@
     //
     //
     //
+    //
 
     var script = {};
 
@@ -150,7 +151,7 @@
       var _vm = this;
       var _h = _vm.$createElement;
       var _c = _vm._self._c || _h;
-      return _c("div", { attrs: { id: "content-container" } })
+      return _c("div", { attrs: { id: "header" } })
     };
     var __vue_staticRenderFns__ = [];
     __vue_render__._withStripped = true;
@@ -158,11 +159,11 @@
       /* style */
       const __vue_inject_styles__ = function (inject) {
         if (!inject) return
-        inject("data-v-4f175fb2_0", { source: "\n#content-container[data-v-4f175fb2] {\n    grid-row: 1;\n    grid-column: 1;\n\n    display: grid;\n\n    grid-template-rows: 5% 10% auto;\n    grid-template-columns: 100%;\n}\n", map: {"version":3,"sources":["/mnt/c/users/miles/onedrive/documents/atom-programs-new/games/number-prestige/src/components/content/ContentContainer.vue"],"names":[],"mappings":";AAWA;IACA,WAAA;IACA,cAAA;;IAEA,aAAA;;IAEA,+BAAA;IACA,2BAAA;AACA","file":"ContentContainer.vue","sourcesContent":["<template>\r\n    <div id=\"content-container\">\r\n\r\n    </div>\r\n</template>\r\n\r\n<script>\r\n    export default {};\r\n</script>\r\n\r\n<style scoped>\r\n    #content-container {\r\n        grid-row: 1;\r\n        grid-column: 1;\r\n\r\n        display: grid;\r\n\r\n        grid-template-rows: 5% 10% auto;\r\n        grid-template-columns: 100%;\r\n    }\r\n</style>\r\n"]}, media: undefined });
+        inject("data-v-2d7e52ba_0", { source: "\n#header[data-v-2d7e52ba] {\n    width: 100%;\n\n    display: grid;\n\n    grid-template-rows: 100%;\n    grid-template-columns: repeat(auto-fill, auto);\n}\n", map: {"version":3,"sources":["/mnt/c/users/miles/onedrive/documents/atom-programs-new/games/number-prestige/src/components/content/header/Header.vue"],"names":[],"mappings":";AAYA;IACA,WAAA;;IAEA,aAAA;;IAEA,wBAAA;IACA,8CAAA;AACA","file":"Header.vue","sourcesContent":["<!-- This component represents the app's header -->\r\n<template>\r\n    <div id=\"header\">\r\n\r\n    </div>\r\n</template>\r\n\r\n<script>\r\n    export default {};\r\n</script>\r\n\r\n<style scoped>\r\n    #header {\r\n        width: 100%;\r\n\r\n        display: grid;\r\n\r\n        grid-template-rows: 100%;\r\n        grid-template-columns: repeat(auto-fill, auto);\r\n    }\r\n</style>\r\n"]}, media: undefined });
 
       };
       /* scoped */
-      const __vue_scope_id__ = "data-v-4f175fb2";
+      const __vue_scope_id__ = "data-v-2d7e52ba";
       /* module identifier */
       const __vue_module_identifier__ = undefined;
       /* functional template */
@@ -190,7 +191,7 @@
 
     var script$1 = {
         components: {
-            "content-container": __vue_component__
+            header: __vue_component__
         }
     };
 
@@ -202,20 +203,26 @@
       var _vm = this;
       var _h = _vm.$createElement;
       var _c = _vm._self._c || _h;
-      return _c("div", { attrs: { id: "app" } }, [_c("content-container")], 1)
+      return _vm._m(0)
     };
-    var __vue_staticRenderFns__$1 = [];
+    var __vue_staticRenderFns__$1 = [
+      function() {
+        var _vm = this;
+        var _h = _vm.$createElement;
+        var _c = _vm._self._c || _h;
+        return _c("div", { attrs: { id: "content-container" } }, [_c("header")])
+      }
+    ];
     __vue_render__$1._withStripped = true;
 
       /* style */
       const __vue_inject_styles__$1 = function (inject) {
         if (!inject) return
-        inject("data-v-60eb9310_0", { source: "\n#app[data-v-60eb9310] {\n    position: absolute;\n\n    top: 0;\n    left: 0;\n\n    width: 100%;\n    height: 100%;\n\n    display: grid;\n\n    grid-template-rows: auto;\n    grid-template-columns: auto;\n}\n", map: {"version":3,"sources":["/mnt/c/users/miles/onedrive/documents/atom-programs-new/games/number-prestige/src/components/App.vue"],"names":[],"mappings":";AAiBA;IACA,kBAAA;;IAEA,MAAA;IACA,OAAA;;IAEA,WAAA;IACA,YAAA;;IAEA,aAAA;;IAEA,wBAAA;IACA,2BAAA;AACA","file":"App.vue","sourcesContent":["<template>\r\n    <div id=\"app\">\r\n        <content-container></content-container>\r\n    </div>\r\n</template>\r\n\r\n<script>\r\n    import ContentContainer from \"./content/ContentContainer.vue\";\r\n\r\n    export default {\r\n        components: {\r\n            \"content-container\": ContentContainer\r\n        }\r\n    };\r\n</script>\r\n\r\n<style scoped>\r\n    #app {\r\n        position: absolute;\r\n\r\n        top: 0;\r\n        left: 0;\r\n\r\n        width: 100%;\r\n        height: 100%;\r\n\r\n        display: grid;\r\n\r\n        grid-template-rows: auto;\r\n        grid-template-columns: auto;\r\n    }\r\n</style>\r\n\r\n<style>\r\n    @font-face {\r\n        font-family: \"Open Sans\";\r\n        src: url(\"../fonts/opensans-regular-webfont.woff\");\r\n    }\r\n\r\n    @font-face {\r\n        font-family: \"Plex Mono\";\r\n        src: url(\"../fonts/IBMPlexMono-Regular.ttf\");\r\n    }\r\n\r\n    /*To let me style buttons*/\r\n    button {\r\n        all: unset\r\n    }\r\n</style>\r\n"]}, media: undefined })
-    ,inject("data-v-60eb9310_1", { source: "\n@font-face {\n    font-family: \"Open Sans\";\n    src: url(\"../fonts/opensans-regular-webfont.woff\");\n}\n@font-face {\n    font-family: \"Plex Mono\";\n    src: url(\"../fonts/IBMPlexMono-Regular.ttf\");\n}\n\n/*To let me style buttons*/\nbutton {\n    all: unset\n}\n", map: {"version":3,"sources":["/mnt/c/users/miles/onedrive/documents/atom-programs-new/games/number-prestige/src/components/App.vue"],"names":[],"mappings":";AAkCA;IACA,wBAAA;IACA,kDAAA;AACA;AAEA;IACA,wBAAA;IACA,4CAAA;AACA;;AAEA,0BAAA;AACA;IACA;AACA","file":"App.vue","sourcesContent":["<template>\r\n    <div id=\"app\">\r\n        <content-container></content-container>\r\n    </div>\r\n</template>\r\n\r\n<script>\r\n    import ContentContainer from \"./content/ContentContainer.vue\";\r\n\r\n    export default {\r\n        components: {\r\n            \"content-container\": ContentContainer\r\n        }\r\n    };\r\n</script>\r\n\r\n<style scoped>\r\n    #app {\r\n        position: absolute;\r\n\r\n        top: 0;\r\n        left: 0;\r\n\r\n        width: 100%;\r\n        height: 100%;\r\n\r\n        display: grid;\r\n\r\n        grid-template-rows: auto;\r\n        grid-template-columns: auto;\r\n    }\r\n</style>\r\n\r\n<style>\r\n    @font-face {\r\n        font-family: \"Open Sans\";\r\n        src: url(\"../fonts/opensans-regular-webfont.woff\");\r\n    }\r\n\r\n    @font-face {\r\n        font-family: \"Plex Mono\";\r\n        src: url(\"../fonts/IBMPlexMono-Regular.ttf\");\r\n    }\r\n\r\n    /*To let me style buttons*/\r\n    button {\r\n        all: unset\r\n    }\r\n</style>\r\n"]}, media: undefined });
+        inject("data-v-7e05e123_0", { source: "\n#content-container[data-v-7e05e123] {\n    grid-row: 1;\n    grid-column: 1;\n\n    display: grid;\n\n    grid-template-rows: 5% 10% auto;\n    grid-template-columns: 100%;\n}\n", map: {"version":3,"sources":["/mnt/c/users/miles/onedrive/documents/atom-programs-new/games/number-prestige/src/components/content/ContentContainer.vue"],"names":[],"mappings":";AAkBA;IACA,WAAA;IACA,cAAA;;IAEA,aAAA;;IAEA,+BAAA;IACA,2BAAA;AACA","file":"ContentContainer.vue","sourcesContent":["<!-- This component contains the app's main contents -->\r\n<template>\r\n    <div id=\"content-container\">\r\n        <header></header>\r\n    </div>\r\n</template>\r\n\r\n<script>\r\n    import Header from \"./header/Header.vue\";\r\n\r\n    export default {\r\n        components: {\r\n            header: Header\r\n        }\r\n    };\r\n</script>\r\n\r\n<style scoped>\r\n    #content-container {\r\n        grid-row: 1;\r\n        grid-column: 1;\r\n\r\n        display: grid;\r\n\r\n        grid-template-rows: 5% 10% auto;\r\n        grid-template-columns: 100%;\r\n    }\r\n</style>\r\n"]}, media: undefined });
 
       };
       /* scoped */
-      const __vue_scope_id__$1 = "data-v-60eb9310";
+      const __vue_scope_id__$1 = "data-v-7e05e123";
       /* module identifier */
       const __vue_module_identifier__$1 = undefined;
       /* functional template */
@@ -239,11 +246,64 @@
         undefined
       );
 
+    //
+
+    var script$2 = {
+        components: {
+            "content-container": __vue_component__$1
+        }
+    };
+
+    /* script */
+    const __vue_script__$2 = script$2;
+
+    /* template */
+    var __vue_render__$2 = function() {
+      var _vm = this;
+      var _h = _vm.$createElement;
+      var _c = _vm._self._c || _h;
+      return _c("div", { attrs: { id: "app" } }, [_c("content-container")], 1)
+    };
+    var __vue_staticRenderFns__$2 = [];
+    __vue_render__$2._withStripped = true;
+
+      /* style */
+      const __vue_inject_styles__$2 = function (inject) {
+        if (!inject) return
+        inject("data-v-488fca71_0", { source: "\n#app[data-v-488fca71] {\n    position: absolute;\n\n    top: 0;\n    left: 0;\n\n    width: 100%;\n    height: 100%;\n\n    display: grid;\n\n    grid-template-rows: auto;\n    grid-template-columns: auto;\n}\n", map: {"version":3,"sources":["/mnt/c/users/miles/onedrive/documents/atom-programs-new/games/number-prestige/src/components/App.vue"],"names":[],"mappings":";AAkBA;IACA,kBAAA;;IAEA,MAAA;IACA,OAAA;;IAEA,WAAA;IACA,YAAA;;IAEA,aAAA;;IAEA,wBAAA;IACA,2BAAA;AACA","file":"App.vue","sourcesContent":["<!-- This is the core app component -->\r\n<template>\r\n    <div id=\"app\">\r\n        <content-container></content-container>\r\n    </div>\r\n</template>\r\n\r\n<script>\r\n    import ContentContainer from \"./content/ContentContainer.vue\";\r\n\r\n    export default {\r\n        components: {\r\n            \"content-container\": ContentContainer\r\n        }\r\n    };\r\n</script>\r\n\r\n<style scoped>\r\n    #app {\r\n        position: absolute;\r\n\r\n        top: 0;\r\n        left: 0;\r\n\r\n        width: 100%;\r\n        height: 100%;\r\n\r\n        display: grid;\r\n\r\n        grid-template-rows: auto;\r\n        grid-template-columns: auto;\r\n    }\r\n</style>\r\n\r\n<!-- Global styles -->\r\n<style>\r\n    @font-face {\r\n        font-family: \"Open Sans\";\r\n        src: url(\"../fonts/opensans-regular-webfont.woff\");\r\n    }\r\n\r\n    @font-face {\r\n        font-family: \"Plex Mono\";\r\n        src: url(\"../fonts/IBMPlexMono-Regular.ttf\");\r\n    }\r\n\r\n    /*To let me style buttons*/\r\n    button {\r\n        all: unset\r\n    }\r\n</style>\r\n"]}, media: undefined })
+    ,inject("data-v-488fca71_1", { source: "\n@font-face {\n    font-family: \"Open Sans\";\n    src: url(\"../fonts/opensans-regular-webfont.woff\");\n}\n@font-face {\n    font-family: \"Plex Mono\";\n    src: url(\"../fonts/IBMPlexMono-Regular.ttf\");\n}\n\n/*To let me style buttons*/\nbutton {\n    all: unset\n}\n", map: {"version":3,"sources":["/mnt/c/users/miles/onedrive/documents/atom-programs-new/games/number-prestige/src/components/App.vue"],"names":[],"mappings":";AAoCA;IACA,wBAAA;IACA,kDAAA;AACA;AAEA;IACA,wBAAA;IACA,4CAAA;AACA;;AAEA,0BAAA;AACA;IACA;AACA","file":"App.vue","sourcesContent":["<!-- This is the core app component -->\r\n<template>\r\n    <div id=\"app\">\r\n        <content-container></content-container>\r\n    </div>\r\n</template>\r\n\r\n<script>\r\n    import ContentContainer from \"./content/ContentContainer.vue\";\r\n\r\n    export default {\r\n        components: {\r\n            \"content-container\": ContentContainer\r\n        }\r\n    };\r\n</script>\r\n\r\n<style scoped>\r\n    #app {\r\n        position: absolute;\r\n\r\n        top: 0;\r\n        left: 0;\r\n\r\n        width: 100%;\r\n        height: 100%;\r\n\r\n        display: grid;\r\n\r\n        grid-template-rows: auto;\r\n        grid-template-columns: auto;\r\n    }\r\n</style>\r\n\r\n<!-- Global styles -->\r\n<style>\r\n    @font-face {\r\n        font-family: \"Open Sans\";\r\n        src: url(\"../fonts/opensans-regular-webfont.woff\");\r\n    }\r\n\r\n    @font-face {\r\n        font-family: \"Plex Mono\";\r\n        src: url(\"../fonts/IBMPlexMono-Regular.ttf\");\r\n    }\r\n\r\n    /*To let me style buttons*/\r\n    button {\r\n        all: unset\r\n    }\r\n</style>\r\n"]}, media: undefined });
+
+      };
+      /* scoped */
+      const __vue_scope_id__$2 = "data-v-488fca71";
+      /* module identifier */
+      const __vue_module_identifier__$2 = undefined;
+      /* functional template */
+      const __vue_is_functional_template__$2 = false;
+      /* style inject SSR */
+      
+      /* style inject shadow dom */
+      
+
+      
+      const __vue_component__$2 = normalizeComponent(
+        { render: __vue_render__$2, staticRenderFns: __vue_staticRenderFns__$2 },
+        __vue_inject_styles__$2,
+        __vue_script__$2,
+        __vue_scope_id__$2,
+        __vue_is_functional_template__$2,
+        __vue_module_identifier__$2,
+        false,
+        createInjector,
+        undefined,
+        undefined
+      );
+
     let app = new Vue({
         el: "#app",
 
         components: {
-            app: __vue_component__$1
+            app: __vue_component__$2
         },
 
         template: `<app></app>`
