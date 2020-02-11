@@ -1,16 +1,16 @@
 <!-- This component contains the app's main contents -->
 <template>
     <div id="content-container">
-        <header></header>
+        <header-component></header-component>
     </div>
 </template>
 
 <script>
-    import Header from "./header/Header.vue";
+    import HeaderComponent from "./header/HeaderComponent.vue";
 
     export default {
         components: {
-            header: Header
+            "header-component": HeaderComponent
         }
     };
 </script>

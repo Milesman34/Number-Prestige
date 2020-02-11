@@ -1,12 +1,20 @@
 <!-- This component represents the app's header -->
+<!-- Name is used to avoid conflicts with builtin HTML elements -->
 <template>
     <div id="header">
-
+        <header-item text="Main"></header-item>
+        <header-item text="Options"></header-item>
     </div>
 </template>
 
 <script>
-    export default {};
+    import HeaderItem from "./HeaderItem.vue";
+
+    export default {
+        components: {
+            "header-item": HeaderItem
+        }
+    };
 </script>
 
 <style scoped>
