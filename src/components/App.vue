@@ -1,6 +1,6 @@
 <!-- This is the core app component -->
 <template>
-    <div id="app">
+    <div id="app" v-bind:class="themeClass('app')">
         <content-container></content-container>
     </div>
 </template>
@@ -8,7 +8,11 @@
 <script>
     import ContentContainer from "./content/ContentContainer.vue";
 
+    import theme from "../mixins/store/theme.js";
+
     export default {
+        mixins: [theme],
+
         components: {
             "content-container": ContentContainer
         }
@@ -30,6 +34,18 @@
         grid-template-rows: auto;
         grid-template-columns: auto;
     }
+
+    .app-dark {
+        background-color: rgb(20, 20, 20);
+    }
+
+    .app-light {
+        background-color: rgb(210, 210, 210);
+    }
+
+    .app-gradient {
+        background-image: linear-gradient(rgb(0, 0, 0), rgb(25, 25, 25));
+    }
 </style>
 
 <!-- Global styles -->
@@ -47,5 +63,21 @@
     /*To let me style buttons*/
     button {
         all: unset
+    }
+
+    /*Text themes*/
+    .text-dark {
+    	color: rgb(255, 255, 255);
+    	font-family: "Open Sans";
+    }
+
+    .text-light {
+    	color: rgb(0, 0, 0);
+    	font-family: "Open Sans";
+    }
+
+    .text-gradient {
+    	color: rgb(255, 255, 255);
+    	font-family: "Plex Mono";
     }
 </style>

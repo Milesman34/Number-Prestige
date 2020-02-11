@@ -1,17 +1,36 @@
-(function (Vue) {
+(function (Vue, Vuex) {
     'use strict';
 
     Vue = Vue && Vue.hasOwnProperty('default') ? Vue['default'] : Vue;
+    Vuex = Vuex && Vuex.hasOwnProperty('default') ? Vuex['default'] : Vuex;
 
-    //
-    //
-    //
-    //
-    //
-    //
+    //This mixin provides access to the store
+    var theme = {
+        computed: {
+            //Gets the current theme
+            theme() {
+                return this.$store.state.theme;
+            }
+        },
+
+        methods: {
+            //Sets the theme
+            setTheme(theme) {
+                this.$store.commit("setTheme", theme);
+            },
+
+            //Generates the current theme based on the class name provided
+            themeClass(className) {
+                return `${className}-${this.theme}`;
+            }
+        }
+    };
+
     //
 
     var script = {
+        mixins: [theme],
+
         props: ["text"]
     };
 
@@ -153,9 +172,14 @@
       var _vm = this;
       var _h = _vm.$createElement;
       var _c = _vm._self._c || _h;
-      return _c("div", { staticClass: "header-item" }, [
-        _vm._v("\n    " + _vm._s(_vm.text) + "\n")
-      ])
+      return _c(
+        "div",
+        {
+          staticClass: "header-item",
+          class: [_vm.themeClass("header-item"), _vm.themeClass("text")]
+        },
+        [_vm._v("\n    " + _vm._s(_vm.text) + "\n")]
+      )
     };
     var __vue_staticRenderFns__ = [];
     __vue_render__._withStripped = true;
@@ -163,11 +187,11 @@
       /* style */
       const __vue_inject_styles__ = function (inject) {
         if (!inject) return
-        inject("data-v-07c1d4b6_0", { source: "\n.header-item[data-v-07c1d4b6] {\n    display: flex;\n\n    justify-content: center;\n    align-items: center;\n\n    grid-row: 1;\n\n    font-size: 175%;\n\n    user-select: none;\n}\n", map: {"version":3,"sources":["/mnt/c/users/miles/onedrive/documents/atom-programs-new/games/number-prestige/src/components/content/header/HeaderItem.vue"],"names":[],"mappings":";AAcA;IACA,aAAA;;IAEA,uBAAA;IACA,mBAAA;;IAEA,WAAA;;IAEA,eAAA;;IAEA,iBAAA;AACA","file":"HeaderItem.vue","sourcesContent":["<!-- This component represents an item in the header -->\r\n<template>\r\n    <div class=\"header-item\">\r\n        {{ text }}\r\n    </div>\r\n</template>\r\n\r\n<script>\r\n    export default {\r\n        props: [\"text\"]\r\n    };\r\n</script>\r\n\r\n<style scoped>\r\n    .header-item {\r\n        display: flex;\r\n\r\n        justify-content: center;\r\n        align-items: center;\r\n\r\n        grid-row: 1;\r\n\r\n        font-size: 175%;\r\n\r\n        user-select: none;\r\n    }\r\n</style>\r\n"]}, media: undefined });
+        inject("data-v-4ff83a76_0", { source: "\n.header-item[data-v-4ff83a76] {\n    display: flex;\n\n    justify-content: center;\n    align-items: center;\n\n    grid-row: 1;\n\n    font-size: 175%;\n\n    user-select: none;\n}\n.header-item-dark[data-v-4ff83a76] {\n\tbox-shadow: 2px 2px 2px black;\n}\n.header-item-dark[data-v-4ff83a76]:hover {\n    background-color: rgb(40, 40, 40);\n}\n.header-item-light[data-v-4ff83a76] {\n\tbox-shadow: 2px 2px 2px rgb(180, 180, 180);\n}\n.header-item-light[data-v-4ff83a76]:hover {\n    background-color: rgb(215, 215, 215);\n}\n.header-item-gradient[data-v-4ff83a76] {\n\tborder: 2px solid rgb(195, 195, 195);\n}\n.header-item-gradient[data-v-4ff83a76]:hover {\n    background-image: linear-gradient(rgb(56, 56, 56), rgb(81, 81, 81));\n}\n", map: {"version":3,"sources":["/mnt/c/users/miles/onedrive/documents/atom-programs-new/games/number-prestige/src/components/content/header/HeaderItem.vue"],"names":[],"mappings":";AAkBA;IACA,aAAA;;IAEA,uBAAA;IACA,mBAAA;;IAEA,WAAA;;IAEA,eAAA;;IAEA,iBAAA;AACA;AAEA;CACA,6BAAA;AACA;AAEA;IACA,iCAAA;AACA;AAEA;CACA,0CAAA;AACA;AAEA;IACA,oCAAA;AACA;AAEA;CACA,oCAAA;AACA;AAEA;IACA,mEAAA;AACA","file":"HeaderItem.vue","sourcesContent":["<!-- This component represents an item in the header -->\r\n<template>\r\n    <div class=\"header-item\" v-bind:class=\"[themeClass('header-item'), themeClass('text')]\">\r\n        {{ text }}\r\n    </div>\r\n</template>\r\n\r\n<script>\r\n    import theme from \"../../../mixins/store/theme.js\";\r\n\r\n    export default {\r\n        mixins: [theme],\r\n\r\n        props: [\"text\"]\r\n    };\r\n</script>\r\n\r\n<style scoped>\r\n    .header-item {\r\n        display: flex;\r\n\r\n        justify-content: center;\r\n        align-items: center;\r\n\r\n        grid-row: 1;\r\n\r\n        font-size: 175%;\r\n\r\n        user-select: none;\r\n    }\r\n\r\n    .header-item-dark {\r\n    \tbox-shadow: 2px 2px 2px black;\r\n    }\r\n\r\n    .header-item-dark:hover {\r\n        background-color: rgb(40, 40, 40);\r\n    }\r\n\r\n    .header-item-light {\r\n    \tbox-shadow: 2px 2px 2px rgb(180, 180, 180);\r\n    }\r\n\r\n    .header-item-light:hover {\r\n        background-color: rgb(215, 215, 215);\r\n    }\r\n\r\n    .header-item-gradient {\r\n    \tborder: 2px solid rgb(195, 195, 195);\r\n    }\r\n\r\n    .header-item-gradient:hover {\r\n        background-image: linear-gradient(rgb(56, 56, 56), rgb(81, 81, 81));\r\n    }\r\n</style>\r\n"]}, media: undefined });
 
       };
       /* scoped */
-      const __vue_scope_id__ = "data-v-07c1d4b6";
+      const __vue_scope_id__ = "data-v-4ff83a76";
       /* module identifier */
       const __vue_module_identifier__ = undefined;
       /* functional template */
@@ -194,6 +218,8 @@
     //
 
     var script$1 = {
+        mixins: [theme],
+
         components: {
             "header-item": __vue_component__
         }
@@ -209,7 +235,7 @@
       var _c = _vm._self._c || _h;
       return _c(
         "div",
-        { attrs: { id: "header" } },
+        { class: _vm.themeClass("header"), attrs: { id: "header" } },
         [
           _c("header-item", { attrs: { text: "Main" } }),
           _vm._v(" "),
@@ -224,11 +250,11 @@
       /* style */
       const __vue_inject_styles__$1 = function (inject) {
         if (!inject) return
-        inject("data-v-48adc07c_0", { source: "\n#header[data-v-48adc07c] {\n    width: 100%;\n\n    display: grid;\n\n    grid-template-rows: 100%;\n    grid-template-columns: repeat(auto-fill, auto);\n}\n", map: {"version":3,"sources":["/mnt/c/users/miles/onedrive/documents/atom-programs-new/games/number-prestige/src/components/content/header/HeaderComponent.vue"],"names":[],"mappings":";AAoBA;IACA,WAAA;;IAEA,aAAA;;IAEA,wBAAA;IACA,8CAAA;AACA","file":"HeaderComponent.vue","sourcesContent":["<!-- This component represents the app's header -->\r\n<!-- Name is used to avoid conflicts with builtin HTML elements -->\r\n<template>\r\n    <div id=\"header\">\r\n        <header-item text=\"Main\"></header-item>\r\n        <header-item text=\"Options\"></header-item>\r\n    </div>\r\n</template>\r\n\r\n<script>\r\n    import HeaderItem from \"./HeaderItem.vue\";\r\n\r\n    export default {\r\n        components: {\r\n            \"header-item\": HeaderItem\r\n        }\r\n    };\r\n</script>\r\n\r\n<style scoped>\r\n    #header {\r\n        width: 100%;\r\n\r\n        display: grid;\r\n\r\n        grid-template-rows: 100%;\r\n        grid-template-columns: repeat(auto-fill, auto);\r\n    }\r\n</style>\r\n"]}, media: undefined });
+        inject("data-v-7ffb398e_0", { source: "\n#header[data-v-7ffb398e] {\n    width: 100%;\n\n    display: grid;\n\n    grid-template-rows: 100%;\n    grid-template-columns: repeat(auto-fill, auto);\n}\n.header-dark[data-v-7ffb398e] {\n    background-color: rgb(24, 24, 24);\n}\n.header-light[data-v-7ffb398e] {\n    background-color: rgb(200, 200, 200);\n}\n.header-gradient[data-v-7ffb398e] {\n    background-image: linear-gradient(rgb(36, 36, 36), rgb(61, 61, 61));\n}\n", map: {"version":3,"sources":["/mnt/c/users/miles/onedrive/documents/atom-programs-new/games/number-prestige/src/components/content/header/HeaderComponent.vue"],"names":[],"mappings":";AAwBA;IACA,WAAA;;IAEA,aAAA;;IAEA,wBAAA;IACA,8CAAA;AACA;AAEA;IACA,iCAAA;AACA;AAEA;IACA,oCAAA;AACA;AAEA;IACA,mEAAA;AACA","file":"HeaderComponent.vue","sourcesContent":["<!-- This component represents the app's header -->\r\n<!-- Name is used to avoid conflicts with builtin HTML elements -->\r\n<template>\r\n    <div id=\"header\" v-bind:class=\"themeClass('header')\">\r\n        <header-item text=\"Main\"></header-item>\r\n        <header-item text=\"Options\"></header-item>\r\n    </div>\r\n</template>\r\n\r\n<script>\r\n    import HeaderItem from \"./HeaderItem.vue\";\r\n\r\n    import theme from \"../../../mixins/store/theme.js\";\r\n\r\n    export default {\r\n        mixins: [theme],\r\n\r\n        components: {\r\n            \"header-item\": HeaderItem\r\n        }\r\n    };\r\n</script>\r\n\r\n<style scoped>\r\n    #header {\r\n        width: 100%;\r\n\r\n        display: grid;\r\n\r\n        grid-template-rows: 100%;\r\n        grid-template-columns: repeat(auto-fill, auto);\r\n    }\r\n\r\n    .header-dark {\r\n        background-color: rgb(24, 24, 24);\r\n    }\r\n\r\n    .header-light {\r\n        background-color: rgb(200, 200, 200);\r\n    }\r\n\r\n    .header-gradient {\r\n        background-image: linear-gradient(rgb(36, 36, 36), rgb(61, 61, 61));\r\n    }\r\n</style>\r\n"]}, media: undefined });
 
       };
       /* scoped */
-      const __vue_scope_id__$1 = "data-v-48adc07c";
+      const __vue_scope_id__$1 = "data-v-7ffb398e";
       /* module identifier */
       const __vue_module_identifier__$1 = undefined;
       /* functional template */
@@ -312,6 +338,8 @@
     //
 
     var script$3 = {
+        mixins: [theme],
+
         components: {
             "content-container": __vue_component__$2
         }
@@ -325,7 +353,12 @@
       var _vm = this;
       var _h = _vm.$createElement;
       var _c = _vm._self._c || _h;
-      return _c("div", { attrs: { id: "app" } }, [_c("content-container")], 1)
+      return _c(
+        "div",
+        { class: _vm.themeClass("app"), attrs: { id: "app" } },
+        [_c("content-container")],
+        1
+      )
     };
     var __vue_staticRenderFns__$3 = [];
     __vue_render__$3._withStripped = true;
@@ -333,12 +366,12 @@
       /* style */
       const __vue_inject_styles__$3 = function (inject) {
         if (!inject) return
-        inject("data-v-488fca71_0", { source: "\n#app[data-v-488fca71] {\n    position: absolute;\n\n    top: 0;\n    left: 0;\n\n    width: 100%;\n    height: 100%;\n\n    display: grid;\n\n    grid-template-rows: auto;\n    grid-template-columns: auto;\n}\n", map: {"version":3,"sources":["/mnt/c/users/miles/onedrive/documents/atom-programs-new/games/number-prestige/src/components/App.vue"],"names":[],"mappings":";AAkBA;IACA,kBAAA;;IAEA,MAAA;IACA,OAAA;;IAEA,WAAA;IACA,YAAA;;IAEA,aAAA;;IAEA,wBAAA;IACA,2BAAA;AACA","file":"App.vue","sourcesContent":["<!-- This is the core app component -->\r\n<template>\r\n    <div id=\"app\">\r\n        <content-container></content-container>\r\n    </div>\r\n</template>\r\n\r\n<script>\r\n    import ContentContainer from \"./content/ContentContainer.vue\";\r\n\r\n    export default {\r\n        components: {\r\n            \"content-container\": ContentContainer\r\n        }\r\n    };\r\n</script>\r\n\r\n<style scoped>\r\n    #app {\r\n        position: absolute;\r\n\r\n        top: 0;\r\n        left: 0;\r\n\r\n        width: 100%;\r\n        height: 100%;\r\n\r\n        display: grid;\r\n\r\n        grid-template-rows: auto;\r\n        grid-template-columns: auto;\r\n    }\r\n</style>\r\n\r\n<!-- Global styles -->\r\n<style>\r\n    @font-face {\r\n        font-family: \"Open Sans\";\r\n        src: url(\"../fonts/opensans-regular-webfont.woff\");\r\n    }\r\n\r\n    @font-face {\r\n        font-family: \"Plex Mono\";\r\n        src: url(\"../fonts/IBMPlexMono-Regular.ttf\");\r\n    }\r\n\r\n    /*To let me style buttons*/\r\n    button {\r\n        all: unset\r\n    }\r\n</style>\r\n"]}, media: undefined })
-    ,inject("data-v-488fca71_1", { source: "\n@font-face {\n    font-family: \"Open Sans\";\n    src: url(\"../fonts/opensans-regular-webfont.woff\");\n}\n@font-face {\n    font-family: \"Plex Mono\";\n    src: url(\"../fonts/IBMPlexMono-Regular.ttf\");\n}\n\n/*To let me style buttons*/\nbutton {\n    all: unset\n}\n", map: {"version":3,"sources":["/mnt/c/users/miles/onedrive/documents/atom-programs-new/games/number-prestige/src/components/App.vue"],"names":[],"mappings":";AAoCA;IACA,wBAAA;IACA,kDAAA;AACA;AAEA;IACA,wBAAA;IACA,4CAAA;AACA;;AAEA,0BAAA;AACA;IACA;AACA","file":"App.vue","sourcesContent":["<!-- This is the core app component -->\r\n<template>\r\n    <div id=\"app\">\r\n        <content-container></content-container>\r\n    </div>\r\n</template>\r\n\r\n<script>\r\n    import ContentContainer from \"./content/ContentContainer.vue\";\r\n\r\n    export default {\r\n        components: {\r\n            \"content-container\": ContentContainer\r\n        }\r\n    };\r\n</script>\r\n\r\n<style scoped>\r\n    #app {\r\n        position: absolute;\r\n\r\n        top: 0;\r\n        left: 0;\r\n\r\n        width: 100%;\r\n        height: 100%;\r\n\r\n        display: grid;\r\n\r\n        grid-template-rows: auto;\r\n        grid-template-columns: auto;\r\n    }\r\n</style>\r\n\r\n<!-- Global styles -->\r\n<style>\r\n    @font-face {\r\n        font-family: \"Open Sans\";\r\n        src: url(\"../fonts/opensans-regular-webfont.woff\");\r\n    }\r\n\r\n    @font-face {\r\n        font-family: \"Plex Mono\";\r\n        src: url(\"../fonts/IBMPlexMono-Regular.ttf\");\r\n    }\r\n\r\n    /*To let me style buttons*/\r\n    button {\r\n        all: unset\r\n    }\r\n</style>\r\n"]}, media: undefined });
+        inject("data-v-6383a167_0", { source: "\n#app[data-v-6383a167] {\n    position: absolute;\n\n    top: 0;\n    left: 0;\n\n    width: 100%;\n    height: 100%;\n\n    display: grid;\n\n    grid-template-rows: auto;\n    grid-template-columns: auto;\n}\n.app-dark[data-v-6383a167] {\n    background-color: rgb(20, 20, 20);\n}\n.app-light[data-v-6383a167] {\n    background-color: rgb(210, 210, 210);\n}\n.app-gradient[data-v-6383a167] {\n    background-image: linear-gradient(rgb(0, 0, 0), rgb(25, 25, 25));\n}\n", map: {"version":3,"sources":["/mnt/c/users/miles/onedrive/documents/atom-programs-new/games/number-prestige/src/components/App.vue"],"names":[],"mappings":";AAsBA;IACA,kBAAA;;IAEA,MAAA;IACA,OAAA;;IAEA,WAAA;IACA,YAAA;;IAEA,aAAA;;IAEA,wBAAA;IACA,2BAAA;AACA;AAEA;IACA,iCAAA;AACA;AAEA;IACA,oCAAA;AACA;AAEA;IACA,gEAAA;AACA","file":"App.vue","sourcesContent":["<!-- This is the core app component -->\r\n<template>\r\n    <div id=\"app\" v-bind:class=\"themeClass('app')\">\r\n        <content-container></content-container>\r\n    </div>\r\n</template>\r\n\r\n<script>\r\n    import ContentContainer from \"./content/ContentContainer.vue\";\r\n\r\n    import theme from \"../mixins/store/theme.js\";\r\n\r\n    export default {\r\n        mixins: [theme],\r\n\r\n        components: {\r\n            \"content-container\": ContentContainer\r\n        }\r\n    };\r\n</script>\r\n\r\n<style scoped>\r\n    #app {\r\n        position: absolute;\r\n\r\n        top: 0;\r\n        left: 0;\r\n\r\n        width: 100%;\r\n        height: 100%;\r\n\r\n        display: grid;\r\n\r\n        grid-template-rows: auto;\r\n        grid-template-columns: auto;\r\n    }\r\n\r\n    .app-dark {\r\n        background-color: rgb(20, 20, 20);\r\n    }\r\n\r\n    .app-light {\r\n        background-color: rgb(210, 210, 210);\r\n    }\r\n\r\n    .app-gradient {\r\n        background-image: linear-gradient(rgb(0, 0, 0), rgb(25, 25, 25));\r\n    }\r\n</style>\r\n\r\n<!-- Global styles -->\r\n<style>\r\n    @font-face {\r\n        font-family: \"Open Sans\";\r\n        src: url(\"../fonts/opensans-regular-webfont.woff\");\r\n    }\r\n\r\n    @font-face {\r\n        font-family: \"Plex Mono\";\r\n        src: url(\"../fonts/IBMPlexMono-Regular.ttf\");\r\n    }\r\n\r\n    /*To let me style buttons*/\r\n    button {\r\n        all: unset\r\n    }\r\n\r\n    /*Text themes*/\r\n    .text-dark {\r\n    \tcolor: rgb(255, 255, 255);\r\n    \tfont-family: \"Open Sans\";\r\n    }\r\n\r\n    .text-light {\r\n    \tcolor: rgb(0, 0, 0);\r\n    \tfont-family: \"Open Sans\";\r\n    }\r\n\r\n    .text-gradient {\r\n    \tcolor: rgb(255, 255, 255);\r\n    \tfont-family: \"Plex Mono\";\r\n    }\r\n</style>\r\n"]}, media: undefined })
+    ,inject("data-v-6383a167_1", { source: "\n@font-face {\n    font-family: \"Open Sans\";\n    src: url(\"../fonts/opensans-regular-webfont.woff\");\n}\n@font-face {\n    font-family: \"Plex Mono\";\n    src: url(\"../fonts/IBMPlexMono-Regular.ttf\");\n}\n\n/*To let me style buttons*/\nbutton {\n    all: unset\n}\n\n/*Text themes*/\n.text-dark {\n\tcolor: rgb(255, 255, 255);\n\tfont-family: \"Open Sans\";\n}\n.text-light {\n\tcolor: rgb(0, 0, 0);\n\tfont-family: \"Open Sans\";\n}\n.text-gradient {\n\tcolor: rgb(255, 255, 255);\n\tfont-family: \"Plex Mono\";\n}\n", map: {"version":3,"sources":["/mnt/c/users/miles/onedrive/documents/atom-programs-new/games/number-prestige/src/components/App.vue"],"names":[],"mappings":";AAoDA;IACA,wBAAA;IACA,kDAAA;AACA;AAEA;IACA,wBAAA;IACA,4CAAA;AACA;;AAEA,0BAAA;AACA;IACA;AACA;;AAEA,cAAA;AACA;CACA,yBAAA;CACA,wBAAA;AACA;AAEA;CACA,mBAAA;CACA,wBAAA;AACA;AAEA;CACA,yBAAA;CACA,wBAAA;AACA","file":"App.vue","sourcesContent":["<!-- This is the core app component -->\r\n<template>\r\n    <div id=\"app\" v-bind:class=\"themeClass('app')\">\r\n        <content-container></content-container>\r\n    </div>\r\n</template>\r\n\r\n<script>\r\n    import ContentContainer from \"./content/ContentContainer.vue\";\r\n\r\n    import theme from \"../mixins/store/theme.js\";\r\n\r\n    export default {\r\n        mixins: [theme],\r\n\r\n        components: {\r\n            \"content-container\": ContentContainer\r\n        }\r\n    };\r\n</script>\r\n\r\n<style scoped>\r\n    #app {\r\n        position: absolute;\r\n\r\n        top: 0;\r\n        left: 0;\r\n\r\n        width: 100%;\r\n        height: 100%;\r\n\r\n        display: grid;\r\n\r\n        grid-template-rows: auto;\r\n        grid-template-columns: auto;\r\n    }\r\n\r\n    .app-dark {\r\n        background-color: rgb(20, 20, 20);\r\n    }\r\n\r\n    .app-light {\r\n        background-color: rgb(210, 210, 210);\r\n    }\r\n\r\n    .app-gradient {\r\n        background-image: linear-gradient(rgb(0, 0, 0), rgb(25, 25, 25));\r\n    }\r\n</style>\r\n\r\n<!-- Global styles -->\r\n<style>\r\n    @font-face {\r\n        font-family: \"Open Sans\";\r\n        src: url(\"../fonts/opensans-regular-webfont.woff\");\r\n    }\r\n\r\n    @font-face {\r\n        font-family: \"Plex Mono\";\r\n        src: url(\"../fonts/IBMPlexMono-Regular.ttf\");\r\n    }\r\n\r\n    /*To let me style buttons*/\r\n    button {\r\n        all: unset\r\n    }\r\n\r\n    /*Text themes*/\r\n    .text-dark {\r\n    \tcolor: rgb(255, 255, 255);\r\n    \tfont-family: \"Open Sans\";\r\n    }\r\n\r\n    .text-light {\r\n    \tcolor: rgb(0, 0, 0);\r\n    \tfont-family: \"Open Sans\";\r\n    }\r\n\r\n    .text-gradient {\r\n    \tcolor: rgb(255, 255, 255);\r\n    \tfont-family: \"Plex Mono\";\r\n    }\r\n</style>\r\n"]}, media: undefined });
 
       };
       /* scoped */
-      const __vue_scope_id__$3 = "data-v-488fca71";
+      const __vue_scope_id__$3 = "data-v-6383a167";
       /* module identifier */
       const __vue_module_identifier__$3 = undefined;
       /* functional template */
@@ -362,8 +395,30 @@
         undefined
       );
 
+    //This enum represents all valid themes
+    var themes = {
+        themeDark: "dark",
+        themeLight: "light",
+        themeGradient: "gradient"
+    };
+
+    var store = new Vuex.Store({
+        state: {
+            theme: themes.themeDark
+        },
+
+        mutations: {
+            //Sets the theme
+            setTheme(state, theme) {
+                state.theme = theme;
+            }
+        }
+    });
+
     let app = new Vue({
         el: "#app",
+
+        store,
 
         components: {
             app: __vue_component__$3
@@ -372,4 +427,4 @@
         template: `<app></app>`
     });
 
-}(Vue));
+}(Vue, Vuex));
