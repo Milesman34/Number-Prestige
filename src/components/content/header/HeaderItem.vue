@@ -1,17 +1,18 @@
 <!-- This component represents an item in the header -->
 <template>
-    <div class="header-item" v-bind:class="[themeClass('header-item'), themeClass('text')]">
+    <button class="header-item" @click="setGameState(state)" v-bind:class="[themeClass('header-item'), themeClass('text')]">
         {{ text }}
-    </div>
+    </button>
 </template>
 
 <script>
+    import gameState from "../../../mixins/store/gameState.js";
     import theme from "../../../mixins/store/theme.js";
 
     export default {
-        mixins: [theme],
+        mixins: [gameState, theme],
 
-        props: ["text"]
+        props: ["text", "state"]
     };
 </script>
 

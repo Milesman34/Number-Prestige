@@ -1,4 +1,4 @@
-//This mixin provides access to the store
+//This mixin provides access to the theme variable in the store
 export default {
     computed: {
         //Gets the current theme

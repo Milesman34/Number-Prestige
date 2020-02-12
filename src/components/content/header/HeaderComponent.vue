@@ -2,8 +2,8 @@
 <!-- Name is used to avoid conflicts with builtin HTML elements -->
 <template>
     <div id="header" v-bind:class="themeClass('header')">
-        <header-item text="Main"></header-item>
-        <header-item text="Options"></header-item>
+        <header-item text="Main" state="main"></header-item>
+        <header-item text="Options" state="options"></header-item>
     </div>
 </template>
 

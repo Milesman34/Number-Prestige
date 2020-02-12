@@ -8,6 +8,10 @@
 <script>
     import ContentContainer from "./content/ContentContainer.vue";
 
+    import gameStates from "../enums/gameStates.js";
+    import themes from "../enums/themes.js";
+
+    import gameState from "../mixins/store/gameState.js";
     import theme from "../mixins/store/theme.js";
 
     export default {
