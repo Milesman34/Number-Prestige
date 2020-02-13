@@ -1,8 +1,8 @@
 // This enum represents all valid themes
 export const themes = {
+    light: "light",
     dark: "dark",
-    gradient: "gradient",
-    light: "light"
+    gradient: "gradient"
 };
 
 // This enum represents all valid game states

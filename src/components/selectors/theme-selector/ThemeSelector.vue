@@ -2,12 +2,10 @@
 <template>
     <div id="theme-selector-container">
         <div id="theme-selector" v-bind:class="themeClass('theme-selector')">
-            <div id="theme-selector-title" v-bind:class="[themeClass('selector-item'), themeClass('text')]">Select Theme</div>
+            <theme-selector-title></theme-selector-title>
 
             <div id="theme-selector-list">
-                <theme-selector-list-button theme="light"></theme-selector-list-button>
-                <theme-selector-list-button theme="dark"></theme-selector-list-button>
-                <theme-selector-list-button theme="gradient"></theme-selector-list-button>
+                <theme-selector-list-button v-for="theme in Object.values(themes)" v-bind:theme="theme"/>
             </div>
 
             <theme-selector-exit-button></theme-selector-exit-button>
@@ -18,15 +16,23 @@
 <script>
     import ThemeSelectorExitButton from "./ThemeSelectorExitButton.vue";
     import ThemeSelectorListButton from "./ThemeSelectorListButton.vue";
+    import ThemeSelectorTitle from "./ThemeSelectorTitle.vue";
+
+    import { themes } from "../../../enums.js";
 
     import { theme } from "../../../mixins/storeIO.js";
 
     export default {
         mixins: [theme],
 
+        data: () => ({
+            themes
+        }),
+
         components: {
             "theme-selector-exit-button": ThemeSelectorExitButton,
-            "theme-selector-list-button": ThemeSelectorListButton
+            "theme-selector-list-button": ThemeSelectorListButton,
+            "theme-selector-title": ThemeSelectorTitle
         }
     };
 </script>
@@ -54,15 +60,6 @@
         grid-template-columns: auto;
 
         user-select: none;
-    }
-
-    #theme-selector-title {
-        width: 100%;
-
-        display: flex;
-
-        justify-content: center;
-        align-items: center;
     }
 
     #theme-selector-list {
