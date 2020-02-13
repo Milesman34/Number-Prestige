@@ -11,7 +11,7 @@
 
 <script>
     import OptionsButton from "./OptionsButton.vue";
-    import ThemeOptionsButton from "./ThemeOptionsButton.vue";
+    import ThemeOptionsButton from "./theme-options-button/ThemeOptionsButton.vue";
 
     export default {
         components: {

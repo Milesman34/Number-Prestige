@@ -2,16 +2,13 @@ import Vue from "vue";
 
 import App from "./components/App.vue";
 
-import gameStates from "./enums/gameStates.js";
-import themes from "./enums/themes.js";
-
-import gameState from "./mixins/store/gameState.js";
-import theme from "./mixins/store/theme.js";
+import { gameStates, selectorStates, themes } from "./enums.js";
 
 import store from "./store.js";
 
-//Exposes enums
+// Exposes enums
 window.gameStates = gameStates;
+window.selectorStates = selectorStates;
 window.themes = themes;
 
 let app = new Vue({

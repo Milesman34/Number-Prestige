@@ -10,9 +10,9 @@
 <script>
     import HeaderItem from "./HeaderItem.vue";
 
-    import gameStates from "../../../enums/gameStates.js";
+    import { gameStates } from "../../../enums.js";
 
-    import theme from "../../../mixins/store/theme.js";
+    import { theme } from "../../../mixins/storeIO.js";
 
     export default {
         mixins: [theme],

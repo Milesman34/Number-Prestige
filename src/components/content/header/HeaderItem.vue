@@ -6,8 +6,7 @@
 </template>
 
 <script>
-    import gameState from "../../../mixins/store/gameState.js";
-    import theme from "../../../mixins/store/theme.js";
+    import { gameState, theme } from "../../../mixins/storeIO.js";
 
     import utils from "../../../mixins/utils.js";
 

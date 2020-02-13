@@ -1,22 +1,33 @@
 <!-- Represents the button for changing themes -->
 <template>
     <div class="options-button-container">
-        <button id="theme-options-button" v-bind:class="[themeClass('game-button'), themeClass('text')]">
+        <button id="theme-options-button" v-bind:class="[themeClass('game-button'), themeClass('text')]" @click="openSelector(selectorStates.theme)">
             <div id="theme-options-container">
                 <div id="theme-options-text" v-bind:class="themeClass('text')">Theme</div>
-                <div id="theme-options-current" v-bind:class="themeClass('text')">Currently: {{ capitalize(theme) }}</div>
+
+                <current-theme-display-text></current-theme-display-text>
             </div>
         </button>
     </div>
 </template>
 
 <script>
-    import theme from "../../../../../mixins/store/theme.js";
+    import CurrentThemeDisplayText from "./CurrentThemeDisplayText.vue";
 
-    import utils from "../../../../../mixins/utils.js";
+    import { selectorStates } from "../../../../../../enums.js";
+
+    import { selector, theme } from "../../../../../../mixins/storeIO.js";
 
     export default {
-        mixins: [theme, utils]
+        mixins: [selector, theme],
+
+        data: () => ({
+            selectorStates
+        }),
+
+        components: {
+            "current-theme-display-text": CurrentThemeDisplayText
+        }
     };
 </script>
 
@@ -50,15 +61,6 @@
 
     #theme-options-text {
         font-size: 215%;
-
-        display: flex;
-
-        justify-content: center;
-        align-items: center;
-    }
-
-    #theme-options-current {
-        font-size: 95%;
 
         display: flex;
 

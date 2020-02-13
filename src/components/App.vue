@@ -1,6 +1,7 @@
 <!-- This is the core app component -->
 <template>
     <div id="app" v-bind:class="themeClass('app')">
+        <selector-container></selector-container>
         <content-container></content-container>
     </div>
 </template>
@@ -8,13 +9,16 @@
 <script>
     import ContentContainer from "./content/ContentContainer.vue";
 
-    import theme from "../mixins/store/theme.js";
+    import SelectorContainer from "./selectors/SelectorContainer.vue";
+
+    import { theme } from "../mixins/storeIO.js";
 
     export default {
         mixins: [theme],
 
         components: {
-            "content-container": ContentContainer
+            "content-container": ContentContainer,
+            "selector-container": SelectorContainer
         }
     };
 </script>
@@ -49,6 +53,7 @@
 </style>
 
 <!-- Global styles -->
+<!-- This includes themes for global components -->
 <style>
     @font-face {
         font-family: "Open Sans";

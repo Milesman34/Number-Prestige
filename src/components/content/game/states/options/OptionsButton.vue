@@ -8,7 +8,7 @@
 </template>
 
 <script>
-    import theme from "../../../../../mixins/store/theme.js";
+    import { theme } from "../../../../../mixins/storeIO.js";
 
     export default {
         mixins: [theme],
