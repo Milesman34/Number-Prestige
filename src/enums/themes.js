@@ -1,6 +1,8 @@
-//This enum represents all valid themes
+import Vue from "vue";
+
+//This enum represents all valid states the game can be in
 export default {
-    themeDark: "dark",
-    themeGradient: "gradient",
-    themeLight: "light",
+    dark: "dark",
+    gradient: "gradient",
+    light: "light"
 };

@@ -80,4 +80,41 @@
     	color: rgb(255, 255, 255);
     	font-family: "Plex Mono";
     }
+
+    /* Game button themes */
+    .game-button-dark {
+    	color: rgb(255, 255, 255);
+
+        background-color: rgb(32, 32, 32);
+
+        box-shadow: 2px 2px 2px black;
+    }
+
+    .game-button-dark:hover {
+        background-color: rgb(40, 40, 40);
+    }
+
+    .game-button-light {
+    	color: rgb(0, 0, 0);
+
+        background-color: rgb(200, 200, 200);
+
+        box-shadow: 2px 2px 2px rgb(180, 180, 180);
+    }
+
+    .game-button-light:hover {
+        background-color: rgb(215, 215, 215);
+    }
+
+    .game-button-gradient {
+    	color: rgb(255, 255, 255);
+
+        background-color: rgba(0, 0, 0, 0);
+
+    	border: 2px solid rgb(195, 195, 195);
+    }
+
+    .game-button-gradient:hover {
+    	background-image: linear-gradient(rgb(56, 56, 56), rgb(81, 81, 81));
+    }
 </style>

@@ -1,14 +1,35 @@
 <!-- This component represents the area that contains the game's UI, based on the current gameState -->
 <template>
-    <div id="game-section"></div>
+    <div id="game-component">
+        <main-state v-if="gameState === gameStates.main"></main-state>
+        <options-state v-if="gameState === gameStates.options"></options-state>
+    </div>
 </template>
 
 <script>
-    export default {};
+    import MainState from "./states/MainState.vue";
+    import OptionsState from "./states/options/OptionsState.vue";
+
+    import gameStates from "../../../enums/gameStates.js";
+
+    import gameState from "../../../mixins/store/gameState.js";
+
+    export default {
+        mixins: [gameState],
+
+        data: () => ({
+            gameStates
+        }),
+
+        components: {
+            "main-state": MainState,
+            "options-state": OptionsState
+        }
+    };
 </script>
 
 <style scoped>
-    #game-section {
+    #game-component {
         width: 100%;
         height: 100%;
 

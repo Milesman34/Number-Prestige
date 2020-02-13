@@ -10,6 +10,10 @@ import theme from "./mixins/store/theme.js";
 
 import store from "./store.js";
 
+//Exposes enums
+window.gameStates = gameStates;
+window.themes = themes;
+
 let app = new Vue({
     el: "#app",
 

@@ -2,18 +2,25 @@
 <!-- Name is used to avoid conflicts with builtin HTML elements -->
 <template>
     <div id="header" v-bind:class="themeClass('header')">
-        <header-item text="Main" state="main"></header-item>
-        <header-item text="Options" state="options"></header-item>
+        <header-item text="Main" v-bind:state="gameStates.main"></header-item>
+        <header-item text="Options" v-bind:state="gameStates.options"></header-item>
     </div>
 </template>
 
 <script>
     import HeaderItem from "./HeaderItem.vue";
 
+    import gameStates from "../../../enums/gameStates.js";
+
     import theme from "../../../mixins/store/theme.js";
 
     export default {
         mixins: [theme],
+
+        //This seems to be a good way to load enums
+        data: () => ({
+            gameStates
+        }),
 
         components: {
             "header-item": HeaderItem
