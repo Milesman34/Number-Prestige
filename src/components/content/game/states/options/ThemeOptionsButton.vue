@@ -1,0 +1,68 @@
+<!-- Represents the button for changing themes -->
+<template>
+    <div class="options-button-container">
+        <button id="theme-options-button" v-bind:class="[themeClass('game-button'), themeClass('text')]">
+            <div id="theme-options-container">
+                <div id="theme-options-text" v-bind:class="themeClass('text')">Theme</div>
+                <div id="theme-options-current" v-bind:class="themeClass('text')">Currently: {{ capitalize(theme) }}</div>
+            </div>
+        </button>
+    </div>
+</template>
+
+<script>
+    import theme from "../../../../../mixins/store/theme.js";
+
+    import utils from "../../../../../mixins/utils.js";
+
+    export default {
+        mixins: [theme, utils]
+    };
+</script>
+
+<style scoped>
+    #theme-options-button {
+        width: 100%;
+        height: 100%;
+
+        grid-row: 2;
+        grid-column: 2;
+
+        display: grid;
+
+        grid-template-rows: 25% auto 25%;
+        grid-template-columns: 100%;
+
+        user-select: none;
+    }
+
+    #theme-options-container {
+        grid-row: 2;
+
+        width: 100%;
+        height: 100%;
+
+        display: flex;
+
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    #theme-options-text {
+        font-size: 215%;
+
+        display: flex;
+
+        justify-content: center;
+        align-items: center;
+    }
+
+    #theme-options-current {
+        font-size: 95%;
+
+        display: flex;
+
+        justify-content: center;
+        align-items: center;
+    }
+</style>

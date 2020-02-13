@@ -297,11 +297,12 @@
       /* style */
       const __vue_inject_styles__$2 = function (inject) {
         if (!inject) return
-        inject("data-v-21eda97c_0", { source: "\n.options-button-container[data-v-21eda97c] {\n    display: grid;\n\n    grid-template-rows: 10% auto 10%;\n    grid-template-columns: 10% auto 10%;\n}\n.options-button[data-v-21eda97c] {\n    width: 100%;\n    height: 100%;\n\n    grid-row: 2;\n    grid-column: 2;\n\n    display: flex;\n\n    justify-content: center;\n    align-items: center;\n\n    font-size: 235%;\n\n\tuser-select: none;\n}\n", map: {"version":3,"sources":["/mnt/c/users/miles/onedrive/documents/atom-programs-new/games/number-prestige/src/components/content/game/states/options/OptionsButton.vue"],"names":[],"mappings":";AAoBA;IACA,aAAA;;IAEA,gCAAA;IACA,mCAAA;AACA;AAEA;IACA,WAAA;IACA,YAAA;;IAEA,WAAA;IACA,cAAA;;IAEA,aAAA;;IAEA,uBAAA;IACA,mBAAA;;IAEA,eAAA;;CAEA,iBAAA;AACA","file":"OptionsButton.vue","sourcesContent":["<!-- This button triggers an action -->\r\n<template>\r\n    <div class=\"options-button-container\">\r\n        <button class=\"options-button\" v-bind:class=\"[themeClass('game-button'), themeClass('text')]\" @click=\"func\">\r\n            {{ title }}\r\n        </button>\r\n    </div>\r\n</template>\r\n\r\n<script>\r\n    import theme from \"../../../../../mixins/store/theme.js\";\r\n\r\n    export default {\r\n        mixins: [theme],\r\n\r\n        props: [\"title\", \"func\"]\r\n    };\r\n</script>\r\n\r\n<style scoped>\r\n    .options-button-container {\r\n        display: grid;\r\n\r\n        grid-template-rows: 10% auto 10%;\r\n        grid-template-columns: 10% auto 10%;\r\n    }\r\n\r\n    .options-button {\r\n        width: 100%;\r\n        height: 100%;\r\n\r\n        grid-row: 2;\r\n        grid-column: 2;\r\n\r\n        display: flex;\r\n\r\n        justify-content: center;\r\n        align-items: center;\r\n\r\n        font-size: 235%;\r\n\r\n    \tuser-select: none;\r\n    }\r\n</style>\r\n"]}, media: undefined });
+        inject("data-v-396e66e9_0", { source: "\n.options-button[data-v-396e66e9] {\n    width: 100%;\n    height: 100%;\n\n    grid-row: 2;\n    grid-column: 2;\n\n    display: flex;\n\n    justify-content: center;\n    align-items: center;\n\n    font-size: 235%;\n\n\tuser-select: none;\n}\n", map: {"version":3,"sources":["/mnt/c/users/miles/onedrive/documents/atom-programs-new/games/number-prestige/src/components/content/game/states/options/OptionsButton.vue"],"names":[],"mappings":";AAoBA;IACA,WAAA;IACA,YAAA;;IAEA,WAAA;IACA,cAAA;;IAEA,aAAA;;IAEA,uBAAA;IACA,mBAAA;;IAEA,eAAA;;CAEA,iBAAA;AACA","file":"OptionsButton.vue","sourcesContent":["<!-- This button triggers an action -->\r\n<template>\r\n    <div class=\"options-button-container\">\r\n        <button class=\"options-button\" v-bind:class=\"[themeClass('game-button'), themeClass('text')]\" @click=\"func\">\r\n            {{ title }}\r\n        </button>\r\n    </div>\r\n</template>\r\n\r\n<script>\r\n    import theme from \"../../../../../mixins/store/theme.js\";\r\n\r\n    export default {\r\n        mixins: [theme],\r\n\r\n        props: [\"title\", \"func\"]\r\n    };\r\n</script>\r\n\r\n<style scoped>\r\n    .options-button {\r\n        width: 100%;\r\n        height: 100%;\r\n\r\n        grid-row: 2;\r\n        grid-column: 2;\r\n\r\n        display: flex;\r\n\r\n        justify-content: center;\r\n        align-items: center;\r\n\r\n        font-size: 235%;\r\n\r\n    \tuser-select: none;\r\n    }\r\n</style>\r\n\r\n<style>\r\n    .options-button-container {\r\n        display: grid;\r\n\r\n        grid-template-rows: 10% auto 10%;\r\n        grid-template-columns: 10% auto 10%;\r\n    }\r\n</style>\r\n"]}, media: undefined })
+    ,inject("data-v-396e66e9_1", { source: "\n.options-button-container {\n    display: grid;\n\n    grid-template-rows: 10% auto 10%;\n    grid-template-columns: 10% auto 10%;\n}\n", map: {"version":3,"sources":["/mnt/c/users/miles/onedrive/documents/atom-programs-new/games/number-prestige/src/components/content/game/states/options/OptionsButton.vue"],"names":[],"mappings":";AAuCA;IACA,aAAA;;IAEA,gCAAA;IACA,mCAAA;AACA","file":"OptionsButton.vue","sourcesContent":["<!-- This button triggers an action -->\r\n<template>\r\n    <div class=\"options-button-container\">\r\n        <button class=\"options-button\" v-bind:class=\"[themeClass('game-button'), themeClass('text')]\" @click=\"func\">\r\n            {{ title }}\r\n        </button>\r\n    </div>\r\n</template>\r\n\r\n<script>\r\n    import theme from \"../../../../../mixins/store/theme.js\";\r\n\r\n    export default {\r\n        mixins: [theme],\r\n\r\n        props: [\"title\", \"func\"]\r\n    };\r\n</script>\r\n\r\n<style scoped>\r\n    .options-button {\r\n        width: 100%;\r\n        height: 100%;\r\n\r\n        grid-row: 2;\r\n        grid-column: 2;\r\n\r\n        display: flex;\r\n\r\n        justify-content: center;\r\n        align-items: center;\r\n\r\n        font-size: 235%;\r\n\r\n    \tuser-select: none;\r\n    }\r\n</style>\r\n\r\n<style>\r\n    .options-button-container {\r\n        display: grid;\r\n\r\n        grid-template-rows: 10% auto 10%;\r\n        grid-template-columns: 10% auto 10%;\r\n    }\r\n</style>\r\n"]}, media: undefined });
 
       };
       /* scoped */
-      const __vue_scope_id__$2 = "data-v-21eda97c";
+      const __vue_scope_id__$2 = "data-v-396e66e9";
       /* module identifier */
       const __vue_module_identifier__$2 = undefined;
       /* functional template */
@@ -325,12 +326,20 @@
         undefined
       );
 
+    //This mixin provides some useful utility functions
+    var utils = {
+        methods: {
+            //Capitalizes a word
+            capitalize(word) {
+                return word[0].toUpperCase() + word.slice(1, word.length).toLowerCase();
+            }
+        }
+    };
+
     //
 
     var script$3 = {
-        components: {
-            "options-button": __vue_component__$2
-        }
+        mixins: [theme, utils]
     };
 
     /* script */
@@ -341,11 +350,95 @@
       var _vm = this;
       var _h = _vm.$createElement;
       var _c = _vm._self._c || _h;
+      return _c("div", { staticClass: "options-button-container" }, [
+        _c(
+          "button",
+          {
+            class: [_vm.themeClass("game-button"), _vm.themeClass("text")],
+            attrs: { id: "theme-options-button" }
+          },
+          [
+            _c("div", { attrs: { id: "theme-options-container" } }, [
+              _c(
+                "div",
+                {
+                  class: _vm.themeClass("text"),
+                  attrs: { id: "theme-options-text" }
+                },
+                [_vm._v("Theme")]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  class: _vm.themeClass("text"),
+                  attrs: { id: "theme-options-current" }
+                },
+                [_vm._v("Currently: " + _vm._s(_vm.capitalize(_vm.theme)))]
+              )
+            ])
+          ]
+        )
+      ])
+    };
+    var __vue_staticRenderFns__$3 = [];
+    __vue_render__$3._withStripped = true;
+
+      /* style */
+      const __vue_inject_styles__$3 = function (inject) {
+        if (!inject) return
+        inject("data-v-6d8d5bf8_0", { source: "\n#theme-options-button[data-v-6d8d5bf8] {\n    width: 100%;\n    height: 100%;\n\n    grid-row: 2;\n    grid-column: 2;\n\n    display: grid;\n\n    grid-template-rows: 25% auto 25%;\n    grid-template-columns: 100%;\n\n    user-select: none;\n}\n#theme-options-container[data-v-6d8d5bf8] {\n    grid-row: 2;\n\n    width: 100%;\n    height: 100%;\n\n    display: flex;\n\n    flex-direction: column;\n    justify-content: center;\n}\n#theme-options-text[data-v-6d8d5bf8] {\n    font-size: 215%;\n\n    display: flex;\n\n    justify-content: center;\n    align-items: center;\n}\n#theme-options-current[data-v-6d8d5bf8] {\n    font-size: 95%;\n\n    display: flex;\n\n    justify-content: center;\n    align-items: center;\n}\n", map: {"version":3,"sources":["/mnt/c/users/miles/onedrive/documents/atom-programs-new/games/number-prestige/src/components/content/game/states/options/ThemeOptionsButton.vue"],"names":[],"mappings":";AAuBA;IACA,WAAA;IACA,YAAA;;IAEA,WAAA;IACA,cAAA;;IAEA,aAAA;;IAEA,gCAAA;IACA,2BAAA;;IAEA,iBAAA;AACA;AAEA;IACA,WAAA;;IAEA,WAAA;IACA,YAAA;;IAEA,aAAA;;IAEA,sBAAA;IACA,uBAAA;AACA;AAEA;IACA,eAAA;;IAEA,aAAA;;IAEA,uBAAA;IACA,mBAAA;AACA;AAEA;IACA,cAAA;;IAEA,aAAA;;IAEA,uBAAA;IACA,mBAAA;AACA","file":"ThemeOptionsButton.vue","sourcesContent":["<!-- Represents the button for changing themes -->\r\n<template>\r\n    <div class=\"options-button-container\">\r\n        <button id=\"theme-options-button\" v-bind:class=\"[themeClass('game-button'), themeClass('text')]\">\r\n            <div id=\"theme-options-container\">\r\n                <div id=\"theme-options-text\" v-bind:class=\"themeClass('text')\">Theme</div>\r\n                <div id=\"theme-options-current\" v-bind:class=\"themeClass('text')\">Currently: {{ capitalize(theme) }}</div>\r\n            </div>\r\n        </button>\r\n    </div>\r\n</template>\r\n\r\n<script>\r\n    import theme from \"../../../../../mixins/store/theme.js\";\r\n\r\n    import utils from \"../../../../../mixins/utils.js\";\r\n\r\n    export default {\r\n        mixins: [theme, utils]\r\n    };\r\n</script>\r\n\r\n<style scoped>\r\n    #theme-options-button {\r\n        width: 100%;\r\n        height: 100%;\r\n\r\n        grid-row: 2;\r\n        grid-column: 2;\r\n\r\n        display: grid;\r\n\r\n        grid-template-rows: 25% auto 25%;\r\n        grid-template-columns: 100%;\r\n\r\n        user-select: none;\r\n    }\r\n\r\n    #theme-options-container {\r\n        grid-row: 2;\r\n\r\n        width: 100%;\r\n        height: 100%;\r\n\r\n        display: flex;\r\n\r\n        flex-direction: column;\r\n        justify-content: center;\r\n    }\r\n\r\n    #theme-options-text {\r\n        font-size: 215%;\r\n\r\n        display: flex;\r\n\r\n        justify-content: center;\r\n        align-items: center;\r\n    }\r\n\r\n    #theme-options-current {\r\n        font-size: 95%;\r\n\r\n        display: flex;\r\n\r\n        justify-content: center;\r\n        align-items: center;\r\n    }\r\n</style>\r\n"]}, media: undefined });
+
+      };
+      /* scoped */
+      const __vue_scope_id__$3 = "data-v-6d8d5bf8";
+      /* module identifier */
+      const __vue_module_identifier__$3 = undefined;
+      /* functional template */
+      const __vue_is_functional_template__$3 = false;
+      /* style inject SSR */
+      
+      /* style inject shadow dom */
+      
+
+      
+      const __vue_component__$3 = normalizeComponent(
+        { render: __vue_render__$3, staticRenderFns: __vue_staticRenderFns__$3 },
+        __vue_inject_styles__$3,
+        __vue_script__$3,
+        __vue_scope_id__$3,
+        __vue_is_functional_template__$3,
+        __vue_module_identifier__$3,
+        false,
+        createInjector,
+        undefined,
+        undefined
+      );
+
+    //
+
+    var script$4 = {
+        components: {
+            "options-button": __vue_component__$2,
+            "theme-options-button": __vue_component__$3
+        }
+    };
+
+    /* script */
+    const __vue_script__$4 = script$4;
+
+    /* template */
+    var __vue_render__$4 = function() {
+      var _vm = this;
+      var _h = _vm.$createElement;
+      var _c = _vm._self._c || _h;
       return _c("div", { attrs: { id: "options" } }, [
         _c(
           "div",
           { staticClass: "options-row" },
           [
+            _c("theme-options-button"),
+            _vm._v(" "),
             _c("options-button", {
               attrs: {
                 title: "Save",
@@ -368,34 +461,34 @@
         )
       ])
     };
-    var __vue_staticRenderFns__$3 = [];
-    __vue_render__$3._withStripped = true;
+    var __vue_staticRenderFns__$4 = [];
+    __vue_render__$4._withStripped = true;
 
       /* style */
-      const __vue_inject_styles__$3 = function (inject) {
+      const __vue_inject_styles__$4 = function (inject) {
         if (!inject) return
-        inject("data-v-54b8fde7_0", { source: "\n#options[data-v-54b8fde7] {\n    grid-row: 1;\n    grid-column: 1;\n\n    display: grid;\n\n    grid-template-rows: repeat(4, auto);\n}\n.options-row[data-v-54b8fde7] {\n    width: 100%;\n\n    display: grid;\n\n    grid-template-columns: repeat(4, 25%);\n}\n", map: {"version":3,"sources":["/mnt/c/users/miles/onedrive/documents/atom-programs-new/games/number-prestige/src/components/content/game/states/options/OptionsState.vue"],"names":[],"mappings":";AAqBA;IACA,WAAA;IACA,cAAA;;IAEA,aAAA;;IAEA,mCAAA;AACA;AAEA;IACA,WAAA;;IAEA,aAAA;;IAEA,qCAAA;AACA","file":"OptionsState.vue","sourcesContent":["<!-- This component represents the options tab of the game -->\r\n<template>\r\n    <div id=\"options\">\r\n        <div class=\"options-row\">\r\n            <options-button title=\"Save\" v-bind:func=\"() => 3\"></options-button>\r\n            <options-button title=\"Reset\" v-bind:func=\"() => 4\"></options-button>\r\n        </div>\r\n    </div>\r\n</template>\r\n\r\n<script>\r\n    import OptionsButton from \"./OptionsButton.vue\";\r\n\r\n    export default {\r\n        components: {\r\n            \"options-button\": OptionsButton\r\n        }\r\n    };\r\n</script>\r\n\r\n<style scoped>\r\n    #options {\r\n        grid-row: 1;\r\n        grid-column: 1;\r\n\r\n        display: grid;\r\n\r\n        grid-template-rows: repeat(4, auto);\r\n    }\r\n\r\n    .options-row {\r\n        width: 100%;\r\n\r\n        display: grid;\r\n\r\n        grid-template-columns: repeat(4, 25%);\r\n    }\r\n</style>\r\n"]}, media: undefined });
+        inject("data-v-c9a4c3fc_0", { source: "\n#options[data-v-c9a4c3fc] {\n    grid-row: 1;\n    grid-column: 1;\n\n    display: grid;\n\n    grid-template-rows: repeat(4, auto);\n}\n.options-row[data-v-c9a4c3fc] {\n    width: 100%;\n\n    display: grid;\n\n    grid-template-columns: repeat(4, 25%);\n}\n", map: {"version":3,"sources":["/mnt/c/users/miles/onedrive/documents/atom-programs-new/games/number-prestige/src/components/content/game/states/options/OptionsState.vue"],"names":[],"mappings":";AAwBA;IACA,WAAA;IACA,cAAA;;IAEA,aAAA;;IAEA,mCAAA;AACA;AAEA;IACA,WAAA;;IAEA,aAAA;;IAEA,qCAAA;AACA","file":"OptionsState.vue","sourcesContent":["<!-- This component represents the options tab of the game -->\r\n<template>\r\n    <div id=\"options\">\r\n        <div class=\"options-row\">\r\n            <theme-options-button></theme-options-button>\r\n            <options-button title=\"Save\" v-bind:func=\"() => 3\"></options-button>\r\n            <options-button title=\"Reset\" v-bind:func=\"() => 4\"></options-button>\r\n        </div>\r\n    </div>\r\n</template>\r\n\r\n<script>\r\n    import OptionsButton from \"./OptionsButton.vue\";\r\n    import ThemeOptionsButton from \"./ThemeOptionsButton.vue\";\r\n\r\n    export default {\r\n        components: {\r\n            \"options-button\": OptionsButton,\r\n            \"theme-options-button\": ThemeOptionsButton\r\n        }\r\n    };\r\n</script>\r\n\r\n<style scoped>\r\n    #options {\r\n        grid-row: 1;\r\n        grid-column: 1;\r\n\r\n        display: grid;\r\n\r\n        grid-template-rows: repeat(4, auto);\r\n    }\r\n\r\n    .options-row {\r\n        width: 100%;\r\n\r\n        display: grid;\r\n\r\n        grid-template-columns: repeat(4, 25%);\r\n    }\r\n</style>\r\n"]}, media: undefined });
 
       };
       /* scoped */
-      const __vue_scope_id__$3 = "data-v-54b8fde7";
+      const __vue_scope_id__$4 = "data-v-c9a4c3fc";
       /* module identifier */
-      const __vue_module_identifier__$3 = undefined;
+      const __vue_module_identifier__$4 = undefined;
       /* functional template */
-      const __vue_is_functional_template__$3 = false;
+      const __vue_is_functional_template__$4 = false;
       /* style inject SSR */
       
       /* style inject shadow dom */
       
 
       
-      const __vue_component__$3 = normalizeComponent(
-        { render: __vue_render__$3, staticRenderFns: __vue_staticRenderFns__$3 },
-        __vue_inject_styles__$3,
-        __vue_script__$3,
-        __vue_scope_id__$3,
-        __vue_is_functional_template__$3,
-        __vue_module_identifier__$3,
+      const __vue_component__$4 = normalizeComponent(
+        { render: __vue_render__$4, staticRenderFns: __vue_staticRenderFns__$4 },
+        __vue_inject_styles__$4,
+        __vue_script__$4,
+        __vue_scope_id__$4,
+        __vue_is_functional_template__$4,
+        __vue_module_identifier__$4,
         false,
         createInjector,
         undefined,
@@ -427,7 +520,7 @@
 
     //
 
-    var script$4 = {
+    var script$5 = {
         mixins: [gameState],
 
         data: () => ({
@@ -436,15 +529,15 @@
 
         components: {
             "main-state": __vue_component__$1,
-            "options-state": __vue_component__$3
+            "options-state": __vue_component__$4
         }
     };
 
     /* script */
-    const __vue_script__$4 = script$4;
+    const __vue_script__$5 = script$5;
 
     /* template */
-    var __vue_render__$4 = function() {
+    var __vue_render__$5 = function() {
       var _vm = this;
       var _h = _vm.$createElement;
       var _c = _vm._self._c || _h;
@@ -459,81 +552,17 @@
         1
       )
     };
-    var __vue_staticRenderFns__$4 = [];
-    __vue_render__$4._withStripped = true;
-
-      /* style */
-      const __vue_inject_styles__$4 = function (inject) {
-        if (!inject) return
-        inject("data-v-01ee9891_0", { source: "\n#game-component[data-v-01ee9891] {\n    width: 100%;\n    height: 100%;\n\n    display: grid;\n\n    grid-template-rows: 100%;\n    grid-template-columns: 100%;\n}\n", map: {"version":3,"sources":["/mnt/c/users/miles/onedrive/documents/atom-programs-new/games/number-prestige/src/components/content/game/GameComponent.vue"],"names":[],"mappings":";AA+BA;IACA,WAAA;IACA,YAAA;;IAEA,aAAA;;IAEA,wBAAA;IACA,2BAAA;AACA","file":"GameComponent.vue","sourcesContent":["<!-- This component represents the area that contains the game's UI, based on the current gameState -->\r\n<template>\r\n    <div id=\"game-component\">\r\n        <main-state v-if=\"gameState === gameStates.main\"></main-state>\r\n        <options-state v-if=\"gameState === gameStates.options\"></options-state>\r\n    </div>\r\n</template>\r\n\r\n<script>\r\n    import MainState from \"./states/MainState.vue\";\r\n    import OptionsState from \"./states/options/OptionsState.vue\";\r\n\r\n    import gameStates from \"../../../enums/gameStates.js\";\r\n\r\n    import gameState from \"../../../mixins/store/gameState.js\";\r\n\r\n    export default {\r\n        mixins: [gameState],\r\n\r\n        data: () => ({\r\n            gameStates\r\n        }),\r\n\r\n        components: {\r\n            \"main-state\": MainState,\r\n            \"options-state\": OptionsState\r\n        }\r\n    };\r\n</script>\r\n\r\n<style scoped>\r\n    #game-component {\r\n        width: 100%;\r\n        height: 100%;\r\n\r\n        display: grid;\r\n\r\n        grid-template-rows: 100%;\r\n        grid-template-columns: 100%;\r\n    }\r\n</style>\r\n"]}, media: undefined });
-
-      };
-      /* scoped */
-      const __vue_scope_id__$4 = "data-v-01ee9891";
-      /* module identifier */
-      const __vue_module_identifier__$4 = undefined;
-      /* functional template */
-      const __vue_is_functional_template__$4 = false;
-      /* style inject SSR */
-      
-      /* style inject shadow dom */
-      
-
-      
-      const __vue_component__$4 = normalizeComponent(
-        { render: __vue_render__$4, staticRenderFns: __vue_staticRenderFns__$4 },
-        __vue_inject_styles__$4,
-        __vue_script__$4,
-        __vue_scope_id__$4,
-        __vue_is_functional_template__$4,
-        __vue_module_identifier__$4,
-        false,
-        createInjector,
-        undefined,
-        undefined
-      );
-
-    //
-
-    var script$5 = {
-        mixins: [gameState, theme],
-
-        props: ["text", "state"]
-    };
-
-    /* script */
-    const __vue_script__$5 = script$5;
-
-    /* template */
-    var __vue_render__$5 = function() {
-      var _vm = this;
-      var _h = _vm.$createElement;
-      var _c = _vm._self._c || _h;
-      return _c(
-        "button",
-        {
-          staticClass: "header-item",
-          class: [_vm.themeClass("header-item"), _vm.themeClass("text")],
-          on: {
-            click: function($event) {
-              return _vm.setGameState(_vm.state)
-            }
-          }
-        },
-        [_vm._v("\n    " + _vm._s(_vm.text) + "\n")]
-      )
-    };
     var __vue_staticRenderFns__$5 = [];
     __vue_render__$5._withStripped = true;
 
       /* style */
       const __vue_inject_styles__$5 = function (inject) {
         if (!inject) return
-        inject("data-v-5c1de37d_0", { source: "\n.header-item[data-v-5c1de37d] {\n    display: flex;\n\n    justify-content: center;\n    align-items: center;\n\n    grid-row: 1;\n\n    font-size: 175%;\n\n    user-select: none;\n}\n.header-item-dark[data-v-5c1de37d] {\n\tbox-shadow: 2px 2px 2px black;\n}\n.header-item-dark[data-v-5c1de37d]:hover {\n    background-color: rgb(40, 40, 40);\n}\n.header-item-light[data-v-5c1de37d] {\n\tbox-shadow: 2px 2px 2px rgb(180, 180, 180);\n}\n.header-item-light[data-v-5c1de37d]:hover {\n    background-color: rgb(215, 215, 215);\n}\n.header-item-gradient[data-v-5c1de37d] {\n\tborder: 2px solid rgb(195, 195, 195);\n}\n.header-item-gradient[data-v-5c1de37d]:hover {\n    background-image: linear-gradient(rgb(56, 56, 56), rgb(81, 81, 81));\n}\n", map: {"version":3,"sources":["/mnt/c/users/miles/onedrive/documents/atom-programs-new/games/number-prestige/src/components/content/header/HeaderItem.vue"],"names":[],"mappings":";AAmBA;IACA,aAAA;;IAEA,uBAAA;IACA,mBAAA;;IAEA,WAAA;;IAEA,eAAA;;IAEA,iBAAA;AACA;AAEA;CACA,6BAAA;AACA;AAEA;IACA,iCAAA;AACA;AAEA;CACA,0CAAA;AACA;AAEA;IACA,oCAAA;AACA;AAEA;CACA,oCAAA;AACA;AAEA;IACA,mEAAA;AACA","file":"HeaderItem.vue","sourcesContent":["<!-- This component represents an item in the header -->\r\n<template>\r\n    <button class=\"header-item\" @click=\"setGameState(state)\" v-bind:class=\"[themeClass('header-item'), themeClass('text')]\">\r\n        {{ text }}\r\n    </button>\r\n</template>\r\n\r\n<script>\r\n    import gameState from \"../../../mixins/store/gameState.js\";\r\n    import theme from \"../../../mixins/store/theme.js\";\r\n\r\n    export default {\r\n        mixins: [gameState, theme],\r\n\r\n        props: [\"text\", \"state\"]\r\n    };\r\n</script>\r\n\r\n<style scoped>\r\n    .header-item {\r\n        display: flex;\r\n\r\n        justify-content: center;\r\n        align-items: center;\r\n\r\n        grid-row: 1;\r\n\r\n        font-size: 175%;\r\n\r\n        user-select: none;\r\n    }\r\n\r\n    .header-item-dark {\r\n    \tbox-shadow: 2px 2px 2px black;\r\n    }\r\n\r\n    .header-item-dark:hover {\r\n        background-color: rgb(40, 40, 40);\r\n    }\r\n\r\n    .header-item-light {\r\n    \tbox-shadow: 2px 2px 2px rgb(180, 180, 180);\r\n    }\r\n\r\n    .header-item-light:hover {\r\n        background-color: rgb(215, 215, 215);\r\n    }\r\n\r\n    .header-item-gradient {\r\n    \tborder: 2px solid rgb(195, 195, 195);\r\n    }\r\n\r\n    .header-item-gradient:hover {\r\n        background-image: linear-gradient(rgb(56, 56, 56), rgb(81, 81, 81));\r\n    }\r\n</style>\r\n"]}, media: undefined });
+        inject("data-v-01ee9891_0", { source: "\n#game-component[data-v-01ee9891] {\n    width: 100%;\n    height: 100%;\n\n    display: grid;\n\n    grid-template-rows: 100%;\n    grid-template-columns: 100%;\n}\n", map: {"version":3,"sources":["/mnt/c/users/miles/onedrive/documents/atom-programs-new/games/number-prestige/src/components/content/game/GameComponent.vue"],"names":[],"mappings":";AA+BA;IACA,WAAA;IACA,YAAA;;IAEA,aAAA;;IAEA,wBAAA;IACA,2BAAA;AACA","file":"GameComponent.vue","sourcesContent":["<!-- This component represents the area that contains the game's UI, based on the current gameState -->\r\n<template>\r\n    <div id=\"game-component\">\r\n        <main-state v-if=\"gameState === gameStates.main\"></main-state>\r\n        <options-state v-if=\"gameState === gameStates.options\"></options-state>\r\n    </div>\r\n</template>\r\n\r\n<script>\r\n    import MainState from \"./states/MainState.vue\";\r\n    import OptionsState from \"./states/options/OptionsState.vue\";\r\n\r\n    import gameStates from \"../../../enums/gameStates.js\";\r\n\r\n    import gameState from \"../../../mixins/store/gameState.js\";\r\n\r\n    export default {\r\n        mixins: [gameState],\r\n\r\n        data: () => ({\r\n            gameStates\r\n        }),\r\n\r\n        components: {\r\n            \"main-state\": MainState,\r\n            \"options-state\": OptionsState\r\n        }\r\n    };\r\n</script>\r\n\r\n<style scoped>\r\n    #game-component {\r\n        width: 100%;\r\n        height: 100%;\r\n\r\n        display: grid;\r\n\r\n        grid-template-rows: 100%;\r\n        grid-template-columns: 100%;\r\n    }\r\n</style>\r\n"]}, media: undefined });
 
       };
       /* scoped */
-      const __vue_scope_id__$5 = "data-v-5c1de37d";
+      const __vue_scope_id__$5 = "data-v-01ee9891";
       /* module identifier */
       const __vue_module_identifier__$5 = undefined;
       /* functional template */
@@ -560,16 +589,9 @@
     //
 
     var script$6 = {
-        mixins: [theme],
+        mixins: [gameState, theme, utils],
 
-        //This seems to be a good way to load enums
-        data: () => ({
-            gameStates
-        }),
-
-        components: {
-            "header-item": __vue_component__$5
-        }
+        props: ["state"]
     };
 
     /* script */
@@ -581,18 +603,17 @@
       var _h = _vm.$createElement;
       var _c = _vm._self._c || _h;
       return _c(
-        "div",
-        { class: _vm.themeClass("header"), attrs: { id: "header" } },
-        [
-          _c("header-item", {
-            attrs: { text: "Main", state: _vm.gameStates.main }
-          }),
-          _vm._v(" "),
-          _c("header-item", {
-            attrs: { text: "Options", state: _vm.gameStates.options }
-          })
-        ],
-        1
+        "button",
+        {
+          staticClass: "header-item",
+          class: [_vm.themeClass("header-item"), _vm.themeClass("text")],
+          on: {
+            click: function($event) {
+              return _vm.setGameState(_vm.state)
+            }
+          }
+        },
+        [_vm._v("\n    " + _vm._s(_vm.capitalize(_vm.state)) + "\n")]
       )
     };
     var __vue_staticRenderFns__$6 = [];
@@ -601,11 +622,11 @@
       /* style */
       const __vue_inject_styles__$6 = function (inject) {
         if (!inject) return
-        inject("data-v-0056e6e1_0", { source: "\n#header[data-v-0056e6e1] {\n    width: 100%;\n\n    display: grid;\n\n    grid-template-rows: 100%;\n    grid-template-columns: repeat(auto-fill, auto);\n}\n.header-dark[data-v-0056e6e1] {\n    background-color: rgb(24, 24, 24);\n}\n.header-light[data-v-0056e6e1] {\n    background-color: rgb(200, 200, 200);\n}\n.header-gradient[data-v-0056e6e1] {\n    background-image: linear-gradient(rgb(36, 36, 36), rgb(61, 61, 61));\n}\n", map: {"version":3,"sources":["/mnt/c/users/miles/onedrive/documents/atom-programs-new/games/number-prestige/src/components/content/header/HeaderComponent.vue"],"names":[],"mappings":";AA+BA;IACA,WAAA;;IAEA,aAAA;;IAEA,wBAAA;IACA,8CAAA;AACA;AAEA;IACA,iCAAA;AACA;AAEA;IACA,oCAAA;AACA;AAEA;IACA,mEAAA;AACA","file":"HeaderComponent.vue","sourcesContent":["<!-- This component represents the app's header -->\r\n<!-- Name is used to avoid conflicts with builtin HTML elements -->\r\n<template>\r\n    <div id=\"header\" v-bind:class=\"themeClass('header')\">\r\n        <header-item text=\"Main\" v-bind:state=\"gameStates.main\"></header-item>\r\n        <header-item text=\"Options\" v-bind:state=\"gameStates.options\"></header-item>\r\n    </div>\r\n</template>\r\n\r\n<script>\r\n    import HeaderItem from \"./HeaderItem.vue\";\r\n\r\n    import gameStates from \"../../../enums/gameStates.js\";\r\n\r\n    import theme from \"../../../mixins/store/theme.js\";\r\n\r\n    export default {\r\n        mixins: [theme],\r\n\r\n        //This seems to be a good way to load enums\r\n        data: () => ({\r\n            gameStates\r\n        }),\r\n\r\n        components: {\r\n            \"header-item\": HeaderItem\r\n        }\r\n    };\r\n</script>\r\n\r\n<style scoped>\r\n    #header {\r\n        width: 100%;\r\n\r\n        display: grid;\r\n\r\n        grid-template-rows: 100%;\r\n        grid-template-columns: repeat(auto-fill, auto);\r\n    }\r\n\r\n    .header-dark {\r\n        background-color: rgb(24, 24, 24);\r\n    }\r\n\r\n    .header-light {\r\n        background-color: rgb(200, 200, 200);\r\n    }\r\n\r\n    .header-gradient {\r\n        background-image: linear-gradient(rgb(36, 36, 36), rgb(61, 61, 61));\r\n    }\r\n</style>\r\n"]}, media: undefined });
+        inject("data-v-69a370d7_0", { source: "\n.header-item[data-v-69a370d7] {\n    display: flex;\n\n    justify-content: center;\n    align-items: center;\n\n    grid-row: 1;\n\n    font-size: 175%;\n\n    user-select: none;\n}\n.header-item-dark[data-v-69a370d7] {\n\tbox-shadow: 2px 2px 2px black;\n}\n.header-item-dark[data-v-69a370d7]:hover {\n    background-color: rgb(40, 40, 40);\n}\n.header-item-light[data-v-69a370d7] {\n\tbox-shadow: 2px 2px 2px rgb(180, 180, 180);\n}\n.header-item-light[data-v-69a370d7]:hover {\n    background-color: rgb(215, 215, 215);\n}\n.header-item-gradient[data-v-69a370d7] {\n\tborder: 2px solid rgb(195, 195, 195);\n}\n.header-item-gradient[data-v-69a370d7]:hover {\n    background-image: linear-gradient(rgb(56, 56, 56), rgb(81, 81, 81));\n}\n", map: {"version":3,"sources":["/mnt/c/users/miles/onedrive/documents/atom-programs-new/games/number-prestige/src/components/content/header/HeaderItem.vue"],"names":[],"mappings":";AAqBA;IACA,aAAA;;IAEA,uBAAA;IACA,mBAAA;;IAEA,WAAA;;IAEA,eAAA;;IAEA,iBAAA;AACA;AAEA;CACA,6BAAA;AACA;AAEA;IACA,iCAAA;AACA;AAEA;CACA,0CAAA;AACA;AAEA;IACA,oCAAA;AACA;AAEA;CACA,oCAAA;AACA;AAEA;IACA,mEAAA;AACA","file":"HeaderItem.vue","sourcesContent":["<!-- This component represents an item in the header -->\r\n<template>\r\n    <button class=\"header-item\" @click=\"setGameState(state)\" v-bind:class=\"[themeClass('header-item'), themeClass('text')]\">\r\n        {{ capitalize(state) }}\r\n    </button>\r\n</template>\r\n\r\n<script>\r\n    import gameState from \"../../../mixins/store/gameState.js\";\r\n    import theme from \"../../../mixins/store/theme.js\";\r\n\r\n    import utils from \"../../../mixins/utils.js\";\r\n\r\n    export default {\r\n        mixins: [gameState, theme, utils],\r\n\r\n        props: [\"state\"]\r\n    };\r\n</script>\r\n\r\n<style scoped>\r\n    .header-item {\r\n        display: flex;\r\n\r\n        justify-content: center;\r\n        align-items: center;\r\n\r\n        grid-row: 1;\r\n\r\n        font-size: 175%;\r\n\r\n        user-select: none;\r\n    }\r\n\r\n    .header-item-dark {\r\n    \tbox-shadow: 2px 2px 2px black;\r\n    }\r\n\r\n    .header-item-dark:hover {\r\n        background-color: rgb(40, 40, 40);\r\n    }\r\n\r\n    .header-item-light {\r\n    \tbox-shadow: 2px 2px 2px rgb(180, 180, 180);\r\n    }\r\n\r\n    .header-item-light:hover {\r\n        background-color: rgb(215, 215, 215);\r\n    }\r\n\r\n    .header-item-gradient {\r\n    \tborder: 2px solid rgb(195, 195, 195);\r\n    }\r\n\r\n    .header-item-gradient:hover {\r\n        background-image: linear-gradient(rgb(56, 56, 56), rgb(81, 81, 81));\r\n    }\r\n</style>\r\n"]}, media: undefined });
 
       };
       /* scoped */
-      const __vue_scope_id__$6 = "data-v-0056e6e1";
+      const __vue_scope_id__$6 = "data-v-69a370d7";
       /* module identifier */
       const __vue_module_identifier__$6 = undefined;
       /* functional template */
@@ -632,10 +653,15 @@
     //
 
     var script$7 = {
+        mixins: [theme],
+
+        //This seems to be a good way to load enums
+        data: () => ({
+            gameStates
+        }),
+
         components: {
-            "display-section": __vue_component__,
-            "game-component": __vue_component__$4,
-            "header-component": __vue_component__$6
+            "header-item": __vue_component__$6
         }
     };
 
@@ -649,13 +675,11 @@
       var _c = _vm._self._c || _h;
       return _c(
         "div",
-        { attrs: { id: "content-container" } },
+        { class: _vm.themeClass("header"), attrs: { id: "header" } },
         [
-          _c("header-component"),
+          _c("header-item", { attrs: { state: _vm.gameStates.main } }),
           _vm._v(" "),
-          _c("display-section"),
-          _vm._v(" "),
-          _c("game-component")
+          _c("header-item", { attrs: { state: _vm.gameStates.options } })
         ],
         1
       )
@@ -666,11 +690,11 @@
       /* style */
       const __vue_inject_styles__$7 = function (inject) {
         if (!inject) return
-        inject("data-v-f7da23f8_0", { source: "\n#content-container[data-v-f7da23f8] {\n    grid-row: 1;\n    grid-column: 1;\n\n    display: grid;\n\n    grid-template-rows: 5% 10% auto;\n    grid-template-columns: 100%;\n}\n", map: {"version":3,"sources":["/mnt/c/users/miles/onedrive/documents/atom-programs-new/games/number-prestige/src/components/content/ContentContainer.vue"],"names":[],"mappings":";AAwBA;IACA,WAAA;IACA,cAAA;;IAEA,aAAA;;IAEA,+BAAA;IACA,2BAAA;AACA","file":"ContentContainer.vue","sourcesContent":["<!-- This component contains the app's main contents -->\r\n<template>\r\n    <div id=\"content-container\">\r\n        <header-component></header-component>\r\n        <display-section></display-section>\r\n        <game-component></game-component>\r\n    </div>\r\n</template>\r\n\r\n<script>\r\n    import DisplaySection from \"./display-section/DisplaySection.vue\";\r\n    import GameComponent from \"./game/GameComponent.vue\";\r\n    import HeaderComponent from \"./header/HeaderComponent.vue\";\r\n\r\n    export default {\r\n        components: {\r\n            \"display-section\": DisplaySection,\r\n            \"game-component\": GameComponent,\r\n            \"header-component\": HeaderComponent\r\n        }\r\n    };\r\n</script>\r\n\r\n<style scoped>\r\n    #content-container {\r\n        grid-row: 1;\r\n        grid-column: 1;\r\n\r\n        display: grid;\r\n\r\n        grid-template-rows: 5% 10% auto;\r\n        grid-template-columns: 100%;\r\n    }\r\n</style>\r\n"]}, media: undefined });
+        inject("data-v-67733058_0", { source: "\n#header[data-v-67733058] {\n    width: 100%;\n\n    display: grid;\n\n    grid-template-rows: 100%;\n    grid-template-columns: repeat(auto-fill, auto);\n}\n.header-dark[data-v-67733058] {\n    background-color: rgb(24, 24, 24);\n}\n.header-light[data-v-67733058] {\n    background-color: rgb(200, 200, 200);\n}\n.header-gradient[data-v-67733058] {\n    background-image: linear-gradient(rgb(36, 36, 36), rgb(61, 61, 61));\n}\n", map: {"version":3,"sources":["/mnt/c/users/miles/onedrive/documents/atom-programs-new/games/number-prestige/src/components/content/header/HeaderComponent.vue"],"names":[],"mappings":";AA+BA;IACA,WAAA;;IAEA,aAAA;;IAEA,wBAAA;IACA,8CAAA;AACA;AAEA;IACA,iCAAA;AACA;AAEA;IACA,oCAAA;AACA;AAEA;IACA,mEAAA;AACA","file":"HeaderComponent.vue","sourcesContent":["<!-- This component represents the app's header -->\r\n<!-- Name is used to avoid conflicts with builtin HTML elements -->\r\n<template>\r\n    <div id=\"header\" v-bind:class=\"themeClass('header')\">\r\n        <header-item v-bind:state=\"gameStates.main\"></header-item>\r\n        <header-item v-bind:state=\"gameStates.options\"></header-item>\r\n    </div>\r\n</template>\r\n\r\n<script>\r\n    import HeaderItem from \"./HeaderItem.vue\";\r\n\r\n    import gameStates from \"../../../enums/gameStates.js\";\r\n\r\n    import theme from \"../../../mixins/store/theme.js\";\r\n\r\n    export default {\r\n        mixins: [theme],\r\n\r\n        //This seems to be a good way to load enums\r\n        data: () => ({\r\n            gameStates\r\n        }),\r\n\r\n        components: {\r\n            \"header-item\": HeaderItem\r\n        }\r\n    };\r\n</script>\r\n\r\n<style scoped>\r\n    #header {\r\n        width: 100%;\r\n\r\n        display: grid;\r\n\r\n        grid-template-rows: 100%;\r\n        grid-template-columns: repeat(auto-fill, auto);\r\n    }\r\n\r\n    .header-dark {\r\n        background-color: rgb(24, 24, 24);\r\n    }\r\n\r\n    .header-light {\r\n        background-color: rgb(200, 200, 200);\r\n    }\r\n\r\n    .header-gradient {\r\n        background-image: linear-gradient(rgb(36, 36, 36), rgb(61, 61, 61));\r\n    }\r\n</style>\r\n"]}, media: undefined });
 
       };
       /* scoped */
-      const __vue_scope_id__$7 = "data-v-f7da23f8";
+      const __vue_scope_id__$7 = "data-v-67733058";
       /* module identifier */
       const __vue_module_identifier__$7 = undefined;
       /* functional template */
@@ -697,10 +721,10 @@
     //
 
     var script$8 = {
-        mixins: [theme],
-
         components: {
-            "content-container": __vue_component__$7
+            "display-section": __vue_component__,
+            "game-component": __vue_component__$5,
+            "header-component": __vue_component__$7
         }
     };
 
@@ -714,8 +738,14 @@
       var _c = _vm._self._c || _h;
       return _c(
         "div",
-        { class: _vm.themeClass("app"), attrs: { id: "app" } },
-        [_c("content-container")],
+        { attrs: { id: "content-container" } },
+        [
+          _c("header-component"),
+          _vm._v(" "),
+          _c("display-section"),
+          _vm._v(" "),
+          _c("game-component")
+        ],
         1
       )
     };
@@ -725,12 +755,11 @@
       /* style */
       const __vue_inject_styles__$8 = function (inject) {
         if (!inject) return
-        inject("data-v-7ba41ee2_0", { source: "\n#app[data-v-7ba41ee2] {\n    position: absolute;\n\n    top: 0;\n    left: 0;\n\n    width: 100%;\n    height: 100%;\n\n    display: grid;\n\n    grid-template-rows: auto;\n    grid-template-columns: auto;\n}\n.app-dark[data-v-7ba41ee2] {\n    background-color: rgb(20, 20, 20);\n}\n.app-light[data-v-7ba41ee2] {\n    background-color: rgb(210, 210, 210);\n}\n.app-gradient[data-v-7ba41ee2] {\n    background-image: linear-gradient(rgb(0, 0, 0), rgb(25, 25, 25));\n}\n", map: {"version":3,"sources":["/mnt/c/users/miles/onedrive/documents/atom-programs-new/games/number-prestige/src/components/App.vue"],"names":[],"mappings":";AAsBA;IACA,kBAAA;;IAEA,MAAA;IACA,OAAA;;IAEA,WAAA;IACA,YAAA;;IAEA,aAAA;;IAEA,wBAAA;IACA,2BAAA;AACA;AAEA;IACA,iCAAA;AACA;AAEA;IACA,oCAAA;AACA;AAEA;IACA,gEAAA;AACA","file":"App.vue","sourcesContent":["<!-- This is the core app component -->\r\n<template>\r\n    <div id=\"app\" v-bind:class=\"themeClass('app')\">\r\n        <content-container></content-container>\r\n    </div>\r\n</template>\r\n\r\n<script>\r\n    import ContentContainer from \"./content/ContentContainer.vue\";\r\n\r\n    import theme from \"../mixins/store/theme.js\";\r\n\r\n    export default {\r\n        mixins: [theme],\r\n\r\n        components: {\r\n            \"content-container\": ContentContainer\r\n        }\r\n    };\r\n</script>\r\n\r\n<style scoped>\r\n    #app {\r\n        position: absolute;\r\n\r\n        top: 0;\r\n        left: 0;\r\n\r\n        width: 100%;\r\n        height: 100%;\r\n\r\n        display: grid;\r\n\r\n        grid-template-rows: auto;\r\n        grid-template-columns: auto;\r\n    }\r\n\r\n    .app-dark {\r\n        background-color: rgb(20, 20, 20);\r\n    }\r\n\r\n    .app-light {\r\n        background-color: rgb(210, 210, 210);\r\n    }\r\n\r\n    .app-gradient {\r\n        background-image: linear-gradient(rgb(0, 0, 0), rgb(25, 25, 25));\r\n    }\r\n</style>\r\n\r\n<!-- Global styles -->\r\n<style>\r\n    @font-face {\r\n        font-family: \"Open Sans\";\r\n        src: url(\"../fonts/opensans-regular-webfont.woff\");\r\n    }\r\n\r\n    @font-face {\r\n        font-family: \"Plex Mono\";\r\n        src: url(\"../fonts/IBMPlexMono-Regular.ttf\");\r\n    }\r\n\r\n    /*To let me style buttons*/\r\n    button {\r\n        all: unset\r\n    }\r\n\r\n    /*Text themes*/\r\n    .text-dark {\r\n    \tcolor: rgb(255, 255, 255);\r\n    \tfont-family: \"Open Sans\";\r\n    }\r\n\r\n    .text-light {\r\n    \tcolor: rgb(0, 0, 0);\r\n    \tfont-family: \"Open Sans\";\r\n    }\r\n\r\n    .text-gradient {\r\n    \tcolor: rgb(255, 255, 255);\r\n    \tfont-family: \"Plex Mono\";\r\n    }\r\n\r\n    /* Game button themes */\r\n    .game-button-dark {\r\n    \tcolor: rgb(255, 255, 255);\r\n\r\n        background-color: rgb(32, 32, 32);\r\n\r\n        box-shadow: 2px 2px 2px black;\r\n    }\r\n\r\n    .game-button-dark:hover {\r\n        background-color: rgb(40, 40, 40);\r\n    }\r\n\r\n    .game-button-light {\r\n    \tcolor: rgb(0, 0, 0);\r\n\r\n        background-color: rgb(200, 200, 200);\r\n\r\n        box-shadow: 2px 2px 2px rgb(180, 180, 180);\r\n    }\r\n\r\n    .game-button-light:hover {\r\n        background-color: rgb(215, 215, 215);\r\n    }\r\n\r\n    .game-button-gradient {\r\n    \tcolor: rgb(255, 255, 255);\r\n\r\n        background-color: rgba(0, 0, 0, 0);\r\n\r\n    \tborder: 2px solid rgb(195, 195, 195);\r\n    }\r\n\r\n    .game-button-gradient:hover {\r\n    \tbackground-image: linear-gradient(rgb(56, 56, 56), rgb(81, 81, 81));\r\n    }\r\n</style>\r\n"]}, media: undefined })
-    ,inject("data-v-7ba41ee2_1", { source: "\n@font-face {\n    font-family: \"Open Sans\";\n    src: url(\"../fonts/opensans-regular-webfont.woff\");\n}\n@font-face {\n    font-family: \"Plex Mono\";\n    src: url(\"../fonts/IBMPlexMono-Regular.ttf\");\n}\n\n/*To let me style buttons*/\nbutton {\n    all: unset\n}\n\n/*Text themes*/\n.text-dark {\n\tcolor: rgb(255, 255, 255);\n\tfont-family: \"Open Sans\";\n}\n.text-light {\n\tcolor: rgb(0, 0, 0);\n\tfont-family: \"Open Sans\";\n}\n.text-gradient {\n\tcolor: rgb(255, 255, 255);\n\tfont-family: \"Plex Mono\";\n}\n\n/* Game button themes */\n.game-button-dark {\n\tcolor: rgb(255, 255, 255);\n\n    background-color: rgb(32, 32, 32);\n\n    box-shadow: 2px 2px 2px black;\n}\n.game-button-dark:hover {\n    background-color: rgb(40, 40, 40);\n}\n.game-button-light {\n\tcolor: rgb(0, 0, 0);\n\n    background-color: rgb(200, 200, 200);\n\n    box-shadow: 2px 2px 2px rgb(180, 180, 180);\n}\n.game-button-light:hover {\n    background-color: rgb(215, 215, 215);\n}\n.game-button-gradient {\n\tcolor: rgb(255, 255, 255);\n\n    background-color: rgba(0, 0, 0, 0);\n\n\tborder: 2px solid rgb(195, 195, 195);\n}\n.game-button-gradient:hover {\n\tbackground-image: linear-gradient(rgb(56, 56, 56), rgb(81, 81, 81));\n}\n", map: {"version":3,"sources":["/mnt/c/users/miles/onedrive/documents/atom-programs-new/games/number-prestige/src/components/App.vue"],"names":[],"mappings":";AAoDA;IACA,wBAAA;IACA,kDAAA;AACA;AAEA;IACA,wBAAA;IACA,4CAAA;AACA;;AAEA,0BAAA;AACA;IACA;AACA;;AAEA,cAAA;AACA;CACA,yBAAA;CACA,wBAAA;AACA;AAEA;CACA,mBAAA;CACA,wBAAA;AACA;AAEA;CACA,yBAAA;CACA,wBAAA;AACA;;AAEA,uBAAA;AACA;CACA,yBAAA;;IAEA,iCAAA;;IAEA,6BAAA;AACA;AAEA;IACA,iCAAA;AACA;AAEA;CACA,mBAAA;;IAEA,oCAAA;;IAEA,0CAAA;AACA;AAEA;IACA,oCAAA;AACA;AAEA;CACA,yBAAA;;IAEA,kCAAA;;CAEA,oCAAA;AACA;AAEA;CACA,mEAAA;AACA","file":"App.vue","sourcesContent":["<!-- This is the core app component -->\r\n<template>\r\n    <div id=\"app\" v-bind:class=\"themeClass('app')\">\r\n        <content-container></content-container>\r\n    </div>\r\n</template>\r\n\r\n<script>\r\n    import ContentContainer from \"./content/ContentContainer.vue\";\r\n\r\n    import theme from \"../mixins/store/theme.js\";\r\n\r\n    export default {\r\n        mixins: [theme],\r\n\r\n        components: {\r\n            \"content-container\": ContentContainer\r\n        }\r\n    };\r\n</script>\r\n\r\n<style scoped>\r\n    #app {\r\n        position: absolute;\r\n\r\n        top: 0;\r\n        left: 0;\r\n\r\n        width: 100%;\r\n        height: 100%;\r\n\r\n        display: grid;\r\n\r\n        grid-template-rows: auto;\r\n        grid-template-columns: auto;\r\n    }\r\n\r\n    .app-dark {\r\n        background-color: rgb(20, 20, 20);\r\n    }\r\n\r\n    .app-light {\r\n        background-color: rgb(210, 210, 210);\r\n    }\r\n\r\n    .app-gradient {\r\n        background-image: linear-gradient(rgb(0, 0, 0), rgb(25, 25, 25));\r\n    }\r\n</style>\r\n\r\n<!-- Global styles -->\r\n<style>\r\n    @font-face {\r\n        font-family: \"Open Sans\";\r\n        src: url(\"../fonts/opensans-regular-webfont.woff\");\r\n    }\r\n\r\n    @font-face {\r\n        font-family: \"Plex Mono\";\r\n        src: url(\"../fonts/IBMPlexMono-Regular.ttf\");\r\n    }\r\n\r\n    /*To let me style buttons*/\r\n    button {\r\n        all: unset\r\n    }\r\n\r\n    /*Text themes*/\r\n    .text-dark {\r\n    \tcolor: rgb(255, 255, 255);\r\n    \tfont-family: \"Open Sans\";\r\n    }\r\n\r\n    .text-light {\r\n    \tcolor: rgb(0, 0, 0);\r\n    \tfont-family: \"Open Sans\";\r\n    }\r\n\r\n    .text-gradient {\r\n    \tcolor: rgb(255, 255, 255);\r\n    \tfont-family: \"Plex Mono\";\r\n    }\r\n\r\n    /* Game button themes */\r\n    .game-button-dark {\r\n    \tcolor: rgb(255, 255, 255);\r\n\r\n        background-color: rgb(32, 32, 32);\r\n\r\n        box-shadow: 2px 2px 2px black;\r\n    }\r\n\r\n    .game-button-dark:hover {\r\n        background-color: rgb(40, 40, 40);\r\n    }\r\n\r\n    .game-button-light {\r\n    \tcolor: rgb(0, 0, 0);\r\n\r\n        background-color: rgb(200, 200, 200);\r\n\r\n        box-shadow: 2px 2px 2px rgb(180, 180, 180);\r\n    }\r\n\r\n    .game-button-light:hover {\r\n        background-color: rgb(215, 215, 215);\r\n    }\r\n\r\n    .game-button-gradient {\r\n    \tcolor: rgb(255, 255, 255);\r\n\r\n        background-color: rgba(0, 0, 0, 0);\r\n\r\n    \tborder: 2px solid rgb(195, 195, 195);\r\n    }\r\n\r\n    .game-button-gradient:hover {\r\n    \tbackground-image: linear-gradient(rgb(56, 56, 56), rgb(81, 81, 81));\r\n    }\r\n</style>\r\n"]}, media: undefined });
+        inject("data-v-f7da23f8_0", { source: "\n#content-container[data-v-f7da23f8] {\n    grid-row: 1;\n    grid-column: 1;\n\n    display: grid;\n\n    grid-template-rows: 5% 10% auto;\n    grid-template-columns: 100%;\n}\n", map: {"version":3,"sources":["/mnt/c/users/miles/onedrive/documents/atom-programs-new/games/number-prestige/src/components/content/ContentContainer.vue"],"names":[],"mappings":";AAwBA;IACA,WAAA;IACA,cAAA;;IAEA,aAAA;;IAEA,+BAAA;IACA,2BAAA;AACA","file":"ContentContainer.vue","sourcesContent":["<!-- This component contains the app's main contents -->\r\n<template>\r\n    <div id=\"content-container\">\r\n        <header-component></header-component>\r\n        <display-section></display-section>\r\n        <game-component></game-component>\r\n    </div>\r\n</template>\r\n\r\n<script>\r\n    import DisplaySection from \"./display-section/DisplaySection.vue\";\r\n    import GameComponent from \"./game/GameComponent.vue\";\r\n    import HeaderComponent from \"./header/HeaderComponent.vue\";\r\n\r\n    export default {\r\n        components: {\r\n            \"display-section\": DisplaySection,\r\n            \"game-component\": GameComponent,\r\n            \"header-component\": HeaderComponent\r\n        }\r\n    };\r\n</script>\r\n\r\n<style scoped>\r\n    #content-container {\r\n        grid-row: 1;\r\n        grid-column: 1;\r\n\r\n        display: grid;\r\n\r\n        grid-template-rows: 5% 10% auto;\r\n        grid-template-columns: 100%;\r\n    }\r\n</style>\r\n"]}, media: undefined });
 
       };
       /* scoped */
-      const __vue_scope_id__$8 = "data-v-7ba41ee2";
+      const __vue_scope_id__$8 = "data-v-f7da23f8";
       /* module identifier */
       const __vue_module_identifier__$8 = undefined;
       /* functional template */
@@ -748,6 +777,66 @@
         __vue_scope_id__$8,
         __vue_is_functional_template__$8,
         __vue_module_identifier__$8,
+        false,
+        createInjector,
+        undefined,
+        undefined
+      );
+
+    //
+
+    var script$9 = {
+        mixins: [theme],
+
+        components: {
+            "content-container": __vue_component__$8
+        }
+    };
+
+    /* script */
+    const __vue_script__$9 = script$9;
+
+    /* template */
+    var __vue_render__$9 = function() {
+      var _vm = this;
+      var _h = _vm.$createElement;
+      var _c = _vm._self._c || _h;
+      return _c(
+        "div",
+        { class: _vm.themeClass("app"), attrs: { id: "app" } },
+        [_c("content-container")],
+        1
+      )
+    };
+    var __vue_staticRenderFns__$9 = [];
+    __vue_render__$9._withStripped = true;
+
+      /* style */
+      const __vue_inject_styles__$9 = function (inject) {
+        if (!inject) return
+        inject("data-v-7ba41ee2_0", { source: "\n#app[data-v-7ba41ee2] {\n    position: absolute;\n\n    top: 0;\n    left: 0;\n\n    width: 100%;\n    height: 100%;\n\n    display: grid;\n\n    grid-template-rows: auto;\n    grid-template-columns: auto;\n}\n.app-dark[data-v-7ba41ee2] {\n    background-color: rgb(20, 20, 20);\n}\n.app-light[data-v-7ba41ee2] {\n    background-color: rgb(210, 210, 210);\n}\n.app-gradient[data-v-7ba41ee2] {\n    background-image: linear-gradient(rgb(0, 0, 0), rgb(25, 25, 25));\n}\n", map: {"version":3,"sources":["/mnt/c/users/miles/onedrive/documents/atom-programs-new/games/number-prestige/src/components/App.vue"],"names":[],"mappings":";AAsBA;IACA,kBAAA;;IAEA,MAAA;IACA,OAAA;;IAEA,WAAA;IACA,YAAA;;IAEA,aAAA;;IAEA,wBAAA;IACA,2BAAA;AACA;AAEA;IACA,iCAAA;AACA;AAEA;IACA,oCAAA;AACA;AAEA;IACA,gEAAA;AACA","file":"App.vue","sourcesContent":["<!-- This is the core app component -->\r\n<template>\r\n    <div id=\"app\" v-bind:class=\"themeClass('app')\">\r\n        <content-container></content-container>\r\n    </div>\r\n</template>\r\n\r\n<script>\r\n    import ContentContainer from \"./content/ContentContainer.vue\";\r\n\r\n    import theme from \"../mixins/store/theme.js\";\r\n\r\n    export default {\r\n        mixins: [theme],\r\n\r\n        components: {\r\n            \"content-container\": ContentContainer\r\n        }\r\n    };\r\n</script>\r\n\r\n<style scoped>\r\n    #app {\r\n        position: absolute;\r\n\r\n        top: 0;\r\n        left: 0;\r\n\r\n        width: 100%;\r\n        height: 100%;\r\n\r\n        display: grid;\r\n\r\n        grid-template-rows: auto;\r\n        grid-template-columns: auto;\r\n    }\r\n\r\n    .app-dark {\r\n        background-color: rgb(20, 20, 20);\r\n    }\r\n\r\n    .app-light {\r\n        background-color: rgb(210, 210, 210);\r\n    }\r\n\r\n    .app-gradient {\r\n        background-image: linear-gradient(rgb(0, 0, 0), rgb(25, 25, 25));\r\n    }\r\n</style>\r\n\r\n<!-- Global styles -->\r\n<style>\r\n    @font-face {\r\n        font-family: \"Open Sans\";\r\n        src: url(\"../fonts/opensans-regular-webfont.woff\");\r\n    }\r\n\r\n    @font-face {\r\n        font-family: \"Plex Mono\";\r\n        src: url(\"../fonts/IBMPlexMono-Regular.ttf\");\r\n    }\r\n\r\n    /*To let me style buttons*/\r\n    button {\r\n        all: unset\r\n    }\r\n\r\n    /*Text themes*/\r\n    .text-dark {\r\n    \tcolor: rgb(255, 255, 255);\r\n    \tfont-family: \"Open Sans\";\r\n    }\r\n\r\n    .text-light {\r\n    \tcolor: rgb(0, 0, 0);\r\n    \tfont-family: \"Open Sans\";\r\n    }\r\n\r\n    .text-gradient {\r\n    \tcolor: rgb(255, 255, 255);\r\n    \tfont-family: \"Plex Mono\";\r\n    }\r\n\r\n    /* Game button themes */\r\n    .game-button-dark {\r\n    \tcolor: rgb(255, 255, 255);\r\n\r\n        background-color: rgb(32, 32, 32);\r\n\r\n        box-shadow: 2px 2px 2px black;\r\n    }\r\n\r\n    .game-button-dark:hover {\r\n        background-color: rgb(40, 40, 40);\r\n    }\r\n\r\n    .game-button-light {\r\n    \tcolor: rgb(0, 0, 0);\r\n\r\n        background-color: rgb(200, 200, 200);\r\n\r\n        box-shadow: 2px 2px 2px rgb(180, 180, 180);\r\n    }\r\n\r\n    .game-button-light:hover {\r\n        background-color: rgb(215, 215, 215);\r\n    }\r\n\r\n    .game-button-gradient {\r\n    \tcolor: rgb(255, 255, 255);\r\n\r\n        background-color: rgba(0, 0, 0, 0);\r\n\r\n    \tborder: 2px solid rgb(195, 195, 195);\r\n    }\r\n\r\n    .game-button-gradient:hover {\r\n    \tbackground-image: linear-gradient(rgb(56, 56, 56), rgb(81, 81, 81));\r\n    }\r\n</style>\r\n"]}, media: undefined })
+    ,inject("data-v-7ba41ee2_1", { source: "\n@font-face {\n    font-family: \"Open Sans\";\n    src: url(\"../fonts/opensans-regular-webfont.woff\");\n}\n@font-face {\n    font-family: \"Plex Mono\";\n    src: url(\"../fonts/IBMPlexMono-Regular.ttf\");\n}\n\n/*To let me style buttons*/\nbutton {\n    all: unset\n}\n\n/*Text themes*/\n.text-dark {\n\tcolor: rgb(255, 255, 255);\n\tfont-family: \"Open Sans\";\n}\n.text-light {\n\tcolor: rgb(0, 0, 0);\n\tfont-family: \"Open Sans\";\n}\n.text-gradient {\n\tcolor: rgb(255, 255, 255);\n\tfont-family: \"Plex Mono\";\n}\n\n/* Game button themes */\n.game-button-dark {\n\tcolor: rgb(255, 255, 255);\n\n    background-color: rgb(32, 32, 32);\n\n    box-shadow: 2px 2px 2px black;\n}\n.game-button-dark:hover {\n    background-color: rgb(40, 40, 40);\n}\n.game-button-light {\n\tcolor: rgb(0, 0, 0);\n\n    background-color: rgb(200, 200, 200);\n\n    box-shadow: 2px 2px 2px rgb(180, 180, 180);\n}\n.game-button-light:hover {\n    background-color: rgb(215, 215, 215);\n}\n.game-button-gradient {\n\tcolor: rgb(255, 255, 255);\n\n    background-color: rgba(0, 0, 0, 0);\n\n\tborder: 2px solid rgb(195, 195, 195);\n}\n.game-button-gradient:hover {\n\tbackground-image: linear-gradient(rgb(56, 56, 56), rgb(81, 81, 81));\n}\n", map: {"version":3,"sources":["/mnt/c/users/miles/onedrive/documents/atom-programs-new/games/number-prestige/src/components/App.vue"],"names":[],"mappings":";AAoDA;IACA,wBAAA;IACA,kDAAA;AACA;AAEA;IACA,wBAAA;IACA,4CAAA;AACA;;AAEA,0BAAA;AACA;IACA;AACA;;AAEA,cAAA;AACA;CACA,yBAAA;CACA,wBAAA;AACA;AAEA;CACA,mBAAA;CACA,wBAAA;AACA;AAEA;CACA,yBAAA;CACA,wBAAA;AACA;;AAEA,uBAAA;AACA;CACA,yBAAA;;IAEA,iCAAA;;IAEA,6BAAA;AACA;AAEA;IACA,iCAAA;AACA;AAEA;CACA,mBAAA;;IAEA,oCAAA;;IAEA,0CAAA;AACA;AAEA;IACA,oCAAA;AACA;AAEA;CACA,yBAAA;;IAEA,kCAAA;;CAEA,oCAAA;AACA;AAEA;CACA,mEAAA;AACA","file":"App.vue","sourcesContent":["<!-- This is the core app component -->\r\n<template>\r\n    <div id=\"app\" v-bind:class=\"themeClass('app')\">\r\n        <content-container></content-container>\r\n    </div>\r\n</template>\r\n\r\n<script>\r\n    import ContentContainer from \"./content/ContentContainer.vue\";\r\n\r\n    import theme from \"../mixins/store/theme.js\";\r\n\r\n    export default {\r\n        mixins: [theme],\r\n\r\n        components: {\r\n            \"content-container\": ContentContainer\r\n        }\r\n    };\r\n</script>\r\n\r\n<style scoped>\r\n    #app {\r\n        position: absolute;\r\n\r\n        top: 0;\r\n        left: 0;\r\n\r\n        width: 100%;\r\n        height: 100%;\r\n\r\n        display: grid;\r\n\r\n        grid-template-rows: auto;\r\n        grid-template-columns: auto;\r\n    }\r\n\r\n    .app-dark {\r\n        background-color: rgb(20, 20, 20);\r\n    }\r\n\r\n    .app-light {\r\n        background-color: rgb(210, 210, 210);\r\n    }\r\n\r\n    .app-gradient {\r\n        background-image: linear-gradient(rgb(0, 0, 0), rgb(25, 25, 25));\r\n    }\r\n</style>\r\n\r\n<!-- Global styles -->\r\n<style>\r\n    @font-face {\r\n        font-family: \"Open Sans\";\r\n        src: url(\"../fonts/opensans-regular-webfont.woff\");\r\n    }\r\n\r\n    @font-face {\r\n        font-family: \"Plex Mono\";\r\n        src: url(\"../fonts/IBMPlexMono-Regular.ttf\");\r\n    }\r\n\r\n    /*To let me style buttons*/\r\n    button {\r\n        all: unset\r\n    }\r\n\r\n    /*Text themes*/\r\n    .text-dark {\r\n    \tcolor: rgb(255, 255, 255);\r\n    \tfont-family: \"Open Sans\";\r\n    }\r\n\r\n    .text-light {\r\n    \tcolor: rgb(0, 0, 0);\r\n    \tfont-family: \"Open Sans\";\r\n    }\r\n\r\n    .text-gradient {\r\n    \tcolor: rgb(255, 255, 255);\r\n    \tfont-family: \"Plex Mono\";\r\n    }\r\n\r\n    /* Game button themes */\r\n    .game-button-dark {\r\n    \tcolor: rgb(255, 255, 255);\r\n\r\n        background-color: rgb(32, 32, 32);\r\n\r\n        box-shadow: 2px 2px 2px black;\r\n    }\r\n\r\n    .game-button-dark:hover {\r\n        background-color: rgb(40, 40, 40);\r\n    }\r\n\r\n    .game-button-light {\r\n    \tcolor: rgb(0, 0, 0);\r\n\r\n        background-color: rgb(200, 200, 200);\r\n\r\n        box-shadow: 2px 2px 2px rgb(180, 180, 180);\r\n    }\r\n\r\n    .game-button-light:hover {\r\n        background-color: rgb(215, 215, 215);\r\n    }\r\n\r\n    .game-button-gradient {\r\n    \tcolor: rgb(255, 255, 255);\r\n\r\n        background-color: rgba(0, 0, 0, 0);\r\n\r\n    \tborder: 2px solid rgb(195, 195, 195);\r\n    }\r\n\r\n    .game-button-gradient:hover {\r\n    \tbackground-image: linear-gradient(rgb(56, 56, 56), rgb(81, 81, 81));\r\n    }\r\n</style>\r\n"]}, media: undefined });
+
+      };
+      /* scoped */
+      const __vue_scope_id__$9 = "data-v-7ba41ee2";
+      /* module identifier */
+      const __vue_module_identifier__$9 = undefined;
+      /* functional template */
+      const __vue_is_functional_template__$9 = false;
+      /* style inject SSR */
+      
+      /* style inject shadow dom */
+      
+
+      
+      const __vue_component__$9 = normalizeComponent(
+        { render: __vue_render__$9, staticRenderFns: __vue_staticRenderFns__$9 },
+        __vue_inject_styles__$9,
+        __vue_script__$9,
+        __vue_scope_id__$9,
+        __vue_is_functional_template__$9,
+        __vue_module_identifier__$9,
         false,
         createInjector,
         undefined,
@@ -793,7 +882,7 @@
         store,
 
         components: {
-            app: __vue_component__$8
+            app: __vue_component__$9
         },
 
         template: `<app></app>`

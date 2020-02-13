@@ -1,7 +1,7 @@
 <!-- This component represents an item in the header -->
 <template>
     <button class="header-item" @click="setGameState(state)" v-bind:class="[themeClass('header-item'), themeClass('text')]">
-        {{ text }}
+        {{ capitalize(state) }}
     </button>
 </template>
 
@@ -9,10 +9,12 @@
     import gameState from "../../../mixins/store/gameState.js";
     import theme from "../../../mixins/store/theme.js";
 
-    export default {
-        mixins: [gameState, theme],
+    import utils from "../../../mixins/utils.js";
 
-        props: ["text", "state"]
+    export default {
+        mixins: [gameState, theme, utils],
+
+        props: ["state"]
     };
 </script>
 

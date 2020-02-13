@@ -2,6 +2,7 @@
 <template>
     <div id="options">
         <div class="options-row">
+            <theme-options-button></theme-options-button>
             <options-button title="Save" v-bind:func="() => 3"></options-button>
             <options-button title="Reset" v-bind:func="() => 4"></options-button>
         </div>
@@ -10,10 +11,12 @@
 
 <script>
     import OptionsButton from "./OptionsButton.vue";
+    import ThemeOptionsButton from "./ThemeOptionsButton.vue";
 
     export default {
         components: {
-            "options-button": OptionsButton
+            "options-button": OptionsButton,
+            "theme-options-button": ThemeOptionsButton
         }
     };
 </script>
