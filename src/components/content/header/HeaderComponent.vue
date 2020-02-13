@@ -2,8 +2,8 @@
 <!-- Name is used to avoid conflicts with builtin HTML elements -->
 <template>
     <div id="header" v-bind:class="themeClass('header')">
-        <header-item text="Main" v-bind:state="gameStates.main"></header-item>
-        <header-item text="Options" v-bind:state="gameStates.options"></header-item>
+        <header-item v-bind:state="gameStates.main"></header-item>
+        <header-item v-bind:state="gameStates.options"></header-item>
     </div>
 </template>
 

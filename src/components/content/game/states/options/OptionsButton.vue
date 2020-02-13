@@ -18,13 +18,6 @@
 </script>
 
 <style scoped>
-    .options-button-container {
-        display: grid;
-
-        grid-template-rows: 10% auto 10%;
-        grid-template-columns: 10% auto 10%;
-    }
-
     .options-button {
         width: 100%;
         height: 100%;
@@ -40,5 +33,14 @@
         font-size: 235%;
 
     	user-select: none;
+    }
+</style>
+
+<style>
+    .options-button-container {
+        display: grid;
+
+        grid-template-rows: 10% auto 10%;
+        grid-template-columns: 10% auto 10%;
     }
 </style>
