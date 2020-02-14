@@ -16,3 +16,9 @@ export const selectorStates = {
     none: "none",
     theme: "theme"
 };
+
+// This enum represents the default save file
+export const defaultSave = {
+    theme: themes.light,
+    gameState: gameStates.main
+};

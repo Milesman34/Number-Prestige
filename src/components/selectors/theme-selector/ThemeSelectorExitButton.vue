@@ -1,6 +1,6 @@
 <!-- This component allows the player to exit the theme selector -->
 <template>
-    <button id="theme-selector-exit-button" v-bind:class="[themeClass('selector-item'), themeClass('text'), themeClass('selector-hover')]" @click="closeSelector()">Exit</button>
+    <button id="theme-selector-exit-button" v-bind:class="[themeClass('selector-hover'), themeClass('selector-item'), themeClass('text')]" @click="closeSelector()">Exit</button>
 </template>
 
 <script>

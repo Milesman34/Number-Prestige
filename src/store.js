@@ -1,14 +1,14 @@
 import Vuex from "vuex";
 
-import { gameStates, selectorStates, themes } from "./enums.js";
+import { defaultSave, selectorStates } from "./enums.js";
 
 export default new Vuex.Store({
     state: {
         // Current theme
-        theme: themes.light,
+        theme: defaultSave.theme,
 
         // Current game state
-        gameState: gameStates.main,
+        gameState: defaultSave.gameState,
 
         // Current open selector
         selector: selectorStates.none

@@ -2,7 +2,7 @@
 <template>
     <button
         class="theme-selector-list-button"
-        v-bind:class="[themeClass('selector-item'), themeClass('selector-hover'), themeClass('text')]"
+        v-bind:class="[themeClass('selector-hover'), themeClass('selector-item'), themeClass('text')]"
         @click="setTheme(theme)">{{ capitalize(theme) }}
     </button>
 </template>

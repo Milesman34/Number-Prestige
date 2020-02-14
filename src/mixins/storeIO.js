@@ -16,19 +16,6 @@ export const theme = {
     }
 };
 
-// This mixin grants access to the gameState variable
-export const gameState = {
-    methods: {
-        getGameState() {
-            return this.$store.state.gameState;
-        },
-
-        setGameState(gameState) {
-            this.$store.commit("setGameState", gameState)
-        }
-    }
-};
-
 // This mixin grants access to the selector variable
 export const selector = {
     methods: {
@@ -41,6 +28,22 @@ export const selector = {
         },
 
         closeSelector() {
+            this.$store.commit("closeSelector");
+        }
+    }
+};
+
+// This mixin grants access to the gameState variable
+export const gameState = {
+    methods: {
+        getGameState() {
+            return this.$store.state.gameState;
+        },
+
+        setGameState(gameState) {
+            this.$store.commit("setGameState", gameState);
+
+            // Closes open selectors
             this.$store.commit("closeSelector");
         }
     }

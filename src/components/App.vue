@@ -11,14 +11,24 @@
 
     import SelectorContainer from "./selectors/SelectorContainer.vue";
 
+    import save from "../mixins/save.js";
+
     import { theme } from "../mixins/storeIO.js";
 
     export default {
-        mixins: [theme],
+        mixins: [save, theme],
 
         components: {
             "content-container": ContentContainer,
             "selector-container": SelectorContainer
+        },
+
+        created() {
+            // Loads save data
+            this.loadSaveData();
+
+            // Sets up autosave (5 second interval)
+            setInterval(this.save, 5000);
         }
     };
 </script>

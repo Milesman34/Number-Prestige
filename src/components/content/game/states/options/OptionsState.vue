@@ -3,8 +3,9 @@
     <div id="options">
         <div class="options-row">
             <theme-options-button></theme-options-button>
-            <options-button title="Save" v-bind:func="() => 3"></options-button>
-            <options-button title="Reset" v-bind:func="() => 4"></options-button>
+            <options-button title="Save" v-bind:func="save"></options-button>
+            <options-button title="Load" v-bind:func="loadSaveData"></options-button>
+            <options-button title="Reset" v-bind:func="() => confirmReset() && resetSave()"></options-button>
         </div>
     </div>
 </template>
@@ -13,7 +14,11 @@
     import OptionsButton from "./OptionsButton.vue";
     import ThemeOptionsButton from "./theme-options-button/ThemeOptionsButton.vue";
 
+    import save from "../../../../../mixins/save.js";
+
     export default {
+        mixins: [save],
+
         components: {
             "options-button": OptionsButton,
             "theme-options-button": ThemeOptionsButton
