@@ -62,6 +62,10 @@ export const score = {
 
         addScore(score) {
             this.$store.commit("addScore", score);
+        },
+
+        resetScore() {
+            this.$store.commit("resetScore");
         }
     }
 };
@@ -98,4 +102,43 @@ export const gain = {
             this.$store.commit("increaseGain");
         }
     }
-}
+};
+
+// This mixin grants access to the prestigePoints variable
+export const prestigePoints = {
+    methods: {
+        getPrestigePoints() {
+            return this.$store.state.prestigePoints;
+        },
+
+        setPrestigePoints(prestigePoints) {
+            this.$store.commit("setPrestigePoints", prestigePoints);
+        },
+
+        addPrestigePoints(prestigePoints) {
+            this.$store.commit("addPrestigePoints", prestigePoints);
+        }
+    }
+};
+
+// This mixin grants access to the prestiges variable
+export const prestiges = {
+    methods: {
+        getPrestiges() {
+            return this.$store.state.prestiges;
+        },
+
+        setPrestiges(prestiges) {
+            this.$store.commit("setPrestiges", prestiges);
+        },
+
+        increasePrestiges() {
+            this.$store.commit("increasePrestiges");
+        },
+
+        // Checks if the player has prestiged
+        hasPrestiged() {
+            return this.getPrestiges() > 0;
+        }
+    }
+};

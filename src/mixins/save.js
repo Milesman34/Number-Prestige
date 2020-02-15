@@ -1,6 +1,6 @@
 import { defaultSave } from "../enums.js";
 
-import { gain, gameState, goal, score, selector, theme } from "./storeIO.js";
+import { gain, gameState, goal, prestigePoints, prestiges, score, selector, theme } from "./storeIO.js";
 
 // This mixin handles the player's save data
 export default {
@@ -9,13 +9,15 @@ export default {
         ...gain.methods,
         ...gameState.methods,
         ...goal.methods,
+        ...prestigePoints.methods,
+        ...prestiges.methods,
         ...score.methods,
         ...selector.methods,
         ...theme.methods,
 
         // Encodes the player's save data
-        encodeSaveData({ theme, gameState, score, goal, gain }) {
-            return `${theme}|${gameState}|${score}|${goal}|${gain}`;
+        encodeSaveData({ theme, gameState, score, goal, gain, prestigePoints, prestiges }) {
+            return `${theme}|${gameState}|${score}|${goal}|${gain}|${prestigePoints}|${prestiges}`;
         },
 
         // Decodes the given save data
@@ -28,7 +30,9 @@ export default {
                 gameState: items.length > 1 ? items[1] : defaultSave.gameState,
                 score: items.length > 2 ? parseInt(items[2]) : defaultSave.score,
                 goal: items.length > 3 ? parseInt(items[3]) : defaultSave.goal,
-                gain: items.length > 4 ? parseInt(items[4]) : defaultSave.gain
+                gain: items.length > 4 ? parseInt(items[4]) : defaultSave.gain,
+                prestigePoints: items.length > 5 ? parseInt(items[5]) : defaultSave.prestigePoints,
+                prestiges: items.length > 6 ? parseInt(items[6]) : defaultSave.prestiges
             };
         },
 
@@ -39,7 +43,9 @@ export default {
                 gameState: this.getGameState(),
                 score: this.getScore(),
                 goal: this.getGoal(),
-                gain: this.getGain()
+                gain: this.getGain(),
+                prestigePoints: this.getPrestigePoints(),
+                prestiges: this.getPrestiges()
             }));
         },
 
@@ -58,6 +64,8 @@ export default {
             this.setScore(defaultSave.score);
             this.setGoal(defaultSave.goal);
             this.setGain(defaultSave.gain);
+            this.setPrestigePoints(defaultSave.prestigePoints);
+            this.setPrestiges(defaultSave.prestiges);
 
             // Saves over player's save file
             this.save();
@@ -73,7 +81,9 @@ export default {
                 gameState: defaultSave.gameState,
                 score: defaultSave.score,
                 goal: defaultSave.goal,
-                gain: defaultSave.gain
+                gain: defaultSave.gain,
+                prestigePoints: defaultSave.prestigePoints,
+                prestiges: defaultSave.prestiges
             }) : save;
         },
 
@@ -89,6 +99,8 @@ export default {
             this.setScore(saveObject.score);
             this.setGoal(saveObject.goal);
             this.setGain(saveObject.gain);
+            this.setPrestigePoints(saveObject.prestigePoints);
+            this.setPrestiges(saveObject.prestiges);
         }
     }
 };

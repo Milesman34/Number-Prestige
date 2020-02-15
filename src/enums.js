@@ -23,5 +23,7 @@ export const defaultSave = {
     gameState: gameStates.main,
     score: 0,
     goal: 10,
-    gain: 1
+    gain: 1,
+    prestigePoints: 0,
+    prestiges: 0
 };

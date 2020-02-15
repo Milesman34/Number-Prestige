@@ -20,7 +20,13 @@ export default new Vuex.Store({
         goal: defaultSave.goal,
 
         // Amount gained per click
-        gain: defaultSave.gain
+        gain: defaultSave.gain,
+
+        // Number of prestige points
+        prestigePoints: defaultSave.prestigePoints,
+
+        // Number of times prestiged
+        prestiges: defaultSave.prestiges
     },
 
     mutations: {
@@ -54,6 +60,11 @@ export default new Vuex.Store({
             state.score += score;
         },
 
+        // Resets the score
+        resetScore(state) {
+            state.score = 0;
+        },
+
         // Sets the goal
         setGoal(state, goal) {
             state.goal = goal;
@@ -72,6 +83,26 @@ export default new Vuex.Store({
         // Increases the gain by adding 1 to it
         increaseGain(state) {
             state.gain++;
+        },
+
+        // Sets the number of prestige points
+        setPrestigePoints(state, prestigePoints) {
+            state.prestigePoints = prestigePoints;
+        },
+
+        // Adds to the number of prestige points
+        addPrestigePoints(state, prestigePoints) {
+            state.prestigePoints += prestigePoints;
+        },
+
+        // Sets the number of prestiges
+        setPrestiges(state, prestiges) {
+            state.prestiges = prestiges;
+        },
+
+        // Increases the number of prestiges by 1
+        increasePrestiges(state) {
+            state.prestiges++;
         }
     }
 });

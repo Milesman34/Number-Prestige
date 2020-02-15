@@ -28,6 +28,11 @@ export default {
 
                 return `${div}e${oom}`;
             } else return this.roundTo(num, places).toString();
+        },
+
+        //Returns the plural ending of a number (for standard uses)
+        pluralEnding(num) {
+            return Math.abs(num) === 1 ? "" : "s";
         }
     }
 };

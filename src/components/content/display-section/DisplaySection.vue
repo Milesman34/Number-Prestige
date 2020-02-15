@@ -2,15 +2,18 @@
 <template>
     <div id="display-section">
         <number-display></number-display>
+        <prestige-display></prestige-display>
     </div>
 </template>
 
 <script>
     import NumberDisplay from "./number-display/NumberDisplay.vue";
+    import PrestigeDisplay from "./prestige-display/PrestigeDisplay.vue";
 
     export default {
         components: {
-            "number-display": NumberDisplay
+            "number-display": NumberDisplay,
+            "prestige-display": PrestigeDisplay
         }
     };
 </script>
