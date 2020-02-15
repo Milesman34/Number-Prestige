@@ -17,7 +17,10 @@ export default new Vuex.Store({
         score: defaultSave.score,
 
         // Current goal for prestiging
-        goal: defaultSave.goal
+        goal: defaultSave.goal,
+
+        // Amount gained per click
+        gain: defaultSave.gain
     },
 
     mutations: {
@@ -59,6 +62,16 @@ export default new Vuex.Store({
         // Increases the goal by doubling it (done on prestige)
         increaseGoal(state) {
             state.goal *= 2;
+        },
+
+        // Sets the amount gained on click
+        setGain(state, gain) {
+            state.gain = gain;
+        },
+
+        // Increases the gain by adding 1 to it
+        increaseGain(state) {
+            state.gain++;
         }
     }
 });
