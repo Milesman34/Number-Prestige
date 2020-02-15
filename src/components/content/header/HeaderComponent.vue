@@ -4,6 +4,11 @@
     <div id="header" v-bind:class="themeClass('header')">
         <header-item v-bind:state="gameStates.main"></header-item>
         <header-item v-bind:state="gameStates.options"></header-item>
+
+        <template v-if="hasPrestiged()">
+            <header-item v-bind:state="gameStates.upgrades"></header-item>
+            <header-item v-bind:state="gameStates.automation"></header-item>
+        </template>
     </div>
 </template>
 
@@ -12,10 +17,10 @@
 
     import { gameStates } from "../../../enums.js";
 
-    import { theme } from "../../../mixins/storeIO.js";
+    import { prestiges, theme } from "../../../mixins/storeIO.js";
 
     export default {
-        mixins: [theme],
+        mixins: [prestiges, theme],
 
         //This seems to be a good way to load enums
         data: () => ({

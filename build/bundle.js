@@ -1010,7 +1010,9 @@
     // This enum represents all valid game states
     const gameStates = {
         main: "main",
-        options: "options"
+        options: "options",
+        upgrades: "upgrades",
+        automation: "automation"
     };
 
     // This enum represents all valid selector states
@@ -1439,7 +1441,7 @@
     //
 
     var script$f = {
-        mixins: [theme],
+        mixins: [prestiges, theme],
 
         //This seems to be a good way to load enums
         data: () => ({
@@ -1465,9 +1467,17 @@
         [
           _c("header-item", { attrs: { state: _vm.gameStates.main } }),
           _vm._v(" "),
-          _c("header-item", { attrs: { state: _vm.gameStates.options } })
+          _c("header-item", { attrs: { state: _vm.gameStates.options } }),
+          _vm._v(" "),
+          _vm.hasPrestiged()
+            ? [
+                _c("header-item", { attrs: { state: _vm.gameStates.upgrades } }),
+                _vm._v(" "),
+                _c("header-item", { attrs: { state: _vm.gameStates.automation } })
+              ]
+            : _vm._e()
         ],
-        1
+        2
       )
     };
     var __vue_staticRenderFns__$f = [];
@@ -1476,11 +1486,11 @@
       /* style */
       const __vue_inject_styles__$f = function (inject) {
         if (!inject) return
-        inject("data-v-73bb8063_0", { source: "\n#header[data-v-73bb8063] {\n    width: 100%;\n\n    display: grid;\n\n    grid-template-rows: 100%;\n    grid-template-columns: repeat(auto-fill, auto);\n}\n.header-dark[data-v-73bb8063] {\n    background-color: rgb(24, 24, 24);\n}\n.header-light[data-v-73bb8063] {\n    background-color: rgb(200, 200, 200);\n}\n.header-gradient[data-v-73bb8063] {\n    background-image: linear-gradient(rgb(36, 36, 36), rgb(61, 61, 61));\n}\n", map: {"version":3,"sources":["/mnt/c/users/miles/onedrive/documents/atom-programs-new/games/number-prestige/src/components/content/header/HeaderComponent.vue"],"names":[],"mappings":";AA+BA;IACA,WAAA;;IAEA,aAAA;;IAEA,wBAAA;IACA,8CAAA;AACA;AAEA;IACA,iCAAA;AACA;AAEA;IACA,oCAAA;AACA;AAEA;IACA,mEAAA;AACA","file":"HeaderComponent.vue","sourcesContent":["<!-- This component represents the app's header -->\r\n<!-- Name is used to avoid conflicts with builtin HTML elements -->\r\n<template>\r\n    <div id=\"header\" v-bind:class=\"themeClass('header')\">\r\n        <header-item v-bind:state=\"gameStates.main\"></header-item>\r\n        <header-item v-bind:state=\"gameStates.options\"></header-item>\r\n    </div>\r\n</template>\r\n\r\n<script>\r\n    import HeaderItem from \"./HeaderItem.vue\";\r\n\r\n    import { gameStates } from \"../../../enums.js\";\r\n\r\n    import { theme } from \"../../../mixins/storeIO.js\";\r\n\r\n    export default {\r\n        mixins: [theme],\r\n\r\n        //This seems to be a good way to load enums\r\n        data: () => ({\r\n            gameStates\r\n        }),\r\n\r\n        components: {\r\n            \"header-item\": HeaderItem\r\n        }\r\n    };\r\n</script>\r\n\r\n<style scoped>\r\n    #header {\r\n        width: 100%;\r\n\r\n        display: grid;\r\n\r\n        grid-template-rows: 100%;\r\n        grid-template-columns: repeat(auto-fill, auto);\r\n    }\r\n\r\n    .header-dark {\r\n        background-color: rgb(24, 24, 24);\r\n    }\r\n\r\n    .header-light {\r\n        background-color: rgb(200, 200, 200);\r\n    }\r\n\r\n    .header-gradient {\r\n        background-image: linear-gradient(rgb(36, 36, 36), rgb(61, 61, 61));\r\n    }\r\n</style>\r\n"]}, media: undefined });
+        inject("data-v-12a79238_0", { source: "\n#header[data-v-12a79238] {\n    width: 100%;\n\n    display: grid;\n\n    grid-template-rows: 100%;\n    grid-template-columns: repeat(auto-fill, auto);\n}\n.header-dark[data-v-12a79238] {\n    background-color: rgb(24, 24, 24);\n}\n.header-light[data-v-12a79238] {\n    background-color: rgb(200, 200, 200);\n}\n.header-gradient[data-v-12a79238] {\n    background-image: linear-gradient(rgb(36, 36, 36), rgb(61, 61, 61));\n}\n", map: {"version":3,"sources":["/mnt/c/users/miles/onedrive/documents/atom-programs-new/games/number-prestige/src/components/content/header/HeaderComponent.vue"],"names":[],"mappings":";AAoCA;IACA,WAAA;;IAEA,aAAA;;IAEA,wBAAA;IACA,8CAAA;AACA;AAEA;IACA,iCAAA;AACA;AAEA;IACA,oCAAA;AACA;AAEA;IACA,mEAAA;AACA","file":"HeaderComponent.vue","sourcesContent":["<!-- This component represents the app's header -->\r\n<!-- Name is used to avoid conflicts with builtin HTML elements -->\r\n<template>\r\n    <div id=\"header\" v-bind:class=\"themeClass('header')\">\r\n        <header-item v-bind:state=\"gameStates.main\"></header-item>\r\n        <header-item v-bind:state=\"gameStates.options\"></header-item>\r\n\r\n        <template v-if=\"hasPrestiged()\">\r\n            <header-item v-bind:state=\"gameStates.upgrades\"></header-item>\r\n            <header-item v-bind:state=\"gameStates.automation\"></header-item>\r\n        </template>\r\n    </div>\r\n</template>\r\n\r\n<script>\r\n    import HeaderItem from \"./HeaderItem.vue\";\r\n\r\n    import { gameStates } from \"../../../enums.js\";\r\n\r\n    import { prestiges, theme } from \"../../../mixins/storeIO.js\";\r\n\r\n    export default {\r\n        mixins: [prestiges, theme],\r\n\r\n        //This seems to be a good way to load enums\r\n        data: () => ({\r\n            gameStates\r\n        }),\r\n\r\n        components: {\r\n            \"header-item\": HeaderItem\r\n        }\r\n    };\r\n</script>\r\n\r\n<style scoped>\r\n    #header {\r\n        width: 100%;\r\n\r\n        display: grid;\r\n\r\n        grid-template-rows: 100%;\r\n        grid-template-columns: repeat(auto-fill, auto);\r\n    }\r\n\r\n    .header-dark {\r\n        background-color: rgb(24, 24, 24);\r\n    }\r\n\r\n    .header-light {\r\n        background-color: rgb(200, 200, 200);\r\n    }\r\n\r\n    .header-gradient {\r\n        background-image: linear-gradient(rgb(36, 36, 36), rgb(61, 61, 61));\r\n    }\r\n</style>\r\n"]}, media: undefined });
 
       };
       /* scoped */
-      const __vue_scope_id__$f = "data-v-73bb8063";
+      const __vue_scope_id__$f = "data-v-12a79238";
       /* module identifier */
       const __vue_module_identifier__$f = undefined;
       /* functional template */

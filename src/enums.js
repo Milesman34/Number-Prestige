@@ -8,7 +8,9 @@ export const themes = {
 // This enum represents all valid game states
 export const gameStates = {
     main: "main",
-    options: "options"
+    options: "options",
+    upgrades: "upgrades",
+    automation: "automation"
 };
 
 // This enum represents all valid selector states
