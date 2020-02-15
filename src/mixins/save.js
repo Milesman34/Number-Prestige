@@ -1,18 +1,20 @@
 import { defaultSave } from "../enums.js";
 
-import { gameState, selector, theme } from "./storeIO.js";
+import { gameState, goal, score, selector, theme } from "./storeIO.js";
 
 // This mixin handles the player's save data
 export default {
     methods: {
         // Due to how saving works, it must also contain the methods used in some other mixins
         ...gameState.methods,
+        ...goal.methods,
+        ...score.methods,
         ...selector.methods,
         ...theme.methods,
 
         // Encodes the player's save data
-        encodeSaveData({ theme, gameState }) {
-            return `${theme}|${gameState}`;
+        encodeSaveData({ theme, gameState, score, goal }) {
+            return `${theme}|${gameState}|${score}|${goal}`;
         },
 
         // Decodes the given save data
@@ -22,7 +24,9 @@ export default {
             // Loads default items if needed
             return {
                 theme: items.length > 0 ? items[0] : defaultSave.theme,
-                gameState: items.length > 1 ? items[1] : defaultSave.gameState
+                gameState: items.length > 1 ? items[1] : defaultSave.gameState,
+                score: items.length > 2 ? parseInt(items[2]) : defaultSave.score,
+                goal: items.length > 3 ? parseInt(items[3]) : defaultSave.goal
             };
         },
 
@@ -30,7 +34,9 @@ export default {
         save() {
             localStorage.setItem("save", this.encodeSaveData({
                 theme: this.getTheme(),
-                gameState: this.getGameState()
+                gameState: this.getGameState(),
+                score: this.getScore(),
+                goal: this.getGoal()
             }));
         },
 
@@ -46,6 +52,8 @@ export default {
             this.setGameState(defaultSave.gameState);
             this.closeSelector();
             this.setTheme(defaultSave.theme);
+            this.setScore(defaultSave.score);
+            this.setGoal(defaultSave.goal);
 
             // Saves over player's save file
             this.save();
@@ -58,7 +66,9 @@ export default {
             // Returns the save if possible, returning the default save data if the save could not be found
             return save === null ? this.encodeSaveData({
                 theme: defaultSave.theme,
-                gameState: defaultSave.gameState
+                gameState: defaultSave.gameState,
+                score: defaultSave.score,
+                goal: defaultSave.goal
             }) : save;
         },
 
@@ -71,6 +81,8 @@ export default {
             // Sets certain values based on the values in the save object
             this.setGameState(saveObject.gameState);
             this.setTheme(saveObject.theme);
+            this.setScore(saveObject.score);
+            this.setGoal(saveObject.goal);
         }
     }
 };

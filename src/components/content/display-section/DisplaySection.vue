@@ -1,11 +1,18 @@
 <!-- This component represents the section used to display the player's score -->
 <template>
     <div id="display-section">
+        <number-display></number-display>
     </div>
 </template>
 
 <script>
-    export default {};
+    import NumberDisplay from "./number-display/NumberDisplay.vue";
+
+    export default {
+        components: {
+            "number-display": NumberDisplay
+        }
+    };
 </script>
 
 <style scoped>

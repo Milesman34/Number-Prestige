@@ -48,3 +48,37 @@ export const gameState = {
         }
     }
 };
+
+// This mixin grants access to the score variable
+export const score = {
+    methods: {
+        getScore() {
+            return this.$store.state.score;
+        },
+
+        setScore(score) {
+            this.$store.commit("setScore", score);
+        },
+
+        addScore(score) {
+            this.$store.commit("addScore", score);
+        }
+    }
+};
+
+// This mixin grants access to the goal variable
+export const goal = {
+    methods: {
+        getGoal() {
+            return this.$store.state.goal;
+        },
+
+        setGoal(goal) {
+            this.$store.commit("setGoal", goal);
+        },
+
+        increaseGoal() {
+            this.$store.commit("increaseGoal");
+        }
+    }
+};
