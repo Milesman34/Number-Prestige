@@ -20,5 +20,7 @@ export const selectorStates = {
 // This enum represents the default save file
 export const defaultSave = {
     theme: themes.light,
-    gameState: gameStates.main
+    gameState: gameStates.main,
+    score: 0,
+    goal: 10
 };

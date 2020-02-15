@@ -11,7 +11,13 @@ export default new Vuex.Store({
         gameState: defaultSave.gameState,
 
         // Current open selector
-        selector: selectorStates.none
+        selector: selectorStates.none,
+
+        // Current score
+        score: defaultSave.score,
+
+        // Current goal for prestiging
+        goal: defaultSave.goal
     },
 
     mutations: {
@@ -33,6 +39,26 @@ export default new Vuex.Store({
         // Closes any active selectors
         closeSelector(state) {
             state.selector = selectorStates.none;
+        },
+
+        // Sets the score
+        setScore(state, score) {
+            state.score = score;
+        },
+
+        // Adds to the score
+        addScore(state, score) {
+            state.score += score;
+        },
+
+        // Sets the goal
+        setGoal(state, goal) {
+            state.goal = goal;
+        },
+
+        // Increases the goal by doubling it (done on prestige)
+        increaseGoal(state) {
+            state.goal *= 2;
         }
     }
 });
