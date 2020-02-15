@@ -1,11 +1,21 @@
 <!-- This component represents the section used to display the player's score -->
 <template>
     <div id="display-section">
+        <number-display></number-display>
+        <prestige-display></prestige-display>
     </div>
 </template>
 
 <script>
-    export default {};
+    import NumberDisplay from "./number-display/NumberDisplay.vue";
+    import PrestigeDisplay from "./prestige-display/PrestigeDisplay.vue";
+
+    export default {
+        components: {
+            "number-display": NumberDisplay,
+            "prestige-display": PrestigeDisplay
+        }
+    };
 </script>
 
 <style scoped>

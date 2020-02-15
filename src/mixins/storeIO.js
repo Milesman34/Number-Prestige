@@ -48,3 +48,97 @@ export const gameState = {
         }
     }
 };
+
+// This mixin grants access to the score variable
+export const score = {
+    methods: {
+        getScore() {
+            return this.$store.state.score;
+        },
+
+        setScore(score) {
+            this.$store.commit("setScore", score);
+        },
+
+        addScore(score) {
+            this.$store.commit("addScore", score);
+        },
+
+        resetScore() {
+            this.$store.commit("resetScore");
+        }
+    }
+};
+
+// This mixin grants access to the goal variable
+export const goal = {
+    methods: {
+        getGoal() {
+            return this.$store.state.goal;
+        },
+
+        setGoal(goal) {
+            this.$store.commit("setGoal", goal);
+        },
+
+        increaseGoal() {
+            this.$store.commit("increaseGoal");
+        }
+    }
+};
+
+// This mixin grants access to the gain variable
+export const gain = {
+    methods: {
+        getGain() {
+            return this.$store.state.gain;
+        },
+
+        setGain(gain) {
+            this.$store.commit("setGain", gain);
+        },
+
+        increaseGain() {
+            this.$store.commit("increaseGain");
+        }
+    }
+};
+
+// This mixin grants access to the prestigePoints variable
+export const prestigePoints = {
+    methods: {
+        getPrestigePoints() {
+            return this.$store.state.prestigePoints;
+        },
+
+        setPrestigePoints(prestigePoints) {
+            this.$store.commit("setPrestigePoints", prestigePoints);
+        },
+
+        addPrestigePoints(prestigePoints) {
+            this.$store.commit("addPrestigePoints", prestigePoints);
+        }
+    }
+};
+
+// This mixin grants access to the prestiges variable
+export const prestiges = {
+    methods: {
+        getPrestiges() {
+            return this.$store.state.prestiges;
+        },
+
+        setPrestiges(prestiges) {
+            this.$store.commit("setPrestiges", prestiges);
+        },
+
+        increasePrestiges() {
+            this.$store.commit("increasePrestiges");
+        },
+
+        // Checks if the player has prestiged
+        hasPrestiged() {
+            return this.getPrestiges() > 0;
+        }
+    }
+};

@@ -8,7 +8,9 @@ export const themes = {
 // This enum represents all valid game states
 export const gameStates = {
     main: "main",
-    options: "options"
+    options: "options",
+    upgrades: "upgrades",
+    automation: "automation"
 };
 
 // This enum represents all valid selector states
@@ -20,5 +22,10 @@ export const selectorStates = {
 // This enum represents the default save file
 export const defaultSave = {
     theme: themes.light,
-    gameState: gameStates.main
+    gameState: gameStates.main,
+    score: 0,
+    goal: 10,
+    gain: 1,
+    prestigePoints: 0,
+    prestiges: 0
 };
