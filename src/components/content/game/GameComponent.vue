@@ -3,12 +3,14 @@
     <div id="game-component">
         <main-state v-if="getGameState() === gameStates.main"></main-state>
         <options-state v-if="getGameState() === gameStates.options"></options-state>
+        <upgrades-state v-if="getGameState() === gameStates.upgrades"></upgrades-state>
     </div>
 </template>
 
 <script>
     import MainState from "./states/main/MainState.vue";
     import OptionsState from "./states/options/OptionsState.vue";
+    import UpgradesState from "./states/upgrades/UpgradesState.vue";
 
     import { gameStates } from "../../../enums.js";
 
@@ -23,7 +25,8 @@
 
         components: {
             "main-state": MainState,
-            "options-state": OptionsState
+            "options-state": OptionsState,
+            "upgrades-state": UpgradesState
         }
     };
 </script>
