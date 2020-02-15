@@ -22,5 +22,6 @@ export const defaultSave = {
     theme: themes.light,
     gameState: gameStates.main,
     score: 0,
-    goal: 10
+    goal: 10,
+    gain: 1
 };

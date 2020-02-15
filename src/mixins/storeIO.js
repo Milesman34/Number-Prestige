@@ -82,3 +82,20 @@ export const goal = {
         }
     }
 };
+
+// This mixin grants access to the gain variable
+export const gain = {
+    methods: {
+        getGain() {
+            return this.$store.state.gain;
+        },
+
+        setGain(gain) {
+            this.$store.commit("setGain", gain);
+        },
+
+        increaseGain() {
+            this.$store.commit("increaseGain");
+        }
+    }
+}

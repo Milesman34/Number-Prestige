@@ -1,11 +1,12 @@
 import { defaultSave } from "../enums.js";
 
-import { gameState, goal, score, selector, theme } from "./storeIO.js";
+import { gain, gameState, goal, score, selector, theme } from "./storeIO.js";
 
 // This mixin handles the player's save data
 export default {
     methods: {
         // Due to how saving works, it must also contain the methods used in some other mixins
+        ...gain.methods,
         ...gameState.methods,
         ...goal.methods,
         ...score.methods,
@@ -13,8 +14,8 @@ export default {
         ...theme.methods,
 
         // Encodes the player's save data
-        encodeSaveData({ theme, gameState, score, goal }) {
-            return `${theme}|${gameState}|${score}|${goal}`;
+        encodeSaveData({ theme, gameState, score, goal, gain }) {
+            return `${theme}|${gameState}|${score}|${goal}|${gain}`;
         },
 
         // Decodes the given save data
@@ -26,7 +27,8 @@ export default {
                 theme: items.length > 0 ? items[0] : defaultSave.theme,
                 gameState: items.length > 1 ? items[1] : defaultSave.gameState,
                 score: items.length > 2 ? parseInt(items[2]) : defaultSave.score,
-                goal: items.length > 3 ? parseInt(items[3]) : defaultSave.goal
+                goal: items.length > 3 ? parseInt(items[3]) : defaultSave.goal,
+                gain: items.length > 4 ? parseInt(items[4]) : defaultSave.gain
             };
         },
 
@@ -36,7 +38,8 @@ export default {
                 theme: this.getTheme(),
                 gameState: this.getGameState(),
                 score: this.getScore(),
-                goal: this.getGoal()
+                goal: this.getGoal(),
+                gain: this.getGain()
             }));
         },
 
@@ -54,6 +57,7 @@ export default {
             this.setTheme(defaultSave.theme);
             this.setScore(defaultSave.score);
             this.setGoal(defaultSave.goal);
+            this.setGain(defaultSave.gain);
 
             // Saves over player's save file
             this.save();
@@ -68,7 +72,8 @@ export default {
                 theme: defaultSave.theme,
                 gameState: defaultSave.gameState,
                 score: defaultSave.score,
-                goal: defaultSave.goal
+                goal: defaultSave.goal,
+                gain: defaultSave.gain
             }) : save;
         },
 
@@ -83,6 +88,7 @@ export default {
             this.setTheme(saveObject.theme);
             this.setScore(saveObject.score);
             this.setGoal(saveObject.goal);
+            this.setGain(saveObject.gain);
         }
     }
 };

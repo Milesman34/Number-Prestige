@@ -7,7 +7,7 @@
 </template>
 
 <script>
-    import MainState from "./states/MainState.vue";
+    import MainState from "./states/main/MainState.vue";
     import OptionsState from "./states/options/OptionsState.vue";
 
     import { gameStates } from "../../../enums.js";
