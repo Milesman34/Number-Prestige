@@ -89,6 +89,10 @@
 
             increaseGoal() {
                 this.$store.commit("increaseGoal");
+            },
+
+            resetGoal() {
+                this.$store.commit("resetGoal");
             }
         }
     };
@@ -106,6 +110,10 @@
 
             increaseGain() {
                 this.$store.commit("increaseGain");
+            },
+
+            resetGain() {
+                this.$store.commit("resetGain");
             }
         }
     };
@@ -123,6 +131,10 @@
 
             addPrestigePoints(prestigePoints) {
                 this.$store.commit("addPrestigePoints", prestigePoints);
+            },
+
+            subtractPrestigePoints(prestigePoints) {
+                this.$store.commit("subtractPrestigePoints", prestigePoints);
             }
         }
     };
@@ -145,6 +157,62 @@
             // Checks if the player has prestiged
             hasPrestiged() {
                 return this.getPrestiges() > 0;
+            }
+        }
+    };
+
+    // This mixin grants access to the upgrades variable
+    const upgrades = {
+        methods: {
+            // Gets the upgrades array
+            getUpgrades() {
+                return this.$store.state.upgrades;
+            },
+
+            // Returns the cost of a given upgrade
+            getUpgradeCost(id) {
+                return this.getUpgrades()[id].cost;
+            },
+
+            // Returns the amount of a given upgrade
+            getUpgradeAmount(id) {
+                return this.getUpgrades()[id].amount;
+            },
+
+            // Returns the boost given by a given upgrade
+            getUpgradeBoost(id) {
+                return this.getUpgrades()[id].boost();
+            },
+
+            setUpgradeAmount(id, amount) {
+                this.$store.commit("setUpgradeAmount", { id, amount });
+            },
+
+            setUpgradeCost(id, cost) {
+                this.$store.commit("setUpgradeCost", { id, cost });
+            },
+
+            buyUpgrade(id) {
+                this.$store.commit("buyUpgrade", id);
+            }
+        }
+    };
+
+    // Gets calculated variants of certain game values
+    var calculatedValues = {
+        methods: {
+            ...gain.methods,
+            ...goal.methods,
+            ...upgrades.methods,
+
+            // Calculates the total number gain
+            getTotalGain() {
+                return this.getGain() + this.getUpgradeBoost(1);
+            },
+
+            // Calculates the actual prestige goal
+            getActualGoal() {
+                return Math.floor(this.getGoal() * this.getUpgradeBoost(2));
             }
         }
     };
@@ -191,7 +259,7 @@
     //
 
     var script = {
-        mixins: [goal, theme, utils]
+        mixins: [calculatedValues, theme, utils]
     };
 
     function normalizeComponent(template, style, script, scopeId, isFunctionalTemplate, moduleIdentifier /* server only */, shadowMode, createInjector, createInjectorSSR, createInjectorShadow) {
@@ -335,7 +403,7 @@
       return _c(
         "div",
         { class: _vm.themeClass("text"), attrs: { id: "goal-display" } },
-        [_vm._v("Goal: " + _vm._s(_vm.formatSci(_vm.getGoal())))]
+        [_vm._v("Goal: " + _vm._s(_vm.formatSci(_vm.getActualGoal())))]
       )
     };
     var __vue_staticRenderFns__ = [];
@@ -344,11 +412,11 @@
       /* style */
       const __vue_inject_styles__ = function (inject) {
         if (!inject) return
-        inject("data-v-d2248ea6_0", { source: "\n#goal-display[data-v-d2248ea6] {\n    display: flex;\n\n    justify-content: center;\n    align-items: center;\n\n    font-size: 75%;\n}\n", map: {"version":3,"sources":["/mnt/c/users/miles/onedrive/documents/atom-programs-new/games/number-prestige/src/components/content/display-section/number-display/GoalDisplay.vue"],"names":[],"mappings":";AAgBA;IACA,aAAA;;IAEA,uBAAA;IACA,mBAAA;;IAEA,cAAA;AACA","file":"GoalDisplay.vue","sourcesContent":["<!-- This component displays the goal -->\r\n<template>\r\n    <div id=\"goal-display\" v-bind:class=\"themeClass('text')\">Goal: {{ formatSci(getGoal()) }}</div>\r\n</template>\r\n\r\n<script>\r\n    import { goal, theme } from \"../../../../mixins/storeIO.js\";\r\n\r\n    import utils from \"../../../../mixins/utils.js\";\r\n\r\n    export default {\r\n        mixins: [goal, theme, utils]\r\n    };\r\n</script>\r\n\r\n<style scoped>\r\n    #goal-display {\r\n        display: flex;\r\n\r\n        justify-content: center;\r\n        align-items: center;\r\n\r\n        font-size: 75%;\r\n    }\r\n</style>\r\n"]}, media: undefined });
+        inject("data-v-9981f6cc_0", { source: "\n#goal-display[data-v-9981f6cc] {\n    display: flex;\n\n    justify-content: center;\n    align-items: center;\n\n    font-size: 75%;\n}\n", map: {"version":3,"sources":["/mnt/c/users/miles/onedrive/documents/atom-programs-new/games/number-prestige/src/components/content/display-section/number-display/GoalDisplay.vue"],"names":[],"mappings":";AAiBA;IACA,aAAA;;IAEA,uBAAA;IACA,mBAAA;;IAEA,cAAA;AACA","file":"GoalDisplay.vue","sourcesContent":["<!-- This component displays the goal -->\r\n<template>\r\n    <div id=\"goal-display\" v-bind:class=\"themeClass('text')\">Goal: {{ formatSci(getActualGoal()) }}</div>\r\n</template>\r\n\r\n<script>\r\n    import { theme } from \"../../../../mixins/storeIO.js\";\r\n\r\n    import calculatedValues from \"../../../../mixins/calculatedValues.js\";\r\n    import utils from \"../../../../mixins/utils.js\";\r\n\r\n    export default {\r\n        mixins: [calculatedValues, theme, utils]\r\n    };\r\n</script>\r\n\r\n<style scoped>\r\n    #goal-display {\r\n        display: flex;\r\n\r\n        justify-content: center;\r\n        align-items: center;\r\n\r\n        font-size: 75%;\r\n    }\r\n</style>\r\n"]}, media: undefined });
 
       };
       /* scoped */
-      const __vue_scope_id__ = "data-v-d2248ea6";
+      const __vue_scope_id__ = "data-v-9981f6cc";
       /* module identifier */
       const __vue_module_identifier__ = undefined;
       /* functional template */
@@ -487,7 +555,7 @@
     //
 
     var script$3 = {
-        mixins: [gain, goal, prestigePoints, prestiges, score, theme],
+        mixins: [gain, goal, prestigePoints, prestiges, score, theme, upgrades, utils],
 
         methods: {
             // Prestiges the game, resetting the player's score but increasing their number gain by 1 and doubling their goal
@@ -505,7 +573,7 @@
                 this.increaseGoal();
 
                 // Gives the player the required number of prestige points and a prestiged stat
-                this.addPrestigePoints(1);
+                this.addPrestigePoints(this.getUpgradeBoost(0));
                 this.increasePrestiges();
             }
         }
@@ -530,7 +598,14 @@
             }
           }
         },
-        [_vm._v("Prestige for 1 Prestige Point")]
+        [
+          _vm._v(
+            "Prestige for " +
+              _vm._s(_vm.getUpgradeBoost(0)) +
+              " Prestige Point" +
+              _vm._s(_vm.pluralEnding(_vm.getUpgradeBoost(0)))
+          )
+        ]
       )
     };
     var __vue_staticRenderFns__$3 = [];
@@ -539,11 +614,11 @@
       /* style */
       const __vue_inject_styles__$3 = function (inject) {
         if (!inject) return
-        inject("data-v-681588b8_0", { source: "\n#prestige-button[data-v-681588b8] {\n    width: 55%;\n    height: 100%;\n\n    display: flex;\n\n    justify-content: center;\n    align-items: center;\n\n    font-size: 92.5%;\n\n    text-align: center;\n\n    user-select: none;\n}\n", map: {"version":3,"sources":["/mnt/c/users/miles/onedrive/documents/atom-programs-new/games/number-prestige/src/components/content/display-section/prestige-display/PrestigeButton.vue"],"names":[],"mappings":";AAmCA;IACA,UAAA;IACA,YAAA;;IAEA,aAAA;;IAEA,uBAAA;IACA,mBAAA;;IAEA,gBAAA;;IAEA,kBAAA;;IAEA,iBAAA;AACA","file":"PrestigeButton.vue","sourcesContent":["<!-- This component represents the button for prestiging -->\r\n<template>\r\n    <button id=\"prestige-button\" @click=\"prestige()\" v-bind:class=\"[themeClass('game-button'), themeClass('text')]\">Prestige for 1 Prestige Point</button>\r\n</template>\r\n\r\n<script>\r\n    import { gain, goal, prestigePoints, prestiges, score, theme } from \"../../../../mixins/storeIO.js\";\r\n\r\n    export default {\r\n        mixins: [gain, goal, prestigePoints, prestiges, score, theme],\r\n\r\n        methods: {\r\n            // Prestiges the game, resetting the player's score but increasing their number gain by 1 and doubling their goal\r\n            prestige() {\r\n                // Gives the player a warning if it is their first prestige\r\n                if (!this.hasPrestiged() && !confirm(\r\n                    \"Are you sure you want to prestige? This will reset your score, while adding 1 to your number gain and doubling the goal. You will also receive a Prestige point.\"\r\n                )) return;\r\n\r\n                // Resets the score\r\n                this.resetScore();\r\n\r\n                // Updates the number gain and prestige goal\r\n                this.increaseGain();\r\n                this.increaseGoal();\r\n\r\n                // Gives the player the required number of prestige points and a prestiged stat\r\n                this.addPrestigePoints(1);\r\n                this.increasePrestiges();\r\n            }\r\n        }\r\n    };\r\n</script>\r\n\r\n<style scoped>\r\n    #prestige-button {\r\n        width: 55%;\r\n        height: 100%;\r\n\r\n        display: flex;\r\n\r\n        justify-content: center;\r\n        align-items: center;\r\n\r\n        font-size: 92.5%;\r\n\r\n        text-align: center;\r\n\r\n        user-select: none;\r\n    }\r\n</style>\r\n"]}, media: undefined });
+        inject("data-v-70933b3a_0", { source: "\n#prestige-button[data-v-70933b3a] {\n    width: 55%;\n    height: 100%;\n\n    display: flex;\n\n    justify-content: center;\n    align-items: center;\n\n    font-size: 92.5%;\n\n    text-align: center;\n\n    user-select: none;\n}\n", map: {"version":3,"sources":["/mnt/c/users/miles/onedrive/documents/atom-programs-new/games/number-prestige/src/components/content/display-section/prestige-display/PrestigeButton.vue"],"names":[],"mappings":";AAqCA;IACA,UAAA;IACA,YAAA;;IAEA,aAAA;;IAEA,uBAAA;IACA,mBAAA;;IAEA,gBAAA;;IAEA,kBAAA;;IAEA,iBAAA;AACA","file":"PrestigeButton.vue","sourcesContent":["<!-- This component represents the button for prestiging -->\r\n<template>\r\n    <button id=\"prestige-button\" @click=\"prestige()\" v-bind:class=\"[themeClass('game-button'), themeClass('text')]\">Prestige for {{ getUpgradeBoost(0) }} Prestige Point{{ pluralEnding(getUpgradeBoost(0)) }}</button>\r\n</template>\r\n\r\n<script>\r\n    import { gain, goal, prestigePoints, prestiges, score, theme, upgrades } from \"../../../../mixins/storeIO.js\";\r\n\r\n    import utils from \"../../../../mixins/utils.js\";\r\n\r\n    export default {\r\n        mixins: [gain, goal, prestigePoints, prestiges, score, theme, upgrades, utils],\r\n\r\n        methods: {\r\n            // Prestiges the game, resetting the player's score but increasing their number gain by 1 and doubling their goal\r\n            prestige() {\r\n                // Gives the player a warning if it is their first prestige\r\n                if (!this.hasPrestiged() && !confirm(\r\n                    \"Are you sure you want to prestige? This will reset your score, while adding 1 to your number gain and doubling the goal. You will also receive a Prestige point.\"\r\n                )) return;\r\n\r\n                // Resets the score\r\n                this.resetScore();\r\n\r\n                // Updates the number gain and prestige goal\r\n                this.increaseGain();\r\n                this.increaseGoal();\r\n\r\n                // Gives the player the required number of prestige points and a prestiged stat\r\n                this.addPrestigePoints(this.getUpgradeBoost(0));\r\n                this.increasePrestiges();\r\n            }\r\n        }\r\n    };\r\n</script>\r\n\r\n<style scoped>\r\n    #prestige-button {\r\n        width: 55%;\r\n        height: 100%;\r\n\r\n        display: flex;\r\n\r\n        justify-content: center;\r\n        align-items: center;\r\n\r\n        font-size: 92.5%;\r\n\r\n        text-align: center;\r\n\r\n        user-select: none;\r\n    }\r\n</style>\r\n"]}, media: undefined });
 
       };
       /* scoped */
-      const __vue_scope_id__$3 = "data-v-681588b8";
+      const __vue_scope_id__$3 = "data-v-70933b3a";
       /* module identifier */
       const __vue_module_identifier__$3 = undefined;
       /* functional template */
@@ -631,7 +706,7 @@
     //
 
     var script$5 = {
-        mixins: [goal, prestiges, score],
+        mixins: [calculatedValues, prestiges, score],
 
         components: {
             "prestige-button": __vue_component__$3,
@@ -641,7 +716,7 @@
         methods: {
             // Determines if the player can prestige
             canPrestige() {
-                return this.getScore() >= this.getGoal();
+                return this.getScore() >= this.getActualGoal();
             }
         }
     };
@@ -676,11 +751,11 @@
       /* style */
       const __vue_inject_styles__$5 = function (inject) {
         if (!inject) return
-        inject("data-v-514867a4_0", { source: "\n#prestige-display[data-v-514867a4] {\n    width: 100%;\n    height: 100%;\n\n    grid-column: 3;\n\n    display: grid;\n}\n#prestige-button-container[data-v-514867a4] {\n\twidth: 100%;\n\theight: 100%;\n\n\tgrid-row: 2;\n\n\tdisplay: flex;\n\n    justify-content: center;\n    align-items: center;\n}\n", map: {"version":3,"sources":["/mnt/c/users/miles/onedrive/documents/atom-programs-new/games/number-prestige/src/components/content/display-section/prestige-display/PrestigeDisplay.vue"],"names":[],"mappings":";AAmCA;IACA,WAAA;IACA,YAAA;;IAEA,cAAA;;IAEA,aAAA;AACA;AAEA;CACA,WAAA;CACA,YAAA;;CAEA,WAAA;;CAEA,aAAA;;IAEA,uBAAA;IACA,mBAAA;AACA","file":"PrestigeDisplay.vue","sourcesContent":["<!-- This component contains the prestige points display and the prestige button -->\r\n<template>\r\n    <div id=\"prestige-display\">\r\n        <prestige-point-display v-if=\"hasPrestiged()\"></prestige-point-display>\r\n\r\n        <div id=\"prestige-button-container\">\r\n            <prestige-button v-if=\"canPrestige()\"></prestige-button>\r\n        </div>\r\n    </div>\r\n</template>\r\n\r\n<script>\r\n    import PrestigeButton from \"./PrestigeButton.vue\";\r\n    import PrestigePointDisplay from \"./PrestigePointDisplay.vue\";\r\n\r\n    import { goal, prestiges, score } from \"../../../../mixins/storeIO.js\";\r\n\r\n    export default {\r\n        mixins: [goal, prestiges, score],\r\n\r\n        components: {\r\n            \"prestige-button\": PrestigeButton,\r\n            \"prestige-point-display\": PrestigePointDisplay\r\n        },\r\n\r\n        methods: {\r\n            // Determines if the player can prestige\r\n            canPrestige() {\r\n                return this.getScore() >= this.getGoal();\r\n            }\r\n        }\r\n    };\r\n</script>\r\n\r\n<style scoped>\r\n    #prestige-display {\r\n        width: 100%;\r\n        height: 100%;\r\n\r\n        grid-column: 3;\r\n\r\n        display: grid;\r\n    }\r\n\r\n    #prestige-button-container {\r\n    \twidth: 100%;\r\n    \theight: 100%;\r\n\r\n    \tgrid-row: 2;\r\n\r\n    \tdisplay: flex;\r\n\r\n        justify-content: center;\r\n        align-items: center;\r\n    }\r\n</style>\r\n"]}, media: undefined });
+        inject("data-v-6989be12_0", { source: "\n#prestige-display[data-v-6989be12] {\n    width: 100%;\n    height: 100%;\n\n    grid-column: 3;\n\n    display: grid;\n}\n#prestige-button-container[data-v-6989be12] {\n\twidth: 100%;\n\theight: 100%;\n\n\tgrid-row: 2;\n\n\tdisplay: flex;\n\n    justify-content: center;\n    align-items: center;\n}\n", map: {"version":3,"sources":["/mnt/c/users/miles/onedrive/documents/atom-programs-new/games/number-prestige/src/components/content/display-section/prestige-display/PrestigeDisplay.vue"],"names":[],"mappings":";AAqCA;IACA,WAAA;IACA,YAAA;;IAEA,cAAA;;IAEA,aAAA;AACA;AAEA;CACA,WAAA;CACA,YAAA;;CAEA,WAAA;;CAEA,aAAA;;IAEA,uBAAA;IACA,mBAAA;AACA","file":"PrestigeDisplay.vue","sourcesContent":["<!-- This component contains the prestige points display and the prestige button -->\r\n<template>\r\n    <div id=\"prestige-display\">\r\n        <prestige-point-display v-if=\"hasPrestiged()\"></prestige-point-display>\r\n\r\n        <div id=\"prestige-button-container\">\r\n            <prestige-button v-if=\"canPrestige()\"></prestige-button>\r\n        </div>\r\n    </div>\r\n</template>\r\n\r\n<script>\r\n    import PrestigeButton from \"./PrestigeButton.vue\";\r\n    import PrestigePointDisplay from \"./PrestigePointDisplay.vue\";\r\n\r\n    import { prestiges, score } from \"../../../../mixins/storeIO.js\";\r\n\r\n    import calculatedValues from \"../../../../mixins/calculatedValues.js\";\r\n\r\n    export default {\r\n        mixins: [calculatedValues, prestiges, score],\r\n\r\n        components: {\r\n            \"prestige-button\": PrestigeButton,\r\n            \"prestige-point-display\": PrestigePointDisplay\r\n        },\r\n\r\n        methods: {\r\n            // Determines if the player can prestige\r\n            canPrestige() {\r\n                return this.getScore() >= this.getActualGoal();\r\n            }\r\n        }\r\n    };\r\n</script>\r\n\r\n<style scoped>\r\n    #prestige-display {\r\n        width: 100%;\r\n        height: 100%;\r\n\r\n        grid-column: 3;\r\n\r\n        display: grid;\r\n    }\r\n\r\n    #prestige-button-container {\r\n    \twidth: 100%;\r\n    \theight: 100%;\r\n\r\n    \tgrid-row: 2;\r\n\r\n    \tdisplay: flex;\r\n\r\n        justify-content: center;\r\n        align-items: center;\r\n    }\r\n</style>\r\n"]}, media: undefined });
 
       };
       /* scoped */
-      const __vue_scope_id__$5 = "data-v-514867a4";
+      const __vue_scope_id__$5 = "data-v-6989be12";
       /* module identifier */
       const __vue_module_identifier__$5 = undefined;
       /* functional template */
@@ -765,7 +840,7 @@
     //
 
     var script$7 = {
-        mixins: [gain, score, theme, utils]
+        mixins: [calculatedValues, score, theme, utils]
     };
 
     /* script */
@@ -783,11 +858,11 @@
           attrs: { id: "click-button" },
           on: {
             click: function($event) {
-              _vm.addScore(_vm.getGain());
+              _vm.addScore(_vm.getTotalGain());
             }
           }
         },
-        [_vm._v("Increase number by " + _vm._s(_vm.formatSci(_vm.getGain())))]
+        [_vm._v("Increase number by " + _vm._s(_vm.formatSci(_vm.getTotalGain())))]
       )
     };
     var __vue_staticRenderFns__$7 = [];
@@ -796,11 +871,11 @@
       /* style */
       const __vue_inject_styles__$7 = function (inject) {
         if (!inject) return
-        inject("data-v-2748f0d9_0", { source: "\n#click-button[data-v-2748f0d9] {\n    width: 22%;\n    height: 35%;\n\n    display: flex;\n\n    justify-content: center;\n    align-items: center;\n\n    font-size: 100%;\n}\n", map: {"version":3,"sources":["/mnt/c/users/miles/onedrive/documents/atom-programs-new/games/number-prestige/src/components/content/game/states/main/ClickButton.vue"],"names":[],"mappings":";AAgBA;IACA,UAAA;IACA,WAAA;;IAEA,aAAA;;IAEA,uBAAA;IACA,mBAAA;;IAEA,eAAA;AACA","file":"ClickButton.vue","sourcesContent":["<!-- This component is for the button clicked to increase the player's score -->\r\n<template>\r\n    <button id=\"click-button\" v-bind:class=\"[themeClass('game-button'), themeClass('text')]\" v-on:click=\"addScore(getGain())\">Increase number by {{ formatSci(getGain()) }}</button>\r\n</template>\r\n\r\n<script>\r\n    import { gain, score, theme } from \"../../../../../mixins/storeIO.js\";\r\n\r\n    import utils from \"../../../../../mixins/utils.js\";\r\n\r\n    export default {\r\n        mixins: [gain, score, theme, utils]\r\n    };\r\n</script>\r\n\r\n<style scoped>\r\n    #click-button {\r\n        width: 22%;\r\n        height: 35%;\r\n\r\n        display: flex;\r\n\r\n        justify-content: center;\r\n        align-items: center;\r\n\r\n        font-size: 100%;\r\n    }\r\n</style>\r\n"]}, media: undefined });
+        inject("data-v-7ceedfdb_0", { source: "\n#click-button[data-v-7ceedfdb] {\n    width: 22%;\n    height: 35%;\n\n    display: flex;\n\n    justify-content: center;\n    align-items: center;\n\n    font-size: 100%;\n}\n", map: {"version":3,"sources":["/mnt/c/users/miles/onedrive/documents/atom-programs-new/games/number-prestige/src/components/content/game/states/main/ClickButton.vue"],"names":[],"mappings":";AAiBA;IACA,UAAA;IACA,WAAA;;IAEA,aAAA;;IAEA,uBAAA;IACA,mBAAA;;IAEA,eAAA;AACA","file":"ClickButton.vue","sourcesContent":["<!-- This component is for the button clicked to increase the player's score -->\r\n<template>\r\n    <button id=\"click-button\" v-bind:class=\"[themeClass('game-button'), themeClass('text')]\" v-on:click=\"addScore(getTotalGain())\">Increase number by {{ formatSci(getTotalGain()) }}</button>\r\n</template>\r\n\r\n<script>\r\n    import { gain, score, theme, upgrades } from \"../../../../../mixins/storeIO.js\";\r\n\r\n    import calculatedValues from \"../../../../../mixins/calculatedValues.js\";\r\n    import utils from \"../../../../../mixins/utils.js\";\r\n\r\n    export default {\r\n        mixins: [calculatedValues, score, theme, utils]\r\n    };\r\n</script>\r\n\r\n<style scoped>\r\n    #click-button {\r\n        width: 22%;\r\n        height: 35%;\r\n\r\n        display: flex;\r\n\r\n        justify-content: center;\r\n        align-items: center;\r\n\r\n        font-size: 100%;\r\n    }\r\n</style>\r\n"]}, media: undefined });
 
       };
       /* scoped */
-      const __vue_scope_id__$7 = "data-v-2748f0d9";
+      const __vue_scope_id__$7 = "data-v-7ceedfdb";
       /* module identifier */
       const __vue_module_identifier__$7 = undefined;
       /* functional template */
@@ -1029,7 +1104,24 @@
         goal: 10,
         gain: 1,
         prestigePoints: 0,
-        prestiges: 0
+        prestiges: 0,
+
+        upgrades: [
+            {
+                cost: 2,
+                amount: 0
+            },
+
+            {
+                cost: 4,
+                amount: 0
+            },
+
+            {
+                cost: 5,
+                amount: 0
+            }
+        ]
     };
 
     //
@@ -1134,10 +1226,11 @@
             ...score.methods,
             ...selector.methods,
             ...theme.methods,
+            ...upgrades.methods,
 
             // Encodes the player's save data
-            encodeSaveData({ theme, gameState, score, goal, gain, prestigePoints, prestiges }) {
-                return `${theme}|${gameState}|${score}|${goal}|${gain}|${prestigePoints}|${prestiges}`;
+            encodeSaveData({ theme, gameState, score, goal, gain, prestigePoints, prestiges, upgrades }) {
+                return `${theme}|${gameState}|${score}|${goal}|${gain}|${prestigePoints}|${prestiges}|${upgrades[0].cost}|${upgrades[0].amount}|${upgrades[1].cost}|${upgrades[1].amount}|${upgrades[2].cost}|${upgrades[2].amount}`;
             },
 
             // Decodes the given save data
@@ -1152,7 +1245,24 @@
                     goal: items.length > 3 ? parseInt(items[3]) : defaultSave.goal,
                     gain: items.length > 4 ? parseInt(items[4]) : defaultSave.gain,
                     prestigePoints: items.length > 5 ? parseInt(items[5]) : defaultSave.prestigePoints,
-                    prestiges: items.length > 6 ? parseInt(items[6]) : defaultSave.prestiges
+                    prestiges: items.length > 6 ? parseInt(items[6]) : defaultSave.prestiges,
+
+                    upgrades: [
+                        {
+                            cost: items.length > 7 ? parseInt(items[7]) : defaultSave.upgrades[0].cost,
+                            amount: items.length > 8 ? parseInt(items[8]) : defaultSave.upgrades[0].amount
+                        },
+
+                        {
+                            cost: items.length > 9 ? parseInt(items[9]) : defaultSave.upgrades[1].cost,
+                            amount: items.length > 10 ? parseInt(items[10]) : defaultSave.upgrades[1].amount
+                        },
+
+                        {
+                            cost: items.length > 11 ? parseInt(items[11]) : defaultSave.upgrades[2].cost,
+                            amount: items.length > 12 ? parseInt(items[12]) : defaultSave.upgrades[2].amount
+                        }
+                    ]
                 };
             },
 
@@ -1165,7 +1275,24 @@
                     goal: this.getGoal(),
                     gain: this.getGain(),
                     prestigePoints: this.getPrestigePoints(),
-                    prestiges: this.getPrestiges()
+                    prestiges: this.getPrestiges(),
+
+                    upgrades: [
+                        {
+                            cost: this.getUpgradeCost(0),
+                            amount: this.getUpgradeAmount(0)
+                        },
+
+                        {
+                            cost: this.getUpgradeCost(1),
+                            amount: this.getUpgradeAmount(1)
+                        },
+
+                        {
+                            cost: this.getUpgradeCost(2),
+                            amount: this.getUpgradeAmount(2)
+                        }
+                    ]
                 }));
             },
 
@@ -1187,6 +1314,12 @@
                 this.setPrestigePoints(defaultSave.prestigePoints);
                 this.setPrestiges(defaultSave.prestiges);
 
+                // Sets upgrade variables
+                defaultSave.upgrades.forEach((upgrade, id) => {
+                    this.setUpgradeCost(id, upgrade.cost);
+                    this.setUpgradeAmount(id, upgrade.amount);
+                });
+
                 // Saves over player's save file
                 this.save();
             },
@@ -1203,7 +1336,24 @@
                     goal: defaultSave.goal,
                     gain: defaultSave.gain,
                     prestigePoints: defaultSave.prestigePoints,
-                    prestiges: defaultSave.prestiges
+                    prestiges: defaultSave.prestiges,
+
+                    upgrades: [
+                        {
+                            cost: defaultSave.upgrades[0].cost,
+                            amount: defaultSave.upgrades[0].amount
+                        },
+
+                        {
+                            cost: defaultSave.upgrades[1].cost,
+                            amount: defaultSave.upgrades[1].amount
+                        },
+
+                        {
+                            cost: defaultSave.upgrades[2].cost,
+                            amount: defaultSave.upgrades[2].amount
+                        }
+                    ]
                 }) : save;
             },
 
@@ -1221,6 +1371,12 @@
                 this.setGain(saveObject.gain);
                 this.setPrestigePoints(saveObject.prestigePoints);
                 this.setPrestiges(saveObject.prestiges);
+
+                // Sets variables for upgrades
+                saveObject.upgrades.forEach((upgrade, id) => {
+                    this.setUpgradeCost(id, upgrade.cost);
+                    this.setUpgradeAmount(id, upgrade.amount);
+                });
             }
         }
     };
@@ -1307,7 +1463,9 @@
     //
 
     var script$d = {
-        mixins: [theme]
+        mixins: [theme, upgrades, utils],
+
+        props: ["id"]
     };
 
     /* script */
@@ -1320,10 +1478,13 @@
       var _c = _vm._self._c || _h;
       return _c(
         "div",
-        { class: _vm.themeClass("text"), attrs: { id: "upgrades-subtext" } },
+        { staticClass: "prestige-upgrade-cost", class: _vm.themeClass("text") },
         [
           _vm._v(
-            "Buying an upgrade will reset your score, prestige requirement, and number gain."
+            "Cost: " +
+              _vm._s(_vm.getUpgradeCost(_vm.id)) +
+              " Prestige Point" +
+              _vm._s(_vm.pluralEnding(_vm.getUpgradeCost(_vm.id)))
           )
         ]
       )
@@ -1334,11 +1495,11 @@
       /* style */
       const __vue_inject_styles__$d = function (inject) {
         if (!inject) return
-        inject("data-v-77d44387_0", { source: "\n#upgrades-subtext[data-v-77d44387] {\n    width: 100%;\n    height: 100%;\n\n    display: flex;\n\n    justify-content: center;\n    align-items: center;\n\n    font-size: 85%;\n}\n", map: {"version":3,"sources":["/mnt/c/users/miles/onedrive/documents/atom-programs-new/games/number-prestige/src/components/content/game/states/upgrades/UpgradesSubtext.vue"],"names":[],"mappings":";AAcA;IACA,WAAA;IACA,YAAA;;IAEA,aAAA;;IAEA,uBAAA;IACA,mBAAA;;IAEA,cAAA;AACA","file":"UpgradesSubtext.vue","sourcesContent":["<!-- This component displays important text about buying upgrades -->\r\n<template>\r\n    <div id=\"upgrades-subtext\" v-bind:class=\"themeClass('text')\">Buying an upgrade will reset your score, prestige requirement, and number gain.</div>\r\n</template>\r\n\r\n<script>\r\n    import { theme } from \"../../../../../mixins/storeIO.js\";\r\n\r\n    export default {\r\n        mixins: [theme]\r\n    }\r\n</script>\r\n\r\n<style scoped>\r\n    #upgrades-subtext {\r\n        width: 100%;\r\n        height: 100%;\r\n\r\n        display: flex;\r\n\r\n        justify-content: center;\r\n        align-items: center;\r\n\r\n        font-size: 85%;\r\n    }\r\n</style>\r\n"]}, media: undefined });
+        inject("data-v-2c180bc7_0", { source: "\n.prestige-upgrade-cost[data-v-2c180bc7] {\n    grid-row: 6;\n\n    display: flex;\n\n    justify-content: center;\n    align-items: center;\n\n    font-size: 90%;\n}\n", map: {"version":3,"sources":["/mnt/c/users/miles/onedrive/documents/atom-programs-new/games/number-prestige/src/components/content/game/states/upgrades/prestige-upgrade-button/PrestigeUpgradeCostDisplay.vue"],"names":[],"mappings":";AAkBA;IACA,WAAA;;IAEA,aAAA;;IAEA,uBAAA;IACA,mBAAA;;IAEA,cAAA;AACA","file":"PrestigeUpgradeCostDisplay.vue","sourcesContent":["<!-- Represents the part of a prestige upgrade that displays the current cost -->\r\n<template>\r\n    <div class=\"prestige-upgrade-cost\" v-bind:class=\"themeClass('text')\">Cost: {{ getUpgradeCost(id) }} Prestige Point{{ pluralEnding(getUpgradeCost(id)) }}</div>\r\n</template>\r\n\r\n<script>\r\n    import { theme, upgrades } from \"../../../../../../mixins/storeIO.js\";\r\n\r\n    import utils from \"../../../../../../mixins/utils.js\";\r\n\r\n    export default {\r\n        mixins: [theme, upgrades, utils],\r\n\r\n        props: [\"id\"]\r\n    };\r\n</script>\r\n\r\n<style scoped>\r\n    .prestige-upgrade-cost {\r\n        grid-row: 6;\r\n\r\n        display: flex;\r\n\r\n        justify-content: center;\r\n        align-items: center;\r\n\r\n        font-size: 90%;\r\n    }\r\n</style>\r\n"]}, media: undefined });
 
       };
       /* scoped */
-      const __vue_scope_id__$d = "data-v-77d44387";
+      const __vue_scope_id__$d = "data-v-2c180bc7";
       /* module identifier */
       const __vue_module_identifier__$d = undefined;
       /* functional template */
@@ -1365,9 +1526,9 @@
     //
 
     var script$e = {
-        components: {
-            "upgrades-subtext": __vue_component__$d
-        }
+        mixins: [theme, upgrades],
+
+        props: ["id", "func"]
     };
 
     /* script */
@@ -1378,7 +1539,11 @@
       var _vm = this;
       var _h = _vm.$createElement;
       var _c = _vm._self._c || _h;
-      return _c("div", { attrs: { id: "upgrades" } }, [_c("upgrades-subtext")], 1)
+      return _c(
+        "div",
+        { staticClass: "prestige-upgrade-current", class: _vm.themeClass("text") },
+        [_vm._v("Currently: " + _vm._s(_vm.func(_vm.getUpgradeBoost(_vm.id))))]
+      )
     };
     var __vue_staticRenderFns__$e = [];
     __vue_render__$e._withStripped = true;
@@ -1386,11 +1551,11 @@
       /* style */
       const __vue_inject_styles__$e = function (inject) {
         if (!inject) return
-        inject("data-v-01c42e82_0", { source: "\n#upgrades[data-v-01c42e82] {\n    width: 100%;\n    height: 100%;\n\n    display: grid;\n\n    grid-template-rows: 12% 30% auto;\n    grid-template-columns: 100%;\n}\n", map: {"version":3,"sources":["/mnt/c/users/miles/onedrive/documents/atom-programs-new/games/number-prestige/src/components/content/game/states/upgrades/UpgradesState.vue"],"names":[],"mappings":";AAkBA;IACA,WAAA;IACA,YAAA;;IAEA,aAAA;;IAEA,gCAAA;IACA,2BAAA;AACA","file":"UpgradesState.vue","sourcesContent":["<!-- This component represents the upgrades tab of the game -->\r\n<template>\r\n    <div id=\"upgrades\">\r\n        <upgrades-subtext></upgrades-subtext>\r\n    </div>\r\n</template>\r\n\r\n<script>\r\n    import UpgradesSubtext from \"./UpgradesSubtext.vue\";\r\n\r\n    export default {\r\n        components: {\r\n            \"upgrades-subtext\": UpgradesSubtext\r\n        }\r\n    };\r\n</script>\r\n\r\n<style scoped>\r\n    #upgrades {\r\n        width: 100%;\r\n        height: 100%;\r\n\r\n        display: grid;\r\n\r\n        grid-template-rows: 12% 30% auto;\r\n        grid-template-columns: 100%;\r\n    }\r\n</style>\r\n"]}, media: undefined });
+        inject("data-v-75ba37a0_0", { source: "\n.prestige-upgrade-current[data-v-75ba37a0] {\n    grid-row: 4;\n\n    display: flex;\n\n    justify-content: center;\n    align-items: center;\n\n    font-size: 90%;\n}\n", map: {"version":3,"sources":["/mnt/c/users/miles/onedrive/documents/atom-programs-new/games/number-prestige/src/components/content/game/states/upgrades/prestige-upgrade-button/PrestigeUpgradeCurrent.vue"],"names":[],"mappings":";AAgBA;IACA,WAAA;;IAEA,aAAA;;IAEA,uBAAA;IACA,mBAAA;;IAEA,cAAA;AACA","file":"PrestigeUpgradeCurrent.vue","sourcesContent":["<!-- Represents the part of a prestige upgrade that displays the current boost -->\r\n<template>\r\n    <div class=\"prestige-upgrade-current\" v-bind:class=\"themeClass('text')\">Currently: {{ func(getUpgradeBoost(id)) }}</div>\r\n</template>\r\n\r\n<script>\r\n    import { theme, upgrades } from \"../../../../../../mixins/storeIO.js\";\r\n\r\n    export default {\r\n        mixins: [theme, upgrades],\r\n\r\n        props: [\"id\", \"func\"]\r\n    };\r\n</script>\r\n\r\n<style scoped>\r\n    .prestige-upgrade-current {\r\n        grid-row: 4;\r\n\r\n        display: flex;\r\n\r\n        justify-content: center;\r\n        align-items: center;\r\n\r\n        font-size: 90%;\r\n    }\r\n</style>\r\n"]}, media: undefined });
 
       };
       /* scoped */
-      const __vue_scope_id__$e = "data-v-01c42e82";
+      const __vue_scope_id__$e = "data-v-75ba37a0";
       /* module identifier */
       const __vue_module_identifier__$e = undefined;
       /* functional template */
@@ -1417,17 +1582,9 @@
     //
 
     var script$f = {
-        mixins: [gameState],
+        mixins: [theme],
 
-        data: () => ({
-            gameStates
-        }),
-
-        components: {
-            "main-state": __vue_component__$8,
-            "options-state": __vue_component__$c,
-            "upgrades-state": __vue_component__$e
-        }
+        props: ["description"]
     };
 
     /* script */
@@ -1440,19 +1597,11 @@
       var _c = _vm._self._c || _h;
       return _c(
         "div",
-        { attrs: { id: "game-component" } },
-        [
-          _vm.getGameState() === _vm.gameStates.main ? _c("main-state") : _vm._e(),
-          _vm._v(" "),
-          _vm.getGameState() === _vm.gameStates.options
-            ? _c("options-state")
-            : _vm._e(),
-          _vm._v(" "),
-          _vm.getGameState() === _vm.gameStates.upgrades
-            ? _c("upgrades-state")
-            : _vm._e()
-        ],
-        1
+        {
+          staticClass: "prestige-upgrade-description",
+          class: _vm.themeClass("text")
+        },
+        [_vm._v(_vm._s(_vm.description))]
       )
     };
     var __vue_staticRenderFns__$f = [];
@@ -1461,11 +1610,11 @@
       /* style */
       const __vue_inject_styles__$f = function (inject) {
         if (!inject) return
-        inject("data-v-701ee6e8_0", { source: "\n#game-component[data-v-701ee6e8] {\n    width: 100%;\n    height: 100%;\n\n    display: grid;\n\n    grid-template-rows: 100%;\n    grid-template-columns: 100%;\n}\n", map: {"version":3,"sources":["/mnt/c/users/miles/onedrive/documents/atom-programs-new/games/number-prestige/src/components/content/game/GameComponent.vue"],"names":[],"mappings":";AAkCA;IACA,WAAA;IACA,YAAA;;IAEA,aAAA;;IAEA,wBAAA;IACA,2BAAA;AACA","file":"GameComponent.vue","sourcesContent":["<!-- This component represents the area that contains the game's UI, based on the current gameState -->\r\n<template>\r\n    <div id=\"game-component\">\r\n        <main-state v-if=\"getGameState() === gameStates.main\"></main-state>\r\n        <options-state v-if=\"getGameState() === gameStates.options\"></options-state>\r\n        <upgrades-state v-if=\"getGameState() === gameStates.upgrades\"></upgrades-state>\r\n    </div>\r\n</template>\r\n\r\n<script>\r\n    import MainState from \"./states/main/MainState.vue\";\r\n    import OptionsState from \"./states/options/OptionsState.vue\";\r\n    import UpgradesState from \"./states/upgrades/UpgradesState.vue\";\r\n\r\n    import { gameStates } from \"../../../enums.js\";\r\n\r\n    import { gameState } from \"../../../mixins/storeIO.js\";\r\n\r\n    export default {\r\n        mixins: [gameState],\r\n\r\n        data: () => ({\r\n            gameStates\r\n        }),\r\n\r\n        components: {\r\n            \"main-state\": MainState,\r\n            \"options-state\": OptionsState,\r\n            \"upgrades-state\": UpgradesState\r\n        }\r\n    };\r\n</script>\r\n\r\n<style scoped>\r\n    #game-component {\r\n        width: 100%;\r\n        height: 100%;\r\n\r\n        display: grid;\r\n\r\n        grid-template-rows: 100%;\r\n        grid-template-columns: 100%;\r\n    }\r\n</style>\r\n"]}, media: undefined });
+        inject("data-v-b27115d2_0", { source: "\n.prestige-upgrade-description[data-v-b27115d2] {\n    grid-row: 2;\n\n    display: flex;\n\n    justify-content: center;\n    align-items: center;\n\n    text-align: center;\n\n    font-size: 140%;\n}\n", map: {"version":3,"sources":["/mnt/c/users/miles/onedrive/documents/atom-programs-new/games/number-prestige/src/components/content/game/states/upgrades/prestige-upgrade-button/PrestigeUpgradeDescription.vue"],"names":[],"mappings":";AAgBA;IACA,WAAA;;IAEA,aAAA;;IAEA,uBAAA;IACA,mBAAA;;IAEA,kBAAA;;IAEA,eAAA;AACA","file":"PrestigeUpgradeDescription.vue","sourcesContent":["<!-- Represents the description of a prestige upgrade -->\r\n<template>\r\n    <div class=\"prestige-upgrade-description\" v-bind:class=\"themeClass('text')\">{{ description }}</div>\r\n</template>\r\n\r\n<script>\r\n    import { theme } from \"../../../../../../mixins/storeIO.js\";\r\n\r\n    export default {\r\n        mixins: [theme],\r\n\r\n        props: [\"description\"]\r\n    };\r\n</script>\r\n\r\n<style scoped>\r\n    .prestige-upgrade-description {\r\n        grid-row: 2;\r\n\r\n        display: flex;\r\n\r\n        justify-content: center;\r\n        align-items: center;\r\n\r\n        text-align: center;\r\n\r\n        font-size: 140%;\r\n    }\r\n</style>\r\n"]}, media: undefined });
 
       };
       /* scoped */
-      const __vue_scope_id__$f = "data-v-701ee6e8";
+      const __vue_scope_id__$f = "data-v-b27115d2";
       /* module identifier */
       const __vue_module_identifier__$f = undefined;
       /* functional template */
@@ -1492,9 +1641,35 @@
     //
 
     var script$g = {
-        mixins: [gameState, theme, utils],
+        mixins: [gain, goal, prestigePoints, score, theme, upgrades],
 
-        props: ["state"]
+        props: ["id", "description", "func"],
+
+        components: {
+            "prestige-upgrade-cost-display": __vue_component__$d,
+            "prestige-upgrade-current-display": __vue_component__$e,
+            "prestige-upgrade-description": __vue_component__$f
+        },
+
+        methods: {
+            // Checks if the upgrade is affordable
+            canAfford() {
+                return this.getPrestigePoints() >= this.getUpgradeCost(this.id);
+            },
+
+            // Buys an upgrade
+            buy() {
+                // Subtracts the cost of the upgrade
+                this.subtractPrestigePoints(this.getUpgradeCost(this.id));
+
+                this.buyUpgrade(this.id);
+
+                // Resets the player's score, gain, and goal
+                this.resetScore();
+                this.resetGain();
+                this.resetGoal();
+            }
+        }
     };
 
     /* script */
@@ -1505,19 +1680,35 @@
       var _vm = this;
       var _h = _vm.$createElement;
       var _c = _vm._self._c || _h;
-      return _c(
-        "button",
-        {
-          staticClass: "header-item",
-          class: [_vm.themeClass("header-item"), _vm.themeClass("text")],
-          on: {
-            click: function($event) {
-              return _vm.setGameState(_vm.state)
+      return _c("div", { staticClass: "prestige-upgrade-container" }, [
+        _c(
+          "button",
+          {
+            staticClass: "prestige-upgrade-button",
+            class: [
+              _vm.themeClass("game-button"),
+              _vm.canAfford() ? "" : _vm.themeClass("unaffordable")
+            ],
+            on: {
+              click: function() {
+                return _vm.canAfford() && _vm.buy()
+              }
             }
-          }
-        },
-        [_vm._v("\n    " + _vm._s(_vm.capitalize(_vm.state)) + "\n")]
-      )
+          },
+          [
+            _c("prestige-upgrade-description", {
+              attrs: { description: _vm.description }
+            }),
+            _vm._v(" "),
+            _c("prestige-upgrade-current-display", {
+              attrs: { id: _vm.id, func: _vm.func }
+            }),
+            _vm._v(" "),
+            _c("prestige-upgrade-cost-display", { attrs: { id: _vm.id } })
+          ],
+          1
+        )
+      ])
     };
     var __vue_staticRenderFns__$g = [];
     __vue_render__$g._withStripped = true;
@@ -1525,11 +1716,11 @@
       /* style */
       const __vue_inject_styles__$g = function (inject) {
         if (!inject) return
-        inject("data-v-42363776_0", { source: "\n.header-item[data-v-42363776] {\n    display: flex;\n\n    justify-content: center;\n    align-items: center;\n\n    grid-row: 1;\n\n    font-size: 175%;\n\n    user-select: none;\n}\n.header-item-dark[data-v-42363776] {\n\tbox-shadow: 2px 2px 2px black;\n}\n.header-item-dark[data-v-42363776]:hover {\n    background-color: rgb(40, 40, 40);\n}\n.header-item-light[data-v-42363776] {\n\tbox-shadow: 2px 2px 2px rgb(180, 180, 180);\n}\n.header-item-light[data-v-42363776]:hover {\n    background-color: rgb(215, 215, 215);\n}\n.header-item-gradient[data-v-42363776] {\n\tborder: 2px solid rgb(195, 195, 195);\n}\n.header-item-gradient[data-v-42363776]:hover {\n    background-image: linear-gradient(rgb(56, 56, 56), rgb(81, 81, 81));\n}\n", map: {"version":3,"sources":["/mnt/c/users/miles/onedrive/documents/atom-programs-new/games/number-prestige/src/components/content/header/HeaderItem.vue"],"names":[],"mappings":";AAoBA;IACA,aAAA;;IAEA,uBAAA;IACA,mBAAA;;IAEA,WAAA;;IAEA,eAAA;;IAEA,iBAAA;AACA;AAEA;CACA,6BAAA;AACA;AAEA;IACA,iCAAA;AACA;AAEA;CACA,0CAAA;AACA;AAEA;IACA,oCAAA;AACA;AAEA;CACA,oCAAA;AACA;AAEA;IACA,mEAAA;AACA","file":"HeaderItem.vue","sourcesContent":["<!-- This component represents an item in the header -->\r\n<template>\r\n    <button class=\"header-item\" @click=\"setGameState(state)\" v-bind:class=\"[themeClass('header-item'), themeClass('text')]\">\r\n        {{ capitalize(state) }}\r\n    </button>\r\n</template>\r\n\r\n<script>\r\n    import { gameState, theme } from \"../../../mixins/storeIO.js\";\r\n\r\n    import utils from \"../../../mixins/utils.js\";\r\n\r\n    export default {\r\n        mixins: [gameState, theme, utils],\r\n\r\n        props: [\"state\"]\r\n    };\r\n</script>\r\n\r\n<style scoped>\r\n    .header-item {\r\n        display: flex;\r\n\r\n        justify-content: center;\r\n        align-items: center;\r\n\r\n        grid-row: 1;\r\n\r\n        font-size: 175%;\r\n\r\n        user-select: none;\r\n    }\r\n\r\n    .header-item-dark {\r\n    \tbox-shadow: 2px 2px 2px black;\r\n    }\r\n\r\n    .header-item-dark:hover {\r\n        background-color: rgb(40, 40, 40);\r\n    }\r\n\r\n    .header-item-light {\r\n    \tbox-shadow: 2px 2px 2px rgb(180, 180, 180);\r\n    }\r\n\r\n    .header-item-light:hover {\r\n        background-color: rgb(215, 215, 215);\r\n    }\r\n\r\n    .header-item-gradient {\r\n    \tborder: 2px solid rgb(195, 195, 195);\r\n    }\r\n\r\n    .header-item-gradient:hover {\r\n        background-image: linear-gradient(rgb(56, 56, 56), rgb(81, 81, 81));\r\n    }\r\n</style>\r\n"]}, media: undefined });
+        inject("data-v-ce2ca2f8_0", { source: "\n.prestige-upgrade-container[data-v-ce2ca2f8] {\n    width: 100%;\n    height: 100%;\n\n    grid-row: 1;\n\n    display: flex;\n\n    justify-content: center;\n    align-items: center;\n}\n.prestige-upgrade-button[data-v-ce2ca2f8] {\n    width: 85%;\n    height: 85%;\n\n    grid-template-rows: 5% 17% 15% 10% 3% 12% auto;\n    grid-template-columns: 100%;\n\n    user-select: none;\n}\n\n/* Unaffordable themes */\n.unaffordable-dark[data-v-ce2ca2f8] {\n\tbackground-color: rgb(24, 24, 24);\n}\n.unaffordable-dark[data-v-ce2ca2f8]:hover {\n\tbackground-color: rgb(15, 15, 15);\n}\n.unaffordable-light[data-v-ce2ca2f8] {\n\tbackground-color: rgb(185, 185, 185);\n}\n.unaffordable-light[data-v-ce2ca2f8]:hover {\n\tbackground-color: rgb(175, 175, 175);\n}\n.unaffordable-gradient[data-v-ce2ca2f8] {\n\tbackground-color: rgb(24, 24, 24);\n}\n.unaffordable-gradient[data-v-ce2ca2f8]:hover {\n\tbackground-image: linear-gradient(rgb(86, 56, 56), rgb(111, 81, 81));\n}\n", map: {"version":3,"sources":["/mnt/c/users/miles/onedrive/documents/atom-programs-new/games/number-prestige/src/components/content/game/states/upgrades/prestige-upgrade-button/PrestigeUpgradeButton.vue"],"names":[],"mappings":";AAoDA;IACA,WAAA;IACA,YAAA;;IAEA,WAAA;;IAEA,aAAA;;IAEA,uBAAA;IACA,mBAAA;AACA;AAEA;IACA,UAAA;IACA,WAAA;;IAEA,8CAAA;IACA,2BAAA;;IAEA,iBAAA;AACA;;AAEA,wBAAA;AACA;CACA,iCAAA;AACA;AAEA;CACA,iCAAA;AACA;AAEA;CACA,oCAAA;AACA;AAEA;CACA,oCAAA;AACA;AAEA;CACA,iCAAA;AACA;AAEA;CACA,oEAAA;AACA","file":"PrestigeUpgradeButton.vue","sourcesContent":["<!-- Represents a prestige upgrade's button -->\r\n<template>\r\n    <div class=\"prestige-upgrade-container\">\r\n        <button class=\"prestige-upgrade-button\" v-bind:class=\"[themeClass('game-button'), canAfford() ? '' : themeClass('unaffordable')]\" @click=\"() => canAfford() && buy()\">\r\n            <prestige-upgrade-description v-bind:description=\"description\"></prestige-upgrade-description>\r\n            <prestige-upgrade-current-display v-bind:id=\"id\" v-bind:func=\"func\"></prestige-upgrade-current-display>\r\n            <prestige-upgrade-cost-display v-bind:id=\"id\"></prestige-upgrade-cost-display>\r\n        </button>\r\n    </div>\r\n</template>\r\n\r\n<script>\r\n    import PrestigeUpgradeCostDisplay from \"./PrestigeUpgradeCostDisplay.vue\";\r\n    import PrestigeUpgradeCurrentDisplay from \"./PrestigeUpgradeCurrent.vue\";\r\n    import PrestigeUpgradeDescription from \"./PrestigeUpgradeDescription.vue\";\r\n\r\n    import { gain, goal, prestigePoints, score, theme, upgrades } from \"../../../../../../mixins/storeIO.js\";\r\n\r\n    export default {\r\n        mixins: [gain, goal, prestigePoints, score, theme, upgrades],\r\n\r\n        props: [\"id\", \"description\", \"func\"],\r\n\r\n        components: {\r\n            \"prestige-upgrade-cost-display\": PrestigeUpgradeCostDisplay,\r\n            \"prestige-upgrade-current-display\": PrestigeUpgradeCurrentDisplay,\r\n            \"prestige-upgrade-description\": PrestigeUpgradeDescription\r\n        },\r\n\r\n        methods: {\r\n            // Checks if the upgrade is affordable\r\n            canAfford() {\r\n                return this.getPrestigePoints() >= this.getUpgradeCost(this.id);\r\n            },\r\n\r\n            // Buys an upgrade\r\n            buy() {\r\n                // Subtracts the cost of the upgrade\r\n                this.subtractPrestigePoints(this.getUpgradeCost(this.id));\r\n\r\n                this.buyUpgrade(this.id);\r\n\r\n                // Resets the player's score, gain, and goal\r\n                this.resetScore();\r\n                this.resetGain();\r\n                this.resetGoal();\r\n            }\r\n        }\r\n    };\r\n</script>\r\n\r\n<style scoped>\r\n    .prestige-upgrade-container {\r\n        width: 100%;\r\n        height: 100%;\r\n\r\n        grid-row: 1;\r\n\r\n        display: flex;\r\n\r\n        justify-content: center;\r\n        align-items: center;\r\n    }\r\n\r\n    .prestige-upgrade-button {\r\n        width: 85%;\r\n        height: 85%;\r\n\r\n        grid-template-rows: 5% 17% 15% 10% 3% 12% auto;\r\n        grid-template-columns: 100%;\r\n\r\n        user-select: none;\r\n    }\r\n\r\n    /* Unaffordable themes */\r\n    .unaffordable-dark {\r\n    \tbackground-color: rgb(24, 24, 24);\r\n    }\r\n\r\n    .unaffordable-dark:hover {\r\n    \tbackground-color: rgb(15, 15, 15);\r\n    }\r\n\r\n    .unaffordable-light {\r\n    \tbackground-color: rgb(185, 185, 185);\r\n    }\r\n\r\n    .unaffordable-light:hover {\r\n    \tbackground-color: rgb(175, 175, 175);\r\n    }\r\n\r\n    .unaffordable-gradient {\r\n    \tbackground-color: rgb(24, 24, 24);\r\n    }\r\n\r\n    .unaffordable-gradient:hover {\r\n    \tbackground-image: linear-gradient(rgb(86, 56, 56), rgb(111, 81, 81));\r\n    }\r\n</style>\r\n"]}, media: undefined });
 
       };
       /* scoped */
-      const __vue_scope_id__$g = "data-v-42363776";
+      const __vue_scope_id__$g = "data-v-ce2ca2f8";
       /* module identifier */
       const __vue_module_identifier__$g = undefined;
       /* functional template */
@@ -1556,16 +1747,7 @@
     //
 
     var script$h = {
-        mixins: [prestiges, theme],
-
-        //This seems to be a good way to load enums
-        data: () => ({
-            gameStates
-        }),
-
-        components: {
-            "header-item": __vue_component__$g
-        }
+        mixins: [theme]
     };
 
     /* script */
@@ -1578,21 +1760,12 @@
       var _c = _vm._self._c || _h;
       return _c(
         "div",
-        { class: _vm.themeClass("header"), attrs: { id: "header" } },
+        { class: _vm.themeClass("text"), attrs: { id: "upgrades-subtext" } },
         [
-          _c("header-item", { attrs: { state: _vm.gameStates.main } }),
-          _vm._v(" "),
-          _c("header-item", { attrs: { state: _vm.gameStates.options } }),
-          _vm._v(" "),
-          _vm.hasPrestiged()
-            ? [
-                _c("header-item", { attrs: { state: _vm.gameStates.upgrades } }),
-                _vm._v(" "),
-                _c("header-item", { attrs: { state: _vm.gameStates.automation } })
-              ]
-            : _vm._e()
-        ],
-        2
+          _vm._v(
+            "Buying an upgrade will reset your score, prestige requirement, and number gain."
+          )
+        ]
       )
     };
     var __vue_staticRenderFns__$h = [];
@@ -1601,11 +1774,11 @@
       /* style */
       const __vue_inject_styles__$h = function (inject) {
         if (!inject) return
-        inject("data-v-12a79238_0", { source: "\n#header[data-v-12a79238] {\n    width: 100%;\n\n    display: grid;\n\n    grid-template-rows: 100%;\n    grid-template-columns: repeat(auto-fill, auto);\n}\n.header-dark[data-v-12a79238] {\n    background-color: rgb(24, 24, 24);\n}\n.header-light[data-v-12a79238] {\n    background-color: rgb(200, 200, 200);\n}\n.header-gradient[data-v-12a79238] {\n    background-image: linear-gradient(rgb(36, 36, 36), rgb(61, 61, 61));\n}\n", map: {"version":3,"sources":["/mnt/c/users/miles/onedrive/documents/atom-programs-new/games/number-prestige/src/components/content/header/HeaderComponent.vue"],"names":[],"mappings":";AAoCA;IACA,WAAA;;IAEA,aAAA;;IAEA,wBAAA;IACA,8CAAA;AACA;AAEA;IACA,iCAAA;AACA;AAEA;IACA,oCAAA;AACA;AAEA;IACA,mEAAA;AACA","file":"HeaderComponent.vue","sourcesContent":["<!-- This component represents the app's header -->\r\n<!-- Name is used to avoid conflicts with builtin HTML elements -->\r\n<template>\r\n    <div id=\"header\" v-bind:class=\"themeClass('header')\">\r\n        <header-item v-bind:state=\"gameStates.main\"></header-item>\r\n        <header-item v-bind:state=\"gameStates.options\"></header-item>\r\n\r\n        <template v-if=\"hasPrestiged()\">\r\n            <header-item v-bind:state=\"gameStates.upgrades\"></header-item>\r\n            <header-item v-bind:state=\"gameStates.automation\"></header-item>\r\n        </template>\r\n    </div>\r\n</template>\r\n\r\n<script>\r\n    import HeaderItem from \"./HeaderItem.vue\";\r\n\r\n    import { gameStates } from \"../../../enums.js\";\r\n\r\n    import { prestiges, theme } from \"../../../mixins/storeIO.js\";\r\n\r\n    export default {\r\n        mixins: [prestiges, theme],\r\n\r\n        //This seems to be a good way to load enums\r\n        data: () => ({\r\n            gameStates\r\n        }),\r\n\r\n        components: {\r\n            \"header-item\": HeaderItem\r\n        }\r\n    };\r\n</script>\r\n\r\n<style scoped>\r\n    #header {\r\n        width: 100%;\r\n\r\n        display: grid;\r\n\r\n        grid-template-rows: 100%;\r\n        grid-template-columns: repeat(auto-fill, auto);\r\n    }\r\n\r\n    .header-dark {\r\n        background-color: rgb(24, 24, 24);\r\n    }\r\n\r\n    .header-light {\r\n        background-color: rgb(200, 200, 200);\r\n    }\r\n\r\n    .header-gradient {\r\n        background-image: linear-gradient(rgb(36, 36, 36), rgb(61, 61, 61));\r\n    }\r\n</style>\r\n"]}, media: undefined });
+        inject("data-v-77d44387_0", { source: "\n#upgrades-subtext[data-v-77d44387] {\n    width: 100%;\n    height: 100%;\n\n    display: flex;\n\n    justify-content: center;\n    align-items: center;\n\n    font-size: 85%;\n}\n", map: {"version":3,"sources":["/mnt/c/users/miles/onedrive/documents/atom-programs-new/games/number-prestige/src/components/content/game/states/upgrades/UpgradesSubtext.vue"],"names":[],"mappings":";AAcA;IACA,WAAA;IACA,YAAA;;IAEA,aAAA;;IAEA,uBAAA;IACA,mBAAA;;IAEA,cAAA;AACA","file":"UpgradesSubtext.vue","sourcesContent":["<!-- This component displays important text about buying upgrades -->\r\n<template>\r\n    <div id=\"upgrades-subtext\" v-bind:class=\"themeClass('text')\">Buying an upgrade will reset your score, prestige requirement, and number gain.</div>\r\n</template>\r\n\r\n<script>\r\n    import { theme } from \"../../../../../mixins/storeIO.js\";\r\n\r\n    export default {\r\n        mixins: [theme]\r\n    }\r\n</script>\r\n\r\n<style scoped>\r\n    #upgrades-subtext {\r\n        width: 100%;\r\n        height: 100%;\r\n\r\n        display: flex;\r\n\r\n        justify-content: center;\r\n        align-items: center;\r\n\r\n        font-size: 85%;\r\n    }\r\n</style>\r\n"]}, media: undefined });
 
       };
       /* scoped */
-      const __vue_scope_id__$h = "data-v-12a79238";
+      const __vue_scope_id__$h = "data-v-77d44387";
       /* module identifier */
       const __vue_module_identifier__$h = undefined;
       /* functional template */
@@ -1632,10 +1805,11 @@
     //
 
     var script$i = {
+        mixins: [goal, utils],
+
         components: {
-            "display-section": __vue_component__$6,
-            "game-component": __vue_component__$f,
-            "header-component": __vue_component__$h
+            "prestige-upgrade-button": __vue_component__$g,
+            "upgrades-subtext": __vue_component__$h
         }
     };
 
@@ -1649,13 +1823,46 @@
       var _c = _vm._self._c || _h;
       return _c(
         "div",
-        { attrs: { id: "content-container" } },
+        { attrs: { id: "upgrades" } },
         [
-          _c("header-component"),
+          _c("upgrades-subtext"),
           _vm._v(" "),
-          _c("display-section"),
-          _vm._v(" "),
-          _c("game-component")
+          _c(
+            "div",
+            { attrs: { id: "prestige-upgrades-container" } },
+            [
+              _c("prestige-upgrade-button", {
+                attrs: {
+                  id: 0,
+                  description: "Multiply Prestige Point gain by 2",
+                  func: function(e) {
+                    return _vm.formatSci(e) + "x"
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _c("prestige-upgrade-button", {
+                attrs: {
+                  id: 1,
+                  description: "Add 1 to number gain",
+                  func: function(e) {
+                    return "+" + _vm.formatSci(e)
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _c("prestige-upgrade-button", {
+                attrs: {
+                  id: 2,
+                  description: "Reduce prestige goal by 10%",
+                  func: function(e) {
+                    return "-" + _vm.formatSci(Math.ceil(_vm.getGoal() * (1 - e)))
+                  }
+                }
+              })
+            ],
+            1
+          )
         ],
         1
       )
@@ -1666,11 +1873,11 @@
       /* style */
       const __vue_inject_styles__$i = function (inject) {
         if (!inject) return
-        inject("data-v-f7da23f8_0", { source: "\n#content-container[data-v-f7da23f8] {\n    grid-row: 1;\n    grid-column: 1;\n\n    display: grid;\n\n    grid-template-rows: 5% 10% auto;\n    grid-template-columns: 100%;\n}\n", map: {"version":3,"sources":["/mnt/c/users/miles/onedrive/documents/atom-programs-new/games/number-prestige/src/components/content/ContentContainer.vue"],"names":[],"mappings":";AAwBA;IACA,WAAA;IACA,cAAA;;IAEA,aAAA;;IAEA,+BAAA;IACA,2BAAA;AACA","file":"ContentContainer.vue","sourcesContent":["<!-- This component contains the app's main contents -->\r\n<template>\r\n    <div id=\"content-container\">\r\n        <header-component></header-component>\r\n        <display-section></display-section>\r\n        <game-component></game-component>\r\n    </div>\r\n</template>\r\n\r\n<script>\r\n    import DisplaySection from \"./display-section/DisplaySection.vue\";\r\n    import GameComponent from \"./game/GameComponent.vue\";\r\n    import HeaderComponent from \"./header/HeaderComponent.vue\";\r\n\r\n    export default {\r\n        components: {\r\n            \"display-section\": DisplaySection,\r\n            \"game-component\": GameComponent,\r\n            \"header-component\": HeaderComponent\r\n        }\r\n    };\r\n</script>\r\n\r\n<style scoped>\r\n    #content-container {\r\n        grid-row: 1;\r\n        grid-column: 1;\r\n\r\n        display: grid;\r\n\r\n        grid-template-rows: 5% 10% auto;\r\n        grid-template-columns: 100%;\r\n    }\r\n</style>\r\n"]}, media: undefined });
+        inject("data-v-692371c4_0", { source: "\n#upgrades[data-v-692371c4] {\n    width: 100%;\n    height: 100%;\n\n    display: grid;\n\n    grid-template-rows: 12% 30% auto;\n    grid-template-columns: 100%;\n}\n#prestige-upgrades-container[data-v-692371c4] {\n    width: 100%;\n    height: 100%;\n\n    grid-column: 1;\n\n    display: grid;\n\n    grid-template-rows: 100%;\n    grid-template-columns: repeat(4, 25%);\n}\n", map: {"version":3,"sources":["/mnt/c/users/miles/onedrive/documents/atom-programs-new/games/number-prestige/src/components/content/game/states/upgrades/UpgradesState.vue"],"names":[],"mappings":";AAiCA;IACA,WAAA;IACA,YAAA;;IAEA,aAAA;;IAEA,gCAAA;IACA,2BAAA;AACA;AAEA;IACA,WAAA;IACA,YAAA;;IAEA,cAAA;;IAEA,aAAA;;IAEA,wBAAA;IACA,qCAAA;AACA","file":"UpgradesState.vue","sourcesContent":["<!-- This component represents the upgrades tab of the game -->\r\n<template>\r\n    <div id=\"upgrades\">\r\n        <upgrades-subtext></upgrades-subtext>\r\n\r\n        <div id=\"prestige-upgrades-container\">\r\n            <prestige-upgrade-button v-bind:id=\"0\" description=\"Multiply Prestige Point gain by 2\" v-bind:func=\"e => `${formatSci(e)}x`\"></prestige-upgrade-button>\r\n            <prestige-upgrade-button v-bind:id=\"1\" description=\"Add 1 to number gain\" v-bind:func=\"e => `+${formatSci(e)}`\"></prestige-upgrade-button>\r\n            <prestige-upgrade-button v-bind:id=\"2\" description=\"Reduce prestige goal by 10%\" v-bind:func=\"e => `-${formatSci(Math.ceil(getGoal() * (1 - e)))}`\"></prestige-upgrade-button>\r\n        </div>\r\n    </div>\r\n</template>\r\n\r\n<script>\r\n    import PrestigeUpgradeButton from \"./prestige-upgrade-button/PrestigeUpgradeButton.vue\";\r\n\r\n    import UpgradesSubtext from \"./UpgradesSubtext.vue\";\r\n\r\n    import { goal } from \"../../../../../mixins/storeIO.js\";\r\n\r\n    import utils from \"../../../../../mixins/utils.js\";\r\n\r\n    export default {\r\n        mixins: [goal, utils],\r\n\r\n        components: {\r\n            \"prestige-upgrade-button\": PrestigeUpgradeButton,\r\n            \"upgrades-subtext\": UpgradesSubtext\r\n        }\r\n    };\r\n</script>\r\n\r\n<style scoped>\r\n    #upgrades {\r\n        width: 100%;\r\n        height: 100%;\r\n\r\n        display: grid;\r\n\r\n        grid-template-rows: 12% 30% auto;\r\n        grid-template-columns: 100%;\r\n    }\r\n\r\n    #prestige-upgrades-container {\r\n        width: 100%;\r\n        height: 100%;\r\n\r\n        grid-column: 1;\r\n\r\n        display: grid;\r\n\r\n        grid-template-rows: 100%;\r\n        grid-template-columns: repeat(4, 25%);\r\n    }\r\n</style>\r\n"]}, media: undefined });
 
       };
       /* scoped */
-      const __vue_scope_id__$i = "data-v-f7da23f8";
+      const __vue_scope_id__$i = "data-v-692371c4";
       /* module identifier */
       const __vue_module_identifier__$i = undefined;
       /* functional template */
@@ -1697,7 +1904,17 @@
     //
 
     var script$j = {
-        mixins: [selector, theme]
+        mixins: [gameState],
+
+        data: () => ({
+            gameStates
+        }),
+
+        components: {
+            "main-state": __vue_component__$8,
+            "options-state": __vue_component__$c,
+            "upgrades-state": __vue_component__$i
+        }
     };
 
     /* script */
@@ -1709,21 +1926,20 @@
       var _h = _vm.$createElement;
       var _c = _vm._self._c || _h;
       return _c(
-        "button",
-        {
-          class: [
-            _vm.themeClass("selector-hover"),
-            _vm.themeClass("selector-item"),
-            _vm.themeClass("text")
-          ],
-          attrs: { id: "theme-selector-exit-button" },
-          on: {
-            click: function($event) {
-              return _vm.closeSelector()
-            }
-          }
-        },
-        [_vm._v("Exit")]
+        "div",
+        { attrs: { id: "game-component" } },
+        [
+          _vm.getGameState() === _vm.gameStates.main ? _c("main-state") : _vm._e(),
+          _vm._v(" "),
+          _vm.getGameState() === _vm.gameStates.options
+            ? _c("options-state")
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.getGameState() === _vm.gameStates.upgrades
+            ? _c("upgrades-state")
+            : _vm._e()
+        ],
+        1
       )
     };
     var __vue_staticRenderFns__$j = [];
@@ -1732,11 +1948,11 @@
       /* style */
       const __vue_inject_styles__$j = function (inject) {
         if (!inject) return
-        inject("data-v-4320e190_0", { source: "\n#theme-selector-exit-button[data-v-4320e190] {\n    width: 100%;\n\n    display: flex;\n\n    justify-content: center;\n    align-items: center;\n}\n", map: {"version":3,"sources":["/mnt/c/users/miles/onedrive/documents/atom-programs-new/games/number-prestige/src/components/selectors/theme-selector/ThemeSelectorExitButton.vue"],"names":[],"mappings":";AAcA;IACA,WAAA;;IAEA,aAAA;;IAEA,uBAAA;IACA,mBAAA;AACA","file":"ThemeSelectorExitButton.vue","sourcesContent":["<!-- This component allows the player to exit the theme selector -->\r\n<template>\r\n    <button id=\"theme-selector-exit-button\" v-bind:class=\"[themeClass('selector-hover'), themeClass('selector-item'), themeClass('text')]\" @click=\"closeSelector()\">Exit</button>\r\n</template>\r\n\r\n<script>\r\n    import { selector, theme } from \"../../../mixins/storeIO.js\";\r\n\r\n    export default {\r\n        mixins: [selector, theme]\r\n    };\r\n</script>\r\n\r\n<style scoped>\r\n    #theme-selector-exit-button {\r\n        width: 100%;\r\n\r\n        display: flex;\r\n\r\n        justify-content: center;\r\n        align-items: center;\r\n    }\r\n</style>\r\n"]}, media: undefined });
+        inject("data-v-701ee6e8_0", { source: "\n#game-component[data-v-701ee6e8] {\n    width: 100%;\n    height: 100%;\n\n    display: grid;\n\n    grid-template-rows: 100%;\n    grid-template-columns: 100%;\n}\n", map: {"version":3,"sources":["/mnt/c/users/miles/onedrive/documents/atom-programs-new/games/number-prestige/src/components/content/game/GameComponent.vue"],"names":[],"mappings":";AAkCA;IACA,WAAA;IACA,YAAA;;IAEA,aAAA;;IAEA,wBAAA;IACA,2BAAA;AACA","file":"GameComponent.vue","sourcesContent":["<!-- This component represents the area that contains the game's UI, based on the current gameState -->\r\n<template>\r\n    <div id=\"game-component\">\r\n        <main-state v-if=\"getGameState() === gameStates.main\"></main-state>\r\n        <options-state v-if=\"getGameState() === gameStates.options\"></options-state>\r\n        <upgrades-state v-if=\"getGameState() === gameStates.upgrades\"></upgrades-state>\r\n    </div>\r\n</template>\r\n\r\n<script>\r\n    import MainState from \"./states/main/MainState.vue\";\r\n    import OptionsState from \"./states/options/OptionsState.vue\";\r\n    import UpgradesState from \"./states/upgrades/UpgradesState.vue\";\r\n\r\n    import { gameStates } from \"../../../enums.js\";\r\n\r\n    import { gameState } from \"../../../mixins/storeIO.js\";\r\n\r\n    export default {\r\n        mixins: [gameState],\r\n\r\n        data: () => ({\r\n            gameStates\r\n        }),\r\n\r\n        components: {\r\n            \"main-state\": MainState,\r\n            \"options-state\": OptionsState,\r\n            \"upgrades-state\": UpgradesState\r\n        }\r\n    };\r\n</script>\r\n\r\n<style scoped>\r\n    #game-component {\r\n        width: 100%;\r\n        height: 100%;\r\n\r\n        display: grid;\r\n\r\n        grid-template-rows: 100%;\r\n        grid-template-columns: 100%;\r\n    }\r\n</style>\r\n"]}, media: undefined });
 
       };
       /* scoped */
-      const __vue_scope_id__$j = "data-v-4320e190";
+      const __vue_scope_id__$j = "data-v-701ee6e8";
       /* module identifier */
       const __vue_module_identifier__$j = undefined;
       /* functional template */
@@ -1763,9 +1979,9 @@
     //
 
     var script$k = {
-        mixins: [theme, utils],
+        mixins: [gameState, theme, utils],
 
-        props: ["theme"]
+        props: ["state"]
     };
 
     /* script */
@@ -1779,19 +1995,15 @@
       return _c(
         "button",
         {
-          staticClass: "theme-selector-list-button",
-          class: [
-            _vm.themeClass("selector-hover"),
-            _vm.themeClass("selector-item"),
-            _vm.themeClass("text")
-          ],
+          staticClass: "header-item",
+          class: [_vm.themeClass("header-item"), _vm.themeClass("text")],
           on: {
             click: function($event) {
-              return _vm.setTheme(_vm.theme)
+              return _vm.setGameState(_vm.state)
             }
           }
         },
-        [_vm._v(_vm._s(_vm.capitalize(_vm.theme)) + "\n")]
+        [_vm._v("\n    " + _vm._s(_vm.capitalize(_vm.state)) + "\n")]
       )
     };
     var __vue_staticRenderFns__$k = [];
@@ -1800,11 +2012,11 @@
       /* style */
       const __vue_inject_styles__$k = function (inject) {
         if (!inject) return
-        inject("data-v-102a339e_0", { source: "\n.theme-selector-list-button[data-v-102a339e] {\n    width: 100%;\n    height: 50%;\n\n    display: flex;\n\n    justify-content: center;\n    align-items: center;\n\n    font-size: 155%;\n}\n", map: {"version":3,"sources":["/mnt/c/users/miles/onedrive/documents/atom-programs-new/games/number-prestige/src/components/selectors/theme-selector/ThemeSelectorListButton.vue"],"names":[],"mappings":";AAsBA;IACA,WAAA;IACA,WAAA;;IAEA,aAAA;;IAEA,uBAAA;IACA,mBAAA;;IAEA,eAAA;AACA","file":"ThemeSelectorListButton.vue","sourcesContent":["<!-- Represents a button that can be used to select a list -->\r\n<template>\r\n    <button\r\n        class=\"theme-selector-list-button\"\r\n        v-bind:class=\"[themeClass('selector-hover'), themeClass('selector-item'), themeClass('text')]\"\r\n        @click=\"setTheme(theme)\">{{ capitalize(theme) }}\r\n    </button>\r\n</template>\r\n\r\n<script>\r\n    import { theme } from \"../../../mixins/storeIO.js\";\r\n\r\n    import utils from \"../../../mixins/utils.js\";\r\n\r\n    export default {\r\n        mixins: [theme, utils],\r\n\r\n        props: [\"theme\"]\r\n    };\r\n</script>\r\n\r\n<style scoped>\r\n    .theme-selector-list-button {\r\n        width: 100%;\r\n        height: 50%;\r\n\r\n        display: flex;\r\n\r\n        justify-content: center;\r\n        align-items: center;\r\n\r\n        font-size: 155%;\r\n    }\r\n</style>\r\n"]}, media: undefined });
+        inject("data-v-42363776_0", { source: "\n.header-item[data-v-42363776] {\n    display: flex;\n\n    justify-content: center;\n    align-items: center;\n\n    grid-row: 1;\n\n    font-size: 175%;\n\n    user-select: none;\n}\n.header-item-dark[data-v-42363776] {\n\tbox-shadow: 2px 2px 2px black;\n}\n.header-item-dark[data-v-42363776]:hover {\n    background-color: rgb(40, 40, 40);\n}\n.header-item-light[data-v-42363776] {\n\tbox-shadow: 2px 2px 2px rgb(180, 180, 180);\n}\n.header-item-light[data-v-42363776]:hover {\n    background-color: rgb(215, 215, 215);\n}\n.header-item-gradient[data-v-42363776] {\n\tborder: 2px solid rgb(195, 195, 195);\n}\n.header-item-gradient[data-v-42363776]:hover {\n    background-image: linear-gradient(rgb(56, 56, 56), rgb(81, 81, 81));\n}\n", map: {"version":3,"sources":["/mnt/c/users/miles/onedrive/documents/atom-programs-new/games/number-prestige/src/components/content/header/HeaderItem.vue"],"names":[],"mappings":";AAoBA;IACA,aAAA;;IAEA,uBAAA;IACA,mBAAA;;IAEA,WAAA;;IAEA,eAAA;;IAEA,iBAAA;AACA;AAEA;CACA,6BAAA;AACA;AAEA;IACA,iCAAA;AACA;AAEA;CACA,0CAAA;AACA;AAEA;IACA,oCAAA;AACA;AAEA;CACA,oCAAA;AACA;AAEA;IACA,mEAAA;AACA","file":"HeaderItem.vue","sourcesContent":["<!-- This component represents an item in the header -->\r\n<template>\r\n    <button class=\"header-item\" @click=\"setGameState(state)\" v-bind:class=\"[themeClass('header-item'), themeClass('text')]\">\r\n        {{ capitalize(state) }}\r\n    </button>\r\n</template>\r\n\r\n<script>\r\n    import { gameState, theme } from \"../../../mixins/storeIO.js\";\r\n\r\n    import utils from \"../../../mixins/utils.js\";\r\n\r\n    export default {\r\n        mixins: [gameState, theme, utils],\r\n\r\n        props: [\"state\"]\r\n    };\r\n</script>\r\n\r\n<style scoped>\r\n    .header-item {\r\n        display: flex;\r\n\r\n        justify-content: center;\r\n        align-items: center;\r\n\r\n        grid-row: 1;\r\n\r\n        font-size: 175%;\r\n\r\n        user-select: none;\r\n    }\r\n\r\n    .header-item-dark {\r\n    \tbox-shadow: 2px 2px 2px black;\r\n    }\r\n\r\n    .header-item-dark:hover {\r\n        background-color: rgb(40, 40, 40);\r\n    }\r\n\r\n    .header-item-light {\r\n    \tbox-shadow: 2px 2px 2px rgb(180, 180, 180);\r\n    }\r\n\r\n    .header-item-light:hover {\r\n        background-color: rgb(215, 215, 215);\r\n    }\r\n\r\n    .header-item-gradient {\r\n    \tborder: 2px solid rgb(195, 195, 195);\r\n    }\r\n\r\n    .header-item-gradient:hover {\r\n        background-image: linear-gradient(rgb(56, 56, 56), rgb(81, 81, 81));\r\n    }\r\n</style>\r\n"]}, media: undefined });
 
       };
       /* scoped */
-      const __vue_scope_id__$k = "data-v-102a339e";
+      const __vue_scope_id__$k = "data-v-42363776";
       /* module identifier */
       const __vue_module_identifier__$k = undefined;
       /* functional template */
@@ -1831,7 +2043,16 @@
     //
 
     var script$l = {
-        mixins: [theme]
+        mixins: [prestiges, theme],
+
+        //This seems to be a good way to load enums
+        data: () => ({
+            gameStates
+        }),
+
+        components: {
+            "header-item": __vue_component__$k
+        }
     };
 
     /* script */
@@ -1844,11 +2065,21 @@
       var _c = _vm._self._c || _h;
       return _c(
         "div",
-        {
-          class: [_vm.themeClass("selector-item"), _vm.themeClass("text")],
-          attrs: { id: "theme-selector-title" }
-        },
-        [_vm._v("Select Theme")]
+        { class: _vm.themeClass("header"), attrs: { id: "header" } },
+        [
+          _c("header-item", { attrs: { state: _vm.gameStates.main } }),
+          _vm._v(" "),
+          _c("header-item", { attrs: { state: _vm.gameStates.options } }),
+          _vm._v(" "),
+          _vm.hasPrestiged()
+            ? [
+                _c("header-item", { attrs: { state: _vm.gameStates.upgrades } }),
+                _vm._v(" "),
+                _c("header-item", { attrs: { state: _vm.gameStates.automation } })
+              ]
+            : _vm._e()
+        ],
+        2
       )
     };
     var __vue_staticRenderFns__$l = [];
@@ -1857,11 +2088,11 @@
       /* style */
       const __vue_inject_styles__$l = function (inject) {
         if (!inject) return
-        inject("data-v-978afc10_0", { source: "\n#theme-selector-title[data-v-978afc10] {\n    width: 100%;\n\n    display: flex;\n\n    justify-content: center;\n    align-items: center;\n}\n", map: {"version":3,"sources":["/mnt/c/users/miles/onedrive/documents/atom-programs-new/games/number-prestige/src/components/selectors/theme-selector/ThemeSelectorTitle.vue"],"names":[],"mappings":";AAcA;IACA,WAAA;;IAEA,aAAA;;IAEA,uBAAA;IACA,mBAAA;AACA","file":"ThemeSelectorTitle.vue","sourcesContent":["<!-- This component represents the title of the theme selector -->\r\n<template>\r\n    <div id=\"theme-selector-title\" v-bind:class=\"[themeClass('selector-item'), themeClass('text')]\">Select Theme</div>\r\n</template>\r\n\r\n<script>\r\n    import { theme } from \"../../../mixins/storeIO.js\";\r\n\r\n    export default {\r\n        mixins: [theme]\r\n    };\r\n</script>\r\n\r\n<style scoped>\r\n    #theme-selector-title {\r\n        width: 100%;\r\n\r\n        display: flex;\r\n\r\n        justify-content: center;\r\n        align-items: center;\r\n    }\r\n</style>\r\n"]}, media: undefined });
+        inject("data-v-12a79238_0", { source: "\n#header[data-v-12a79238] {\n    width: 100%;\n\n    display: grid;\n\n    grid-template-rows: 100%;\n    grid-template-columns: repeat(auto-fill, auto);\n}\n.header-dark[data-v-12a79238] {\n    background-color: rgb(24, 24, 24);\n}\n.header-light[data-v-12a79238] {\n    background-color: rgb(200, 200, 200);\n}\n.header-gradient[data-v-12a79238] {\n    background-image: linear-gradient(rgb(36, 36, 36), rgb(61, 61, 61));\n}\n", map: {"version":3,"sources":["/mnt/c/users/miles/onedrive/documents/atom-programs-new/games/number-prestige/src/components/content/header/HeaderComponent.vue"],"names":[],"mappings":";AAoCA;IACA,WAAA;;IAEA,aAAA;;IAEA,wBAAA;IACA,8CAAA;AACA;AAEA;IACA,iCAAA;AACA;AAEA;IACA,oCAAA;AACA;AAEA;IACA,mEAAA;AACA","file":"HeaderComponent.vue","sourcesContent":["<!-- This component represents the app's header -->\r\n<!-- Name is used to avoid conflicts with builtin HTML elements -->\r\n<template>\r\n    <div id=\"header\" v-bind:class=\"themeClass('header')\">\r\n        <header-item v-bind:state=\"gameStates.main\"></header-item>\r\n        <header-item v-bind:state=\"gameStates.options\"></header-item>\r\n\r\n        <template v-if=\"hasPrestiged()\">\r\n            <header-item v-bind:state=\"gameStates.upgrades\"></header-item>\r\n            <header-item v-bind:state=\"gameStates.automation\"></header-item>\r\n        </template>\r\n    </div>\r\n</template>\r\n\r\n<script>\r\n    import HeaderItem from \"./HeaderItem.vue\";\r\n\r\n    import { gameStates } from \"../../../enums.js\";\r\n\r\n    import { prestiges, theme } from \"../../../mixins/storeIO.js\";\r\n\r\n    export default {\r\n        mixins: [prestiges, theme],\r\n\r\n        //This seems to be a good way to load enums\r\n        data: () => ({\r\n            gameStates\r\n        }),\r\n\r\n        components: {\r\n            \"header-item\": HeaderItem\r\n        }\r\n    };\r\n</script>\r\n\r\n<style scoped>\r\n    #header {\r\n        width: 100%;\r\n\r\n        display: grid;\r\n\r\n        grid-template-rows: 100%;\r\n        grid-template-columns: repeat(auto-fill, auto);\r\n    }\r\n\r\n    .header-dark {\r\n        background-color: rgb(24, 24, 24);\r\n    }\r\n\r\n    .header-light {\r\n        background-color: rgb(200, 200, 200);\r\n    }\r\n\r\n    .header-gradient {\r\n        background-image: linear-gradient(rgb(36, 36, 36), rgb(61, 61, 61));\r\n    }\r\n</style>\r\n"]}, media: undefined });
 
       };
       /* scoped */
-      const __vue_scope_id__$l = "data-v-978afc10";
+      const __vue_scope_id__$l = "data-v-12a79238";
       /* module identifier */
       const __vue_module_identifier__$l = undefined;
       /* functional template */
@@ -1888,16 +2119,10 @@
     //
 
     var script$m = {
-        mixins: [theme],
-
-        data: () => ({
-            themes
-        }),
-
         components: {
-            "theme-selector-exit-button": __vue_component__$j,
-            "theme-selector-list-button": __vue_component__$k,
-            "theme-selector-title": __vue_component__$l
+            "display-section": __vue_component__$6,
+            "game-component": __vue_component__$j,
+            "header-component": __vue_component__$l
         }
     };
 
@@ -1906,6 +2131,268 @@
 
     /* template */
     var __vue_render__$m = function() {
+      var _vm = this;
+      var _h = _vm.$createElement;
+      var _c = _vm._self._c || _h;
+      return _c(
+        "div",
+        { attrs: { id: "content-container" } },
+        [
+          _c("header-component"),
+          _vm._v(" "),
+          _c("display-section"),
+          _vm._v(" "),
+          _c("game-component")
+        ],
+        1
+      )
+    };
+    var __vue_staticRenderFns__$m = [];
+    __vue_render__$m._withStripped = true;
+
+      /* style */
+      const __vue_inject_styles__$m = function (inject) {
+        if (!inject) return
+        inject("data-v-f7da23f8_0", { source: "\n#content-container[data-v-f7da23f8] {\n    grid-row: 1;\n    grid-column: 1;\n\n    display: grid;\n\n    grid-template-rows: 5% 10% auto;\n    grid-template-columns: 100%;\n}\n", map: {"version":3,"sources":["/mnt/c/users/miles/onedrive/documents/atom-programs-new/games/number-prestige/src/components/content/ContentContainer.vue"],"names":[],"mappings":";AAwBA;IACA,WAAA;IACA,cAAA;;IAEA,aAAA;;IAEA,+BAAA;IACA,2BAAA;AACA","file":"ContentContainer.vue","sourcesContent":["<!-- This component contains the app's main contents -->\r\n<template>\r\n    <div id=\"content-container\">\r\n        <header-component></header-component>\r\n        <display-section></display-section>\r\n        <game-component></game-component>\r\n    </div>\r\n</template>\r\n\r\n<script>\r\n    import DisplaySection from \"./display-section/DisplaySection.vue\";\r\n    import GameComponent from \"./game/GameComponent.vue\";\r\n    import HeaderComponent from \"./header/HeaderComponent.vue\";\r\n\r\n    export default {\r\n        components: {\r\n            \"display-section\": DisplaySection,\r\n            \"game-component\": GameComponent,\r\n            \"header-component\": HeaderComponent\r\n        }\r\n    };\r\n</script>\r\n\r\n<style scoped>\r\n    #content-container {\r\n        grid-row: 1;\r\n        grid-column: 1;\r\n\r\n        display: grid;\r\n\r\n        grid-template-rows: 5% 10% auto;\r\n        grid-template-columns: 100%;\r\n    }\r\n</style>\r\n"]}, media: undefined });
+
+      };
+      /* scoped */
+      const __vue_scope_id__$m = "data-v-f7da23f8";
+      /* module identifier */
+      const __vue_module_identifier__$m = undefined;
+      /* functional template */
+      const __vue_is_functional_template__$m = false;
+      /* style inject SSR */
+      
+      /* style inject shadow dom */
+      
+
+      
+      const __vue_component__$m = normalizeComponent(
+        { render: __vue_render__$m, staticRenderFns: __vue_staticRenderFns__$m },
+        __vue_inject_styles__$m,
+        __vue_script__$m,
+        __vue_scope_id__$m,
+        __vue_is_functional_template__$m,
+        __vue_module_identifier__$m,
+        false,
+        createInjector,
+        undefined,
+        undefined
+      );
+
+    //
+
+    var script$n = {
+        mixins: [selector, theme]
+    };
+
+    /* script */
+    const __vue_script__$n = script$n;
+
+    /* template */
+    var __vue_render__$n = function() {
+      var _vm = this;
+      var _h = _vm.$createElement;
+      var _c = _vm._self._c || _h;
+      return _c(
+        "button",
+        {
+          class: [
+            _vm.themeClass("selector-hover"),
+            _vm.themeClass("selector-item"),
+            _vm.themeClass("text")
+          ],
+          attrs: { id: "theme-selector-exit-button" },
+          on: {
+            click: function($event) {
+              return _vm.closeSelector()
+            }
+          }
+        },
+        [_vm._v("Exit")]
+      )
+    };
+    var __vue_staticRenderFns__$n = [];
+    __vue_render__$n._withStripped = true;
+
+      /* style */
+      const __vue_inject_styles__$n = function (inject) {
+        if (!inject) return
+        inject("data-v-4320e190_0", { source: "\n#theme-selector-exit-button[data-v-4320e190] {\n    width: 100%;\n\n    display: flex;\n\n    justify-content: center;\n    align-items: center;\n}\n", map: {"version":3,"sources":["/mnt/c/users/miles/onedrive/documents/atom-programs-new/games/number-prestige/src/components/selectors/theme-selector/ThemeSelectorExitButton.vue"],"names":[],"mappings":";AAcA;IACA,WAAA;;IAEA,aAAA;;IAEA,uBAAA;IACA,mBAAA;AACA","file":"ThemeSelectorExitButton.vue","sourcesContent":["<!-- This component allows the player to exit the theme selector -->\r\n<template>\r\n    <button id=\"theme-selector-exit-button\" v-bind:class=\"[themeClass('selector-hover'), themeClass('selector-item'), themeClass('text')]\" @click=\"closeSelector()\">Exit</button>\r\n</template>\r\n\r\n<script>\r\n    import { selector, theme } from \"../../../mixins/storeIO.js\";\r\n\r\n    export default {\r\n        mixins: [selector, theme]\r\n    };\r\n</script>\r\n\r\n<style scoped>\r\n    #theme-selector-exit-button {\r\n        width: 100%;\r\n\r\n        display: flex;\r\n\r\n        justify-content: center;\r\n        align-items: center;\r\n    }\r\n</style>\r\n"]}, media: undefined });
+
+      };
+      /* scoped */
+      const __vue_scope_id__$n = "data-v-4320e190";
+      /* module identifier */
+      const __vue_module_identifier__$n = undefined;
+      /* functional template */
+      const __vue_is_functional_template__$n = false;
+      /* style inject SSR */
+      
+      /* style inject shadow dom */
+      
+
+      
+      const __vue_component__$n = normalizeComponent(
+        { render: __vue_render__$n, staticRenderFns: __vue_staticRenderFns__$n },
+        __vue_inject_styles__$n,
+        __vue_script__$n,
+        __vue_scope_id__$n,
+        __vue_is_functional_template__$n,
+        __vue_module_identifier__$n,
+        false,
+        createInjector,
+        undefined,
+        undefined
+      );
+
+    //
+
+    var script$o = {
+        mixins: [theme, utils],
+
+        props: ["theme"]
+    };
+
+    /* script */
+    const __vue_script__$o = script$o;
+
+    /* template */
+    var __vue_render__$o = function() {
+      var _vm = this;
+      var _h = _vm.$createElement;
+      var _c = _vm._self._c || _h;
+      return _c(
+        "button",
+        {
+          staticClass: "theme-selector-list-button",
+          class: [
+            _vm.themeClass("selector-hover"),
+            _vm.themeClass("selector-item"),
+            _vm.themeClass("text")
+          ],
+          on: {
+            click: function($event) {
+              return _vm.setTheme(_vm.theme)
+            }
+          }
+        },
+        [_vm._v(_vm._s(_vm.capitalize(_vm.theme)) + "\n")]
+      )
+    };
+    var __vue_staticRenderFns__$o = [];
+    __vue_render__$o._withStripped = true;
+
+      /* style */
+      const __vue_inject_styles__$o = function (inject) {
+        if (!inject) return
+        inject("data-v-102a339e_0", { source: "\n.theme-selector-list-button[data-v-102a339e] {\n    width: 100%;\n    height: 50%;\n\n    display: flex;\n\n    justify-content: center;\n    align-items: center;\n\n    font-size: 155%;\n}\n", map: {"version":3,"sources":["/mnt/c/users/miles/onedrive/documents/atom-programs-new/games/number-prestige/src/components/selectors/theme-selector/ThemeSelectorListButton.vue"],"names":[],"mappings":";AAsBA;IACA,WAAA;IACA,WAAA;;IAEA,aAAA;;IAEA,uBAAA;IACA,mBAAA;;IAEA,eAAA;AACA","file":"ThemeSelectorListButton.vue","sourcesContent":["<!-- Represents a button that can be used to select a list -->\r\n<template>\r\n    <button\r\n        class=\"theme-selector-list-button\"\r\n        v-bind:class=\"[themeClass('selector-hover'), themeClass('selector-item'), themeClass('text')]\"\r\n        @click=\"setTheme(theme)\">{{ capitalize(theme) }}\r\n    </button>\r\n</template>\r\n\r\n<script>\r\n    import { theme } from \"../../../mixins/storeIO.js\";\r\n\r\n    import utils from \"../../../mixins/utils.js\";\r\n\r\n    export default {\r\n        mixins: [theme, utils],\r\n\r\n        props: [\"theme\"]\r\n    };\r\n</script>\r\n\r\n<style scoped>\r\n    .theme-selector-list-button {\r\n        width: 100%;\r\n        height: 50%;\r\n\r\n        display: flex;\r\n\r\n        justify-content: center;\r\n        align-items: center;\r\n\r\n        font-size: 155%;\r\n    }\r\n</style>\r\n"]}, media: undefined });
+
+      };
+      /* scoped */
+      const __vue_scope_id__$o = "data-v-102a339e";
+      /* module identifier */
+      const __vue_module_identifier__$o = undefined;
+      /* functional template */
+      const __vue_is_functional_template__$o = false;
+      /* style inject SSR */
+      
+      /* style inject shadow dom */
+      
+
+      
+      const __vue_component__$o = normalizeComponent(
+        { render: __vue_render__$o, staticRenderFns: __vue_staticRenderFns__$o },
+        __vue_inject_styles__$o,
+        __vue_script__$o,
+        __vue_scope_id__$o,
+        __vue_is_functional_template__$o,
+        __vue_module_identifier__$o,
+        false,
+        createInjector,
+        undefined,
+        undefined
+      );
+
+    //
+
+    var script$p = {
+        mixins: [theme]
+    };
+
+    /* script */
+    const __vue_script__$p = script$p;
+
+    /* template */
+    var __vue_render__$p = function() {
+      var _vm = this;
+      var _h = _vm.$createElement;
+      var _c = _vm._self._c || _h;
+      return _c(
+        "div",
+        {
+          class: [_vm.themeClass("selector-item"), _vm.themeClass("text")],
+          attrs: { id: "theme-selector-title" }
+        },
+        [_vm._v("Select Theme")]
+      )
+    };
+    var __vue_staticRenderFns__$p = [];
+    __vue_render__$p._withStripped = true;
+
+      /* style */
+      const __vue_inject_styles__$p = function (inject) {
+        if (!inject) return
+        inject("data-v-978afc10_0", { source: "\n#theme-selector-title[data-v-978afc10] {\n    width: 100%;\n\n    display: flex;\n\n    justify-content: center;\n    align-items: center;\n}\n", map: {"version":3,"sources":["/mnt/c/users/miles/onedrive/documents/atom-programs-new/games/number-prestige/src/components/selectors/theme-selector/ThemeSelectorTitle.vue"],"names":[],"mappings":";AAcA;IACA,WAAA;;IAEA,aAAA;;IAEA,uBAAA;IACA,mBAAA;AACA","file":"ThemeSelectorTitle.vue","sourcesContent":["<!-- This component represents the title of the theme selector -->\r\n<template>\r\n    <div id=\"theme-selector-title\" v-bind:class=\"[themeClass('selector-item'), themeClass('text')]\">Select Theme</div>\r\n</template>\r\n\r\n<script>\r\n    import { theme } from \"../../../mixins/storeIO.js\";\r\n\r\n    export default {\r\n        mixins: [theme]\r\n    };\r\n</script>\r\n\r\n<style scoped>\r\n    #theme-selector-title {\r\n        width: 100%;\r\n\r\n        display: flex;\r\n\r\n        justify-content: center;\r\n        align-items: center;\r\n    }\r\n</style>\r\n"]}, media: undefined });
+
+      };
+      /* scoped */
+      const __vue_scope_id__$p = "data-v-978afc10";
+      /* module identifier */
+      const __vue_module_identifier__$p = undefined;
+      /* functional template */
+      const __vue_is_functional_template__$p = false;
+      /* style inject SSR */
+      
+      /* style inject shadow dom */
+      
+
+      
+      const __vue_component__$p = normalizeComponent(
+        { render: __vue_render__$p, staticRenderFns: __vue_staticRenderFns__$p },
+        __vue_inject_styles__$p,
+        __vue_script__$p,
+        __vue_scope_id__$p,
+        __vue_is_functional_template__$p,
+        __vue_module_identifier__$p,
+        false,
+        createInjector,
+        undefined,
+        undefined
+      );
+
+    //
+
+    var script$q = {
+        mixins: [theme],
+
+        data: () => ({
+            themes
+        }),
+
+        components: {
+            "theme-selector-exit-button": __vue_component__$n,
+            "theme-selector-list-button": __vue_component__$o,
+            "theme-selector-title": __vue_component__$p
+        }
+    };
+
+    /* script */
+    const __vue_script__$q = script$q;
+
+    /* template */
+    var __vue_render__$q = function() {
       var _vm = this;
       var _h = _vm.$createElement;
       var _c = _vm._self._c || _h;
@@ -1934,35 +2421,35 @@
         )
       ])
     };
-    var __vue_staticRenderFns__$m = [];
-    __vue_render__$m._withStripped = true;
+    var __vue_staticRenderFns__$q = [];
+    __vue_render__$q._withStripped = true;
 
       /* style */
-      const __vue_inject_styles__$m = function (inject) {
+      const __vue_inject_styles__$q = function (inject) {
         if (!inject) return
         inject("data-v-1d3358f3_0", { source: "\n#theme-selector-container[data-v-1d3358f3] {\n    grid-row: 1;\n    grid-column: 1;\n\n    display: grid;\n\n    grid-template-rows: 30% auto 30%;\n    grid-template-columns: 45% auto 45%;\n}\n#theme-selector[data-v-1d3358f3] {\n    position: relative;\n\n    grid-row: 2;\n    grid-column: 2;\n\n    display: grid;\n\n    grid-template-rows: 10% auto 10%;\n    grid-template-columns: auto;\n\n    user-select: none;\n}\n#theme-selector-list[data-v-1d3358f3] {\n    display: flex;\n\n    flex-direction: column;\n}\n\n/* Theme selector themes */\n.theme-selector-dark[data-v-1d3358f3] {\n    color: rgb(255, 255, 255);\n\n    background-color: rgb(36, 36, 36);\n\n    box-shadow: 2px 2px 2px black;\n}\n.theme-selector-light[data-v-1d3358f3] {\n    color: rgb(0, 0, 0);\n\n    background-color: rgb(195, 195, 195);\n\n    box-shadow: 2px 2px 2px rgb(180, 180, 180);\n}\n.theme-selector-gradient[data-v-1d3358f3] {\n    color: rgb(255, 255, 255);\n\n    background-image: linear-gradient(rgb(36, 36, 36), rgb(61, 61, 61));\n\n    border: 2px 2px 2px 2px solid rgb(195, 195, 195);\n}\n", map: {"version":3,"sources":["/mnt/c/users/miles/onedrive/documents/atom-programs-new/games/number-prestige/src/components/selectors/theme-selector/ThemeSelector.vue"],"names":[],"mappings":";AAwCA;IACA,WAAA;IACA,cAAA;;IAEA,aAAA;;IAEA,gCAAA;IACA,mCAAA;AACA;AAEA;IACA,kBAAA;;IAEA,WAAA;IACA,cAAA;;IAEA,aAAA;;IAEA,gCAAA;IACA,2BAAA;;IAEA,iBAAA;AACA;AAEA;IACA,aAAA;;IAEA,sBAAA;AACA;;AAEA,0BAAA;AACA;IACA,yBAAA;;IAEA,iCAAA;;IAEA,6BAAA;AACA;AAEA;IACA,mBAAA;;IAEA,oCAAA;;IAEA,0CAAA;AACA;AAEA;IACA,yBAAA;;IAEA,mEAAA;;IAEA,gDAAA;AACA","file":"ThemeSelector.vue","sourcesContent":["<!-- This component represents the selector for themes -->\r\n<template>\r\n    <div id=\"theme-selector-container\">\r\n        <div id=\"theme-selector\" v-bind:class=\"themeClass('theme-selector')\">\r\n            <theme-selector-title></theme-selector-title>\r\n\r\n            <div id=\"theme-selector-list\">\r\n                <theme-selector-list-button v-for=\"theme in Object.values(themes)\" v-bind:theme=\"theme\"/>\r\n            </div>\r\n\r\n            <theme-selector-exit-button></theme-selector-exit-button>\r\n        </div>\r\n    </div>\r\n</template>\r\n\r\n<script>\r\n    import ThemeSelectorExitButton from \"./ThemeSelectorExitButton.vue\";\r\n    import ThemeSelectorListButton from \"./ThemeSelectorListButton.vue\";\r\n    import ThemeSelectorTitle from \"./ThemeSelectorTitle.vue\";\r\n\r\n    import { themes } from \"../../../enums.js\";\r\n\r\n    import { theme } from \"../../../mixins/storeIO.js\";\r\n\r\n    export default {\r\n        mixins: [theme],\r\n\r\n        data: () => ({\r\n            themes\r\n        }),\r\n\r\n        components: {\r\n            \"theme-selector-exit-button\": ThemeSelectorExitButton,\r\n            \"theme-selector-list-button\": ThemeSelectorListButton,\r\n            \"theme-selector-title\": ThemeSelectorTitle\r\n        }\r\n    };\r\n</script>\r\n\r\n<style scoped>\r\n    #theme-selector-container {\r\n        grid-row: 1;\r\n        grid-column: 1;\r\n\r\n        display: grid;\r\n\r\n        grid-template-rows: 30% auto 30%;\r\n        grid-template-columns: 45% auto 45%;\r\n    }\r\n\r\n    #theme-selector {\r\n        position: relative;\r\n\r\n        grid-row: 2;\r\n        grid-column: 2;\r\n\r\n        display: grid;\r\n\r\n        grid-template-rows: 10% auto 10%;\r\n        grid-template-columns: auto;\r\n\r\n        user-select: none;\r\n    }\r\n\r\n    #theme-selector-list {\r\n        display: flex;\r\n\r\n        flex-direction: column;\r\n    }\r\n\r\n    /* Theme selector themes */\r\n    .theme-selector-dark {\r\n        color: rgb(255, 255, 255);\r\n\r\n        background-color: rgb(36, 36, 36);\r\n\r\n        box-shadow: 2px 2px 2px black;\r\n    }\r\n\r\n    .theme-selector-light {\r\n        color: rgb(0, 0, 0);\r\n\r\n        background-color: rgb(195, 195, 195);\r\n\r\n        box-shadow: 2px 2px 2px rgb(180, 180, 180);\r\n    }\r\n\r\n    .theme-selector-gradient {\r\n        color: rgb(255, 255, 255);\r\n\r\n        background-image: linear-gradient(rgb(36, 36, 36), rgb(61, 61, 61));\r\n\r\n        border: 2px 2px 2px 2px solid rgb(195, 195, 195);\r\n    }\r\n</style>\r\n\r\n<style>\r\n    /* Selector hover themes */\r\n    .selector-hover-dark:hover {\r\n        background-color: rgb(44, 44, 44);\r\n    }\r\n\r\n    .selector-hover-light:hover {\r\n        background-color: rgb(215, 215, 215);\r\n    }\r\n\r\n    .selector-hover-gradient:hover {\r\n        background-image: linear-gradient(rgb(56, 56, 56), rgb(81, 81, 81));\r\n    }\r\n\r\n    /* Selector item themes */\r\n    .selector-item-dark {\r\n        color: rgb(255, 255, 255);\r\n\r\n        border-bottom: solid black 2px;\r\n    }\r\n\r\n    .selector-item-light {\r\n        color: rgb(0, 0, 0);\r\n\r\n        border-bottom: solid rgb(180, 180, 180) 2px;\r\n    }\r\n\r\n    .selector-item-gradient {\r\n        color: rgb(255, 255, 255);\r\n\r\n        border: 2px solid rgb(195, 195, 195);\r\n    }\r\n</style>\r\n"]}, media: undefined })
     ,inject("data-v-1d3358f3_1", { source: "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* Selector hover themes */\n.selector-hover-dark:hover {\n    background-color: rgb(44, 44, 44);\n}\n.selector-hover-light:hover {\n    background-color: rgb(215, 215, 215);\n}\n.selector-hover-gradient:hover {\n    background-image: linear-gradient(rgb(56, 56, 56), rgb(81, 81, 81));\n}\n\n/* Selector item themes */\n.selector-item-dark {\n    color: rgb(255, 255, 255);\n\n    border-bottom: solid black 2px;\n}\n.selector-item-light {\n    color: rgb(0, 0, 0);\n\n    border-bottom: solid rgb(180, 180, 180) 2px;\n}\n.selector-item-gradient {\n    color: rgb(255, 255, 255);\n\n    border: 2px solid rgb(195, 195, 195);\n}\n", map: {"version":3,"sources":["/mnt/c/users/miles/onedrive/documents/atom-programs-new/games/number-prestige/src/components/selectors/theme-selector/ThemeSelector.vue"],"names":[],"mappings":";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;AAiGA,0BAAA;AACA;IACA,iCAAA;AACA;AAEA;IACA,oCAAA;AACA;AAEA;IACA,mEAAA;AACA;;AAEA,yBAAA;AACA;IACA,yBAAA;;IAEA,8BAAA;AACA;AAEA;IACA,mBAAA;;IAEA,2CAAA;AACA;AAEA;IACA,yBAAA;;IAEA,oCAAA;AACA","file":"ThemeSelector.vue","sourcesContent":["<!-- This component represents the selector for themes -->\r\n<template>\r\n    <div id=\"theme-selector-container\">\r\n        <div id=\"theme-selector\" v-bind:class=\"themeClass('theme-selector')\">\r\n            <theme-selector-title></theme-selector-title>\r\n\r\n            <div id=\"theme-selector-list\">\r\n                <theme-selector-list-button v-for=\"theme in Object.values(themes)\" v-bind:theme=\"theme\"/>\r\n            </div>\r\n\r\n            <theme-selector-exit-button></theme-selector-exit-button>\r\n        </div>\r\n    </div>\r\n</template>\r\n\r\n<script>\r\n    import ThemeSelectorExitButton from \"./ThemeSelectorExitButton.vue\";\r\n    import ThemeSelectorListButton from \"./ThemeSelectorListButton.vue\";\r\n    import ThemeSelectorTitle from \"./ThemeSelectorTitle.vue\";\r\n\r\n    import { themes } from \"../../../enums.js\";\r\n\r\n    import { theme } from \"../../../mixins/storeIO.js\";\r\n\r\n    export default {\r\n        mixins: [theme],\r\n\r\n        data: () => ({\r\n            themes\r\n        }),\r\n\r\n        components: {\r\n            \"theme-selector-exit-button\": ThemeSelectorExitButton,\r\n            \"theme-selector-list-button\": ThemeSelectorListButton,\r\n            \"theme-selector-title\": ThemeSelectorTitle\r\n        }\r\n    };\r\n</script>\r\n\r\n<style scoped>\r\n    #theme-selector-container {\r\n        grid-row: 1;\r\n        grid-column: 1;\r\n\r\n        display: grid;\r\n\r\n        grid-template-rows: 30% auto 30%;\r\n        grid-template-columns: 45% auto 45%;\r\n    }\r\n\r\n    #theme-selector {\r\n        position: relative;\r\n\r\n        grid-row: 2;\r\n        grid-column: 2;\r\n\r\n        display: grid;\r\n\r\n        grid-template-rows: 10% auto 10%;\r\n        grid-template-columns: auto;\r\n\r\n        user-select: none;\r\n    }\r\n\r\n    #theme-selector-list {\r\n        display: flex;\r\n\r\n        flex-direction: column;\r\n    }\r\n\r\n    /* Theme selector themes */\r\n    .theme-selector-dark {\r\n        color: rgb(255, 255, 255);\r\n\r\n        background-color: rgb(36, 36, 36);\r\n\r\n        box-shadow: 2px 2px 2px black;\r\n    }\r\n\r\n    .theme-selector-light {\r\n        color: rgb(0, 0, 0);\r\n\r\n        background-color: rgb(195, 195, 195);\r\n\r\n        box-shadow: 2px 2px 2px rgb(180, 180, 180);\r\n    }\r\n\r\n    .theme-selector-gradient {\r\n        color: rgb(255, 255, 255);\r\n\r\n        background-image: linear-gradient(rgb(36, 36, 36), rgb(61, 61, 61));\r\n\r\n        border: 2px 2px 2px 2px solid rgb(195, 195, 195);\r\n    }\r\n</style>\r\n\r\n<style>\r\n    /* Selector hover themes */\r\n    .selector-hover-dark:hover {\r\n        background-color: rgb(44, 44, 44);\r\n    }\r\n\r\n    .selector-hover-light:hover {\r\n        background-color: rgb(215, 215, 215);\r\n    }\r\n\r\n    .selector-hover-gradient:hover {\r\n        background-image: linear-gradient(rgb(56, 56, 56), rgb(81, 81, 81));\r\n    }\r\n\r\n    /* Selector item themes */\r\n    .selector-item-dark {\r\n        color: rgb(255, 255, 255);\r\n\r\n        border-bottom: solid black 2px;\r\n    }\r\n\r\n    .selector-item-light {\r\n        color: rgb(0, 0, 0);\r\n\r\n        border-bottom: solid rgb(180, 180, 180) 2px;\r\n    }\r\n\r\n    .selector-item-gradient {\r\n        color: rgb(255, 255, 255);\r\n\r\n        border: 2px solid rgb(195, 195, 195);\r\n    }\r\n</style>\r\n"]}, media: undefined });
 
       };
       /* scoped */
-      const __vue_scope_id__$m = "data-v-1d3358f3";
+      const __vue_scope_id__$q = "data-v-1d3358f3";
       /* module identifier */
-      const __vue_module_identifier__$m = undefined;
+      const __vue_module_identifier__$q = undefined;
       /* functional template */
-      const __vue_is_functional_template__$m = false;
+      const __vue_is_functional_template__$q = false;
       /* style inject SSR */
       
       /* style inject shadow dom */
       
 
       
-      const __vue_component__$m = normalizeComponent(
-        { render: __vue_render__$m, staticRenderFns: __vue_staticRenderFns__$m },
-        __vue_inject_styles__$m,
-        __vue_script__$m,
-        __vue_scope_id__$m,
-        __vue_is_functional_template__$m,
-        __vue_module_identifier__$m,
+      const __vue_component__$q = normalizeComponent(
+        { render: __vue_render__$q, staticRenderFns: __vue_staticRenderFns__$q },
+        __vue_inject_styles__$q,
+        __vue_script__$q,
+        __vue_scope_id__$q,
+        __vue_is_functional_template__$q,
+        __vue_module_identifier__$q,
         false,
         createInjector,
         undefined,
@@ -1971,7 +2458,7 @@
 
     //
 
-    var script$n = {
+    var script$r = {
         mixins: [selector],
 
         data: () => ({
@@ -1979,15 +2466,15 @@
         }),
 
         components: {
-            "theme-selector": __vue_component__$m
+            "theme-selector": __vue_component__$q
         }
     };
 
     /* script */
-    const __vue_script__$n = script$n;
+    const __vue_script__$r = script$r;
 
     /* template */
-    var __vue_render__$n = function() {
+    var __vue_render__$r = function() {
       var _vm = this;
       var _h = _vm.$createElement;
       var _c = _vm._self._c || _h;
@@ -2002,34 +2489,34 @@
         1
       )
     };
-    var __vue_staticRenderFns__$n = [];
-    __vue_render__$n._withStripped = true;
+    var __vue_staticRenderFns__$r = [];
+    __vue_render__$r._withStripped = true;
 
       /* style */
-      const __vue_inject_styles__$n = function (inject) {
+      const __vue_inject_styles__$r = function (inject) {
         if (!inject) return
         inject("data-v-76c48c2e_0", { source: "\n#selector-container[data-v-76c48c2e] {\n    grid-row: 1;\n    grid-column: 1;\n\n    display: grid;\n\n    grid-template-rows: auto;\n    grid-template-columns: auto;\n}\n", map: {"version":3,"sources":["/mnt/c/users/miles/onedrive/documents/atom-programs-new/games/number-prestige/src/components/selectors/SelectorContainer.vue"],"names":[],"mappings":";AA4BA;IACA,WAAA;IACA,cAAA;;IAEA,aAAA;;IAEA,wBAAA;IACA,2BAAA;AACA","file":"SelectorContainer.vue","sourcesContent":["<!-- This component containers any selectors -->\r\n<template>\r\n    <div id=\"selector-container\">\r\n        <theme-selector v-if=\"getSelector() === selectorStates.theme\"></theme-selector>\r\n    </div>\r\n</template>\r\n\r\n<script>\r\n    import ThemeSelector from \"./theme-selector/ThemeSelector.vue\";\r\n\r\n    import { selectorStates } from \"../../enums.js\";\r\n\r\n    import { selector } from \"../../mixins/storeIO.js\";\r\n\r\n    export default {\r\n        mixins: [selector],\r\n\r\n        data: () => ({\r\n            selectorStates\r\n        }),\r\n\r\n        components: {\r\n            \"theme-selector\": ThemeSelector\r\n        }\r\n    };\r\n</script>\r\n\r\n<style scoped>\r\n    #selector-container {\r\n        grid-row: 1;\r\n        grid-column: 1;\r\n\r\n        display: grid;\r\n\r\n        grid-template-rows: auto;\r\n        grid-template-columns: auto;\r\n    }\r\n</style>\r\n"]}, media: undefined });
 
       };
       /* scoped */
-      const __vue_scope_id__$n = "data-v-76c48c2e";
+      const __vue_scope_id__$r = "data-v-76c48c2e";
       /* module identifier */
-      const __vue_module_identifier__$n = undefined;
+      const __vue_module_identifier__$r = undefined;
       /* functional template */
-      const __vue_is_functional_template__$n = false;
+      const __vue_is_functional_template__$r = false;
       /* style inject SSR */
       
       /* style inject shadow dom */
       
 
       
-      const __vue_component__$n = normalizeComponent(
-        { render: __vue_render__$n, staticRenderFns: __vue_staticRenderFns__$n },
-        __vue_inject_styles__$n,
-        __vue_script__$n,
-        __vue_scope_id__$n,
-        __vue_is_functional_template__$n,
-        __vue_module_identifier__$n,
+      const __vue_component__$r = normalizeComponent(
+        { render: __vue_render__$r, staticRenderFns: __vue_staticRenderFns__$r },
+        __vue_inject_styles__$r,
+        __vue_script__$r,
+        __vue_scope_id__$r,
+        __vue_is_functional_template__$r,
+        __vue_module_identifier__$r,
         false,
         createInjector,
         undefined,
@@ -2038,12 +2525,12 @@
 
     //
 
-    var script$o = {
+    var script$s = {
         mixins: [save, theme],
 
         components: {
-            "content-container": __vue_component__$i,
-            "selector-container": __vue_component__$n
+            "content-container": __vue_component__$m,
+            "selector-container": __vue_component__$r
         },
 
         created() {
@@ -2056,10 +2543,10 @@
     };
 
     /* script */
-    const __vue_script__$o = script$o;
+    const __vue_script__$s = script$s;
 
     /* template */
-    var __vue_render__$o = function() {
+    var __vue_render__$s = function() {
       var _vm = this;
       var _h = _vm.$createElement;
       var _c = _vm._self._c || _h;
@@ -2070,40 +2557,61 @@
         1
       )
     };
-    var __vue_staticRenderFns__$o = [];
-    __vue_render__$o._withStripped = true;
+    var __vue_staticRenderFns__$s = [];
+    __vue_render__$s._withStripped = true;
 
       /* style */
-      const __vue_inject_styles__$o = function (inject) {
+      const __vue_inject_styles__$s = function (inject) {
         if (!inject) return
         inject("data-v-da1a497c_0", { source: "\n#app[data-v-da1a497c] {\n    position: absolute;\n\n    top: 0;\n    left: 0;\n\n    width: 100%;\n    height: 100%;\n\n    display: grid;\n\n    grid-template-rows: auto;\n    grid-template-columns: auto;\n}\n.app-dark[data-v-da1a497c] {\n    background-color: rgb(20, 20, 20);\n}\n.app-light[data-v-da1a497c] {\n    background-color: rgb(210, 210, 210);\n}\n.app-gradient[data-v-da1a497c] {\n    background-image: linear-gradient(rgb(0, 0, 0), rgb(25, 25, 25));\n}\n", map: {"version":3,"sources":["/mnt/c/users/miles/onedrive/documents/atom-programs-new/games/number-prestige/src/components/App.vue"],"names":[],"mappings":";AAoCA;IACA,kBAAA;;IAEA,MAAA;IACA,OAAA;;IAEA,WAAA;IACA,YAAA;;IAEA,aAAA;;IAEA,wBAAA;IACA,2BAAA;AACA;AAEA;IACA,iCAAA;AACA;AAEA;IACA,oCAAA;AACA;AAEA;IACA,gEAAA;AACA","file":"App.vue","sourcesContent":["<!-- This is the core app component -->\r\n<template>\r\n    <div id=\"app\" v-bind:class=\"themeClass('app')\">\r\n        <selector-container></selector-container>\r\n        <content-container></content-container>\r\n    </div>\r\n</template>\r\n\r\n<script>\r\n    import ContentContainer from \"./content/ContentContainer.vue\";\r\n\r\n    import SelectorContainer from \"./selectors/SelectorContainer.vue\";\r\n\r\n    import save from \"../mixins/save.js\";\r\n\r\n    import { theme } from \"../mixins/storeIO.js\";\r\n\r\n    export default {\r\n        mixins: [save, theme],\r\n\r\n        components: {\r\n            \"content-container\": ContentContainer,\r\n            \"selector-container\": SelectorContainer\r\n        },\r\n\r\n        created() {\r\n            // Loads save data\r\n            this.loadSaveData();\r\n\r\n            // Sets up autosave (5 second interval)\r\n            setInterval(this.save, 5000);\r\n        }\r\n    };\r\n</script>\r\n\r\n<style scoped>\r\n    #app {\r\n        position: absolute;\r\n\r\n        top: 0;\r\n        left: 0;\r\n\r\n        width: 100%;\r\n        height: 100%;\r\n\r\n        display: grid;\r\n\r\n        grid-template-rows: auto;\r\n        grid-template-columns: auto;\r\n    }\r\n\r\n    .app-dark {\r\n        background-color: rgb(20, 20, 20);\r\n    }\r\n\r\n    .app-light {\r\n        background-color: rgb(210, 210, 210);\r\n    }\r\n\r\n    .app-gradient {\r\n        background-image: linear-gradient(rgb(0, 0, 0), rgb(25, 25, 25));\r\n    }\r\n</style>\r\n\r\n<!-- Global styles -->\r\n<!-- This includes themes for global components -->\r\n<style>\r\n    @font-face {\r\n        font-family: \"Open Sans\";\r\n        src: url(\"../fonts/opensans-regular-webfont.woff\");\r\n    }\r\n\r\n    @font-face {\r\n        font-family: \"Plex Mono\";\r\n        src: url(\"../fonts/IBMPlexMono-Regular.ttf\");\r\n    }\r\n\r\n    /*To let me style buttons*/\r\n    button {\r\n        all: unset\r\n    }\r\n\r\n    /*Text themes*/\r\n    .text-dark {\r\n    \tcolor: rgb(255, 255, 255);\r\n    \tfont-family: \"Open Sans\";\r\n    }\r\n\r\n    .text-light {\r\n    \tcolor: rgb(0, 0, 0);\r\n    \tfont-family: \"Open Sans\";\r\n    }\r\n\r\n    .text-gradient {\r\n    \tcolor: rgb(255, 255, 255);\r\n    \tfont-family: \"Plex Mono\";\r\n    }\r\n\r\n    /* Game button themes */\r\n    .game-button-dark {\r\n    \tcolor: rgb(255, 255, 255);\r\n\r\n        background-color: rgb(32, 32, 32);\r\n\r\n        box-shadow: 2px 2px 2px black;\r\n    }\r\n\r\n    .game-button-dark:hover {\r\n        background-color: rgb(40, 40, 40);\r\n    }\r\n\r\n    .game-button-light {\r\n    \tcolor: rgb(0, 0, 0);\r\n\r\n        background-color: rgb(200, 200, 200);\r\n\r\n        box-shadow: 2px 2px 2px rgb(180, 180, 180);\r\n    }\r\n\r\n    .game-button-light:hover {\r\n        background-color: rgb(215, 215, 215);\r\n    }\r\n\r\n    .game-button-gradient {\r\n    \tcolor: rgb(255, 255, 255);\r\n\r\n        background-color: rgba(0, 0, 0, 0);\r\n\r\n    \tborder: 2px solid rgb(195, 195, 195);\r\n    }\r\n\r\n    .game-button-gradient:hover {\r\n    \tbackground-image: linear-gradient(rgb(56, 56, 56), rgb(81, 81, 81));\r\n    }\r\n</style>\r\n"]}, media: undefined })
     ,inject("data-v-da1a497c_1", { source: "\n@font-face {\n    font-family: \"Open Sans\";\n    src: url(\"../fonts/opensans-regular-webfont.woff\");\n}\n@font-face {\n    font-family: \"Plex Mono\";\n    src: url(\"../fonts/IBMPlexMono-Regular.ttf\");\n}\n\n/*To let me style buttons*/\nbutton {\n    all: unset\n}\n\n/*Text themes*/\n.text-dark {\n\tcolor: rgb(255, 255, 255);\n\tfont-family: \"Open Sans\";\n}\n.text-light {\n\tcolor: rgb(0, 0, 0);\n\tfont-family: \"Open Sans\";\n}\n.text-gradient {\n\tcolor: rgb(255, 255, 255);\n\tfont-family: \"Plex Mono\";\n}\n\n/* Game button themes */\n.game-button-dark {\n\tcolor: rgb(255, 255, 255);\n\n    background-color: rgb(32, 32, 32);\n\n    box-shadow: 2px 2px 2px black;\n}\n.game-button-dark:hover {\n    background-color: rgb(40, 40, 40);\n}\n.game-button-light {\n\tcolor: rgb(0, 0, 0);\n\n    background-color: rgb(200, 200, 200);\n\n    box-shadow: 2px 2px 2px rgb(180, 180, 180);\n}\n.game-button-light:hover {\n    background-color: rgb(215, 215, 215);\n}\n.game-button-gradient {\n\tcolor: rgb(255, 255, 255);\n\n    background-color: rgba(0, 0, 0, 0);\n\n\tborder: 2px solid rgb(195, 195, 195);\n}\n.game-button-gradient:hover {\n\tbackground-image: linear-gradient(rgb(56, 56, 56), rgb(81, 81, 81));\n}\n", map: {"version":3,"sources":["/mnt/c/users/miles/onedrive/documents/atom-programs-new/games/number-prestige/src/components/App.vue"],"names":[],"mappings":";AAmEA;IACA,wBAAA;IACA,kDAAA;AACA;AAEA;IACA,wBAAA;IACA,4CAAA;AACA;;AAEA,0BAAA;AACA;IACA;AACA;;AAEA,cAAA;AACA;CACA,yBAAA;CACA,wBAAA;AACA;AAEA;CACA,mBAAA;CACA,wBAAA;AACA;AAEA;CACA,yBAAA;CACA,wBAAA;AACA;;AAEA,uBAAA;AACA;CACA,yBAAA;;IAEA,iCAAA;;IAEA,6BAAA;AACA;AAEA;IACA,iCAAA;AACA;AAEA;CACA,mBAAA;;IAEA,oCAAA;;IAEA,0CAAA;AACA;AAEA;IACA,oCAAA;AACA;AAEA;CACA,yBAAA;;IAEA,kCAAA;;CAEA,oCAAA;AACA;AAEA;CACA,mEAAA;AACA","file":"App.vue","sourcesContent":["<!-- This is the core app component -->\r\n<template>\r\n    <div id=\"app\" v-bind:class=\"themeClass('app')\">\r\n        <selector-container></selector-container>\r\n        <content-container></content-container>\r\n    </div>\r\n</template>\r\n\r\n<script>\r\n    import ContentContainer from \"./content/ContentContainer.vue\";\r\n\r\n    import SelectorContainer from \"./selectors/SelectorContainer.vue\";\r\n\r\n    import save from \"../mixins/save.js\";\r\n\r\n    import { theme } from \"../mixins/storeIO.js\";\r\n\r\n    export default {\r\n        mixins: [save, theme],\r\n\r\n        components: {\r\n            \"content-container\": ContentContainer,\r\n            \"selector-container\": SelectorContainer\r\n        },\r\n\r\n        created() {\r\n            // Loads save data\r\n            this.loadSaveData();\r\n\r\n            // Sets up autosave (5 second interval)\r\n            setInterval(this.save, 5000);\r\n        }\r\n    };\r\n</script>\r\n\r\n<style scoped>\r\n    #app {\r\n        position: absolute;\r\n\r\n        top: 0;\r\n        left: 0;\r\n\r\n        width: 100%;\r\n        height: 100%;\r\n\r\n        display: grid;\r\n\r\n        grid-template-rows: auto;\r\n        grid-template-columns: auto;\r\n    }\r\n\r\n    .app-dark {\r\n        background-color: rgb(20, 20, 20);\r\n    }\r\n\r\n    .app-light {\r\n        background-color: rgb(210, 210, 210);\r\n    }\r\n\r\n    .app-gradient {\r\n        background-image: linear-gradient(rgb(0, 0, 0), rgb(25, 25, 25));\r\n    }\r\n</style>\r\n\r\n<!-- Global styles -->\r\n<!-- This includes themes for global components -->\r\n<style>\r\n    @font-face {\r\n        font-family: \"Open Sans\";\r\n        src: url(\"../fonts/opensans-regular-webfont.woff\");\r\n    }\r\n\r\n    @font-face {\r\n        font-family: \"Plex Mono\";\r\n        src: url(\"../fonts/IBMPlexMono-Regular.ttf\");\r\n    }\r\n\r\n    /*To let me style buttons*/\r\n    button {\r\n        all: unset\r\n    }\r\n\r\n    /*Text themes*/\r\n    .text-dark {\r\n    \tcolor: rgb(255, 255, 255);\r\n    \tfont-family: \"Open Sans\";\r\n    }\r\n\r\n    .text-light {\r\n    \tcolor: rgb(0, 0, 0);\r\n    \tfont-family: \"Open Sans\";\r\n    }\r\n\r\n    .text-gradient {\r\n    \tcolor: rgb(255, 255, 255);\r\n    \tfont-family: \"Plex Mono\";\r\n    }\r\n\r\n    /* Game button themes */\r\n    .game-button-dark {\r\n    \tcolor: rgb(255, 255, 255);\r\n\r\n        background-color: rgb(32, 32, 32);\r\n\r\n        box-shadow: 2px 2px 2px black;\r\n    }\r\n\r\n    .game-button-dark:hover {\r\n        background-color: rgb(40, 40, 40);\r\n    }\r\n\r\n    .game-button-light {\r\n    \tcolor: rgb(0, 0, 0);\r\n\r\n        background-color: rgb(200, 200, 200);\r\n\r\n        box-shadow: 2px 2px 2px rgb(180, 180, 180);\r\n    }\r\n\r\n    .game-button-light:hover {\r\n        background-color: rgb(215, 215, 215);\r\n    }\r\n\r\n    .game-button-gradient {\r\n    \tcolor: rgb(255, 255, 255);\r\n\r\n        background-color: rgba(0, 0, 0, 0);\r\n\r\n    \tborder: 2px solid rgb(195, 195, 195);\r\n    }\r\n\r\n    .game-button-gradient:hover {\r\n    \tbackground-image: linear-gradient(rgb(56, 56, 56), rgb(81, 81, 81));\r\n    }\r\n</style>\r\n"]}, media: undefined });
 
       };
       /* scoped */
-      const __vue_scope_id__$o = "data-v-da1a497c";
+      const __vue_scope_id__$s = "data-v-da1a497c";
       /* module identifier */
-      const __vue_module_identifier__$o = undefined;
+      const __vue_module_identifier__$s = undefined;
       /* functional template */
-      const __vue_is_functional_template__$o = false;
+      const __vue_is_functional_template__$s = false;
       /* style inject SSR */
       
       /* style inject shadow dom */
       
 
       
-      const __vue_component__$o = normalizeComponent(
-        { render: __vue_render__$o, staticRenderFns: __vue_staticRenderFns__$o },
-        __vue_inject_styles__$o,
-        __vue_script__$o,
-        __vue_scope_id__$o,
-        __vue_is_functional_template__$o,
-        __vue_module_identifier__$o,
+      const __vue_component__$s = normalizeComponent(
+        { render: __vue_render__$s, staticRenderFns: __vue_staticRenderFns__$s },
+        __vue_inject_styles__$s,
+        __vue_script__$s,
+        __vue_scope_id__$s,
+        __vue_is_functional_template__$s,
+        __vue_module_identifier__$s,
         false,
         createInjector,
         undefined,
         undefined
       );
+
+    // This class represents an upgrade in the game
+    var Upgrade = ({ cost, scaling, amount = 0, boost } = {}) => ({
+        // Cost of the upgrade
+        cost,
+
+        // Amount the upgrade's cost increases on purchase
+        scaling,
+
+        // Number of times the upgrade has been bought
+        amount,
+
+        // Function that determines how powerful the upgrade is
+        boost,
+
+        // Buys the upgrade
+        buy() {
+            this.amount++;
+            this.cost *= this.scaling;
+        }
+    });
 
     var store = new Vuex.Store({
         state: {
@@ -2129,7 +2637,46 @@
             prestigePoints: defaultSave.prestigePoints,
 
             // Number of times prestiged
-            prestiges: defaultSave.prestiges
+            prestiges: defaultSave.prestiges,
+
+            // Purchaseable upgrades
+            upgrades: [
+                // Prestige point multiplier
+                Upgrade({
+                    cost: defaultSave.upgrades[0].cost,
+                    scaling: 5,
+
+                    amount: defaultSave.upgrades[0].amount,
+
+                    boost() {
+                        return 2 ** this.amount;
+                    }
+                }),
+
+                // Number gain boost
+                Upgrade({
+                    cost: defaultSave.upgrades[1].cost,
+                    scaling: 5,
+
+                    amount: defaultSave.upgrades[1].amount,
+
+                    boost() {
+                        return this.amount;
+                    }
+                }),
+
+                // Goal reduction upgrade
+                Upgrade({
+                    cost: defaultSave.upgrades[2].cost,
+                    scaling: 5,
+
+                    amount: defaultSave.upgrades[2].amount,
+
+                    boost() {
+                        return 0.9 ** this.amount;
+                    }
+                })
+            ]
         },
 
         mutations: {
@@ -2178,6 +2725,11 @@
                 state.goal *= 2;
             },
 
+            // Resets the goal
+            resetGoal(state) {
+                state.goal = 10;
+            },
+
             // Sets the amount gained on click
             setGain(state, gain) {
                 state.gain = gain;
@@ -2186,6 +2738,11 @@
             // Increases the gain by adding 1 to it
             increaseGain(state) {
                 state.gain++;
+            },
+
+            // Resets the number gained
+            resetGain(state) {
+                state.gain = 1;
             },
 
             // Sets the number of prestige points
@@ -2198,6 +2755,11 @@
                 state.prestigePoints += prestigePoints;
             },
 
+            // Subtracts from the number of prestige points
+            subtractPrestigePoints(state, prestigePoints) {
+                state.prestigePoints -= prestigePoints;
+            },
+
             // Sets the number of prestiges
             setPrestiges(state, prestiges) {
                 state.prestiges = prestiges;
@@ -2206,6 +2768,21 @@
             // Increases the number of prestiges by 1
             increasePrestiges(state) {
                 state.prestiges++;
+            },
+
+            // Sets the amount of an upgrade
+            setUpgradeAmount(state, { id, amount }) {
+                state.upgrades[id].amount = amount;
+            },
+
+            // Sets the cost of an upgrade
+            setUpgradeCost(state, { id, cost }) {
+                state.upgrades[id].cost = cost;
+            },
+
+            // Buys an upgrade
+            buyUpgrade(state, id) {
+                state.upgrades[id].buy();
             }
         }
     });
@@ -2216,7 +2793,7 @@
         store,
 
         components: {
-            app: __vue_component__$o
+            app: __vue_component__$s
         },
 
         template: `<app></app>`

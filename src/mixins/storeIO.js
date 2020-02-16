@@ -83,6 +83,10 @@ export const goal = {
 
         increaseGoal() {
             this.$store.commit("increaseGoal");
+        },
+
+        resetGoal() {
+            this.$store.commit("resetGoal");
         }
     }
 };
@@ -100,6 +104,10 @@ export const gain = {
 
         increaseGain() {
             this.$store.commit("increaseGain");
+        },
+
+        resetGain() {
+            this.$store.commit("resetGain");
         }
     }
 };
@@ -117,6 +125,10 @@ export const prestigePoints = {
 
         addPrestigePoints(prestigePoints) {
             this.$store.commit("addPrestigePoints", prestigePoints);
+        },
+
+        subtractPrestigePoints(prestigePoints) {
+            this.$store.commit("subtractPrestigePoints", prestigePoints);
         }
     }
 };
@@ -142,3 +154,40 @@ export const prestiges = {
         }
     }
 };
+
+// This mixin grants access to the upgrades variable
+export const upgrades = {
+    methods: {
+        // Gets the upgrades array
+        getUpgrades() {
+            return this.$store.state.upgrades;
+        },
+
+        // Returns the cost of a given upgrade
+        getUpgradeCost(id) {
+            return this.getUpgrades()[id].cost;
+        },
+
+        // Returns the amount of a given upgrade
+        getUpgradeAmount(id) {
+            return this.getUpgrades()[id].amount;
+        },
+
+        // Returns the boost given by a given upgrade
+        getUpgradeBoost(id) {
+            return this.getUpgrades()[id].boost();
+        },
+
+        setUpgradeAmount(id, amount) {
+            this.$store.commit("setUpgradeAmount", { id, amount });
+        },
+
+        setUpgradeCost(id, cost) {
+            this.$store.commit("setUpgradeCost", { id, cost });
+        },
+
+        buyUpgrade(id) {
+            this.$store.commit("buyUpgrade", id);
+        }
+    }
+}

@@ -27,5 +27,22 @@ export const defaultSave = {
     goal: 10,
     gain: 1,
     prestigePoints: 0,
-    prestiges: 0
+    prestiges: 0,
+
+    upgrades: [
+        {
+            cost: 2,
+            amount: 0
+        },
+
+        {
+            cost: 4,
+            amount: 0
+        },
+
+        {
+            cost: 5,
+            amount: 0
+        }
+    ]
 };

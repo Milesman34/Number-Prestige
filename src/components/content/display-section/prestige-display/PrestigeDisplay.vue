@@ -13,10 +13,12 @@
     import PrestigeButton from "./PrestigeButton.vue";
     import PrestigePointDisplay from "./PrestigePointDisplay.vue";
 
-    import { goal, prestiges, score } from "../../../../mixins/storeIO.js";
+    import { prestiges, score } from "../../../../mixins/storeIO.js";
+
+    import calculatedValues from "../../../../mixins/calculatedValues.js";
 
     export default {
-        mixins: [goal, prestiges, score],
+        mixins: [calculatedValues, prestiges, score],
 
         components: {
             "prestige-button": PrestigeButton,
@@ -26,7 +28,7 @@
         methods: {
             // Determines if the player can prestige
             canPrestige() {
-                return this.getScore() >= this.getGoal();
+                return this.getScore() >= this.getActualGoal();
             }
         }
     };

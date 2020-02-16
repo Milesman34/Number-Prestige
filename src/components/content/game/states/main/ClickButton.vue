@@ -1,15 +1,16 @@
 <!-- This component is for the button clicked to increase the player's score -->
 <template>
-    <button id="click-button" v-bind:class="[themeClass('game-button'), themeClass('text')]" v-on:click="addScore(getGain())">Increase number by {{ formatSci(getGain()) }}</button>
+    <button id="click-button" v-bind:class="[themeClass('game-button'), themeClass('text')]" v-on:click="addScore(getTotalGain())">Increase number by {{ formatSci(getTotalGain()) }}</button>
 </template>
 
 <script>
-    import { gain, score, theme } from "../../../../../mixins/storeIO.js";
+    import { gain, score, theme, upgrades } from "../../../../../mixins/storeIO.js";
 
+    import calculatedValues from "../../../../../mixins/calculatedValues.js";
     import utils from "../../../../../mixins/utils.js";
 
     export default {
-        mixins: [gain, score, theme, utils]
+        mixins: [calculatedValues, score, theme, utils]
     };
 </script>
 

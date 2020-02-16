@@ -1,13 +1,15 @@
 <!-- This component represents the button for prestiging -->
 <template>
-    <button id="prestige-button" @click="prestige()" v-bind:class="[themeClass('game-button'), themeClass('text')]">Prestige for 1 Prestige Point</button>
+    <button id="prestige-button" @click="prestige()" v-bind:class="[themeClass('game-button'), themeClass('text')]">Prestige for {{ getUpgradeBoost(0) }} Prestige Point{{ pluralEnding(getUpgradeBoost(0)) }}</button>
 </template>
 
 <script>
-    import { gain, goal, prestigePoints, prestiges, score, theme } from "../../../../mixins/storeIO.js";
+    import { gain, goal, prestigePoints, prestiges, score, theme, upgrades } from "../../../../mixins/storeIO.js";
+
+    import utils from "../../../../mixins/utils.js";
 
     export default {
-        mixins: [gain, goal, prestigePoints, prestiges, score, theme],
+        mixins: [gain, goal, prestigePoints, prestiges, score, theme, upgrades, utils],
 
         methods: {
             // Prestiges the game, resetting the player's score but increasing their number gain by 1 and doubling their goal
@@ -25,7 +27,7 @@
                 this.increaseGoal();
 
                 // Gives the player the required number of prestige points and a prestiged stat
-                this.addPrestigePoints(1);
+                this.addPrestigePoints(this.getUpgradeBoost(0));
                 this.increasePrestiges();
             }
         }

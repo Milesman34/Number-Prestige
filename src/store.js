@@ -2,6 +2,8 @@ import Vuex from "vuex";
 
 import { defaultSave, selectorStates } from "./enums.js";
 
+import Upgrade from "./classes/Upgrade.js";
+
 export default new Vuex.Store({
     state: {
         // Current theme
@@ -26,7 +28,46 @@ export default new Vuex.Store({
         prestigePoints: defaultSave.prestigePoints,
 
         // Number of times prestiged
-        prestiges: defaultSave.prestiges
+        prestiges: defaultSave.prestiges,
+
+        // Purchaseable upgrades
+        upgrades: [
+            // Prestige point multiplier
+            Upgrade({
+                cost: defaultSave.upgrades[0].cost,
+                scaling: 5,
+
+                amount: defaultSave.upgrades[0].amount,
+
+                boost() {
+                    return 2 ** this.amount;
+                }
+            }),
+
+            // Number gain boost
+            Upgrade({
+                cost: defaultSave.upgrades[1].cost,
+                scaling: 5,
+
+                amount: defaultSave.upgrades[1].amount,
+
+                boost() {
+                    return this.amount;
+                }
+            }),
+
+            // Goal reduction upgrade
+            Upgrade({
+                cost: defaultSave.upgrades[2].cost,
+                scaling: 5,
+
+                amount: defaultSave.upgrades[2].amount,
+
+                boost() {
+                    return 0.9 ** this.amount;
+                }
+            })
+        ]
     },
 
     mutations: {
@@ -75,6 +116,11 @@ export default new Vuex.Store({
             state.goal *= 2;
         },
 
+        // Resets the goal
+        resetGoal(state) {
+            state.goal = 10;
+        },
+
         // Sets the amount gained on click
         setGain(state, gain) {
             state.gain = gain;
@@ -83,6 +129,11 @@ export default new Vuex.Store({
         // Increases the gain by adding 1 to it
         increaseGain(state) {
             state.gain++;
+        },
+
+        // Resets the number gained
+        resetGain(state) {
+            state.gain = 1;
         },
 
         // Sets the number of prestige points
@@ -95,6 +146,11 @@ export default new Vuex.Store({
             state.prestigePoints += prestigePoints;
         },
 
+        // Subtracts from the number of prestige points
+        subtractPrestigePoints(state, prestigePoints) {
+            state.prestigePoints -= prestigePoints;
+        },
+
         // Sets the number of prestiges
         setPrestiges(state, prestiges) {
             state.prestiges = prestiges;
@@ -103,6 +159,21 @@ export default new Vuex.Store({
         // Increases the number of prestiges by 1
         increasePrestiges(state) {
             state.prestiges++;
+        },
+
+        // Sets the amount of an upgrade
+        setUpgradeAmount(state, { id, amount }) {
+            state.upgrades[id].amount = amount;
+        },
+
+        // Sets the cost of an upgrade
+        setUpgradeCost(state, { id, cost }) {
+            state.upgrades[id].cost = cost;
+        },
+
+        // Buys an upgrade
+        buyUpgrade(state, id) {
+            state.upgrades[id].buy();
         }
     }
 });

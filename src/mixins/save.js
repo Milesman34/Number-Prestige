@@ -1,6 +1,6 @@
 import { defaultSave } from "../enums.js";
 
-import { gain, gameState, goal, prestigePoints, prestiges, score, selector, theme } from "./storeIO.js";
+import { gain, gameState, goal, prestigePoints, prestiges, score, selector, theme, upgrades } from "./storeIO.js";
 
 // This mixin handles the player's save data
 export default {
@@ -14,10 +14,11 @@ export default {
         ...score.methods,
         ...selector.methods,
         ...theme.methods,
+        ...upgrades.methods,
 
         // Encodes the player's save data
-        encodeSaveData({ theme, gameState, score, goal, gain, prestigePoints, prestiges }) {
-            return `${theme}|${gameState}|${score}|${goal}|${gain}|${prestigePoints}|${prestiges}`;
+        encodeSaveData({ theme, gameState, score, goal, gain, prestigePoints, prestiges, upgrades }) {
+            return `${theme}|${gameState}|${score}|${goal}|${gain}|${prestigePoints}|${prestiges}|${upgrades[0].cost}|${upgrades[0].amount}|${upgrades[1].cost}|${upgrades[1].amount}|${upgrades[2].cost}|${upgrades[2].amount}`;
         },
 
         // Decodes the given save data
@@ -32,7 +33,24 @@ export default {
                 goal: items.length > 3 ? parseInt(items[3]) : defaultSave.goal,
                 gain: items.length > 4 ? parseInt(items[4]) : defaultSave.gain,
                 prestigePoints: items.length > 5 ? parseInt(items[5]) : defaultSave.prestigePoints,
-                prestiges: items.length > 6 ? parseInt(items[6]) : defaultSave.prestiges
+                prestiges: items.length > 6 ? parseInt(items[6]) : defaultSave.prestiges,
+
+                upgrades: [
+                    {
+                        cost: items.length > 7 ? parseInt(items[7]) : defaultSave.upgrades[0].cost,
+                        amount: items.length > 8 ? parseInt(items[8]) : defaultSave.upgrades[0].amount
+                    },
+
+                    {
+                        cost: items.length > 9 ? parseInt(items[9]) : defaultSave.upgrades[1].cost,
+                        amount: items.length > 10 ? parseInt(items[10]) : defaultSave.upgrades[1].amount
+                    },
+
+                    {
+                        cost: items.length > 11 ? parseInt(items[11]) : defaultSave.upgrades[2].cost,
+                        amount: items.length > 12 ? parseInt(items[12]) : defaultSave.upgrades[2].amount
+                    }
+                ]
             };
         },
 
@@ -45,7 +63,24 @@ export default {
                 goal: this.getGoal(),
                 gain: this.getGain(),
                 prestigePoints: this.getPrestigePoints(),
-                prestiges: this.getPrestiges()
+                prestiges: this.getPrestiges(),
+
+                upgrades: [
+                    {
+                        cost: this.getUpgradeCost(0),
+                        amount: this.getUpgradeAmount(0)
+                    },
+
+                    {
+                        cost: this.getUpgradeCost(1),
+                        amount: this.getUpgradeAmount(1)
+                    },
+
+                    {
+                        cost: this.getUpgradeCost(2),
+                        amount: this.getUpgradeAmount(2)
+                    }
+                ]
             }));
         },
 
@@ -67,6 +102,12 @@ export default {
             this.setPrestigePoints(defaultSave.prestigePoints);
             this.setPrestiges(defaultSave.prestiges);
 
+            // Sets upgrade variables
+            defaultSave.upgrades.forEach((upgrade, id) => {
+                this.setUpgradeCost(id, upgrade.cost);
+                this.setUpgradeAmount(id, upgrade.amount);
+            });
+
             // Saves over player's save file
             this.save();
         },
@@ -83,7 +124,24 @@ export default {
                 goal: defaultSave.goal,
                 gain: defaultSave.gain,
                 prestigePoints: defaultSave.prestigePoints,
-                prestiges: defaultSave.prestiges
+                prestiges: defaultSave.prestiges,
+
+                upgrades: [
+                    {
+                        cost: defaultSave.upgrades[0].cost,
+                        amount: defaultSave.upgrades[0].amount
+                    },
+
+                    {
+                        cost: defaultSave.upgrades[1].cost,
+                        amount: defaultSave.upgrades[1].amount
+                    },
+
+                    {
+                        cost: defaultSave.upgrades[2].cost,
+                        amount: defaultSave.upgrades[2].amount
+                    }
+                ]
             }) : save;
         },
 
@@ -101,6 +159,12 @@ export default {
             this.setGain(saveObject.gain);
             this.setPrestigePoints(saveObject.prestigePoints);
             this.setPrestiges(saveObject.prestiges);
+
+            // Sets variables for upgrades
+            saveObject.upgrades.forEach((upgrade, id) => {
+                this.setUpgradeCost(id, upgrade.cost);
+                this.setUpgradeAmount(id, upgrade.amount);
+            });
         }
     }
 };
