@@ -19,8 +19,9 @@ export default {
         },
 
         // Gets the interval for auto-click (10 / prestige points)
+        // This formula is boosted by the 4th repeatable upgrade
         getAutoClickInterval() {
-            return 10 / Math.max(this.getPrestigePoints(), 1);
+            return 10 / Math.max(this.getPrestigePoints() * this.getUpgradeBoost(3), 1);
         },
 
         // Determines if the player can prestige

@@ -20,7 +20,7 @@ export default {
 
         // Encodes the player's save data
         encodeSaveData({ theme, gameState, score, goal, gain, prestigePoints, prestiges, upgrades, autoClick, autoPrestige }) {
-            return `${theme}|${gameState}|${score}|${goal}|${gain}|${prestigePoints}|${prestiges}|${upgrades[0].cost}|${upgrades[0].amount}|${upgrades[1].cost}|${upgrades[1].amount}|${upgrades[2].cost}|${upgrades[2].amount}|${autoClick.unlocked}|${autoClick.enabled}|${autoPrestige.unlocked}|${autoPrestige.enabled}`;
+            return `${theme}|${gameState}|${score}|${goal}|${gain}|${prestigePoints}|${prestiges}|${upgrades[0].cost}|${upgrades[0].amount}|${upgrades[1].cost}|${upgrades[1].amount}|${upgrades[2].cost}|${upgrades[2].amount}|${autoClick.unlocked}|${autoClick.enabled}|${autoPrestige.unlocked}|${autoPrestige.enabled}|${upgrades[3].cost}|${upgrades[3].amount}`;
         },
 
         // Decodes the given save data
@@ -51,6 +51,11 @@ export default {
                     {
                         cost: items.length > 11 ? parseInt(items[11]) : defaultSave.upgrades[2].cost,
                         amount: items.length > 12 ? parseInt(items[12]) : defaultSave.upgrades[2].amount
+                    },
+
+                    {
+                        cost: items.length > 17 ? parseInt(items[17]) : defaultSave.upgrades[3].cost,
+                        amount: items.length > 18 ? parseInt(items[18]) : defaultSave.upgrades[3].amount
                     }
                 ],
 
@@ -91,6 +96,11 @@ export default {
                     {
                         cost: this.getUpgradeCost(2),
                         amount: this.getUpgradeAmount(2)
+                    },
+
+                    {
+                        cost: this.getUpgradeCost(3),
+                        amount: this.getUpgradeAmount(3)
                     }
                 ],
 

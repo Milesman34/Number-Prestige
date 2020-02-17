@@ -6,7 +6,8 @@
         <div id="prestige-upgrades-container">
             <prestige-upgrade-button v-bind:id="0" description="Multiply Prestige Point gain by 2" v-bind:func="e => `${formatSci(e)}x`"></prestige-upgrade-button>
             <prestige-upgrade-button v-bind:id="1" description="Add 1 to number gain" v-bind:func="e => `+${formatSci(e)}`"></prestige-upgrade-button>
-            <prestige-upgrade-button v-bind:id="2" description="Reduce prestige goal by 10%" v-bind:func="e => `-${formatSci(Math.ceil(getGoal() * (1 - e)))}`"></prestige-upgrade-button>
+            <prestige-upgrade-button v-bind:id="2" description="Reduce prestige goal by 10%" v-bind:func="e => `-${formatSci((1 - e) * 100)}%`"></prestige-upgrade-button>
+            <prestige-upgrade-button v-if="isAutoClickUnlocked()" v-bind:id="3" description="Make Auto-Click 2x faster" v-bind:func="e => `${formatSci(e)}x`"></prestige-upgrade-button>
         </div>
     </div>
 </template>
@@ -16,12 +17,12 @@
 
     import UpgradesSubtext from "./UpgradesSubtext.vue";
 
-    import { goal } from "../../../../../mixins/storeIO.js";
+    import { autoClick, goal } from "../../../../../mixins/storeIO.js";
 
     import utils from "../../../../../mixins/utils.js";
 
     export default {
-        mixins: [goal, utils],
+        mixins: [autoClick, goal, utils],
 
         components: {
             "prestige-upgrade-button": PrestigeUpgradeButton,

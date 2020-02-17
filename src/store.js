@@ -66,6 +66,18 @@ export default new Vuex.Store({
                 boost() {
                     return 0.9 ** this.amount;
                 }
+            }),
+
+            // Auto-click speed boost upgrade
+            Upgrade({
+                cost: defaultSave.upgrades[3].cost,
+                scaling: 3,
+
+                amount: defaultSave.upgrades[3].amount,
+
+                boost() {
+                    return 2 ** this.amount;
+                }
             })
         ],
 
