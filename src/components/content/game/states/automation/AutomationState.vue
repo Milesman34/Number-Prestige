@@ -7,6 +7,7 @@
         </div>
 
         <auto-click v-if="isAutoClickUnlocked()"></auto-click>
+        <auto-prestige v-if="isAutoPrestigeUnlocked()"></auto-prestige>
     </div>
 </template>
 
@@ -14,6 +15,7 @@
     import AutomationNextUnlockText from "./AutomationNextUnlockText.vue";
 
     import AutoClick from "./auto-click/AutoClick.vue";
+    import AutoPrestige from "./AutoPrestige.vue";
 
     import { autoClick, autoPrestige } from "../../../../../mixins/storeIO.js";
 
@@ -22,7 +24,8 @@
 
         components: {
             "automation-next-unlock-text": AutomationNextUnlockText,
-            "auto-click": AutoClick
+            "auto-click": AutoClick,
+            "auto-prestige": AutoPrestige
         }
     };
 </script>
