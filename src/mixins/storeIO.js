@@ -109,6 +109,10 @@ export const gain = {
 
         resetGain() {
             this.$store.commit("resetGain");
+        },
+
+        addGain(gain) {
+            this.$store.commit("addGain", gain);
         }
     }
 };

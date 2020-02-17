@@ -115,6 +115,10 @@
 
             resetGain() {
                 this.$store.commit("resetGain");
+            },
+
+            addGain(gain) {
+                this.$store.commit("addGain", gain);
             }
         }
     };
@@ -317,10 +321,18 @@
             ...prestigePoints.methods,
             ...upgrades.methods,
 
+            // Calculates the strength of upgrade 5
+            getUpgrade5Strength() {
+                return Math.log10(Math.max(this.getPrestigePoints(), 1));
+            },
+
             // Calculates the total number gain
             getTotalGain() {
-                return this.getGain() + this.getUpgradeBoost(1);
-            },
+                // Amount gained before upgrade 5
+                let baseGain = this.getGain() + this.getUpgradeBoost(1);
+
+                // Factors in upgrade 5 (if upgrade 5 has not been purchased, then this will be zero)
+                return baseGain + this.getUpgrade5Strength() * this.getUpgradeBoost(5);        },
 
             // Calculates the actual prestige goal
             getActualGoal() {
@@ -704,7 +716,7 @@
                 this.resetScore();
 
                 // Updates the number gain and prestige goal
-                this.increaseGain();
+                this.addGain(1 + this.getUpgradeBoost(4));
                 this.increaseGoal();
 
                 // Gives the player the required number of prestige points and a prestiged stat
@@ -1768,6 +1780,16 @@
             {
                 cost: 4,
                 amount: 0
+            },
+
+            {
+                cost: 12,
+                amount: 0
+            },
+
+            {
+                cost: 6,
+                amount: 0
             }
         ],
 
@@ -1890,7 +1912,7 @@
 
             // Encodes the player's save data
             encodeSaveData({ theme, gameState, score, goal, gain, prestigePoints, prestiges, upgrades, autoClick, autoPrestige }) {
-                return `${theme}|${gameState}|${score}|${goal}|${gain}|${prestigePoints}|${prestiges}|${upgrades[0].cost}|${upgrades[0].amount}|${upgrades[1].cost}|${upgrades[1].amount}|${upgrades[2].cost}|${upgrades[2].amount}|${autoClick.unlocked}|${autoClick.enabled}|${autoPrestige.unlocked}|${autoPrestige.enabled}|${upgrades[3].cost}|${upgrades[3].amount}`;
+                return `${theme}|${gameState}|${score}|${goal}|${gain}|${prestigePoints}|${prestiges}|${upgrades[0].cost}|${upgrades[0].amount}|${upgrades[1].cost}|${upgrades[1].amount}|${upgrades[2].cost}|${upgrades[2].amount}|${autoClick.unlocked}|${autoClick.enabled}|${autoPrestige.unlocked}|${autoPrestige.enabled}|${upgrades[3].cost}|${upgrades[3].amount}|${upgrades[4].cost}|${upgrades[4].amount}|${upgrades[5].cost}|${upgrades[5].amount}`;
             },
 
             // Decodes the given save data
@@ -1926,6 +1948,16 @@
                         {
                             cost: items.length > 17 ? parseInt(items[17]) : defaultSave.upgrades[3].cost,
                             amount: items.length > 18 ? parseInt(items[18]) : defaultSave.upgrades[3].amount
+                        },
+
+                        {
+                            cost: items.length > 19 ? parseInt(items[19]) : defaultSave.upgrades[4].cost,
+                            amount: items.length > 20 ? parseInt(items[20]) : defaultSave.upgrades[4].amount
+                        },
+
+                        {
+                            cost: items.length > 21 ? parseInt(items[21]) : defaultSave.upgrades[5].cost,
+                            amount: items.length > 22 ? parseInt(items[22]) : defaultSave.upgrades[5].amount
                         }
                     ],
 
@@ -1971,6 +2003,16 @@
                         {
                             cost: this.getUpgradeCost(3),
                             amount: this.getUpgradeAmount(3)
+                        },
+
+                        {
+                            cost: this.getUpgradeCost(4),
+                            amount: this.getUpgradeAmount(4)
+                        },
+
+                        {
+                            cost: this.getUpgradeCost(5),
+                            amount: this.getUpgradeAmount(5)
                         }
                     ],
 
@@ -2321,11 +2363,11 @@
       /* style */
       const __vue_inject_styles__$m = function (inject) {
         if (!inject) return
-        inject("data-v-b27115d2_0", { source: "\n.prestige-upgrade-description[data-v-b27115d2] {\n    grid-row: 2;\n\n    display: flex;\n\n    justify-content: center;\n    align-items: center;\n\n    text-align: center;\n\n    font-size: 140%;\n}\n", map: {"version":3,"sources":["/mnt/c/users/miles/onedrive/documents/atom-programs-new/games/number-prestige/src/components/content/game/states/upgrades/prestige-upgrade-button/PrestigeUpgradeDescription.vue"],"names":[],"mappings":";AAgBA;IACA,WAAA;;IAEA,aAAA;;IAEA,uBAAA;IACA,mBAAA;;IAEA,kBAAA;;IAEA,eAAA;AACA","file":"PrestigeUpgradeDescription.vue","sourcesContent":["<!-- Represents the description of a prestige upgrade -->\r\n<template>\r\n    <div class=\"prestige-upgrade-description\" v-bind:class=\"themeClass('text')\">{{ description }}</div>\r\n</template>\r\n\r\n<script>\r\n    import { theme } from \"../../../../../../mixins/storeIO.js\";\r\n\r\n    export default {\r\n        mixins: [theme],\r\n\r\n        props: [\"description\"]\r\n    };\r\n</script>\r\n\r\n<style scoped>\r\n    .prestige-upgrade-description {\r\n        grid-row: 2;\r\n\r\n        display: flex;\r\n\r\n        justify-content: center;\r\n        align-items: center;\r\n\r\n        text-align: center;\r\n\r\n        font-size: 140%;\r\n    }\r\n</style>\r\n"]}, media: undefined });
+        inject("data-v-563410ea_0", { source: "\n.prestige-upgrade-description[data-v-563410ea] {\n    grid-row: 2;\n\n    display: flex;\n\n    justify-content: center;\n    align-items: center;\n\n    text-align: center;\n\n    font-size: 140%;\n\n    margin-left: 10px;\n    margin-right: 10px;\n}\n", map: {"version":3,"sources":["/mnt/c/users/miles/onedrive/documents/atom-programs-new/games/number-prestige/src/components/content/game/states/upgrades/prestige-upgrade-button/PrestigeUpgradeDescription.vue"],"names":[],"mappings":";AAgBA;IACA,WAAA;;IAEA,aAAA;;IAEA,uBAAA;IACA,mBAAA;;IAEA,kBAAA;;IAEA,eAAA;;IAEA,iBAAA;IACA,kBAAA;AACA","file":"PrestigeUpgradeDescription.vue","sourcesContent":["<!-- Represents the description of a prestige upgrade -->\r\n<template>\r\n    <div class=\"prestige-upgrade-description\" v-bind:class=\"themeClass('text')\">{{ description }}</div>\r\n</template>\r\n\r\n<script>\r\n    import { theme } from \"../../../../../../mixins/storeIO.js\";\r\n\r\n    export default {\r\n        mixins: [theme],\r\n\r\n        props: [\"description\"]\r\n    };\r\n</script>\r\n\r\n<style scoped>\r\n    .prestige-upgrade-description {\r\n        grid-row: 2;\r\n\r\n        display: flex;\r\n\r\n        justify-content: center;\r\n        align-items: center;\r\n\r\n        text-align: center;\r\n\r\n        font-size: 140%;\r\n\r\n        margin-left: 10px;\r\n        margin-right: 10px;\r\n    }\r\n</style>\r\n"]}, media: undefined });
 
       };
       /* scoped */
-      const __vue_scope_id__$m = "data-v-b27115d2";
+      const __vue_scope_id__$m = "data-v-563410ea";
       /* module identifier */
       const __vue_module_identifier__$m = undefined;
       /* functional template */
@@ -2516,7 +2558,7 @@
     //
 
     var script$p = {
-        mixins: [autoClick, goal, utils],
+        mixins: [autoClick, calculatedValues, goal, utils],
 
         components: {
             "prestige-upgrade-button": __vue_component__$n,
@@ -2540,7 +2582,7 @@
           _vm._v(" "),
           _c(
             "div",
-            { attrs: { id: "prestige-upgrades-container" } },
+            { staticClass: "prestige-upgrades-container" },
             [
               _c("prestige-upgrade-button", {
                 attrs: {
@@ -2585,6 +2627,33 @@
                 : _vm._e()
             ],
             1
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "prestige-upgrades-container" },
+            [
+              _c("prestige-upgrade-button", {
+                attrs: {
+                  id: 4,
+                  description: "Increase boost from prestiging by 1",
+                  func: function(e) {
+                    return "+" + _vm.formatSci(e)
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _c("prestige-upgrade-button", {
+                attrs: {
+                  id: 5,
+                  description: "Boost to number gain based on Prestige Points",
+                  func: function(e) {
+                    return "+" + _vm.formatSci(_vm.getUpgrade5Strength() * e)
+                  }
+                }
+              })
+            ],
+            1
           )
         ],
         1
@@ -2596,11 +2665,11 @@
       /* style */
       const __vue_inject_styles__$p = function (inject) {
         if (!inject) return
-        inject("data-v-4842db76_0", { source: "\n#upgrades[data-v-4842db76] {\n    width: 100%;\n    height: 100%;\n\n    display: grid;\n\n    grid-template-rows: 12% 30% auto;\n    grid-template-columns: 100%;\n}\n#prestige-upgrades-container[data-v-4842db76] {\n    width: 100%;\n    height: 100%;\n\n    grid-column: 1;\n\n    display: grid;\n\n    grid-template-rows: 100%;\n    grid-template-columns: repeat(4, 25%);\n}\n", map: {"version":3,"sources":["/mnt/c/users/miles/onedrive/documents/atom-programs-new/games/number-prestige/src/components/content/game/states/upgrades/UpgradesState.vue"],"names":[],"mappings":";AAkCA;IACA,WAAA;IACA,YAAA;;IAEA,aAAA;;IAEA,gCAAA;IACA,2BAAA;AACA;AAEA;IACA,WAAA;IACA,YAAA;;IAEA,cAAA;;IAEA,aAAA;;IAEA,wBAAA;IACA,qCAAA;AACA","file":"UpgradesState.vue","sourcesContent":["<!-- This component represents the upgrades tab of the game -->\r\n<template>\r\n    <div id=\"upgrades\">\r\n        <upgrades-subtext></upgrades-subtext>\r\n\r\n        <div id=\"prestige-upgrades-container\">\r\n            <prestige-upgrade-button v-bind:id=\"0\" description=\"Multiply Prestige Point gain by 2\" v-bind:func=\"e => `${formatSci(e)}x`\"></prestige-upgrade-button>\r\n            <prestige-upgrade-button v-bind:id=\"1\" description=\"Add 1 to number gain\" v-bind:func=\"e => `+${formatSci(e)}`\"></prestige-upgrade-button>\r\n            <prestige-upgrade-button v-bind:id=\"2\" description=\"Reduce prestige goal by 10%\" v-bind:func=\"e => `-${formatSci((1 - e) * 100)}%`\"></prestige-upgrade-button>\r\n            <prestige-upgrade-button v-if=\"isAutoClickUnlocked()\" v-bind:id=\"3\" description=\"Make Auto-Click 2x faster\" v-bind:func=\"e => `${formatSci(e)}x`\"></prestige-upgrade-button>\r\n        </div>\r\n    </div>\r\n</template>\r\n\r\n<script>\r\n    import PrestigeUpgradeButton from \"./prestige-upgrade-button/PrestigeUpgradeButton.vue\";\r\n\r\n    import UpgradesSubtext from \"./UpgradesSubtext.vue\";\r\n\r\n    import { autoClick, goal } from \"../../../../../mixins/storeIO.js\";\r\n\r\n    import utils from \"../../../../../mixins/utils.js\";\r\n\r\n    export default {\r\n        mixins: [autoClick, goal, utils],\r\n\r\n        components: {\r\n            \"prestige-upgrade-button\": PrestigeUpgradeButton,\r\n            \"upgrades-subtext\": UpgradesSubtext\r\n        }\r\n    };\r\n</script>\r\n\r\n<style scoped>\r\n    #upgrades {\r\n        width: 100%;\r\n        height: 100%;\r\n\r\n        display: grid;\r\n\r\n        grid-template-rows: 12% 30% auto;\r\n        grid-template-columns: 100%;\r\n    }\r\n\r\n    #prestige-upgrades-container {\r\n        width: 100%;\r\n        height: 100%;\r\n\r\n        grid-column: 1;\r\n\r\n        display: grid;\r\n\r\n        grid-template-rows: 100%;\r\n        grid-template-columns: repeat(4, 25%);\r\n    }\r\n</style>\r\n"]}, media: undefined });
+        inject("data-v-1f7e8ade_0", { source: "\n#upgrades[data-v-1f7e8ade] {\n    width: 100%;\n    height: 100%;\n\n    display: grid;\n\n    grid-template-rows: 12% 30% 30% auto;\n    grid-template-columns: 100%;\n}\n.prestige-upgrades-container[data-v-1f7e8ade] {\n    width: 100%;\n    height: 100%;\n\n    grid-column: 1;\n\n    display: grid;\n\n    grid-template-rows: 100%;\n    grid-template-columns: repeat(4, 25%);\n}\n", map: {"version":3,"sources":["/mnt/c/users/miles/onedrive/documents/atom-programs-new/games/number-prestige/src/components/content/game/states/upgrades/UpgradesState.vue"],"names":[],"mappings":";AAwCA;IACA,WAAA;IACA,YAAA;;IAEA,aAAA;;IAEA,oCAAA;IACA,2BAAA;AACA;AAEA;IACA,WAAA;IACA,YAAA;;IAEA,cAAA;;IAEA,aAAA;;IAEA,wBAAA;IACA,qCAAA;AACA","file":"UpgradesState.vue","sourcesContent":["<!-- This component represents the upgrades tab of the game -->\r\n<template>\r\n    <div id=\"upgrades\">\r\n        <upgrades-subtext></upgrades-subtext>\r\n\r\n        <div class=\"prestige-upgrades-container\">\r\n            <prestige-upgrade-button v-bind:id=\"0\" description=\"Multiply Prestige Point gain by 2\" v-bind:func=\"e => `${formatSci(e)}x`\"></prestige-upgrade-button>\r\n            <prestige-upgrade-button v-bind:id=\"1\" description=\"Add 1 to number gain\" v-bind:func=\"e => `+${formatSci(e)}`\"></prestige-upgrade-button>\r\n            <prestige-upgrade-button v-bind:id=\"2\" description=\"Reduce prestige goal by 10%\" v-bind:func=\"e => `-${formatSci((1 - e) * 100)}%`\"></prestige-upgrade-button>\r\n            <prestige-upgrade-button v-if=\"isAutoClickUnlocked()\" v-bind:id=\"3\" description=\"Make Auto-Click 2x faster\" v-bind:func=\"e => `${formatSci(e)}x`\"></prestige-upgrade-button>\r\n        </div>\r\n\r\n        <div class=\"prestige-upgrades-container\">\r\n            <prestige-upgrade-button v-bind:id=\"4\" description=\"Increase boost from prestiging by 1\" v-bind:func=\"e => `+${formatSci(e)}`\"></prestige-upgrade-button>\r\n            <prestige-upgrade-button v-bind:id=\"5\" description=\"Boost to number gain based on Prestige Points\" v-bind:func=\"e => `+${formatSci(getUpgrade5Strength() * e)}`\"></prestige-upgrade-button>\r\n        </div>\r\n    </div>\r\n</template>\r\n\r\n<script>\r\n    import PrestigeUpgradeButton from \"./prestige-upgrade-button/PrestigeUpgradeButton.vue\";\r\n\r\n    import UpgradesSubtext from \"./UpgradesSubtext.vue\";\r\n\r\n    import { autoClick, goal } from \"../../../../../mixins/storeIO.js\";\r\n\r\n    import calculatedValues from \"../../../../../mixins/calculatedValues.js\";\r\n    import utils from \"../../../../../mixins/utils.js\";\r\n\r\n    export default {\r\n        mixins: [autoClick, calculatedValues, goal, utils],\r\n\r\n        components: {\r\n            \"prestige-upgrade-button\": PrestigeUpgradeButton,\r\n            \"upgrades-subtext\": UpgradesSubtext\r\n        }\r\n    };\r\n</script>\r\n\r\n<style scoped>\r\n    #upgrades {\r\n        width: 100%;\r\n        height: 100%;\r\n\r\n        display: grid;\r\n\r\n        grid-template-rows: 12% 30% 30% auto;\r\n        grid-template-columns: 100%;\r\n    }\r\n\r\n    .prestige-upgrades-container {\r\n        width: 100%;\r\n        height: 100%;\r\n\r\n        grid-column: 1;\r\n\r\n        display: grid;\r\n\r\n        grid-template-rows: 100%;\r\n        grid-template-columns: repeat(4, 25%);\r\n    }\r\n</style>\r\n"]}, media: undefined });
 
       };
       /* scoped */
-      const __vue_scope_id__$p = "data-v-4842db76";
+      const __vue_scope_id__$p = "data-v-1f7e8ade";
       /* module identifier */
       const __vue_module_identifier__$p = undefined;
       /* functional template */
@@ -3561,6 +3630,31 @@
                     boost() {
                         return 2 ** this.amount;
                     }
+                }),
+
+                // Prestige gain boost upgrade
+                Upgrade({
+                    cost: defaultSave.upgrades[4].cost,
+                    scaling: 6,
+
+                    amount: defaultSave.upgrades[4].amount,
+
+                    boost() {
+                        return this.amount;
+                    }
+                }),
+
+                // Boost to number gain based on Prestige Points
+                Upgrade({
+                    cost: defaultSave.upgrades[5].cost,
+                    scaling: 8,
+
+                    amount: defaultSave.upgrades[5].amount,
+
+                    // Boost is calculated based on prestige points, then multiplied by this number
+                    boost() {
+                        return this.amount;
+                    }
                 })
             ],
 
@@ -3638,6 +3732,11 @@
             // Resets the number gained
             resetGain(state) {
                 state.gain = 1;
+            },
+
+            // Adds to the number gain
+            addGain(state, gain) {
+                state.gain += gain;
             },
 
             // Sets the number of prestige points

@@ -48,6 +48,16 @@ export const defaultSave = {
         {
             cost: 4,
             amount: 0
+        },
+
+        {
+            cost: 12,
+            amount: 0
+        },
+
+        {
+            cost: 6,
+            amount: 0
         }
     ],
 

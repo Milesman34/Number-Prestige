@@ -20,7 +20,7 @@ export default {
 
         // Encodes the player's save data
         encodeSaveData({ theme, gameState, score, goal, gain, prestigePoints, prestiges, upgrades, autoClick, autoPrestige }) {
-            return `${theme}|${gameState}|${score}|${goal}|${gain}|${prestigePoints}|${prestiges}|${upgrades[0].cost}|${upgrades[0].amount}|${upgrades[1].cost}|${upgrades[1].amount}|${upgrades[2].cost}|${upgrades[2].amount}|${autoClick.unlocked}|${autoClick.enabled}|${autoPrestige.unlocked}|${autoPrestige.enabled}|${upgrades[3].cost}|${upgrades[3].amount}`;
+            return `${theme}|${gameState}|${score}|${goal}|${gain}|${prestigePoints}|${prestiges}|${upgrades[0].cost}|${upgrades[0].amount}|${upgrades[1].cost}|${upgrades[1].amount}|${upgrades[2].cost}|${upgrades[2].amount}|${autoClick.unlocked}|${autoClick.enabled}|${autoPrestige.unlocked}|${autoPrestige.enabled}|${upgrades[3].cost}|${upgrades[3].amount}|${upgrades[4].cost}|${upgrades[4].amount}|${upgrades[5].cost}|${upgrades[5].amount}`;
         },
 
         // Decodes the given save data
@@ -56,6 +56,16 @@ export default {
                     {
                         cost: items.length > 17 ? parseInt(items[17]) : defaultSave.upgrades[3].cost,
                         amount: items.length > 18 ? parseInt(items[18]) : defaultSave.upgrades[3].amount
+                    },
+
+                    {
+                        cost: items.length > 19 ? parseInt(items[19]) : defaultSave.upgrades[4].cost,
+                        amount: items.length > 20 ? parseInt(items[20]) : defaultSave.upgrades[4].amount
+                    },
+
+                    {
+                        cost: items.length > 21 ? parseInt(items[21]) : defaultSave.upgrades[5].cost,
+                        amount: items.length > 22 ? parseInt(items[22]) : defaultSave.upgrades[5].amount
                     }
                 ],
 
@@ -101,6 +111,16 @@ export default {
                     {
                         cost: this.getUpgradeCost(3),
                         amount: this.getUpgradeAmount(3)
+                    },
+
+                    {
+                        cost: this.getUpgradeCost(4),
+                        amount: this.getUpgradeAmount(4)
+                    },
+
+                    {
+                        cost: this.getUpgradeCost(5),
+                        amount: this.getUpgradeAmount(5)
                     }
                 ],
 

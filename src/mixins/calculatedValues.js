@@ -8,9 +8,18 @@ export default {
         ...prestigePoints.methods,
         ...upgrades.methods,
 
+        // Calculates the strength of upgrade 5
+        getUpgrade5Strength() {
+            return Math.log10(Math.max(this.getPrestigePoints(), 1));
+        },
+
         // Calculates the total number gain
         getTotalGain() {
-            return this.getGain() + this.getUpgradeBoost(1);
+            // Amount gained before upgrade 5
+            let baseGain = this.getGain() + this.getUpgradeBoost(1);
+
+            // Factors in upgrade 5 (if upgrade 5 has not been purchased, then this will be zero)
+            return baseGain + this.getUpgrade5Strength() * this.getUpgradeBoost(5);;
         },
 
         // Calculates the actual prestige goal

@@ -26,7 +26,7 @@ export default {
             this.resetScore();
 
             // Updates the number gain and prestige goal
-            this.increaseGain();
+            this.addGain(1 + this.getUpgradeBoost(4));
             this.increaseGoal();
 
             // Gives the player the required number of prestige points and a prestiged stat
