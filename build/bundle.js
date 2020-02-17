@@ -289,6 +289,26 @@
         }
     };
 
+    // This mixin grants access to the notifications variable
+    const notifications = {
+        methods: {
+            // Gets the notifications variable
+            getNotifications() {
+                return this.$store.state.notifications;
+            },
+
+            pushNotification(notification) {
+                this.$store.commit("pushNotification", notification);
+
+                setTimeout(this.removeNotification, 2000);
+            },
+
+            removeNotification() {
+                this.$store.commit("removeNotification");
+            }
+        }
+    };
+
     // Gets calculated variants of certain game values
     var calculatedValues = {
         methods: {
@@ -668,6 +688,7 @@
             ...calculatedValues.methods,
             ...gain.methods,
             ...goal.methods,
+            ...notifications.methods,
             ...prestigePoints.methods,
             ...prestiges.methods,
             ...score.methods,
@@ -691,8 +712,11 @@
                 this.increasePrestiges();
 
                 // If the player has at least 25 prestige points, auto-prestige is enabled
-                if (this.getPrestigePoints() >= 25 && !this.isAutoPrestigeUnlocked())
+                if (this.getPrestigePoints() >= 25 && !this.isAutoPrestigeUnlocked()) {
                     this.unlockAutoPrestige();
+
+                    this.pushNotification("Unlocked Auto-Prestige");
+                }
             },
 
             // Adds to the player's score
@@ -700,8 +724,11 @@
                 this._addScore(score);
 
                 // Unlocks auto-click if the score >= 1000
-                if (this.getScore() >= 1000 && !this.isAutoClickUnlocked())
+                if (this.getScore() >= 1000 && !this.isAutoClickUnlocked()) {
                     this.unlockAutoClick();
+
+                    this.pushNotification("Unlocked Auto-Click");
+                }
 
                 // Auto-prestiges if applicable
                 if (this.isAutoPrestigeActive() && this.canPrestige())
@@ -2049,7 +2076,24 @@
     //
 
     var script$j = {
-        mixins: [save],
+        mixins: [notifications, save],
+
+        methods: {
+            // These functions also push notifications to the screen
+            // Manually saves the game
+            manualSave() {
+                this.save();
+
+                this.pushNotification("Game Saved");
+            },
+
+            // Manually loads the game's save data
+            manualLoad() {
+                this.loadSaveData();
+
+                this.pushNotification("Save Loaded");
+            }
+        },
 
         components: {
             "options-button": __vue_component__$g,
@@ -2072,10 +2116,12 @@
           [
             _c("theme-options-button"),
             _vm._v(" "),
-            _c("options-button", { attrs: { title: "Save", func: _vm.save } }),
+            _c("options-button", {
+              attrs: { title: "Save", func: _vm.manualSave }
+            }),
             _vm._v(" "),
             _c("options-button", {
-              attrs: { title: "Load", func: _vm.loadSaveData }
+              attrs: { title: "Load", func: _vm.manualLoad }
             }),
             _vm._v(" "),
             _c("options-button", {
@@ -2097,11 +2143,11 @@
       /* style */
       const __vue_inject_styles__$j = function (inject) {
         if (!inject) return
-        inject("data-v-23f5cbd0_0", { source: "\n#options[data-v-23f5cbd0] {\n    grid-row: 1;\n    grid-column: 1;\n\n    display: grid;\n\n    grid-template-rows: repeat(4, auto);\n}\n.options-row[data-v-23f5cbd0] {\n    width: 100%;\n\n    display: grid;\n\n    grid-template-columns: repeat(4, 25%);\n}\n", map: {"version":3,"sources":["/mnt/c/users/miles/onedrive/documents/atom-programs-new/games/number-prestige/src/components/content/game/states/options/OptionsState.vue"],"names":[],"mappings":";AA6BA;IACA,WAAA;IACA,cAAA;;IAEA,aAAA;;IAEA,mCAAA;AACA;AAEA;IACA,WAAA;;IAEA,aAAA;;IAEA,qCAAA;AACA","file":"OptionsState.vue","sourcesContent":["<!-- This component represents the options tab of the game -->\r\n<template>\r\n    <div id=\"options\">\r\n        <div class=\"options-row\">\r\n            <theme-options-button></theme-options-button>\r\n            <options-button title=\"Save\" v-bind:func=\"save\"></options-button>\r\n            <options-button title=\"Load\" v-bind:func=\"loadSaveData\"></options-button>\r\n            <options-button title=\"Reset\" v-bind:func=\"() => confirmReset() && resetSave()\"></options-button>\r\n        </div>\r\n    </div>\r\n</template>\r\n\r\n<script>\r\n    import OptionsButton from \"./OptionsButton.vue\";\r\n    import ThemeOptionsButton from \"./theme-options-button/ThemeOptionsButton.vue\";\r\n\r\n    import save from \"../../../../../mixins/save.js\";\r\n\r\n    export default {\r\n        mixins: [save],\r\n\r\n        components: {\r\n            \"options-button\": OptionsButton,\r\n            \"theme-options-button\": ThemeOptionsButton\r\n        }\r\n    };\r\n</script>\r\n\r\n<style scoped>\r\n    #options {\r\n        grid-row: 1;\r\n        grid-column: 1;\r\n\r\n        display: grid;\r\n\r\n        grid-template-rows: repeat(4, auto);\r\n    }\r\n\r\n    .options-row {\r\n        width: 100%;\r\n\r\n        display: grid;\r\n\r\n        grid-template-columns: repeat(4, 25%);\r\n    }\r\n</style>\r\n"]}, media: undefined });
+        inject("data-v-5366ffbb_0", { source: "\n#options[data-v-5366ffbb] {\n    grid-row: 1;\n    grid-column: 1;\n\n    display: grid;\n\n    grid-template-rows: repeat(4, auto);\n}\n.options-row[data-v-5366ffbb] {\n    width: 100%;\n\n    display: grid;\n\n    grid-template-columns: repeat(4, 25%);\n}\n", map: {"version":3,"sources":["/mnt/c/users/miles/onedrive/documents/atom-programs-new/games/number-prestige/src/components/content/game/states/options/OptionsState.vue"],"names":[],"mappings":";AAgDA;IACA,WAAA;IACA,cAAA;;IAEA,aAAA;;IAEA,mCAAA;AACA;AAEA;IACA,WAAA;;IAEA,aAAA;;IAEA,qCAAA;AACA","file":"OptionsState.vue","sourcesContent":["<!-- This component represents the options tab of the game -->\r\n<template>\r\n    <div id=\"options\">\r\n        <div class=\"options-row\">\r\n            <theme-options-button></theme-options-button>\r\n            <options-button title=\"Save\" v-bind:func=\"manualSave\"></options-button>\r\n            <options-button title=\"Load\" v-bind:func=\"manualLoad\"></options-button>\r\n            <options-button title=\"Reset\" v-bind:func=\"() => confirmReset() && resetSave()\"></options-button>\r\n        </div>\r\n    </div>\r\n</template>\r\n\r\n<script>\r\n    import OptionsButton from \"./OptionsButton.vue\";\r\n    import ThemeOptionsButton from \"./theme-options-button/ThemeOptionsButton.vue\";\r\n\r\n    import { notifications}  from \"../../../../../mixins/storeIO.js\";\r\n\r\n    import save from \"../../../../../mixins/save.js\";\r\n\r\n    export default {\r\n        mixins: [notifications, save],\r\n\r\n        methods: {\r\n            // These functions also push notifications to the screen\r\n            // Manually saves the game\r\n            manualSave() {\r\n                this.save();\r\n\r\n                this.pushNotification(\"Game Saved\");\r\n            },\r\n\r\n            // Manually loads the game's save data\r\n            manualLoad() {\r\n                this.loadSaveData();\r\n\r\n                this.pushNotification(\"Save Loaded\");\r\n            }\r\n        },\r\n\r\n        components: {\r\n            \"options-button\": OptionsButton,\r\n            \"theme-options-button\": ThemeOptionsButton\r\n        }\r\n    };\r\n</script>\r\n\r\n<style scoped>\r\n    #options {\r\n        grid-row: 1;\r\n        grid-column: 1;\r\n\r\n        display: grid;\r\n\r\n        grid-template-rows: repeat(4, auto);\r\n    }\r\n\r\n    .options-row {\r\n        width: 100%;\r\n\r\n        display: grid;\r\n\r\n        grid-template-columns: repeat(4, 25%);\r\n    }\r\n</style>\r\n"]}, media: undefined });
 
       };
       /* scoped */
-      const __vue_scope_id__$j = "data-v-23f5cbd0";
+      const __vue_scope_id__$j = "data-v-5366ffbb";
       /* module identifier */
       const __vue_module_identifier__$j = undefined;
       /* functional template */
@@ -3208,10 +3254,131 @@
     //
 
     var script$z = {
+        mixins: [theme],
+
+        props: ["text"]
+    };
+
+    /* script */
+    const __vue_script__$z = script$z;
+
+    /* template */
+    var __vue_render__$z = function() {
+      var _vm = this;
+      var _h = _vm.$createElement;
+      var _c = _vm._self._c || _h;
+      return _c(
+        "div",
+        {
+          staticClass: "notification notification-on",
+          class: _vm.themeClass("notification")
+        },
+        [_vm._v(_vm._s(_vm.text))]
+      )
+    };
+    var __vue_staticRenderFns__$z = [];
+    __vue_render__$z._withStripped = true;
+
+      /* style */
+      const __vue_inject_styles__$z = function (inject) {
+        if (!inject) return
+        inject("data-v-02a5cfa8_0", { source: "\n@keyframes notification-fadeout-data-v-02a5cfa8 {\n0% {\n        opacity: 1;\n}\n75% {\n        opacity: 1;\n}\n100% {\n        opacity: 0;\n}\n}\n.notification[data-v-02a5cfa8] {\n\tposition: absolute;\n\n\tright: 0;\n\n\theight: 5%;\n\n    z-index: 1;\n\n    display: flex;\n\n    justify-content: center;\n    align-items: center;\n\n    text-align: center;\n\n    color: black;\n\n\tpadding-left: 5px;\n\tpadding-right: 5px;\n\n\tuser-select: none;\n}\n.notification-on[data-v-02a5cfa8] {\n    opacity: 0;\n    animation-name: notification-fadeout-data-v-02a5cfa8;\n    animation-duration: 2s;\n}\n\n/* Notification themes */\n.notification-light[data-v-02a5cfa8] {\n\tcolor: black;\n\tfont-family: \"Open Sans\";\n\n    font-size: 82%;\n\n\tbackground-color: rgb(52, 204, 235);\n}\n.notification-dark[data-v-02a5cfa8] {\n\tcolor: black;\n\tfont-family: \"Open Sans\";\n\n    font-size: 82%;\n\n\tbackground-color: rgb(52, 204, 235);\n}\n.notification-gradient[data-v-02a5cfa8] {\n\tcolor: black;\n\tfont-family: \"Plex Mono\";\n\n    font-size: 75%;\n\n\tbackground-image: linear-gradient(rgb(2, 176, 210), rgb(52, 204, 235));\n}\n", map: {"version":3,"sources":["/mnt/c/users/miles/onedrive/documents/atom-programs-new/games/number-prestige/src/components/notifications/Notification.vue"],"names":[],"mappings":";AAgBA;AACA;QACA,UAAA;AACA;AAEA;QACA,UAAA;AACA;AAEA;QACA,UAAA;AACA;AACA;AAEA;CACA,kBAAA;;CAEA,QAAA;;CAEA,UAAA;;IAEA,UAAA;;IAEA,aAAA;;IAEA,uBAAA;IACA,mBAAA;;IAEA,kBAAA;;IAEA,YAAA;;CAEA,iBAAA;CACA,kBAAA;;CAEA,iBAAA;AACA;AAEA;IACA,UAAA;IACA,oDAAA;IACA,sBAAA;AACA;;AAEA,wBAAA;AACA;CACA,YAAA;CACA,wBAAA;;IAEA,cAAA;;CAEA,mCAAA;AACA;AAEA;CACA,YAAA;CACA,wBAAA;;IAEA,cAAA;;CAEA,mCAAA;AACA;AAEA;CACA,YAAA;CACA,wBAAA;;IAEA,cAAA;;CAEA,sEAAA;AACA","file":"Notification.vue","sourcesContent":["<!-- This component represents a notification -->\r\n<template>\r\n    <div class=\"notification notification-on\" v-bind:class=\"themeClass('notification')\">{{ text }}</div>\r\n</template>\r\n\r\n<script>\r\n    import { theme } from \"../../mixins/storeIO.js\";\r\n\r\n    export default {\r\n        mixins: [theme],\r\n\r\n        props: [\"text\"]\r\n    };\r\n</script>\r\n\r\n<style scoped>\r\n    @keyframes notification-fadeout {\r\n        0% {\r\n            opacity: 1;\r\n        }\r\n\r\n        75% {\r\n            opacity: 1;\r\n        }\r\n\r\n        100% {\r\n            opacity: 0;\r\n        }\r\n    }\r\n\r\n    .notification {\r\n    \tposition: absolute;\r\n\r\n    \tright: 0;\r\n\r\n    \theight: 5%;\r\n\r\n        z-index: 1;\r\n\r\n        display: flex;\r\n\r\n        justify-content: center;\r\n        align-items: center;\r\n\r\n        text-align: center;\r\n\r\n        color: black;\r\n\r\n    \tpadding-left: 5px;\r\n    \tpadding-right: 5px;\r\n\r\n    \tuser-select: none;\r\n    }\r\n\r\n    .notification-on {\r\n        opacity: 0;\r\n        animation-name: notification-fadeout;\r\n        animation-duration: 2s;\r\n    }\r\n\r\n    /* Notification themes */\r\n    .notification-light {\r\n    \tcolor: black;\r\n    \tfont-family: \"Open Sans\";\r\n\r\n        font-size: 82%;\r\n\r\n    \tbackground-color: rgb(52, 204, 235);\r\n    }\r\n\r\n    .notification-dark {\r\n    \tcolor: black;\r\n    \tfont-family: \"Open Sans\";\r\n\r\n        font-size: 82%;\r\n\r\n    \tbackground-color: rgb(52, 204, 235);\r\n    }\r\n\r\n    .notification-gradient {\r\n    \tcolor: black;\r\n    \tfont-family: \"Plex Mono\";\r\n\r\n        font-size: 75%;\r\n\r\n    \tbackground-image: linear-gradient(rgb(2, 176, 210), rgb(52, 204, 235));\r\n    }\r\n</style>\r\n"]}, media: undefined });
+
+      };
+      /* scoped */
+      const __vue_scope_id__$z = "data-v-02a5cfa8";
+      /* module identifier */
+      const __vue_module_identifier__$z = undefined;
+      /* functional template */
+      const __vue_is_functional_template__$z = false;
+      /* style inject SSR */
+      
+      /* style inject shadow dom */
+      
+
+      
+      const __vue_component__$z = normalizeComponent(
+        { render: __vue_render__$z, staticRenderFns: __vue_staticRenderFns__$z },
+        __vue_inject_styles__$z,
+        __vue_script__$z,
+        __vue_scope_id__$z,
+        __vue_is_functional_template__$z,
+        __vue_module_identifier__$z,
+        false,
+        createInjector,
+        undefined,
+        undefined
+      );
+
+    //
+
+    var script$A = {
+        mixins: [notifications],
+
+        components: {
+            notification: __vue_component__$z
+        }
+    };
+
+    /* script */
+    const __vue_script__$A = script$A;
+
+    /* template */
+    var __vue_render__$A = function() {
+      var _vm = this;
+      var _h = _vm.$createElement;
+      var _c = _vm._self._c || _h;
+      return _c(
+        "div",
+        { attrs: { id: "notification-container" } },
+        _vm._l(_vm.getNotifications(), function(notif) {
+          return _c("notification", { attrs: { text: notif } })
+        }),
+        1
+      )
+    };
+    var __vue_staticRenderFns__$A = [];
+    __vue_render__$A._withStripped = true;
+
+      /* style */
+      const __vue_inject_styles__$A = function (inject) {
+        if (!inject) return
+        inject("data-v-3508863a_0", { source: "\n#notification-container[data-v-3508863a] {\n    grid-row: 1;\n    grid-column: 1;\n}\n", map: {"version":3,"sources":["/mnt/c/users/miles/onedrive/documents/atom-programs-new/games/number-prestige/src/components/notifications/NotificationContainer.vue"],"names":[],"mappings":";AAsBA;IACA,WAAA;IACA,cAAA;AACA","file":"NotificationContainer.vue","sourcesContent":["<!-- This component contains any notifications -->\r\n<template>\r\n    <div id=\"notification-container\">\r\n        <notification v-for=\"notif in getNotifications()\" v-bind:text=\"notif\" />\r\n    </div>\r\n</template>\r\n\r\n<script>\r\n    import Notification from \"./Notification.vue\";\r\n\r\n    import { notifications } from \"../../mixins/storeIO.js\";\r\n\r\n    export default {\r\n        mixins: [notifications],\r\n\r\n        components: {\r\n            notification: Notification\r\n        }\r\n    };\r\n</script>\r\n\r\n<style scoped>\r\n    #notification-container {\r\n        grid-row: 1;\r\n        grid-column: 1;\r\n    }\r\n</style>\r\n"]}, media: undefined });
+
+      };
+      /* scoped */
+      const __vue_scope_id__$A = "data-v-3508863a";
+      /* module identifier */
+      const __vue_module_identifier__$A = undefined;
+      /* functional template */
+      const __vue_is_functional_template__$A = false;
+      /* style inject SSR */
+      
+      /* style inject shadow dom */
+      
+
+      
+      const __vue_component__$A = normalizeComponent(
+        { render: __vue_render__$A, staticRenderFns: __vue_staticRenderFns__$A },
+        __vue_inject_styles__$A,
+        __vue_script__$A,
+        __vue_scope_id__$A,
+        __vue_is_functional_template__$A,
+        __vue_module_identifier__$A,
+        false,
+        createInjector,
+        undefined,
+        undefined
+      );
+
+    //
+
+    var script$B = {
         mixins: [autoClick, calculatedValues, gameFunctions, save, theme],
 
         components: {
             "content-container": __vue_component__$t,
+            "notification-container": __vue_component__$A,
             "selector-container": __vue_component__$y
         },
 
@@ -3244,49 +3411,55 @@
     };
 
     /* script */
-    const __vue_script__$z = script$z;
+    const __vue_script__$B = script$B;
 
     /* template */
-    var __vue_render__$z = function() {
+    var __vue_render__$B = function() {
       var _vm = this;
       var _h = _vm.$createElement;
       var _c = _vm._self._c || _h;
       return _c(
         "div",
         { class: _vm.themeClass("app"), attrs: { id: "app" } },
-        [_c("selector-container"), _vm._v(" "), _c("content-container")],
+        [
+          _c("selector-container"),
+          _vm._v(" "),
+          _c("notification-container"),
+          _vm._v(" "),
+          _c("content-container")
+        ],
         1
       )
     };
-    var __vue_staticRenderFns__$z = [];
-    __vue_render__$z._withStripped = true;
+    var __vue_staticRenderFns__$B = [];
+    __vue_render__$B._withStripped = true;
 
       /* style */
-      const __vue_inject_styles__$z = function (inject) {
+      const __vue_inject_styles__$B = function (inject) {
         if (!inject) return
-        inject("data-v-55e861d7_0", { source: "\n#app[data-v-55e861d7] {\n    position: absolute;\n\n    top: 0;\n    left: 0;\n\n    width: 100%;\n    height: 100%;\n\n    display: grid;\n\n    grid-template-rows: auto;\n    grid-template-columns: auto;\n}\n.app-dark[data-v-55e861d7] {\n    background-color: rgb(20, 20, 20);\n}\n.app-light[data-v-55e861d7] {\n    background-color: rgb(210, 210, 210);\n}\n.app-gradient[data-v-55e861d7] {\n    background-image: linear-gradient(rgb(0, 0, 0), rgb(25, 25, 25));\n}\n", map: {"version":3,"sources":["/mnt/c/users/miles/onedrive/documents/atom-programs-new/games/number-prestige/src/components/App.vue"],"names":[],"mappings":";AAyDA;IACA,kBAAA;;IAEA,MAAA;IACA,OAAA;;IAEA,WAAA;IACA,YAAA;;IAEA,aAAA;;IAEA,wBAAA;IACA,2BAAA;AACA;AAEA;IACA,iCAAA;AACA;AAEA;IACA,oCAAA;AACA;AAEA;IACA,gEAAA;AACA","file":"App.vue","sourcesContent":["<!-- This is the core app component -->\r\n<template>\r\n    <div id=\"app\" v-bind:class=\"themeClass('app')\">\r\n        <selector-container></selector-container>\r\n        <content-container></content-container>\r\n    </div>\r\n</template>\r\n\r\n<script>\r\n    import ContentContainer from \"./content/ContentContainer.vue\";\r\n\r\n    import SelectorContainer from \"./selectors/SelectorContainer.vue\";\r\n\r\n    import calculatedValues from \"../mixins/calculatedValues.js\";\r\n    import gameFunctions from \"../mixins/gameFunctions.js\";\r\n    import save from \"../mixins/save.js\";\r\n\r\n    import { autoClick, theme } from \"../mixins/storeIO.js\";\r\n\r\n    export default {\r\n        mixins: [autoClick, calculatedValues, gameFunctions, save, theme],\r\n\r\n        components: {\r\n            \"content-container\": ContentContainer,\r\n            \"selector-container\": SelectorContainer\r\n        },\r\n\r\n        methods: {\r\n            // This function runs every tick\r\n            tick(tps) {\r\n                if (this.isAutoClickActive()) {\r\n                    let seconds = this.getAutoClickInterval();\r\n                    let gain = this.getTotalGain();\r\n\r\n                    // This adds up to the actual score per second\r\n                    this.addScore(gain / (seconds * tps));\r\n                }\r\n            }\r\n        },\r\n\r\n        created() {\r\n            // Loads save data\r\n            this.loadSaveData();\r\n\r\n            // Current ticks per second\r\n            const tps = 20;\r\n\r\n            // Sets up autosave (5 second interval)\r\n            setInterval(this.save, 5000);\r\n\r\n            // Sets up the tick function to run every tick\r\n            setInterval(() => this.tick(tps), 1000 / tps);\r\n        }\r\n    };\r\n</script>\r\n\r\n<style scoped>\r\n    #app {\r\n        position: absolute;\r\n\r\n        top: 0;\r\n        left: 0;\r\n\r\n        width: 100%;\r\n        height: 100%;\r\n\r\n        display: grid;\r\n\r\n        grid-template-rows: auto;\r\n        grid-template-columns: auto;\r\n    }\r\n\r\n    .app-dark {\r\n        background-color: rgb(20, 20, 20);\r\n    }\r\n\r\n    .app-light {\r\n        background-color: rgb(210, 210, 210);\r\n    }\r\n\r\n    .app-gradient {\r\n        background-image: linear-gradient(rgb(0, 0, 0), rgb(25, 25, 25));\r\n    }\r\n</style>\r\n\r\n<!-- Global styles -->\r\n<!-- This includes themes for global components -->\r\n<style>\r\n    @font-face {\r\n        font-family: \"Open Sans\";\r\n        src: url(\"../fonts/opensans-regular-webfont.woff\");\r\n    }\r\n\r\n    @font-face {\r\n        font-family: \"Plex Mono\";\r\n        src: url(\"../fonts/IBMPlexMono-Regular.ttf\");\r\n    }\r\n\r\n    /*To let me style buttons*/\r\n    button {\r\n        all: unset\r\n    }\r\n\r\n    /*Text themes*/\r\n    .text-dark {\r\n    \tcolor: rgb(255, 255, 255);\r\n    \tfont-family: \"Open Sans\";\r\n    }\r\n\r\n    .text-light {\r\n    \tcolor: rgb(0, 0, 0);\r\n    \tfont-family: \"Open Sans\";\r\n    }\r\n\r\n    .text-gradient {\r\n    \tcolor: rgb(255, 255, 255);\r\n    \tfont-family: \"Plex Mono\";\r\n    }\r\n\r\n    /* Game button themes */\r\n    .game-button-dark {\r\n    \tcolor: rgb(255, 255, 255);\r\n\r\n        background-color: rgb(32, 32, 32);\r\n\r\n        box-shadow: 2px 2px 2px black;\r\n    }\r\n\r\n    .game-button-dark:hover {\r\n        background-color: rgb(40, 40, 40);\r\n    }\r\n\r\n    .game-button-light {\r\n    \tcolor: rgb(0, 0, 0);\r\n\r\n        background-color: rgb(200, 200, 200);\r\n\r\n        box-shadow: 2px 2px 2px rgb(180, 180, 180);\r\n    }\r\n\r\n    .game-button-light:hover {\r\n        background-color: rgb(215, 215, 215);\r\n    }\r\n\r\n    .game-button-gradient {\r\n    \tcolor: rgb(255, 255, 255);\r\n\r\n        background-color: rgba(0, 0, 0, 0);\r\n\r\n    \tborder: 2px solid rgb(195, 195, 195);\r\n    }\r\n\r\n    .game-button-gradient:hover {\r\n    \tbackground-image: linear-gradient(rgb(56, 56, 56), rgb(81, 81, 81));\r\n    }\r\n</style>\r\n"]}, media: undefined })
-    ,inject("data-v-55e861d7_1", { source: "\n@font-face {\n    font-family: \"Open Sans\";\n    src: url(\"../fonts/opensans-regular-webfont.woff\");\n}\n@font-face {\n    font-family: \"Plex Mono\";\n    src: url(\"../fonts/IBMPlexMono-Regular.ttf\");\n}\n\n/*To let me style buttons*/\nbutton {\n    all: unset\n}\n\n/*Text themes*/\n.text-dark {\n\tcolor: rgb(255, 255, 255);\n\tfont-family: \"Open Sans\";\n}\n.text-light {\n\tcolor: rgb(0, 0, 0);\n\tfont-family: \"Open Sans\";\n}\n.text-gradient {\n\tcolor: rgb(255, 255, 255);\n\tfont-family: \"Plex Mono\";\n}\n\n/* Game button themes */\n.game-button-dark {\n\tcolor: rgb(255, 255, 255);\n\n    background-color: rgb(32, 32, 32);\n\n    box-shadow: 2px 2px 2px black;\n}\n.game-button-dark:hover {\n    background-color: rgb(40, 40, 40);\n}\n.game-button-light {\n\tcolor: rgb(0, 0, 0);\n\n    background-color: rgb(200, 200, 200);\n\n    box-shadow: 2px 2px 2px rgb(180, 180, 180);\n}\n.game-button-light:hover {\n    background-color: rgb(215, 215, 215);\n}\n.game-button-gradient {\n\tcolor: rgb(255, 255, 255);\n\n    background-color: rgba(0, 0, 0, 0);\n\n\tborder: 2px solid rgb(195, 195, 195);\n}\n.game-button-gradient:hover {\n\tbackground-image: linear-gradient(rgb(56, 56, 56), rgb(81, 81, 81));\n}\n", map: {"version":3,"sources":["/mnt/c/users/miles/onedrive/documents/atom-programs-new/games/number-prestige/src/components/App.vue"],"names":[],"mappings":";AAwFA;IACA,wBAAA;IACA,kDAAA;AACA;AAEA;IACA,wBAAA;IACA,4CAAA;AACA;;AAEA,0BAAA;AACA;IACA;AACA;;AAEA,cAAA;AACA;CACA,yBAAA;CACA,wBAAA;AACA;AAEA;CACA,mBAAA;CACA,wBAAA;AACA;AAEA;CACA,yBAAA;CACA,wBAAA;AACA;;AAEA,uBAAA;AACA;CACA,yBAAA;;IAEA,iCAAA;;IAEA,6BAAA;AACA;AAEA;IACA,iCAAA;AACA;AAEA;CACA,mBAAA;;IAEA,oCAAA;;IAEA,0CAAA;AACA;AAEA;IACA,oCAAA;AACA;AAEA;CACA,yBAAA;;IAEA,kCAAA;;CAEA,oCAAA;AACA;AAEA;CACA,mEAAA;AACA","file":"App.vue","sourcesContent":["<!-- This is the core app component -->\r\n<template>\r\n    <div id=\"app\" v-bind:class=\"themeClass('app')\">\r\n        <selector-container></selector-container>\r\n        <content-container></content-container>\r\n    </div>\r\n</template>\r\n\r\n<script>\r\n    import ContentContainer from \"./content/ContentContainer.vue\";\r\n\r\n    import SelectorContainer from \"./selectors/SelectorContainer.vue\";\r\n\r\n    import calculatedValues from \"../mixins/calculatedValues.js\";\r\n    import gameFunctions from \"../mixins/gameFunctions.js\";\r\n    import save from \"../mixins/save.js\";\r\n\r\n    import { autoClick, theme } from \"../mixins/storeIO.js\";\r\n\r\n    export default {\r\n        mixins: [autoClick, calculatedValues, gameFunctions, save, theme],\r\n\r\n        components: {\r\n            \"content-container\": ContentContainer,\r\n            \"selector-container\": SelectorContainer\r\n        },\r\n\r\n        methods: {\r\n            // This function runs every tick\r\n            tick(tps) {\r\n                if (this.isAutoClickActive()) {\r\n                    let seconds = this.getAutoClickInterval();\r\n                    let gain = this.getTotalGain();\r\n\r\n                    // This adds up to the actual score per second\r\n                    this.addScore(gain / (seconds * tps));\r\n                }\r\n            }\r\n        },\r\n\r\n        created() {\r\n            // Loads save data\r\n            this.loadSaveData();\r\n\r\n            // Current ticks per second\r\n            const tps = 20;\r\n\r\n            // Sets up autosave (5 second interval)\r\n            setInterval(this.save, 5000);\r\n\r\n            // Sets up the tick function to run every tick\r\n            setInterval(() => this.tick(tps), 1000 / tps);\r\n        }\r\n    };\r\n</script>\r\n\r\n<style scoped>\r\n    #app {\r\n        position: absolute;\r\n\r\n        top: 0;\r\n        left: 0;\r\n\r\n        width: 100%;\r\n        height: 100%;\r\n\r\n        display: grid;\r\n\r\n        grid-template-rows: auto;\r\n        grid-template-columns: auto;\r\n    }\r\n\r\n    .app-dark {\r\n        background-color: rgb(20, 20, 20);\r\n    }\r\n\r\n    .app-light {\r\n        background-color: rgb(210, 210, 210);\r\n    }\r\n\r\n    .app-gradient {\r\n        background-image: linear-gradient(rgb(0, 0, 0), rgb(25, 25, 25));\r\n    }\r\n</style>\r\n\r\n<!-- Global styles -->\r\n<!-- This includes themes for global components -->\r\n<style>\r\n    @font-face {\r\n        font-family: \"Open Sans\";\r\n        src: url(\"../fonts/opensans-regular-webfont.woff\");\r\n    }\r\n\r\n    @font-face {\r\n        font-family: \"Plex Mono\";\r\n        src: url(\"../fonts/IBMPlexMono-Regular.ttf\");\r\n    }\r\n\r\n    /*To let me style buttons*/\r\n    button {\r\n        all: unset\r\n    }\r\n\r\n    /*Text themes*/\r\n    .text-dark {\r\n    \tcolor: rgb(255, 255, 255);\r\n    \tfont-family: \"Open Sans\";\r\n    }\r\n\r\n    .text-light {\r\n    \tcolor: rgb(0, 0, 0);\r\n    \tfont-family: \"Open Sans\";\r\n    }\r\n\r\n    .text-gradient {\r\n    \tcolor: rgb(255, 255, 255);\r\n    \tfont-family: \"Plex Mono\";\r\n    }\r\n\r\n    /* Game button themes */\r\n    .game-button-dark {\r\n    \tcolor: rgb(255, 255, 255);\r\n\r\n        background-color: rgb(32, 32, 32);\r\n\r\n        box-shadow: 2px 2px 2px black;\r\n    }\r\n\r\n    .game-button-dark:hover {\r\n        background-color: rgb(40, 40, 40);\r\n    }\r\n\r\n    .game-button-light {\r\n    \tcolor: rgb(0, 0, 0);\r\n\r\n        background-color: rgb(200, 200, 200);\r\n\r\n        box-shadow: 2px 2px 2px rgb(180, 180, 180);\r\n    }\r\n\r\n    .game-button-light:hover {\r\n        background-color: rgb(215, 215, 215);\r\n    }\r\n\r\n    .game-button-gradient {\r\n    \tcolor: rgb(255, 255, 255);\r\n\r\n        background-color: rgba(0, 0, 0, 0);\r\n\r\n    \tborder: 2px solid rgb(195, 195, 195);\r\n    }\r\n\r\n    .game-button-gradient:hover {\r\n    \tbackground-image: linear-gradient(rgb(56, 56, 56), rgb(81, 81, 81));\r\n    }\r\n</style>\r\n"]}, media: undefined });
+        inject("data-v-03e5f956_0", { source: "\n#app[data-v-03e5f956] {\n    position: absolute;\n\n    top: 0;\n    left: 0;\n\n    width: 100%;\n    height: 100%;\n\n    display: grid;\n\n    grid-template-rows: auto;\n    grid-template-columns: auto;\n}\n.app-dark[data-v-03e5f956] {\n    background-color: rgb(20, 20, 20);\n}\n.app-light[data-v-03e5f956] {\n    background-color: rgb(210, 210, 210);\n}\n.app-gradient[data-v-03e5f956] {\n    background-image: linear-gradient(rgb(0, 0, 0), rgb(25, 25, 25));\n}\n", map: {"version":3,"sources":["/mnt/c/users/miles/onedrive/documents/atom-programs-new/games/number-prestige/src/components/App.vue"],"names":[],"mappings":";AA6DA;IACA,kBAAA;;IAEA,MAAA;IACA,OAAA;;IAEA,WAAA;IACA,YAAA;;IAEA,aAAA;;IAEA,wBAAA;IACA,2BAAA;AACA;AAEA;IACA,iCAAA;AACA;AAEA;IACA,oCAAA;AACA;AAEA;IACA,gEAAA;AACA","file":"App.vue","sourcesContent":["<!-- This is the core app component -->\r\n<template>\r\n    <div id=\"app\" v-bind:class=\"themeClass('app')\">\r\n        <selector-container></selector-container>\r\n        <notification-container></notification-container>\r\n        <content-container></content-container>\r\n    </div>\r\n</template>\r\n\r\n<script>\r\n    import ContentContainer from \"./content/ContentContainer.vue\";\r\n\r\n    import SelectorContainer from \"./selectors/SelectorContainer.vue\";\r\n\r\n    import NotificationContainer from \"./notifications/NotificationContainer.vue\";\r\n\r\n    import calculatedValues from \"../mixins/calculatedValues.js\";\r\n    import gameFunctions from \"../mixins/gameFunctions.js\";\r\n    import save from \"../mixins/save.js\";\r\n\r\n    import { autoClick, theme } from \"../mixins/storeIO.js\";\r\n\r\n    export default {\r\n        mixins: [autoClick, calculatedValues, gameFunctions, save, theme],\r\n\r\n        components: {\r\n            \"content-container\": ContentContainer,\r\n            \"notification-container\": NotificationContainer,\r\n            \"selector-container\": SelectorContainer\r\n        },\r\n\r\n        methods: {\r\n            // This function runs every tick\r\n            tick(tps) {\r\n                if (this.isAutoClickActive()) {\r\n                    let seconds = this.getAutoClickInterval();\r\n                    let gain = this.getTotalGain();\r\n\r\n                    // This adds up to the actual score per second\r\n                    this.addScore(gain / (seconds * tps));\r\n                }\r\n            }\r\n        },\r\n\r\n        created() {\r\n            // Loads save data\r\n            this.loadSaveData();\r\n\r\n            // Current ticks per second\r\n            const tps = 20;\r\n\r\n            // Sets up autosave (5 second interval)\r\n            setInterval(this.save, 5000);\r\n\r\n            // Sets up the tick function to run every tick\r\n            setInterval(() => this.tick(tps), 1000 / tps);\r\n        }\r\n    };\r\n</script>\r\n\r\n<style scoped>\r\n    #app {\r\n        position: absolute;\r\n\r\n        top: 0;\r\n        left: 0;\r\n\r\n        width: 100%;\r\n        height: 100%;\r\n\r\n        display: grid;\r\n\r\n        grid-template-rows: auto;\r\n        grid-template-columns: auto;\r\n    }\r\n\r\n    .app-dark {\r\n        background-color: rgb(20, 20, 20);\r\n    }\r\n\r\n    .app-light {\r\n        background-color: rgb(210, 210, 210);\r\n    }\r\n\r\n    .app-gradient {\r\n        background-image: linear-gradient(rgb(0, 0, 0), rgb(25, 25, 25));\r\n    }\r\n</style>\r\n\r\n<!-- Global styles -->\r\n<!-- This includes themes for global components -->\r\n<style>\r\n    @font-face {\r\n        font-family: \"Open Sans\";\r\n        src: url(\"../fonts/opensans-regular-webfont.woff\");\r\n    }\r\n\r\n    @font-face {\r\n        font-family: \"Plex Mono\";\r\n        src: url(\"../fonts/IBMPlexMono-Regular.ttf\");\r\n    }\r\n\r\n    /*To let me style buttons*/\r\n    button {\r\n        all: unset\r\n    }\r\n\r\n    /*Text themes*/\r\n    .text-dark {\r\n    \tcolor: rgb(255, 255, 255);\r\n    \tfont-family: \"Open Sans\";\r\n    }\r\n\r\n    .text-light {\r\n    \tcolor: rgb(0, 0, 0);\r\n    \tfont-family: \"Open Sans\";\r\n    }\r\n\r\n    .text-gradient {\r\n    \tcolor: rgb(255, 255, 255);\r\n    \tfont-family: \"Plex Mono\";\r\n    }\r\n\r\n    /* Game button themes */\r\n    .game-button-dark {\r\n    \tcolor: rgb(255, 255, 255);\r\n\r\n        background-color: rgb(32, 32, 32);\r\n\r\n        box-shadow: 2px 2px 2px black;\r\n    }\r\n\r\n    .game-button-dark:hover {\r\n        background-color: rgb(40, 40, 40);\r\n    }\r\n\r\n    .game-button-light {\r\n    \tcolor: rgb(0, 0, 0);\r\n\r\n        background-color: rgb(200, 200, 200);\r\n\r\n        box-shadow: 2px 2px 2px rgb(180, 180, 180);\r\n    }\r\n\r\n    .game-button-light:hover {\r\n        background-color: rgb(215, 215, 215);\r\n    }\r\n\r\n    .game-button-gradient {\r\n    \tcolor: rgb(255, 255, 255);\r\n\r\n        background-color: rgba(0, 0, 0, 0);\r\n\r\n    \tborder: 2px solid rgb(195, 195, 195);\r\n    }\r\n\r\n    .game-button-gradient:hover {\r\n    \tbackground-image: linear-gradient(rgb(56, 56, 56), rgb(81, 81, 81));\r\n    }\r\n</style>\r\n"]}, media: undefined })
+    ,inject("data-v-03e5f956_1", { source: "\n@font-face {\n    font-family: \"Open Sans\";\n    src: url(\"../fonts/opensans-regular-webfont.woff\");\n}\n@font-face {\n    font-family: \"Plex Mono\";\n    src: url(\"../fonts/IBMPlexMono-Regular.ttf\");\n}\n\n/*To let me style buttons*/\nbutton {\n    all: unset\n}\n\n/*Text themes*/\n.text-dark {\n\tcolor: rgb(255, 255, 255);\n\tfont-family: \"Open Sans\";\n}\n.text-light {\n\tcolor: rgb(0, 0, 0);\n\tfont-family: \"Open Sans\";\n}\n.text-gradient {\n\tcolor: rgb(255, 255, 255);\n\tfont-family: \"Plex Mono\";\n}\n\n/* Game button themes */\n.game-button-dark {\n\tcolor: rgb(255, 255, 255);\n\n    background-color: rgb(32, 32, 32);\n\n    box-shadow: 2px 2px 2px black;\n}\n.game-button-dark:hover {\n    background-color: rgb(40, 40, 40);\n}\n.game-button-light {\n\tcolor: rgb(0, 0, 0);\n\n    background-color: rgb(200, 200, 200);\n\n    box-shadow: 2px 2px 2px rgb(180, 180, 180);\n}\n.game-button-light:hover {\n    background-color: rgb(215, 215, 215);\n}\n.game-button-gradient {\n\tcolor: rgb(255, 255, 255);\n\n    background-color: rgba(0, 0, 0, 0);\n\n\tborder: 2px solid rgb(195, 195, 195);\n}\n.game-button-gradient:hover {\n\tbackground-image: linear-gradient(rgb(56, 56, 56), rgb(81, 81, 81));\n}\n", map: {"version":3,"sources":["/mnt/c/users/miles/onedrive/documents/atom-programs-new/games/number-prestige/src/components/App.vue"],"names":[],"mappings":";AA4FA;IACA,wBAAA;IACA,kDAAA;AACA;AAEA;IACA,wBAAA;IACA,4CAAA;AACA;;AAEA,0BAAA;AACA;IACA;AACA;;AAEA,cAAA;AACA;CACA,yBAAA;CACA,wBAAA;AACA;AAEA;CACA,mBAAA;CACA,wBAAA;AACA;AAEA;CACA,yBAAA;CACA,wBAAA;AACA;;AAEA,uBAAA;AACA;CACA,yBAAA;;IAEA,iCAAA;;IAEA,6BAAA;AACA;AAEA;IACA,iCAAA;AACA;AAEA;CACA,mBAAA;;IAEA,oCAAA;;IAEA,0CAAA;AACA;AAEA;IACA,oCAAA;AACA;AAEA;CACA,yBAAA;;IAEA,kCAAA;;CAEA,oCAAA;AACA;AAEA;CACA,mEAAA;AACA","file":"App.vue","sourcesContent":["<!-- This is the core app component -->\r\n<template>\r\n    <div id=\"app\" v-bind:class=\"themeClass('app')\">\r\n        <selector-container></selector-container>\r\n        <notification-container></notification-container>\r\n        <content-container></content-container>\r\n    </div>\r\n</template>\r\n\r\n<script>\r\n    import ContentContainer from \"./content/ContentContainer.vue\";\r\n\r\n    import SelectorContainer from \"./selectors/SelectorContainer.vue\";\r\n\r\n    import NotificationContainer from \"./notifications/NotificationContainer.vue\";\r\n\r\n    import calculatedValues from \"../mixins/calculatedValues.js\";\r\n    import gameFunctions from \"../mixins/gameFunctions.js\";\r\n    import save from \"../mixins/save.js\";\r\n\r\n    import { autoClick, theme } from \"../mixins/storeIO.js\";\r\n\r\n    export default {\r\n        mixins: [autoClick, calculatedValues, gameFunctions, save, theme],\r\n\r\n        components: {\r\n            \"content-container\": ContentContainer,\r\n            \"notification-container\": NotificationContainer,\r\n            \"selector-container\": SelectorContainer\r\n        },\r\n\r\n        methods: {\r\n            // This function runs every tick\r\n            tick(tps) {\r\n                if (this.isAutoClickActive()) {\r\n                    let seconds = this.getAutoClickInterval();\r\n                    let gain = this.getTotalGain();\r\n\r\n                    // This adds up to the actual score per second\r\n                    this.addScore(gain / (seconds * tps));\r\n                }\r\n            }\r\n        },\r\n\r\n        created() {\r\n            // Loads save data\r\n            this.loadSaveData();\r\n\r\n            // Current ticks per second\r\n            const tps = 20;\r\n\r\n            // Sets up autosave (5 second interval)\r\n            setInterval(this.save, 5000);\r\n\r\n            // Sets up the tick function to run every tick\r\n            setInterval(() => this.tick(tps), 1000 / tps);\r\n        }\r\n    };\r\n</script>\r\n\r\n<style scoped>\r\n    #app {\r\n        position: absolute;\r\n\r\n        top: 0;\r\n        left: 0;\r\n\r\n        width: 100%;\r\n        height: 100%;\r\n\r\n        display: grid;\r\n\r\n        grid-template-rows: auto;\r\n        grid-template-columns: auto;\r\n    }\r\n\r\n    .app-dark {\r\n        background-color: rgb(20, 20, 20);\r\n    }\r\n\r\n    .app-light {\r\n        background-color: rgb(210, 210, 210);\r\n    }\r\n\r\n    .app-gradient {\r\n        background-image: linear-gradient(rgb(0, 0, 0), rgb(25, 25, 25));\r\n    }\r\n</style>\r\n\r\n<!-- Global styles -->\r\n<!-- This includes themes for global components -->\r\n<style>\r\n    @font-face {\r\n        font-family: \"Open Sans\";\r\n        src: url(\"../fonts/opensans-regular-webfont.woff\");\r\n    }\r\n\r\n    @font-face {\r\n        font-family: \"Plex Mono\";\r\n        src: url(\"../fonts/IBMPlexMono-Regular.ttf\");\r\n    }\r\n\r\n    /*To let me style buttons*/\r\n    button {\r\n        all: unset\r\n    }\r\n\r\n    /*Text themes*/\r\n    .text-dark {\r\n    \tcolor: rgb(255, 255, 255);\r\n    \tfont-family: \"Open Sans\";\r\n    }\r\n\r\n    .text-light {\r\n    \tcolor: rgb(0, 0, 0);\r\n    \tfont-family: \"Open Sans\";\r\n    }\r\n\r\n    .text-gradient {\r\n    \tcolor: rgb(255, 255, 255);\r\n    \tfont-family: \"Plex Mono\";\r\n    }\r\n\r\n    /* Game button themes */\r\n    .game-button-dark {\r\n    \tcolor: rgb(255, 255, 255);\r\n\r\n        background-color: rgb(32, 32, 32);\r\n\r\n        box-shadow: 2px 2px 2px black;\r\n    }\r\n\r\n    .game-button-dark:hover {\r\n        background-color: rgb(40, 40, 40);\r\n    }\r\n\r\n    .game-button-light {\r\n    \tcolor: rgb(0, 0, 0);\r\n\r\n        background-color: rgb(200, 200, 200);\r\n\r\n        box-shadow: 2px 2px 2px rgb(180, 180, 180);\r\n    }\r\n\r\n    .game-button-light:hover {\r\n        background-color: rgb(215, 215, 215);\r\n    }\r\n\r\n    .game-button-gradient {\r\n    \tcolor: rgb(255, 255, 255);\r\n\r\n        background-color: rgba(0, 0, 0, 0);\r\n\r\n    \tborder: 2px solid rgb(195, 195, 195);\r\n    }\r\n\r\n    .game-button-gradient:hover {\r\n    \tbackground-image: linear-gradient(rgb(56, 56, 56), rgb(81, 81, 81));\r\n    }\r\n</style>\r\n"]}, media: undefined });
 
       };
       /* scoped */
-      const __vue_scope_id__$z = "data-v-55e861d7";
+      const __vue_scope_id__$B = "data-v-03e5f956";
       /* module identifier */
-      const __vue_module_identifier__$z = undefined;
+      const __vue_module_identifier__$B = undefined;
       /* functional template */
-      const __vue_is_functional_template__$z = false;
+      const __vue_is_functional_template__$B = false;
       /* style inject SSR */
       
       /* style inject shadow dom */
       
 
       
-      const __vue_component__$z = normalizeComponent(
-        { render: __vue_render__$z, staticRenderFns: __vue_staticRenderFns__$z },
-        __vue_inject_styles__$z,
-        __vue_script__$z,
-        __vue_scope_id__$z,
-        __vue_is_functional_template__$z,
-        __vue_module_identifier__$z,
+      const __vue_component__$B = normalizeComponent(
+        { render: __vue_render__$B, staticRenderFns: __vue_staticRenderFns__$B },
+        __vue_inject_styles__$B,
+        __vue_script__$B,
+        __vue_scope_id__$B,
+        __vue_is_functional_template__$B,
+        __vue_module_identifier__$B,
         false,
         createInjector,
         undefined,
@@ -3395,7 +3568,10 @@
             autoClick: {...defaultSave.autoClick},
 
             // Auto-prestige
-            autoPrestige: {...defaultSave.autoPrestige}
+            autoPrestige: {...defaultSave.autoPrestige},
+
+            // List of active notifications (strings)
+            notifications: []
         },
 
         mutations: {
@@ -3552,6 +3728,16 @@
             // Toggles auto-prestige
             toggleAutoPrestige(state) {
                 state.autoPrestige.enabled = !state.autoPrestige.enabled;
+            },
+
+            // Pushes a notification onto the stack
+            pushNotification(state, notification) {
+                state.notifications.push(notification);
+            },
+
+            // Removes a notification from the stack
+            removeNotification(state) {
+                state.notifications.shift();
             }
         }
     });
@@ -3562,7 +3748,7 @@
         store,
 
         components: {
-            app: __vue_component__$z
+            app: __vue_component__$B
         },
 
         template: `<app></app>`

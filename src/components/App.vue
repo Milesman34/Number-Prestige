@@ -2,6 +2,7 @@
 <template>
     <div id="app" v-bind:class="themeClass('app')">
         <selector-container></selector-container>
+        <notification-container></notification-container>
         <content-container></content-container>
     </div>
 </template>
@@ -10,6 +11,8 @@
     import ContentContainer from "./content/ContentContainer.vue";
 
     import SelectorContainer from "./selectors/SelectorContainer.vue";
+
+    import NotificationContainer from "./notifications/NotificationContainer.vue";
 
     import calculatedValues from "../mixins/calculatedValues.js";
     import gameFunctions from "../mixins/gameFunctions.js";
@@ -22,6 +25,7 @@
 
         components: {
             "content-container": ContentContainer,
+            "notification-container": NotificationContainer,
             "selector-container": SelectorContainer
         },
 

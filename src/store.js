@@ -85,7 +85,10 @@ export default new Vuex.Store({
         autoClick: {...defaultSave.autoClick},
 
         // Auto-prestige
-        autoPrestige: {...defaultSave.autoPrestige}
+        autoPrestige: {...defaultSave.autoPrestige},
+
+        // List of active notifications (strings)
+        notifications: []
     },
 
     mutations: {
@@ -242,6 +245,16 @@ export default new Vuex.Store({
         // Toggles auto-prestige
         toggleAutoPrestige(state) {
             state.autoPrestige.enabled = !state.autoPrestige.enabled;
+        },
+
+        // Pushes a notification onto the stack
+        pushNotification(state, notification) {
+            state.notifications.push(notification);
+        },
+
+        // Removes a notification from the stack
+        removeNotification(state) {
+            state.notifications.shift();
         }
     }
 });

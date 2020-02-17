@@ -1,4 +1,4 @@
-import { autoClick, autoPrestige, gain, goal, prestigePoints, prestiges, score } from "./storeIO.js";
+import { autoClick, autoPrestige, gain, goal, notifications, prestigePoints, prestiges, score } from "./storeIO.js";
 
 import calculatedValues from "./calculatedValues.js";
 
@@ -10,6 +10,7 @@ export default {
         ...calculatedValues.methods,
         ...gain.methods,
         ...goal.methods,
+        ...notifications.methods,
         ...prestigePoints.methods,
         ...prestiges.methods,
         ...score.methods,
@@ -33,8 +34,11 @@ export default {
             this.increasePrestiges();
 
             // If the player has at least 25 prestige points, auto-prestige is enabled
-            if (this.getPrestigePoints() >= 25 && !this.isAutoPrestigeUnlocked())
+            if (this.getPrestigePoints() >= 25 && !this.isAutoPrestigeUnlocked()) {
                 this.unlockAutoPrestige();
+
+                this.pushNotification("Unlocked Auto-Prestige");
+            }
         },
 
         // Adds to the player's score
@@ -42,8 +46,11 @@ export default {
             this._addScore(score);
 
             // Unlocks auto-click if the score >= 1000
-            if (this.getScore() >= 1000 && !this.isAutoClickUnlocked())
+            if (this.getScore() >= 1000 && !this.isAutoClickUnlocked()) {
                 this.unlockAutoClick();
+
+                this.pushNotification("Unlocked Auto-Click");
+            }
 
             // Auto-prestiges if applicable
             if (this.isAutoPrestigeActive() && this.canPrestige())

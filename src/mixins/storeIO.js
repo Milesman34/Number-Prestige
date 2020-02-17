@@ -282,3 +282,23 @@ export const autoPrestige = {
         },
     }
 };
+
+// This mixin grants access to the notifications variable
+export const notifications = {
+    methods: {
+        // Gets the notifications variable
+        getNotifications() {
+            return this.$store.state.notifications;
+        },
+
+        pushNotification(notification) {
+            this.$store.commit("pushNotification", notification);
+
+            setTimeout(this.removeNotification, 2000);
+        },
+
+        removeNotification() {
+            this.$store.commit("removeNotification");
+        }
+    }
+}
