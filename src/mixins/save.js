@@ -1,6 +1,6 @@
 import { defaultSave } from "../enums.js";
 
-import { gain, gameState, goal, prestigePoints, prestiges, score, selector, theme, upgrades } from "./storeIO.js";
+import { autoClick, autoPrestige, gain, gameState, goal, prestigePoints, prestiges, score, selector, theme, upgrades } from "./storeIO.js";
 
 // This mixin handles the player's save data
 export default {
@@ -15,10 +15,12 @@ export default {
         ...selector.methods,
         ...theme.methods,
         ...upgrades.methods,
+        ...autoClick.methods,
+        ...autoPrestige.methods,
 
         // Encodes the player's save data
-        encodeSaveData({ theme, gameState, score, goal, gain, prestigePoints, prestiges, upgrades }) {
-            return `${theme}|${gameState}|${score}|${goal}|${gain}|${prestigePoints}|${prestiges}|${upgrades[0].cost}|${upgrades[0].amount}|${upgrades[1].cost}|${upgrades[1].amount}|${upgrades[2].cost}|${upgrades[2].amount}`;
+        encodeSaveData({ theme, gameState, score, goal, gain, prestigePoints, prestiges, upgrades, autoClick, autoPrestige }) {
+            return `${theme}|${gameState}|${score}|${goal}|${gain}|${prestigePoints}|${prestiges}|${upgrades[0].cost}|${upgrades[0].amount}|${upgrades[1].cost}|${upgrades[1].amount}|${upgrades[2].cost}|${upgrades[2].amount}|${autoClick.unlocked}|${autoClick.enabled}|${autoPrestige.unlocked}|${autoPrestige.enabled}`;
         },
 
         // Decodes the given save data
@@ -50,7 +52,17 @@ export default {
                         cost: items.length > 11 ? parseInt(items[11]) : defaultSave.upgrades[2].cost,
                         amount: items.length > 12 ? parseInt(items[12]) : defaultSave.upgrades[2].amount
                     }
-                ]
+                ],
+
+                autoClick: {
+                    unlocked: items.length > 13 ? items[13] === "true" : defaultSave.autoClick.unlocked,
+                    enabled: items.length > 14 ? items[14] === "true" : defaultSave.autoClick.enabled
+                },
+
+                autoPrestige: {
+                    unlocked: items.length > 15 ? items[15] === "true": defaultSave.autoPrestige.unlocked,
+                    enabled: items.length > 16 ? items[16] === "true": defaultSave.autoPrestige.enabled
+                }
             };
         },
 
@@ -80,7 +92,10 @@ export default {
                         cost: this.getUpgradeCost(2),
                         amount: this.getUpgradeAmount(2)
                     }
-                ]
+                ],
+
+                autoClick: {...this.getAutoClick()},
+                autoPrestige: {...this.getAutoPrestige()}
             }));
         },
 
@@ -108,6 +123,23 @@ export default {
                 this.setUpgradeAmount(id, upgrade.amount);
             });
 
+            // Handles auto-click and auto-prestige
+            if (defaultSave.autoClick.unlocked)
+                this.unlockAutoClick();
+            else this.lockAutoClick();
+
+            if (defaultSave.autoClick.enabled)
+                this.enableAutoClick();
+            else this.disableAutoClick();
+
+            if (defaultSave.autoPrestige.unlocked)
+                this.unlockAutoPrestige();
+            else this.lockAutoPrestige();
+
+            if (defaultSave.autoPrestige.enabled)
+                this.enableAutoPrestige();
+            else this.disableAutoPrestige();
+
             // Saves over player's save file
             this.save();
         },
@@ -117,32 +149,7 @@ export default {
             let save = localStorage.getItem("save");
 
             // Returns the save if possible, returning the default save data if the save could not be found
-            return save === null ? this.encodeSaveData({
-                theme: defaultSave.theme,
-                gameState: defaultSave.gameState,
-                score: defaultSave.score,
-                goal: defaultSave.goal,
-                gain: defaultSave.gain,
-                prestigePoints: defaultSave.prestigePoints,
-                prestiges: defaultSave.prestiges,
-
-                upgrades: [
-                    {
-                        cost: defaultSave.upgrades[0].cost,
-                        amount: defaultSave.upgrades[0].amount
-                    },
-
-                    {
-                        cost: defaultSave.upgrades[1].cost,
-                        amount: defaultSave.upgrades[1].amount
-                    },
-
-                    {
-                        cost: defaultSave.upgrades[2].cost,
-                        amount: defaultSave.upgrades[2].amount
-                    }
-                ]
-            }) : save;
+            return save === null ? decodeSaveData({...defaultSave}) : save;
         },
 
         // Loads the player's save data
@@ -165,6 +172,23 @@ export default {
                 this.setUpgradeCost(id, upgrade.cost);
                 this.setUpgradeAmount(id, upgrade.amount);
             });
+
+            // Handles auto-click and auto-prestige
+            if (saveObject.autoClick.unlocked)
+                this.unlockAutoClick();
+            else this.lockAutoClick();
+
+            if (saveObject.autoClick.enabled)
+                this.enableAutoClick();
+            else this.disableAutoClick();
+
+            if (saveObject.autoPrestige.unlocked)
+                this.unlockAutoPrestige();
+            else this.lockAutoPrestige();
+
+            if (saveObject.autoPrestige.enabled)
+                this.enableAutoPrestige();
+            else this.disableAutoPrestige();
         }
     }
 };

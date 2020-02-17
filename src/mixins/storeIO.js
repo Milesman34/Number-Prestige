@@ -60,7 +60,8 @@ export const score = {
             this.$store.commit("setScore", score);
         },
 
-        addScore(score) {
+        // Uses an underscore, since another function is named addScore
+        _addScore(score) {
             this.$store.commit("addScore", score);
         },
 
@@ -191,3 +192,93 @@ export const upgrades = {
         }
     }
 }
+
+// This mixin grants access to the autoClick variable
+export const autoClick = {
+    methods: {
+        // Gets the auto-click variable
+        getAutoClick() {
+            return this.$store.state.autoClick;
+        },
+
+        // Checks if auto-click is unlocked
+        isAutoClickUnlocked() {
+            return this.getAutoClick().unlocked;
+        },
+
+        // Checks if auto-click is enabled
+        isAutoClickEnabled() {
+            return this.getAutoClick().enabled;
+        },
+
+        // Checks if auto-click is active (unlocked + enabled)
+        isAutoClickActive() {
+            return this.isAutoClickUnlocked() && this.isAutoClickEnabled();
+        },
+
+        unlockAutoClick() {
+            this.$store.commit("unlockAutoClick");
+        },
+
+        lockAutoClick() {
+            this.$store.commit("lockAutoClick");
+        },
+
+        enableAutoClick() {
+            this.$store.commit("enableAutoClick");
+        },
+
+        disableAutoClick() {
+            this.$store.commit("disableAutoClick");
+        },
+
+        toggleAutoClick() {
+            this.$store.commit("toggleAutoClick");
+        },
+    }
+};
+
+// This mixin grants access to the autoPrestige variable
+export const autoPrestige = {
+    methods: {
+        // Gets the auto-prestige variable
+        getAutoPrestige() {
+            return this.$store.state.autoPrestige;
+        },
+
+        // Checks if auto-prestige is unlocked
+        isAutoPrestigeUnlocked() {
+            return this.getAutoPrestige().unlocked;
+        },
+
+        // Checks if auto-prestige is enabled
+        isAutoPrestigeEnabled() {
+            return this.getAutoPrestige().enabled;
+        },
+
+        // Checks if auto-prestige is active (unlocked + enabled)
+        isAutoPrestigeActive() {
+            return this.isAutoPrestigeUnlocked() && this.isAutoPrestigeEnabled();
+        },
+
+        unlockAutoPrestige() {
+            this.$store.commit("unlockAutoPrestige");
+        },
+
+        lockAutoPrestige() {
+            this.$store.commit("lockAutoPrestige");
+        },
+
+        enableAutoPrestige() {
+            this.$store.commit("enableAutoPrestige");
+        },
+
+        disableAutoPrestige() {
+            this.$store.commit("disableAutoPrestige");
+        },
+
+        toggleAutoPrestige() {
+            this.$store.commit("toggleAutoPrestige");
+        },
+    }
+};

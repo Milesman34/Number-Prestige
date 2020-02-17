@@ -4,10 +4,12 @@
         <main-state v-if="getGameState() === gameStates.main"></main-state>
         <options-state v-if="getGameState() === gameStates.options"></options-state>
         <upgrades-state v-if="getGameState() === gameStates.upgrades"></upgrades-state>
+        <automation-state v-if="getGameState() === gameStates.automation"></automation-state>
     </div>
 </template>
 
 <script>
+    import AutomationState from "./states/automation/AutomationState.vue";
     import MainState from "./states/main/MainState.vue";
     import OptionsState from "./states/options/OptionsState.vue";
     import UpgradesState from "./states/upgrades/UpgradesState.vue";
@@ -24,6 +26,7 @@
         }),
 
         components: {
+            "automation-state": AutomationState,
             "main-state": MainState,
             "options-state": OptionsState,
             "upgrades-state": UpgradesState

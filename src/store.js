@@ -67,7 +67,13 @@ export default new Vuex.Store({
                     return 0.9 ** this.amount;
                 }
             })
-        ]
+        ],
+
+        // Auto-click
+        autoClick: {...defaultSave.autoClick},
+
+        // Auto-prestige
+        autoPrestige: {...defaultSave.autoPrestige}
     },
 
     mutations: {
@@ -174,6 +180,56 @@ export default new Vuex.Store({
         // Buys an upgrade
         buyUpgrade(state, id) {
             state.upgrades[id].buy();
+        },
+
+        // Unlocks auto-click
+        unlockAutoClick(state) {
+            state.autoClick.unlocked = true;
+        },
+
+        // Locks auto-click
+        lockAutoClick(state) {
+            state.autoClick.unlocked = false;
+        },
+
+        // Enables auto-click
+        enableAutoClick(state) {
+            state.autoClick.enabled = true;
+        },
+
+        // Disables auto-click
+        disableAutoClick(state) {
+            state.autoClick.enabled = false;
+        },
+
+        // Toggles auto-click
+        toggleAutoClick(state) {
+            state.autoClick.enabled = !state.autoClick.enabled;
+        },
+
+        // Unlocks auto-prestige
+        unlockAutoPrestige(state) {
+            state.autoPrestige.unlocked = true;
+        },
+
+        // Locks auto-prestige
+        lockAutoPrestige(state) {
+            state.autoPrestige.unlocked = false;
+        },
+
+        // Enables auto-prestige
+        enableAutoPrestige(state) {
+            state.autoPrestige.enabled = true;
+        },
+
+        // Disables auto-prestige
+        disableAutoPrestige(state) {
+            state.autoPrestige.enabled = false;
+        },
+
+        // Toggles auto-prestige
+        toggleAutoPrestige(state) {
+            state.autoPrestige.enabled = !state.autoPrestige.enabled;
         }
     }
 });

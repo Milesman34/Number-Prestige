@@ -11,7 +11,7 @@
 
 <script>
     import PrestigeUpgradeCostDisplay from "./PrestigeUpgradeCostDisplay.vue";
-    import PrestigeUpgradeCurrentDisplay from "./PrestigeUpgradeCurrent.vue";
+    import PrestigeUpgradeCurrentDisplay from "./PrestigeUpgradeCurrentDisplay.vue";
     import PrestigeUpgradeDescription from "./PrestigeUpgradeDescription.vue";
 
     import { gain, goal, prestigePoints, score, theme, upgrades } from "../../../../../../mixins/storeIO.js";

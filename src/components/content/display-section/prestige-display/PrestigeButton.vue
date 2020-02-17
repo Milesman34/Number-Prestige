@@ -4,33 +4,13 @@
 </template>
 
 <script>
-    import { gain, goal, prestigePoints, prestiges, score, theme, upgrades } from "../../../../mixins/storeIO.js";
+    import { theme, upgrades } from "../../../../mixins/storeIO.js";
 
+    import gameFunctions from "../../../../mixins/gameFunctions.js";
     import utils from "../../../../mixins/utils.js";
 
     export default {
-        mixins: [gain, goal, prestigePoints, prestiges, score, theme, upgrades, utils],
-
-        methods: {
-            // Prestiges the game, resetting the player's score but increasing their number gain by 1 and doubling their goal
-            prestige() {
-                // Gives the player a warning if it is their first prestige
-                if (!this.hasPrestiged() && !confirm(
-                    "Are you sure you want to prestige? This will reset your score, while adding 1 to your number gain and doubling the goal. You will also receive a Prestige point."
-                )) return;
-
-                // Resets the score
-                this.resetScore();
-
-                // Updates the number gain and prestige goal
-                this.increaseGain();
-                this.increaseGoal();
-
-                // Gives the player the required number of prestige points and a prestiged stat
-                this.addPrestigePoints(this.getUpgradeBoost(0));
-                this.increasePrestiges();
-            }
-        }
+        mixins: [gameFunctions, theme, utils, upgrades]
     };
 </script>
 

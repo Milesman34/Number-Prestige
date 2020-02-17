@@ -23,13 +23,6 @@
         components: {
             "prestige-button": PrestigeButton,
             "prestige-point-display": PrestigePointDisplay
-        },
-
-        methods: {
-            // Determines if the player can prestige
-            canPrestige() {
-                return this.getScore() >= this.getActualGoal();
-            }
         }
     };
 </script>

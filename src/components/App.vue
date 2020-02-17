@@ -11,24 +11,45 @@
 
     import SelectorContainer from "./selectors/SelectorContainer.vue";
 
+    import calculatedValues from "../mixins/calculatedValues.js";
+    import gameFunctions from "../mixins/gameFunctions.js";
     import save from "../mixins/save.js";
 
-    import { theme } from "../mixins/storeIO.js";
+    import { autoClick, theme } from "../mixins/storeIO.js";
 
     export default {
-        mixins: [save, theme],
+        mixins: [autoClick, calculatedValues, gameFunctions, save, theme],
 
         components: {
             "content-container": ContentContainer,
             "selector-container": SelectorContainer
         },
 
+        methods: {
+            // This function runs every tick
+            tick(tps) {
+                if (this.isAutoClickActive()) {
+                    let seconds = this.getAutoClickInterval();
+                    let gain = this.getTotalGain();
+
+                    // This adds up to the actual score per second
+                    this.addScore(gain / (seconds * tps));
+                }
+            }
+        },
+
         created() {
             // Loads save data
             this.loadSaveData();
 
+            // Current ticks per second
+            const tps = 20;
+
             // Sets up autosave (5 second interval)
             setInterval(this.save, 5000);
+
+            // Sets up the tick function to run every tick
+            setInterval(() => this.tick(tps), 1000 / tps);
         }
     };
 </script>

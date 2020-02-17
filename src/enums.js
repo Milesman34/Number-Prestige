@@ -44,5 +44,15 @@ export const defaultSave = {
             cost: 5,
             amount: 0
         }
-    ]
+    ],
+
+    autoClick: {
+        unlocked: false,
+        enabled: true
+    },
+
+    autoPrestige: {
+        unlocked: false,
+        enabled: true
+    }
 };

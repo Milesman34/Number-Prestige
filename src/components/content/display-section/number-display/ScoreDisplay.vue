@@ -1,6 +1,6 @@
 <!-- This component displays the score -->
 <template>
-    <div id="score-display" v-bind:class="themeClass('text')">{{ formatSci(getScore()) }}</div>
+    <div id="score-display" v-bind:class="themeClass('text')">{{ formatSci(Math.floor(getScore())) }}</div>
 </template>
 
 <script>
