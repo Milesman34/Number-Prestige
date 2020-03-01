@@ -1,10 +1,7 @@
 // This class represents an upgrade in the game
 export default ({ cost, scaling, amount = 0, boost } = {}) => ({
-    // Cost of the upgrade
+    // Function that calculates the cost of the upgrade
     cost,
-
-    // Amount the upgrade's cost increases on purchase
-    scaling,
 
     // Number of times the upgrade has been bought
     amount,
@@ -15,6 +12,5 @@ export default ({ cost, scaling, amount = 0, boost } = {}) => ({
     // Buys the upgrade
     buy() {
         this.amount++;
-        this.cost *= this.scaling;
     }
 })

@@ -20,7 +20,7 @@ export default {
 
         // Encodes the player's save data
         encodeSaveData({ theme, gameState, score, goal, gain, prestigePoints, prestiges, upgrades, autoClick, autoPrestige }) {
-            return `${theme}|${gameState}|${score}|${goal}|${gain}|${prestigePoints}|${prestiges}|${upgrades[0].cost}|${upgrades[0].amount}|${upgrades[1].cost}|${upgrades[1].amount}|${upgrades[2].cost}|${upgrades[2].amount}|${autoClick.unlocked}|${autoClick.enabled}|${autoPrestige.unlocked}|${autoPrestige.enabled}|${upgrades[3].cost}|${upgrades[3].amount}|${upgrades[4].cost}|${upgrades[4].amount}|${upgrades[5].cost}|${upgrades[5].amount}`;
+            return `${theme}|${gameState}|${score}|${goal}|${gain}|${prestigePoints}|${prestiges}|${upgrades[0].amount}|${upgrades[1].amount}|${upgrades[2].amount}|${autoClick.unlocked}|${autoClick.enabled}|${autoPrestige.unlocked}|${autoPrestige.enabled}|${upgrades[3].amount}|${upgrades[4].amount}|${upgrades[5].amount}`;
         },
 
         // Decodes the given save data
@@ -39,44 +39,38 @@ export default {
 
                 upgrades: [
                     {
-                        cost: items.length > 7 ? parseInt(items[7]) : defaultSave.upgrades[0].cost,
-                        amount: items.length > 8 ? parseInt(items[8]) : defaultSave.upgrades[0].amount
+                        amount: items.length > 7 ? parseInt(items[7]) : defaultSave.upgrades[0].amount
                     },
 
                     {
-                        cost: items.length > 9 ? parseInt(items[9]) : defaultSave.upgrades[1].cost,
-                        amount: items.length > 10 ? parseInt(items[10]) : defaultSave.upgrades[1].amount
+                        amount: items.length > 8 ? parseInt(items[8]) : defaultSave.upgrades[1].amount,
                     },
 
                     {
-                        cost: items.length > 11 ? parseInt(items[11]) : defaultSave.upgrades[2].cost,
-                        amount: items.length > 12 ? parseInt(items[12]) : defaultSave.upgrades[2].amount
+                        amount: items.length > 9 ? parseInt(items[9]) : defaultSave.upgrades[2].amount
                     },
 
                     {
-                        cost: items.length > 17 ? parseInt(items[17]) : defaultSave.upgrades[3].cost,
-                        amount: items.length > 18 ? parseInt(items[18]) : defaultSave.upgrades[3].amount
+                        amount: items.length > 14 ? parseInt(items[14]) : defaultSave.upgrades[3].amount
                     },
 
                     {
-                        cost: items.length > 19 ? parseInt(items[19]) : defaultSave.upgrades[4].cost,
-                        amount: items.length > 20 ? parseInt(items[20]) : defaultSave.upgrades[4].amount
+                        amount: items.length > 15 ? parseInt(items[15]) : defaultSave.upgrades[4].amount
                     },
 
                     {
-                        cost: items.length > 21 ? parseInt(items[21]) : defaultSave.upgrades[5].cost,
-                        amount: items.length > 22 ? parseInt(items[22]) : defaultSave.upgrades[5].amount
+                        amount: items.length > 16 ? parseInt(items[16]) : defaultSave.upgrades[5].amount
                     }
                 ],
 
                 autoClick: {
-                    unlocked: items.length > 13 ? items[13] === "true" : defaultSave.autoClick.unlocked,
-                    enabled: items.length > 14 ? items[14] === "true" : defaultSave.autoClick.enabled
+                    unlocked: items.length > 10 ? items[10] === "true" : defaultSave.autoClick.unlocked,
+                    enabled: items.length > 11 ? items[11] === "true" : defaultSave.autoClick.enabled
                 },
 
                 autoPrestige: {
-                    unlocked: items.length > 15 ? items[15] === "true": defaultSave.autoPrestige.unlocked,
-                    enabled: items.length > 16 ? items[16] === "true": defaultSave.autoPrestige.enabled
+                    unlocked: items.length > 12 ? items[12] === "true": defaultSave.autoPrestige.unlocked,
+                    enabled: items.length > 13 ? items[13] === "true": defaultSave.autoPrestige.enabled
                 }
             };
         },
@@ -94,32 +88,26 @@ export default {
 
                 upgrades: [
                     {
-                        cost: this.getUpgradeCost(0),
                         amount: this.getUpgradeAmount(0)
                     },
 
                     {
-                        cost: this.getUpgradeCost(1),
                         amount: this.getUpgradeAmount(1)
                     },
 
                     {
-                        cost: this.getUpgradeCost(2),
                         amount: this.getUpgradeAmount(2)
                     },
 
                     {
-                        cost: this.getUpgradeCost(3),
                         amount: this.getUpgradeAmount(3)
                     },
 
                     {
-                        cost: this.getUpgradeCost(4),
                         amount: this.getUpgradeAmount(4)
                     },
 
                     {
-                        cost: this.getUpgradeCost(5),
                         amount: this.getUpgradeAmount(5)
                     }
                 ],
@@ -149,7 +137,6 @@ export default {
 
             // Sets upgrade variables
             defaultSave.upgrades.forEach((upgrade, id) => {
-                this.setUpgradeCost(id, upgrade.cost);
                 this.setUpgradeAmount(id, upgrade.amount);
             });
 
@@ -199,7 +186,6 @@ export default {
 
             // Sets variables for upgrades
             saveObject.upgrades.forEach((upgrade, id) => {
-                this.setUpgradeCost(id, upgrade.cost);
                 this.setUpgradeAmount(id, upgrade.amount);
             });
 

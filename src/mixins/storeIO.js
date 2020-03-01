@@ -170,7 +170,7 @@ export const upgrades = {
 
         // Returns the cost of a given upgrade
         getUpgradeCost(id) {
-            return this.getUpgrades()[id].cost;
+            return this.getUpgrades()[id].cost();
         },
 
         // Returns the amount of a given upgrade
@@ -185,10 +185,6 @@ export const upgrades = {
 
         setUpgradeAmount(id, amount) {
             this.$store.commit("setUpgradeAmount", { id, amount });
-        },
-
-        setUpgradeCost(id, cost) {
-            this.$store.commit("setUpgradeCost", { id, cost });
         },
 
         buyUpgrade(id) {

@@ -34,10 +34,11 @@ export default new Vuex.Store({
         upgrades: [
             // Prestige point multiplier
             Upgrade({
-                cost: defaultSave.upgrades[0].cost,
-                scaling: 5,
-
                 amount: defaultSave.upgrades[0].amount,
+
+                cost() {
+                    return 2 * 5 ** this.amount;
+                },
 
                 boost() {
                     return 2 ** this.amount;
@@ -46,10 +47,11 @@ export default new Vuex.Store({
 
             // Number gain boost
             Upgrade({
-                cost: defaultSave.upgrades[1].cost,
-                scaling: 5,
-
                 amount: defaultSave.upgrades[1].amount,
+
+                cost() {
+                    return 4 * 5 ** this.amount;
+                },
 
                 boost() {
                     return this.amount;
@@ -58,10 +60,11 @@ export default new Vuex.Store({
 
             // Goal reduction upgrade
             Upgrade({
-                cost: defaultSave.upgrades[2].cost,
-                scaling: 5,
-
                 amount: defaultSave.upgrades[2].amount,
+
+                cost() {
+                    return 5 * 5 ** this.amount;
+                },
 
                 boost() {
                     return 0.9 ** this.amount;
@@ -70,10 +73,11 @@ export default new Vuex.Store({
 
             // Auto-click speed boost upgrade
             Upgrade({
-                cost: defaultSave.upgrades[3].cost,
-                scaling: 3,
-
                 amount: defaultSave.upgrades[3].amount,
+
+                cost() {
+                    return 4 * 3 ** this.amount;
+                },
 
                 boost() {
                     return 2 ** this.amount;
@@ -82,10 +86,11 @@ export default new Vuex.Store({
 
             // Prestige gain boost upgrade
             Upgrade({
-                cost: defaultSave.upgrades[4].cost,
-                scaling: 6,
-
                 amount: defaultSave.upgrades[4].amount,
+
+                cost() {
+                    return 12 * 6 ** this.amount;
+                },
 
                 boost() {
                     return this.amount;
@@ -94,10 +99,11 @@ export default new Vuex.Store({
 
             // Boost to number gain based on Prestige Points
             Upgrade({
-                cost: defaultSave.upgrades[5].cost,
-                scaling: 8,
-
                 amount: defaultSave.upgrades[5].amount,
+
+                cost() {
+                    return 6 * 8 ** this.amount;
+                },
 
                 // Boost is calculated based on prestige points, then multiplied by this number
                 boost() {
@@ -215,11 +221,6 @@ export default new Vuex.Store({
         // Sets the amount of an upgrade
         setUpgradeAmount(state, { id, amount }) {
             state.upgrades[id].amount = amount;
-        },
-
-        // Sets the cost of an upgrade
-        setUpgradeCost(state, { id, cost }) {
-            state.upgrades[id].cost = cost;
         },
 
         // Buys an upgrade
