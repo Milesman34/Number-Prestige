@@ -30,29 +30,12 @@ export const defaultSave = {
     prestiges: 0,
 
     upgrades: [
-        {
-            amount: 0
-        },
-
-        {
-            amount: 0
-        },
-
-        {
-            amount: 0
-        },
-
-        {
-            amount: 0
-        },
-
-        {
-            amount: 0
-        },
-
-        {
-            amount: 0
-        }
+        { amount: 0 },
+        { amount: 0 },
+        { amount: 0 },
+        { amount: 0 },
+        { amount: 0 },
+        { amount: 0 }
     ],
 
     autoClick: {

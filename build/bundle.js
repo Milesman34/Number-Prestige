@@ -472,6 +472,7 @@
         }
         return script;
     }
+    //# sourceMappingURL=normalize-component.mjs.map
 
     const isOldIE = typeof navigator !== 'undefined' &&
         /msie [6-9]\\b/.test(navigator.userAgent.toLowerCase());
@@ -525,6 +526,7 @@
             }
         }
     }
+    //# sourceMappingURL=browser.mjs.map
 
     /* script */
     const __vue_script__ = script;
@@ -1740,13 +1742,13 @@
     };
 
     // This enum represents all valid selector states
-    const selectorStates = {
+    const selectorStates$1 = {
         none: "none",
         theme: "theme"
     };
 
     // This enum represents the default save file
-    const defaultSave = {
+    const defaultSave$1 = {
         theme: themes.light,
         gameState: gameStates.main,
         score: 0,
@@ -1756,29 +1758,12 @@
         prestiges: 0,
 
         upgrades: [
-            {
-                amount: 0
-            },
-
-            {
-                amount: 0
-            },
-
-            {
-                amount: 0
-            },
-
-            {
-                amount: 0
-            },
-
-            {
-                amount: 0
-            },
-
-            {
-                amount: 0
-            }
+            { amount: 0 },
+            { amount: 0 },
+            { amount: 0 },
+            { amount: 0 },
+            { amount: 0 },
+            { amount: 0 }
         ],
 
         autoClick: {
@@ -1798,7 +1783,7 @@
         mixins: [selector, theme],
 
         data: () => ({
-            selectorStates
+            selectorStates: selectorStates$1
         }),
 
         components: {
@@ -1909,48 +1894,48 @@
 
                 // Loads default items if needed
                 return {
-                    theme: items.length > 0 ? items[0] : defaultSave.theme,
-                    gameState: items.length > 1 ? items[1] : defaultSave.gameState,
-                    score: items.length > 2 ? parseInt(items[2]) : defaultSave.score,
-                    goal: items.length > 3 ? parseInt(items[3]) : defaultSave.goal,
-                    gain: items.length > 4 ? parseInt(items[4]) : defaultSave.gain,
-                    prestigePoints: items.length > 5 ? parseInt(items[5]) : defaultSave.prestigePoints,
-                    prestiges: items.length > 6 ? parseInt(items[6]) : defaultSave.prestiges,
+                    theme: items.length > 0 ? items[0] : defaultSave$1.theme,
+                    gameState: items.length > 1 ? items[1] : defaultSave$1.gameState,
+                    score: items.length > 2 ? parseInt(items[2]) : defaultSave$1.score,
+                    goal: items.length > 3 ? parseInt(items[3]) : defaultSave$1.goal,
+                    gain: items.length > 4 ? parseInt(items[4]) : defaultSave$1.gain,
+                    prestigePoints: items.length > 5 ? parseInt(items[5]) : defaultSave$1.prestigePoints,
+                    prestiges: items.length > 6 ? parseInt(items[6]) : defaultSave$1.prestiges,
 
                     upgrades: [
                         {
-                            amount: items.length > 7 ? parseInt(items[7]) : defaultSave.upgrades[0].amount
+                            amount: items.length > 7 ? parseInt(items[7]) : defaultSave$1.upgrades[0].amount
                         },
 
                         {
-                            amount: items.length > 8 ? parseInt(items[8]) : defaultSave.upgrades[1].amount,
+                            amount: items.length > 8 ? parseInt(items[8]) : defaultSave$1.upgrades[1].amount,
                         },
 
                         {
-                            amount: items.length > 9 ? parseInt(items[9]) : defaultSave.upgrades[2].amount
+                            amount: items.length > 9 ? parseInt(items[9]) : defaultSave$1.upgrades[2].amount
                         },
 
                         {
-                            amount: items.length > 14 ? parseInt(items[14]) : defaultSave.upgrades[3].amount
+                            amount: items.length > 14 ? parseInt(items[14]) : defaultSave$1.upgrades[3].amount
                         },
 
                         {
-                            amount: items.length > 15 ? parseInt(items[15]) : defaultSave.upgrades[4].amount
+                            amount: items.length > 15 ? parseInt(items[15]) : defaultSave$1.upgrades[4].amount
                         },
 
                         {
-                            amount: items.length > 16 ? parseInt(items[16]) : defaultSave.upgrades[5].amount
+                            amount: items.length > 16 ? parseInt(items[16]) : defaultSave$1.upgrades[5].amount
                         }
                     ],
 
                     autoClick: {
-                        unlocked: items.length > 10 ? items[10] === "true" : defaultSave.autoClick.unlocked,
-                        enabled: items.length > 11 ? items[11] === "true" : defaultSave.autoClick.enabled
+                        unlocked: items.length > 10 ? items[10] === "true" : defaultSave$1.autoClick.unlocked,
+                        enabled: items.length > 11 ? items[11] === "true" : defaultSave$1.autoClick.enabled
                     },
 
                     autoPrestige: {
-                        unlocked: items.length > 12 ? items[12] === "true": defaultSave.autoPrestige.unlocked,
-                        enabled: items.length > 13 ? items[13] === "true": defaultSave.autoPrestige.enabled
+                        unlocked: items.length > 12 ? items[12] === "true": defaultSave$1.autoPrestige.unlocked,
+                        enabled: items.length > 13 ? items[13] === "true": defaultSave$1.autoPrestige.enabled
                     }
                 };
             },
@@ -2006,34 +1991,34 @@
 
             // Resets the player's save data
             resetSave() {
-                this.setGameState(defaultSave.gameState);
+                this.setGameState(defaultSave$1.gameState);
                 this.closeSelector();
-                this.setTheme(defaultSave.theme);
-                this.setScore(defaultSave.score);
-                this.setGoal(defaultSave.goal);
-                this.setGain(defaultSave.gain);
-                this.setPrestigePoints(defaultSave.prestigePoints);
-                this.setPrestiges(defaultSave.prestiges);
+                this.setTheme(defaultSave$1.theme);
+                this.setScore(defaultSave$1.score);
+                this.setGoal(defaultSave$1.goal);
+                this.setGain(defaultSave$1.gain);
+                this.setPrestigePoints(defaultSave$1.prestigePoints);
+                this.setPrestiges(defaultSave$1.prestiges);
 
                 // Sets upgrade variables
-                defaultSave.upgrades.forEach((upgrade, id) => {
+                defaultSave$1.upgrades.forEach((upgrade, id) => {
                     this.setUpgradeAmount(id, upgrade.amount);
                 });
 
                 // Handles auto-click and auto-prestige
-                if (defaultSave.autoClick.unlocked)
+                if (defaultSave$1.autoClick.unlocked)
                     this.unlockAutoClick();
                 else this.lockAutoClick();
 
-                if (defaultSave.autoClick.enabled)
+                if (defaultSave$1.autoClick.enabled)
                     this.enableAutoClick();
                 else this.disableAutoClick();
 
-                if (defaultSave.autoPrestige.unlocked)
+                if (defaultSave$1.autoPrestige.unlocked)
                     this.unlockAutoPrestige();
                 else this.lockAutoPrestige();
 
-                if (defaultSave.autoPrestige.enabled)
+                if (defaultSave$1.autoPrestige.enabled)
                     this.enableAutoPrestige();
                 else this.disableAutoPrestige();
 
@@ -2046,7 +2031,7 @@
                 let save = localStorage.getItem("save");
 
                 // Returns the save if possible, returning the default save data if the save could not be found
-                return save === null ? decodeSaveData({...defaultSave}) : save;
+                return save === null ? decodeSaveData({...defaultSave$1}) : save;
             },
 
             // Loads the player's save data
@@ -3233,7 +3218,7 @@
         mixins: [selector],
 
         data: () => ({
-            selectorStates
+            selectorStates: selectorStates$1
         }),
 
         components: {
@@ -3509,23 +3494,7 @@
         undefined
       );
 
-    // This class represents an upgrade in the game
-    var Upgrade = ({ cost, scaling, amount = 0, boost } = {}) => ({
-        // Function that calculates the cost of the upgrade
-        cost,
-
-        // Number of times the upgrade has been bought
-        amount,
-
-        // Function that determines how powerful the upgrade is
-        boost,
-
-        // Buys the upgrade
-        buy() {
-            this.amount++;
-        }
-    });
-
+    // The API is very basic, but is expanded upon using the mixin
     var store = new Vuex.Store({
         state: {
             // Current theme
@@ -3552,87 +3521,8 @@
             // Number of times prestiged
             prestiges: defaultSave.prestiges,
 
-            // Purchaseable upgrades
-            upgrades: [
-                // Prestige point multiplier
-                Upgrade({
-                    amount: defaultSave.upgrades[0].amount,
-
-                    cost() {
-                        return 2 * 5 ** this.amount;
-                    },
-
-                    boost() {
-                        return 2 ** this.amount;
-                    }
-                }),
-
-                // Number gain boost
-                Upgrade({
-                    amount: defaultSave.upgrades[1].amount,
-
-                    cost() {
-                        return 4 * 5 ** this.amount;
-                    },
-
-                    boost() {
-                        return this.amount;
-                    }
-                }),
-
-                // Goal reduction upgrade
-                Upgrade({
-                    amount: defaultSave.upgrades[2].amount,
-
-                    cost() {
-                        return 5 * 5 ** this.amount;
-                    },
-
-                    boost() {
-                        return 0.9 ** this.amount;
-                    }
-                }),
-
-                // Auto-click speed boost upgrade
-                Upgrade({
-                    amount: defaultSave.upgrades[3].amount,
-
-                    cost() {
-                        return 4 * 3 ** this.amount;
-                    },
-
-                    boost() {
-                        return 2 ** this.amount;
-                    }
-                }),
-
-                // Prestige gain boost upgrade
-                Upgrade({
-                    amount: defaultSave.upgrades[4].amount,
-
-                    cost() {
-                        return 12 * 6 ** this.amount;
-                    },
-
-                    boost() {
-                        return this.amount;
-                    }
-                }),
-
-                // Boost to number gain based on Prestige Points
-                Upgrade({
-                    amount: defaultSave.upgrades[5].amount,
-
-                    cost() {
-                        return 6 * 8 ** this.amount;
-                    },
-
-                    // Boost is calculated based on prestige points, then multiplied by this number
-                    boost() {
-                        return this.amount;
-                    }
-                })
-            ],
+            // Amount of each upgrade
+            upgradeAmounts: [0, 0, 0, 0, 0, 0],
 
             // Auto-click
             autoClick: {...defaultSave.autoClick},
@@ -3655,14 +3545,9 @@
                 state.gameState = gameState;
             },
 
-            // Opens a selector
-            openSelector(state, selector) {
+            // Sets the active
+            setSelector(state, selector) {
                 state.selector = selector;
-            },
-
-            // Closes any active selectors
-            closeSelector(state) {
-                state.selector = selectorStates.none;
             },
 
             // Sets the score
@@ -3670,29 +3555,9 @@
                 state.score = score;
             },
 
-            // Adds to the score
-            addScore(state, score) {
-                state.score += score;
-            },
-
-            // Resets the score
-            resetScore(state) {
-                state.score = 0;
-            },
-
             // Sets the goal
             setGoal(state, goal) {
                 state.goal = goal;
-            },
-
-            // Increases the goal by doubling it (done on prestige)
-            increaseGoal(state) {
-                state.goal *= 2;
-            },
-
-            // Resets the goal
-            resetGoal(state) {
-                state.goal = 10;
             },
 
             // Sets the amount gained on click
@@ -3700,34 +3565,9 @@
                 state.gain = gain;
             },
 
-            // Increases the gain by adding 1 to it
-            increaseGain(state) {
-                state.gain++;
-            },
-
-            // Resets the number gained
-            resetGain(state) {
-                state.gain = 1;
-            },
-
-            // Adds to the number gain
-            addGain(state, gain) {
-                state.gain += gain;
-            },
-
             // Sets the number of prestige points
             setPrestigePoints(state, prestigePoints) {
                 state.prestigePoints = prestigePoints;
-            },
-
-            // Adds to the number of prestige points
-            addPrestigePoints(state, prestigePoints) {
-                state.prestigePoints += prestigePoints;
-            },
-
-            // Subtracts from the number of prestige points
-            subtractPrestigePoints(state, prestigePoints) {
-                state.prestigePoints -= prestigePoints;
             },
 
             // Sets the number of prestiges
@@ -3735,79 +3575,24 @@
                 state.prestiges = prestiges;
             },
 
-            // Increases the number of prestiges by 1
-            increasePrestiges(state) {
-                state.prestiges++;
+            // Sets upgradeAmounts
+            setUpgradeAmounts(state, upgradeAmounts) {
+                state.upgradeAmounts = [...upgradeAmounts];
             },
 
-            // Sets the amount of an upgrade
-            setUpgradeAmount(state, { id, amount }) {
-                state.upgrades[id].amount = amount;
+            // Sets autoClick
+            setAutoClick(state, autoClick) {
+                state.autoClick = {...autoClick};
             },
 
-            // Buys an upgrade
-            buyUpgrade(state, id) {
-                state.upgrades[id].buy();
+            // Sets the values of auto-prestige
+            setAutoPrestige(state, autoPrestige) {
+                state.autoPrestige = {...autoPrestige};
             },
 
-            // Unlocks auto-click
-            unlockAutoClick(state) {
-                state.autoClick.unlocked = true;
-            },
-
-            // Locks auto-click
-            lockAutoClick(state) {
-                state.autoClick.unlocked = false;
-            },
-
-            // Enables auto-click
-            enableAutoClick(state) {
-                state.autoClick.enabled = true;
-            },
-
-            // Disables auto-click
-            disableAutoClick(state) {
-                state.autoClick.enabled = false;
-            },
-
-            // Toggles auto-click
-            toggleAutoClick(state) {
-                state.autoClick.enabled = !state.autoClick.enabled;
-            },
-
-            // Unlocks auto-prestige
-            unlockAutoPrestige(state) {
-                state.autoPrestige.unlocked = true;
-            },
-
-            // Locks auto-prestige
-            lockAutoPrestige(state) {
-                state.autoPrestige.unlocked = false;
-            },
-
-            // Enables auto-prestige
-            enableAutoPrestige(state) {
-                state.autoPrestige.enabled = true;
-            },
-
-            // Disables auto-prestige
-            disableAutoPrestige(state) {
-                state.autoPrestige.enabled = false;
-            },
-
-            // Toggles auto-prestige
-            toggleAutoPrestige(state) {
-                state.autoPrestige.enabled = !state.autoPrestige.enabled;
-            },
-
-            // Pushes a notification onto the stack
-            pushNotification(state, notification) {
-                state.notifications.push(notification);
-            },
-
-            // Removes a notification from the stack
-            removeNotification(state) {
-                state.notifications.shift();
+            // Sets the current notifications array
+            setNotifications(state, notifications) {
+                state.notifications = [...notifications];
             }
         }
     });
