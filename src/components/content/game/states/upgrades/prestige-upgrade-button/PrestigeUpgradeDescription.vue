@@ -4,11 +4,7 @@
 </template>
 
 <script>
-    import { theme } from "../../../../../../mixins/storeIO.js";
-
     export default {
-        mixins: [theme],
-
         props: ["description"]
     };
 </script>
@@ -25,5 +21,8 @@
         text-align: center;
 
         font-size: 140%;
+
+        margin-left: 10px;
+        margin-right: 10px;
     }
 </style>

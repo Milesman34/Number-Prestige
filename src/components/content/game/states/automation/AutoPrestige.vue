@@ -1,18 +1,14 @@
 <!-- This component represents the auto-prestige element -->
 <template>
     <div id="autoprestige-toggle-bar">
-        <automation-toggle-button text="Auto-Prestige" v-bind:func="toggleAutoPrestige" v-bind:condition="isAutoPrestigeEnabled"></automation-toggle-button>
+        <automation-toggle-button text="Auto-Prestige" v-bind:func="() => toggleAutomationElement(enums.automationElements.prestige)" v-bind:condition="isAutoPrestigeEnabled"></automation-toggle-button>
     </div>
 </template>
 
 <script>
     import AutomationToggleButton from "./AutomationToggleButton.vue";
 
-    import { autoPrestige } from "../../../../../mixins/storeIO.js";
-
     export default {
-        mixins: [autoPrestige],
-
         components: {
             "automation-toggle-button": AutomationToggleButton
         }

@@ -1,10 +1,10 @@
 <!-- This component represents the area that contains the game's UI, based on the current gameState -->
 <template>
     <div id="game-component">
-        <main-state v-if="getGameState() === gameStates.main"></main-state>
-        <options-state v-if="getGameState() === gameStates.options"></options-state>
-        <upgrades-state v-if="getGameState() === gameStates.upgrades"></upgrades-state>
-        <automation-state v-if="getGameState() === gameStates.automation"></automation-state>
+        <main-state v-if="getGameState() === enums.gameStates.main"></main-state>
+        <options-state v-if="getGameState() === enums.gameStates.options"></options-state>
+        <upgrades-state v-if="getGameState() === enums.gameStates.upgrades"></upgrades-state>
+        <automation-state v-if="getGameState() === enums.gameStates.automation"></automation-state>
     </div>
 </template>
 
@@ -14,17 +14,7 @@
     import OptionsState from "./states/options/OptionsState.vue";
     import UpgradesState from "./states/upgrades/UpgradesState.vue";
 
-    import { gameStates } from "../../../enums.js";
-
-    import { gameState } from "../../../mixins/storeIO.js";
-
     export default {
-        mixins: [gameState],
-
-        data: () => ({
-            gameStates
-        }),
-
         components: {
             "automation-state": AutomationState,
             "main-state": MainState,

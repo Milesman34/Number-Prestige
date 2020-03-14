@@ -1,24 +1,14 @@
 <!-- This component containers any selectors -->
 <template>
     <div id="selector-container">
-        <theme-selector v-if="getSelector() === selectorStates.theme"></theme-selector>
+        <theme-selector v-if="getSelector() === enums.selectorStates.theme"></theme-selector>
     </div>
 </template>
 
 <script>
     import ThemeSelector from "./theme-selector/ThemeSelector.vue";
 
-    import { selectorStates } from "../../enums.js";
-
-    import { selector } from "../../mixins/storeIO.js";
-
     export default {
-        mixins: [selector],
-
-        data: () => ({
-            selectorStates
-        }),
-
         components: {
             "theme-selector": ThemeSelector
         }

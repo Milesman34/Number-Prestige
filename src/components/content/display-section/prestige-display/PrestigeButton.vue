@@ -4,14 +4,7 @@
 </template>
 
 <script>
-    import { theme, upgrades } from "../../../../mixins/storeIO.js";
-
-    import gameFunctions from "../../../../mixins/gameFunctions.js";
-    import utils from "../../../../mixins/utils.js";
-
-    export default {
-        mixins: [gameFunctions, theme, utils, upgrades]
-    };
+    export default {};
 </script>
 
 <style scoped>

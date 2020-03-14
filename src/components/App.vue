@@ -14,14 +14,10 @@
 
     import NotificationContainer from "./notifications/NotificationContainer.vue";
 
-    import calculatedValues from "../mixins/calculatedValues.js";
-    import gameFunctions from "../mixins/gameFunctions.js";
-    import save from "../mixins/save.js";
-
-    import { autoClick, theme } from "../mixins/storeIO.js";
+    import mixin from "../mixin.js";
 
     export default {
-        mixins: [autoClick, calculatedValues, gameFunctions, save, theme],
+        mixins: [mixin],
 
         components: {
             "content-container": ContentContainer,

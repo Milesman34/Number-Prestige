@@ -6,13 +6,7 @@
 </template>
 
 <script>
-    import { gameState, theme } from "../../../mixins/storeIO.js";
-
-    import utils from "../../../mixins/utils.js";
-
     export default {
-        mixins: [gameState, theme, utils],
-
         props: ["state"]
     };
 </script>

@@ -1,91 +1,112 @@
 import Vuex from "vuex";
 
-import { defaultSave, selectorStates } from "./enums.js";
+import mixin from "./mixin.js";
 
 import Upgrade from "./classes/Upgrade.js";
 
+// Loads data from mixin
+const defaultValues = mixin.data().defaultValues;
+const enums = mixin.data().enums;
+
+// The API is very basic, but is expanded upon using the mixin
 export default new Vuex.Store({
     state: {
         // Current theme
-        theme: defaultSave.theme,
+        theme: defaultValues.theme,
 
         // Current game state
-        gameState: defaultSave.gameState,
+        gameState: defaultValues.gameState,
 
         // Current open selector
-        selector: selectorStates.none,
+        selector: enums.selectorStates.none,
 
         // Current score
-        score: defaultSave.score,
+        score: defaultValues.score,
 
         // Current goal for prestiging
-        goal: defaultSave.goal,
+        goal: defaultValues.goal,
 
         // Amount gained per click
-        gain: defaultSave.gain,
+        gain: defaultValues.gain,
 
         // Number of prestige points
-        prestigePoints: defaultSave.prestigePoints,
+        prestigePoints: defaultValues.prestigePoints,
 
         // Number of times prestiged
-        prestiges: defaultSave.prestiges,
+        prestiges: defaultValues.prestiges,
 
-        // Purchaseable upgrades
+        // All upgrades
         upgrades: [
-            // Prestige point multiplier
+            // Prestige Point multiplier
             Upgrade({
-                cost: defaultSave.upgrades[0].cost,
-                scaling: 5,
-
-                amount: defaultSave.upgrades[0].amount,
+                initialCost: 2,
+                costScaling: 5,
 
                 boost() {
                     return 2 ** this.amount;
                 }
             }),
 
-            // Number gain boost
+            // Number gain boost upgrade
             Upgrade({
-                cost: defaultSave.upgrades[1].cost,
-                scaling: 5,
-
-                amount: defaultSave.upgrades[1].amount,
+                initialCost: 4,
+                costScaling: 5,
 
                 boost() {
                     return this.amount;
                 }
             }),
 
-            // Goal reduction upgrade
+            // Prestige goal reduction upgrade
             Upgrade({
-                cost: defaultSave.upgrades[2].cost,
-                scaling: 5,
-
-                amount: defaultSave.upgrades[2].amount,
+                initialCost: 5,
+                costScaling: 5,
 
                 boost() {
                     return 0.9 ** this.amount;
                 }
             }),
 
-            // Auto-click speed boost upgrade
+            // Auto-Click speed boost upgrade
             Upgrade({
-                cost: defaultSave.upgrades[3].cost,
-                scaling: 3,
-
-                amount: defaultSave.upgrades[3].amount,
+                initialCost: 4,
+                costScaling: 3,
 
                 boost() {
                     return 2 ** this.amount;
                 }
+            }),
+
+            // Prestige power boost upgrade
+            Upgrade({
+                initialCost: 12,
+                costScaling: 6,
+
+                boost() {
+                    return this.amount;
+                }
+            }),
+
+            // Boost to number gain based on Prestige Points upgrade
+            Upgrade({
+                initialCost: 6,
+                costScaling: 8,
+
+                // Actual boost strength is multiplied by this
+                boost() {
+                    return this.amount;
+                }
             })
-        ],
+        ].map((upgrade, id) => ({ ...upgrade, amount: defaultValues.upgrades[id].amount })),
 
-        // Auto-click
-        autoClick: {...defaultSave.autoClick},
+        // Automation object
+        automation: {
+            // Auto-click
+            click: { ...defaultValues.automation.click },
 
-        // Auto-prestige
-        autoPrestige: {...defaultSave.autoPrestige},
+            // Auto-prestige
+            prestige: { ...defaultValues.automation.prestige }
+        },
 
         // List of active notifications (strings)
         notifications: []
@@ -102,14 +123,9 @@ export default new Vuex.Store({
             state.gameState = gameState;
         },
 
-        // Opens a selector
+        // Sets the active
         openSelector(state, selector) {
             state.selector = selector;
-        },
-
-        // Closes any active selectors
-        closeSelector(state) {
-            state.selector = selectorStates.none;
         },
 
         // Sets the score
@@ -117,29 +133,9 @@ export default new Vuex.Store({
             state.score = score;
         },
 
-        // Adds to the score
-        addScore(state, score) {
-            state.score += score;
-        },
-
-        // Resets the score
-        resetScore(state) {
-            state.score = 0;
-        },
-
         // Sets the goal
         setGoal(state, goal) {
             state.goal = goal;
-        },
-
-        // Increases the goal by doubling it (done on prestige)
-        increaseGoal(state) {
-            state.goal *= 2;
-        },
-
-        // Resets the goal
-        resetGoal(state) {
-            state.goal = 10;
         },
 
         // Sets the amount gained on click
@@ -147,29 +143,9 @@ export default new Vuex.Store({
             state.gain = gain;
         },
 
-        // Increases the gain by adding 1 to it
-        increaseGain(state) {
-            state.gain++;
-        },
-
-        // Resets the number gained
-        resetGain(state) {
-            state.gain = 1;
-        },
-
         // Sets the number of prestige points
         setPrestigePoints(state, prestigePoints) {
             state.prestigePoints = prestigePoints;
-        },
-
-        // Adds to the number of prestige points
-        addPrestigePoints(state, prestigePoints) {
-            state.prestigePoints += prestigePoints;
-        },
-
-        // Subtracts from the number of prestige points
-        subtractPrestigePoints(state, prestigePoints) {
-            state.prestigePoints -= prestigePoints;
         },
 
         // Sets the number of prestiges
@@ -177,19 +153,9 @@ export default new Vuex.Store({
             state.prestiges = prestiges;
         },
 
-        // Increases the number of prestiges by 1
-        increasePrestiges(state) {
-            state.prestiges++;
-        },
-
         // Sets the amount of an upgrade
         setUpgradeAmount(state, { id, amount }) {
             state.upgrades[id].amount = amount;
-        },
-
-        // Sets the cost of an upgrade
-        setUpgradeCost(state, { id, cost }) {
-            state.upgrades[id].cost = cost;
         },
 
         // Buys an upgrade
@@ -197,62 +163,17 @@ export default new Vuex.Store({
             state.upgrades[id].buy();
         },
 
-        // Unlocks auto-click
-        unlockAutoClick(state) {
-            state.autoClick.unlocked = true;
+        // Modifies the values of an automation element
+        modifyAutomation(state, { element, settings }) {
+            state.automation[element] = { ...state.automation[element], ...settings };
         },
 
-        // Locks auto-click
-        lockAutoClick(state) {
-            state.autoClick.unlocked = false;
+        // Adds a notification to notifications
+        pushNotification(state, text) {
+            state.notifications.push(text);
         },
 
-        // Enables auto-click
-        enableAutoClick(state) {
-            state.autoClick.enabled = true;
-        },
-
-        // Disables auto-click
-        disableAutoClick(state) {
-            state.autoClick.enabled = false;
-        },
-
-        // Toggles auto-click
-        toggleAutoClick(state) {
-            state.autoClick.enabled = !state.autoClick.enabled;
-        },
-
-        // Unlocks auto-prestige
-        unlockAutoPrestige(state) {
-            state.autoPrestige.unlocked = true;
-        },
-
-        // Locks auto-prestige
-        lockAutoPrestige(state) {
-            state.autoPrestige.unlocked = false;
-        },
-
-        // Enables auto-prestige
-        enableAutoPrestige(state) {
-            state.autoPrestige.enabled = true;
-        },
-
-        // Disables auto-prestige
-        disableAutoPrestige(state) {
-            state.autoPrestige.enabled = false;
-        },
-
-        // Toggles auto-prestige
-        toggleAutoPrestige(state) {
-            state.autoPrestige.enabled = !state.autoPrestige.enabled;
-        },
-
-        // Pushes a notification onto the stack
-        pushNotification(state, notification) {
-            state.notifications.push(notification);
-        },
-
-        // Removes a notification from the stack
+        // Removes the last notification
         removeNotification(state) {
             state.notifications.shift();
         }

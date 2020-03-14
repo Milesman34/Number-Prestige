@@ -2,7 +2,7 @@
 <template>
     <div id="autoclick">
         <div id="autoclick-toggle-bar">
-            <automation-toggle-button text="Auto-Click" v-bind:func="toggleAutoClick" v-bind:condition="isAutoClickEnabled"></automation-toggle-button>
+            <automation-toggle-button text="Auto-Click" v-bind:func="() => toggleAutomationElement(enums.automationElements.click)" v-bind:condition="isAutoClickEnabled"></automation-toggle-button>
         </div>
 
         <div id="autoclick-speed-text-container">
@@ -16,11 +16,7 @@
 
     import AutoClickSpeedText from "./auto-click-speed-text/AutoClickSpeedText.vue";
 
-    import { autoClick } from "../../../../../../mixins/storeIO.js";
-
     export default {
-        mixins: [autoClick],
-
         components: {
             "automation-toggle-button": AutomationToggleButton,
             "auto-click-speed-text": AutoClickSpeedText

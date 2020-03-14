@@ -8,11 +8,7 @@
 </template>
 
 <script>
-    import { theme } from "../../../../../mixins/storeIO.js";
-
     export default {
-        mixins: [theme],
-
         props: ["title", "func"]
     };
 </script>
