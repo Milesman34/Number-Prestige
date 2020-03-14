@@ -4,15 +4,7 @@
 </template>
 
 <script>
-    import { autoClick, gain, score, theme, upgrades } from "../../../../../mixins/storeIO.js";
-
-    import calculatedValues from "../../../../../mixins/calculatedValues.js";
-    import gameFunctions from "../../../../../mixins/gameFunctions.js";
-    import utils from "../../../../../mixins/utils.js";
-
-    export default {
-        mixins: [autoClick, calculatedValues, gameFunctions, theme, utils]
-    };
+    export default {};
 </script>
 
 <style scoped>

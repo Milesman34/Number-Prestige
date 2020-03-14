@@ -5,7 +5,7 @@
             <theme-selector-title></theme-selector-title>
 
             <div id="theme-selector-list">
-                <theme-selector-list-button v-for="theme in Object.values(themes)" v-bind:theme="theme"/>
+                <theme-selector-list-button v-for="theme in Object.values(enums.themes)" v-bind:theme="theme"/>
             </div>
 
             <theme-selector-exit-button></theme-selector-exit-button>
@@ -18,17 +18,7 @@
     import ThemeSelectorListButton from "./ThemeSelectorListButton.vue";
     import ThemeSelectorTitle from "./ThemeSelectorTitle.vue";
 
-    import { themes } from "../../../enums.js";
-
-    import { theme } from "../../../mixins/storeIO.js";
-
     export default {
-        mixins: [theme],
-
-        data: () => ({
-            themes
-        }),
-
         components: {
             "theme-selector-exit-button": ThemeSelectorExitButton,
             "theme-selector-list-button": ThemeSelectorListButton,

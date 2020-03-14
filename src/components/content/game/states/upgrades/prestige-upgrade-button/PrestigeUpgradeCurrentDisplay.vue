@@ -4,11 +4,7 @@
 </template>
 
 <script>
-    import { theme, upgrades } from "../../../../../../mixins/storeIO.js";
-
     export default {
-        mixins: [theme, upgrades],
-
         props: ["id", "func"]
     };
 </script>

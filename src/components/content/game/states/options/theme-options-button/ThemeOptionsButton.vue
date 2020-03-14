@@ -1,7 +1,7 @@
 <!-- Represents the button for changing themes -->
 <template>
     <div class="options-button-container">
-        <button id="theme-options-button" v-bind:class="[themeClass('game-button'), themeClass('text')]" @click="openSelector(selectorStates.theme)">
+        <button id="theme-options-button" v-bind:class="[themeClass('game-button'), themeClass('text')]" @click="openSelector(enums.selectorStates.theme)">
             <div id="theme-options-container">
                 <div id="theme-options-text" v-bind:class="themeClass('text')">Theme</div>
 
@@ -14,17 +14,7 @@
 <script>
     import CurrentThemeDisplayText from "./CurrentThemeDisplayText.vue";
 
-    import { selectorStates } from "../../../../../../enums.js";
-
-    import { selector, theme } from "../../../../../../mixins/storeIO.js";
-
     export default {
-        mixins: [selector, theme],
-
-        data: () => ({
-            selectorStates
-        }),
-
         components: {
             "current-theme-display-text": CurrentThemeDisplayText
         }

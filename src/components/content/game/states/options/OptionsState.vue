@@ -3,6 +3,7 @@
     <div id="options">
         <div class="options-row">
             <theme-options-button></theme-options-button>
+
             <options-button title="Save" v-bind:func="manualSave"></options-button>
             <options-button title="Load" v-bind:func="manualLoad"></options-button>
             <options-button title="Reset" v-bind:func="() => confirmReset() && resetSave()"></options-button>
@@ -14,13 +15,7 @@
     import OptionsButton from "./OptionsButton.vue";
     import ThemeOptionsButton from "./theme-options-button/ThemeOptionsButton.vue";
 
-    import { notifications}  from "../../../../../mixins/storeIO.js";
-
-    import save from "../../../../../mixins/save.js";
-
     export default {
-        mixins: [notifications, save],
-
         methods: {
             // These functions also push notifications to the screen
             // Manually saves the game

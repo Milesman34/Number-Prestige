@@ -4,12 +4,7 @@
 </template>
 
 <script>
-    import { theme } from "../../../../../../mixins/storeIO.js";
-    import utils from "../../../../../../mixins/utils.js";
-
-    export default {
-        mixins: [theme, utils]
-    };
+    export default {};
 </script>
 
 <style scoped>

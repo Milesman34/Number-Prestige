@@ -12,14 +12,8 @@
 <script>
     import PrestigeButton from "./PrestigeButton.vue";
     import PrestigePointDisplay from "./PrestigePointDisplay.vue";
-
-    import { prestiges, score } from "../../../../mixins/storeIO.js";
-
-    import calculatedValues from "../../../../mixins/calculatedValues.js";
-
+    
     export default {
-        mixins: [calculatedValues, prestiges, score],
-
         components: {
             "prestige-button": PrestigeButton,
             "prestige-point-display": PrestigePointDisplay

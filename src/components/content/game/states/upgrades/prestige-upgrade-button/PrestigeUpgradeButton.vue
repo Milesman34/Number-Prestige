@@ -1,7 +1,7 @@
 <!-- Represents a prestige upgrade's button -->
 <template>
     <div class="prestige-upgrade-container">
-        <button class="prestige-upgrade-button" v-bind:class="[themeClass('game-button'), canAfford() ? '' : themeClass('unaffordable')]" @click="() => canAfford() && buy()">
+        <button class="prestige-upgrade-button" v-bind:class="[themeClass('game-button'), canAffordUpgrade(id) ? '' : themeClass('unaffordable')]" @click="() => canAffordUpgrade(id) && buyUpgrade(id)">
             <prestige-upgrade-description v-bind:description="description"></prestige-upgrade-description>
             <prestige-upgrade-current-display v-bind:id="id" v-bind:func="func"></prestige-upgrade-current-display>
             <prestige-upgrade-cost-display v-bind:id="id"></prestige-upgrade-cost-display>
@@ -14,37 +14,13 @@
     import PrestigeUpgradeCurrentDisplay from "./PrestigeUpgradeCurrentDisplay.vue";
     import PrestigeUpgradeDescription from "./PrestigeUpgradeDescription.vue";
 
-    import { gain, goal, prestigePoints, score, theme, upgrades } from "../../../../../../mixins/storeIO.js";
-
     export default {
-        mixins: [gain, goal, prestigePoints, score, theme, upgrades],
-
         props: ["id", "description", "func"],
 
         components: {
             "prestige-upgrade-cost-display": PrestigeUpgradeCostDisplay,
             "prestige-upgrade-current-display": PrestigeUpgradeCurrentDisplay,
             "prestige-upgrade-description": PrestigeUpgradeDescription
-        },
-
-        methods: {
-            // Checks if the upgrade is affordable
-            canAfford() {
-                return this.getPrestigePoints() >= this.getUpgradeCost(this.id);
-            },
-
-            // Buys an upgrade
-            buy() {
-                // Subtracts the cost of the upgrade
-                this.subtractPrestigePoints(this.getUpgradeCost(this.id));
-
-                this.buyUpgrade(this.id);
-
-                // Resets the player's score, gain, and goal
-                this.resetScore();
-                this.resetGain();
-                this.resetGoal();
-            }
         }
     };
 </script>

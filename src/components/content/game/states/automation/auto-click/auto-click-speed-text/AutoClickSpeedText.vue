@@ -8,14 +8,7 @@
 <script>
     import AutoClickSpeedDisplay from "./AutoClickSpeedDisplay.vue";
 
-    import { theme } from "../../../../../../../mixins/storeIO.js";
-
-    import calculatedValues from "../../../../../../../mixins/calculatedValues.js";
-    import utils from "../../../../../../../mixins/utils.js";
-
     export default {
-        mixins: [calculatedValues, theme, utils],
-
         methods: {
             // Returns the text rendered before the number
             getRenderedPreText() {

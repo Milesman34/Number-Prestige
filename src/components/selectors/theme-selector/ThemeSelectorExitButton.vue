@@ -4,11 +4,7 @@
 </template>
 
 <script>
-    import { selector, theme } from "../../../mixins/storeIO.js";
-
-    export default {
-        mixins: [selector, theme]
-    };
+    export default {};
 </script>
 
 <style scoped>

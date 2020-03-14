@@ -4,11 +4,7 @@
 </template>
 
 <script>
-    import utils from "../../../../../../../mixins/utils.js";
-
     export default {
-        mixins: [utils],
-
         props: ["number"]
     };
 </script>

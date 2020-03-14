@@ -8,11 +8,7 @@
 <script>
     import Notification from "./Notification.vue";
 
-    import { notifications } from "../../mixins/storeIO.js";
-
     export default {
-        mixins: [notifications],
-
         components: {
             notification: Notification
         }

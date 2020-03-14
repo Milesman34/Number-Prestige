@@ -4,13 +4,7 @@
 </template>
 
 <script>
-    import { prestigePoints, theme } from "../../../../mixins/storeIO.js";
-
-    import utils from "../../../../mixins/utils.js";
-
-    export default {
-        mixins: [prestigePoints, theme, utils]
-    };
+    export default {};
 </script>
 
 <style scoped>
